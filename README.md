@@ -92,7 +92,7 @@ credential, cloud project or model call is needed. From this directory:
 
     python3 -m unittest discover -s tests
 
-Expect `Ran 1607 tests` and `OK` with skips: the browser checks, the hosted wire checks
+Expect `Ran 1614 tests` and `OK` with skips: the browser checks, the hosted wire checks
 (FastAPI is not installed), the tests that read the baked grid data or the private archives, and the
 tests that read `scripts/deploy/deploy.sh` or `scripts/ontology/sql` skip with their reason. The hosted
 API's pinned third-party dependencies are listed in `requirements/h1.lock`; installing them is a separate

@@ -270,8 +270,13 @@
       el('span', 'gn-meta', `Unclear: fits ${p.candidates.map((s) => s.s).join(', ')}. None is linked.`, plantCell);
     } else el('span', 'gn-meta', 'Names no plant in the register', plantCell);
     const acts = el('div', 'nt-d-acts', null, frag);
-    const desk = link(`/?at=${String(a.t).slice(0, 16)}${a.grid ? '&grid=' + a.grid : ''}`, 'Open on the desk', null, 'gn-btn gn-btn--sm', acts);
-    desk.title = 'The desk at the time this notice was posted';
+    /* The desk reads the grid and the selection from the hash (grid.js initialState: `g`, `t`,
+       and `adv` opens this notice's detail), the clock from `at` (shell.js). Fix of 19 October:
+       the link carried `&grid=` in the query, which the desk never read, so it landed on the
+       plain dashboard. */
+    const desk = link(`/?at=${String(a.t).slice(0, 16)}#${a.grid ? 'g=' + encodeURIComponent(a.grid) + '&' : ''}adv=${encodeURIComponent(a.id)}`,
+                      'Open on the desk', null, 'gn-btn gn-btn--sm', acts);
+    desk.title = 'The desk at the time this notice was posted, with this notice open';
     const copy = link(noticeHref(a), 'Link to notice', null, 'gn-btn gn-btn--sm gn-btn--ghost', acts);
     copy.title = 'A link that opens this notice';
     if (box) { box.appendChild(frag); return; }

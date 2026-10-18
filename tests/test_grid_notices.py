@@ -278,6 +278,17 @@ class Browser(unittest.TestCase):
         self.assertEqual('08SYNGAMA U2 Tripped at 13:34 (Unplanned Outage)', a['detailText'])
         self.assertEqual([['event:syn-gama-u2-trip', '/event/syn-gama-u2-trip'], ['plant:08SYNGAMA', '/plant/08SYNGAMA']], a['detailLinks'])
 
+    def test_open_on_the_desk_carries_the_notice_where_the_desk_reads_it(self):
+        # Bug of 19 October (owner): "Open on the desk" landed on the plain dashboard. The desk
+        # reads the grid and the selection from the hash (`g`, `t`, `adv`) and the clock from
+        # `at`; the link used to put the grid in the query, which nothing read, and named no notice.
+        grid_js = (GRID / 'grid.js').read_text(encoding='utf-8')
+        self.assertIn("const desk = link(`/?at=${String(a.t).slice(0, 16)}#${a.grid ? 'g=' + encodeURIComponent(a.grid) + '&' : ''}"
+                      "adv=${encodeURIComponent(a.id)}`,", NOTICES_JS)
+        self.assertNotIn("'&grid=' + a.grid", NOTICES_JS)
+        self.assertIn("const adv = new URLSearchParams(location.hash.slice(1)).get('adv');", grid_js)
+        self.assertIn("if (adv) selectMessage(adv);", grid_js)
+
     def test_a_phone_keeps_three_columns_and_opens_the_notice_under_its_row(self):
         self.assertEqual(['Time', 'Kind', 'Text'], self.n['phoneColumns'])
         self.assertEqual({'inline': True, 'after': 'adv-V133937', 'text': '08SYNGAMA U2 Tripped at 13:34 (Unplanned Outage)'},

@@ -235,17 +235,20 @@ class ThePageSources(unittest.TestCase):
 
     def test_the_bar_names_gemini_only_for_a_gemini_run(self):
         # The model badge and the trace header claim Gemini only when the answer's `model` says a
-        # Gemini run (live or recorded) wrote it. A composed answer says so, never Gemini.
+        # Gemini run (live or recorded) wrote it. A composed answer says so, never Gemini. The bar
+        # names Ingrid, the agent, never the model (owner, 19 October: "Ask Ingrid", no "Ask Gemini").
+        self.assertNotRegex(COMMAND_JS, r"'[^'\n]*\bAsk Gemini\b")
+        self.assertNotIn("'Gemini is reading", COMMAND_JS)
         self.assertIn("const GEMINI_MODES = ['live', 'recorded'];", COMMAND_JS)
-        self.assertIn("isGemini(answer.model) ? 'Gemini traced ' + count : 'Traced ' + count", COMMAND_JS)
+        self.assertIn("isGemini(answer.model) ? AGENT + ' traced ' + count : 'Traced ' + count", COMMAND_JS)
         self.assertIn("badgeHtml('composed', 'Composed from records', reason, 'composed')", COMMAND_JS)
-        self.assertIn("'Gemini · recorded run'", COMMAND_JS)
+        self.assertIn("AGENT + ' · recorded run'", COMMAND_JS)
         # The placeholder names Gemini only after the server reported a Gemini run for prompts.
         self.assertIn("if (state.gemini) words =", COMMAND_JS)
         self.assertIn("const gemini = isGemini(prompts.model);", COMMAND_JS)
         # No fake progress before the answer: the pending line waits, and the trace steps fire
         # only from the trace the server returned.
-        self.assertIn("'Gemini is reading the records at '", COMMAND_JS)
+        self.assertIn("esc(AGENT) + ' is reading the records at '", COMMAND_JS)
         self.assertIn("const steps = list(turn.answer && turn.answer.trace);", COMMAND_JS)
 
     def test_the_pending_answer_moves_and_counts_the_seconds(self):
@@ -296,7 +299,7 @@ class ThePageSources(unittest.TestCase):
         # the live steps reuse the trace's step markup, and only a server event adds one
         self.assertIn("if (event.event === 'step') liveStep(turn, event.step);", COMMAND_JS)
         self.assertIn("box.insertAdjacentHTML('beforeend', stepHtml(step));", COMMAND_JS)
-        self.assertIn('\'<ol class="gc-steps gc-trace-live" aria-label="Steps Gemini has run so far"\'', COMMAND_JS)
+        self.assertIn('\'<ol class="gc-steps gc-trace-live" aria-label="Steps \' + esc(AGENT) + \' has run so far"\'', COMMAND_JS)
         self.assertIn("list(turn.steps).map(stepHtml).join('')", COMMAND_JS)
         self.assertEqual(2, COMMAND_JS.count('liveStep('), 'one definition, one call: the step event')
         # the answer's own trace still comes only from the server's answer

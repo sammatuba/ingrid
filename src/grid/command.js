@@ -201,21 +201,21 @@
 
   /* Why the server composed an answer instead of a Gemini run (desk-api.md, `model`). */
   const FALLBACK = {
-    not_configured: 'Gemini is not set up on this site.',
-    sign_in_required: 'Sign in to ask Gemini live.',
-    budget_exhausted: 'The day\'s Gemini budget is spent.',
-    budget_unavailable: 'The budget meter did not answer, so Gemini did not run.',
-    model_timeout: 'Gemini ran out of time.',
-    model_unavailable: 'Gemini did not answer.',
-    model_quota: 'Gemini is over its quota.',
-    model_auth_failed: 'Gemini refused the site\'s credentials.',
-    model_credential_missing: 'The site holds no Gemini credentials.',
-    invalid_json: 'Gemini returned an answer that ' + AGENT + ' could not read.',
-    no_tool_call: 'Gemini read no record, so ' + AGENT + ' set its answer aside.',
-    figure_not_in_citation: 'Gemini cited a figure its source does not show, so ' + AGENT + ' set it aside.',
-    figure_in_text: 'Gemini wrote a figure without a source, so ' + AGENT + ' set it aside.',
-    entity_unknown: 'Gemini named a record the tools never returned, so ' + AGENT + ' set it aside.',
-    cite_unresolved: 'Gemini cited a source that does not exist, so ' + AGENT + ' set it aside.',
+    not_configured: AGENT + ' is not set up on this site.',
+    sign_in_required: 'Sign in to ask ' + AGENT + ' live.',
+    budget_exhausted: 'The day\'s budget for ' + AGENT + ' is spent.',
+    budget_unavailable: 'The budget meter did not answer, so ' + AGENT + ' did not run.',
+    model_timeout: AGENT + ' ran out of time.',
+    model_unavailable: AGENT + ' did not answer.',
+    model_quota: AGENT + ' is over her quota.',
+    model_auth_failed: 'The model refused the site\'s credentials, so ' + AGENT + ' did not run.',
+    model_credential_missing: 'The site holds no model credentials, so ' + AGENT + ' did not run.',
+    invalid_json: AGENT + ' returned an answer the desk could not read.',
+    no_tool_call: AGENT + ' read no record, so the desk set her answer aside.',
+    figure_not_in_citation: AGENT + ' cited a figure its source does not show, so the desk set it aside.',
+    figure_in_text: AGENT + ' wrote a figure without a source, so the desk set it aside.',
+    entity_unknown: AGENT + ' named a record the tools never returned, so the desk set it aside.',
+    cite_unresolved: AGENT + ' cited a source that does not exist, so the desk set it aside.',
   };
 
   /* The badge: which model wrote this answer, how, and how long it took. */
@@ -227,18 +227,18 @@
         ? model.tokens.in.toLocaleString('en-US') + ' tokens in, ' + model.tokens.out.toLocaleString('en-US') + ' out' : '';
       if (model.mode === 'live') {
         const secs = typeof model.latency_ms === 'number' ? (model.latency_ms / 1000).toFixed(1) + ' s' : '';
-        const words = [name, model.provider || 'Vertex AI', secs, 'live'].filter(Boolean).join(' · ');
-        const tip = ['A live ' + name + ' run on ' + (model.provider || 'Vertex AI') + '.', tokens ? tokens + '.' : '',
+        const words = [AGENT, secs, 'live'].filter(Boolean).join(' · ');
+        const tip = [AGENT + ' ran live: ' + name + ' on ' + (model.provider || 'Vertex AI') + '.', tokens ? tokens + '.' : '',
           'The server checked every figure against its source.'].filter(Boolean).join(' ');
         return badgeHtml('gemini', words, tip, 'live');
       }
       const when = dayWords(model.recorded_at);
-      const tip = ['Replays a ' + name + ' run' + (when ? ' recorded on ' + when : '') + '.',
-        tokens ? tokens + '.' : '', signedIn() ? '' : 'Sign in to ask Gemini live.'].filter(Boolean).join(' ');
-      return badgeHtml('gemini', 'Gemini · recorded run' + (when ? ' ' + when : ''), tip, 'recorded');
+      const tip = ['Replays a run of ' + AGENT + ' (' + name + ')' + (when ? ' recorded on ' + when : '') + '.',
+        tokens ? tokens + '.' : '', signedIn() ? '' : 'Sign in to ask ' + AGENT + ' live.'].filter(Boolean).join(' ');
+      return badgeHtml('gemini', AGENT + ' · recorded run' + (when ? ' ' + when : ''), tip, 'recorded');
     }
     const key = model && typeof model === 'object' ? String(model.fallback_reason || '') : '';
-    const why = FALLBACK[key] || (key ? 'Gemini did not answer (' + key.replace(/_/g, ' ') + ').' : '');
+    const why = FALLBACK[key] || (key ? AGENT + ' did not answer (' + key.replace(/_/g, ' ') + ').' : '');
     const reason = [why, 'No model call ran for this answer.'].filter(Boolean).join(' ');
     return badgeHtml('composed', 'Composed from records', reason, 'composed');
   }
@@ -246,7 +246,7 @@
   function badgeHtml(kind, words, tip, mode) {
     return '<p class="gc-model" data-model="' + esc(kind) + '" data-mode="' + esc(mode) + '">'
       + '<span class="gc-model-b" tabindex="0" data-tip="' + esc(tip) + '" aria-label="' + esc(words + '. ' + tip) + '">'
-      + (kind === 'gemini' ? '<span class="gc-model-w">Gemini</span>' + esc(words.replace(/^Gemini/, ''))
+      + (kind === 'gemini' ? '<span class="gc-model-w">' + esc(AGENT) + '</span>' + esc(words.slice(AGENT.length))
         : icon('dataset') + esc(words))
       + '</span></p>';
   }
@@ -353,11 +353,12 @@
     applyVoice();
   }
 
-  /* The bar's own words: Gemini by name only when the server reported a Gemini run for prompts. */
+  /* The bar's own words: Ingrid is named as the one who answers only when the server reported a
+     Gemini run for prompts (the model behind her is not displayed in the bar; owner, 19 October). */
   function applyVoice() {
     const narrow = Boolean(window.matchMedia && window.matchMedia('(max-width: 520px)').matches);
     let words = narrow ? 'Search or ask ' + AGENT : 'Search plants, events, data, or ask ' + AGENT;
-    if (state.gemini) words = narrow ? 'Search or ask Gemini' : 'Search, or ask Gemini about the grid';
+    if (state.gemini) words = narrow ? 'Search or ask ' + AGENT : 'Search, or ask ' + AGENT + ' about the grid';
     input.setAttribute('placeholder', words);
     root.classList.toggle('gc-gemini', state.gemini === true);
   }
@@ -461,7 +462,7 @@
     if (ui.listKind === 'prompts') {
       const items = prompts.items || [];
       if (items.length) {
-        groups.push(groupHtml((state.gemini ? 'Ask Gemini about the grid · ' : 'Suggested at ')
+        groups.push(groupHtml((state.gemini ? 'Ask ' + AGENT + ' about the grid · ' : 'Suggested at ')
           + (asOf().slice(11, 16) || 'the replay clock'),
           'gc-g-prompts', items.map((item) => {
             options.push({type: 'prompt', glyph: 'ask', id: item.id, text: item.text,
@@ -490,7 +491,7 @@
     } else {
       const q = ui.q;
       options.push({type: 'ask', glyph: 'ask', text: q,
-                    titleHtml: (state.gemini ? 'Ask Gemini: ' : esc('Ask ' + AGENT + ': '))
+                    titleHtml: esc('Ask ' + AGENT + ': ')
                       + '<span class="gc-quote">“' + esc(q) + '”</span>',
                     sub: 'Composed from the records at ' + (asOf().slice(11, 16) || 'the replay clock')});
       groups.push('<div role="group" class="gc-grp gc-grp-ask" aria-label="Ask">'
@@ -835,12 +836,12 @@
          reports a tool call that has run, and the answer's trace comes from the server. */
       inner += '<p class="gc-wait">'
         + '<span class="gc-spin" aria-hidden="true"></span><span>' + (turn.live
-        ? 'Gemini is reading the records at ' + esc(hhmm(turn.at) || 'the replay clock') + '…'
+        ? esc(AGENT) + ' is reading the records at ' + esc(hhmm(turn.at) || 'the replay clock') + '…'
         : 'Reading the records at ' + esc(hhmm(turn.at) || 'the replay clock') + '.') + '</span>'
         + '<span class="gc-elapsed" aria-hidden="true" data-since="' + esc(String(Number(turn.since) || Date.now())) + '"></span>'
         + (turn.live ? '<span class="gc-wait-note">A live answer takes about 10 to 20 seconds.</span>' : '')
         + '</p>'
-        + '<ol class="gc-steps gc-trace-live" aria-label="Steps Gemini has run so far"'
+        + '<ol class="gc-steps gc-trace-live" aria-label="Steps ' + esc(AGENT) + ' has run so far"'
         + (list(turn.steps).length ? '' : ' hidden') + '>' + list(turn.steps).map(stepHtml).join('') + '</ol>';
     } else if (turn.kind === 'desk' && turn.answer) {
       inner += answerHtml(turn.answer, turn);
@@ -904,7 +905,7 @@
     steps.forEach((step) => { if (step.dataset_id) datasets.add(step.dataset_id); });
     list(answer.citations).forEach((c) => { if (c && c.dataset_id) datasets.add(c.dataset_id); });
     const count = steps.length + (steps.length === 1 ? ' step' : ' steps');
-    const parts = [isGemini(answer.model) ? 'Gemini traced ' + count : 'Traced ' + count];
+    const parts = [isGemini(answer.model) ? AGENT + ' traced ' + count : 'Traced ' + count];
     if (path.length) parts.push(path.slice(0, 4).join(' → '));
     if (datasets.size) parts.push(datasets.size + (datasets.size === 1 ? ' dataset' : ' datasets'));
     return parts.join(' · ');

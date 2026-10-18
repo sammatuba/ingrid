@@ -1209,6 +1209,12 @@
     window.GridExplore = { figure: selectFigure, link: selectLink, message: selectMessage, site: selectSite,
       refresh: () => mark() };
     try { wire(); } catch (err) { if (typeof console !== 'undefined' && console.debug) console.debug('explorable wiring skipped: ' + err); }
+    /* A notice named in the hash (`#adv=<id>`, the notices page's "Open on the desk") opens on
+       the desk as a click on its feed row would: the grid, the clock and the detail panel. */
+    try {
+      const adv = new URLSearchParams(location.hash.slice(1)).get('adv');
+      if (adv) selectMessage(adv);
+    } catch (err) { /* no hash, or a DOM shim without location */ }
   };
   if (typeof window.addEventListener === 'function') window.addEventListener('grid-desk-ready', start);
   if (window.GridDesk) start();

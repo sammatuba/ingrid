@@ -1,4 +1,6 @@
-# Who Answers for a Decision Made with AI? Designing Accountable Human–AI Decision Work, with a Prototype for an Electricity Retailer in the Philippine Wholesale Market
+# InGRID: Interpretable Grid Reasoning for Informed Decisions
+
+*Accountable human–AI decision work, with a prototype for an electricity retailer in the Philippine wholesale electricity market*
 
 **Sam Matuba** (author). Prototype codebase: Sam Matuba and Ericka Formanes. Feedback gathering, as the user representative: Jayden Cacayan.
 
@@ -6,7 +8,7 @@ Version of 19 October 2026 (InGRID release 25).
 
 ## Abstract
 
-We describe the design and first prototype, InGRID, of a decision desk for an electricity retailer in the Philippine Wholesale Electricity Spot Market, built so that every decision taken with AI assistance can later be traced to the evidence, the beliefs, the method and the person behind it. The paper reports what the prototype demonstrates and measures today, and states the hypotheses it does not yet test. On the market's own data, outage schedules matched to the system operator's advisories by event type, plant and unit appeared a median 8.5 hours after the advisory (27 matched rows of 148 late ones); 96.6% of 1,275 generator outage advisories in 2026 have no schedule row for the same plant within six hours of an outage start, a coverage gap rather than a measured delay. Two simple price challengers beat three baselines in 28 of 192 series–horizon–slice groups under a pre-stated gate, 27 at the day horizon; at the month horizon, where contracting decisions sit, 27 origins per series make a claim impossible under the gate, so no skill is claimed there. A deterministic warehouse query lists, for any price interval, the conditions present in six families with the time each was knowable, and ranks them by how unusual each was, labelled as evidence and never as cause; two cases are worked in full. A hosted language model answered a compiled set of eight bounded questions on one real outage under two information cutoffs, cited its passages, gave the same answers in four presentation forms of each question, and disagreed once with a rule-based reading; the disagreement is kept. We name the frameworks and models used, including TimesFM, TabFM, gradient-boosted classifiers and Gemini, and the theoretical role each fills. From the measurements we state a design hypothesis: that the value of AI in decision work is bounded by traceability and trust, that traceability is a property of records written at the time, and that trust must be earned by structure and then measured. We derive requirements from twelve stakeholder-supplied user stories and twelve desk questions, grade forty-four market factors by what is a record today, specify seven record kinds with one time contract, and specify a governed generative interface in which a model arranges record-backed components under a validator that rejects any figure not quoted from a record. No month has been scored, no analyst has used the prototype, and no effect on work has been measured. We report these gaps as results and give the experiments, with numerical thresholds, that would refute or narrow the design.
+We describe the design and first prototype, InGRID, of a decision desk for an electricity retailer in the Philippine Wholesale Electricity Spot Market, built so that every decision taken with AI assistance can later be traced to the evidence, the beliefs, the method and the person behind it. The paper reports what the prototype demonstrates and measures today, and states the hypotheses it does not yet test. InGRID runs as a hosted review desk at https://ingrid-desk.web.app: its grid pages replay recorded market data to 14 October 2026, its event page shows the recorded model judgment on one real outage at two cutoffs, and since release 23 a signed-in analyst can put a question to the desk's assistant, Ingrid, which a Gemini model answers live over the records with its retrieval steps shown. On the market's own data, outage schedules matched to the system operator's advisories by event type, plant and unit appeared a median 8.5 hours after the advisory (27 matched rows of 148 late ones); 96.6% of 1,275 generator outage advisories in 2026 have no schedule row for the same plant within six hours of an outage start, a coverage gap rather than a measured delay. Two simple price challengers beat three baselines in 28 of 192 series–horizon–slice groups under a pre-stated gate, 27 at the day horizon; at the month horizon, where contracting decisions sit, 27 origins per series make a claim impossible under the gate, so no skill is claimed there. A deterministic warehouse query lists, for any price interval, the conditions present in six families with the time each was knowable, and ranks them by how unusual each was, labelled as evidence and never as cause; two cases are worked in full. A hosted language model answered a compiled set of eight bounded questions on one real outage under two information cutoffs, cited its passages, gave the same answers in four presentation forms of each question, and disagreed once with a rule-based reading; the disagreement is kept. We name the frameworks and models used, including TimesFM, TabFM, gradient-boosted classifiers and Gemini, and the theoretical role each fills. From the measurements we state a design hypothesis: that the value of AI in decision work is bounded by traceability and trust, that traceability is a property of records written at the time, and that trust must be earned by structure and then measured. We derive requirements from twelve stakeholder-supplied user stories and twelve desk questions, grade forty-four market factors by what is a record today, specify seven record kinds with one time contract, and specify a governed generative interface in which a model arranges record-backed components under a validator that rejects any figure not quoted from a record. No month has been scored, no analyst has used the prototype in their work, and no effect on work has been measured. We report these gaps as results and give the experiments, with numerical thresholds, that would refute or narrow the design.
 
 ## 1. Introduction
 
@@ -60,8 +62,10 @@ every decision can be answered for. Its assistant persona, Ingrid, proposes a po
 working; the person accepts, changes or rejects it, and the record says which.
 The research object is the record structure that makes a decision answerable, and the research
 question is whether that structure can be built and operated on real market data at the latencies the
-data imposes. At the time of writing, the prototype's language-model component has run on one real
-case under two cutoffs, and no analyst has used the desk. The record kinds are implemented and
+data imposes. At the time of writing (19 October 2026, release 25), the compiled question set has run on one
+real case under two cutoffs and once on a synthetic case; those runs are the measured results. A second
+model path, the live command-bar answer with its retrieval steps, has served signed-in visitors since
+release 23 and is not measured here. No analyst has used the desk in their work. The record kinds are implemented and
 tested; the step that scores an issued forecast against settled prices is implemented and waits for
 the first settled month.
 
@@ -69,7 +73,7 @@ the first settled month.
 
 1. **A problem statement** for AI-assisted decision work framed as accountability rather than
    capability, with one time contract and five falsifiable propositions (Section 2).
-2. **A prototype on a real market**, with its data, its architecture, two fully worked cases of the
+2. **A prototype on a real market**, with its data, its architecture, its hosted desk, two fully worked cases of the
    driver card, the alert record, the recorded judgment, and the status of every record kind
    (Section 3).
 3. **A methods-and-models account**: each framework and model used, the record it produces, the
@@ -295,7 +299,7 @@ flowchart TB
         H1[Static hosting] --> H2[Application server] --> H3[Document database: each visitor's private copy of a case and its decisions]
     end
     subgraph MDL[Model service]
-        M1[Judgment runs recorded with receipts; the public site replays them and makes no live call]
+        M1[Question-set runs recorded with receipts and replayed on the event page; live command-bar answers for signed-in visitors since release 23]
     end
     A1 --> W1
     A2 --> W1
@@ -310,8 +314,9 @@ flowchart TB
 *Figure 2. The prototype. Sources flow into typed warehouse views that carry the time fields of
 Table 2 on every fact; a deterministic step writes one data file per page so that every figure shown
 is a row in a table, and the files are versioned by content; the hosted desk serves those files and
-keeps each visitor's decisions in a private copy of the case; the model's runs are recorded with
-receipts and replayed, so the public site never calls a model.*
+keeps each visitor's decisions in a private copy of the case; the question-set runs are recorded with
+receipts and replayed on the event page, and the command bar calls the model live only for a signed-in
+visitor, over the records, with its steps shown.*
 
 The warehouse layer is the market's shared vocabulary made queryable: 2,178 entities (three regions,
 323 plants, 549 generating units, 1,288 market resources, two inter-island links, four commodities and
@@ -420,6 +425,19 @@ event page and not yet adjudicated by an analyst.
 | Driver card and ranking | demonstrated | six cards, four rankings and three severity lines over the two cases of Table 4, each checked against hand queries on the source tables |
 | Generated view | specified | Section 10 |
 
+**State of the prototype on 19 October 2026 (release 25).** One build covering 18 October 2025 to 14
+October 2026 is live at https://ingrid-desk.web.app and at https://grid-nowcast.web.app, behind a
+sign-in screen (docs/status.md; docs/START-HERE.md). The pages are the grid page, the event page,
+outlooks, register, models, plants, notices, alerts, book, journal, the explainer and this paper. The event
+page shows the recorded judgment of Section 3.6 and makes no live model call
+(docs/work/grid-desk/live-run-2026-10-14.md). A command bar on every page searches the site and
+takes questions; since release 23 it answers a signed-in visitor live on Vertex AI, labelled "live", and
+since release 25 it shows the steps as the model works; an anonymous visitor gets an answer composed from
+the records (docs/work/PROGRESS.md, rows "Batch release 23" and "Batch release 25"). The alert record was
+run and recorded; no live alert has been sent. The rules corpus holds 30 documents with their clauses;
+no live extraction call has been made (docs/status.md). The data used is the company copy to 14 October
+2026 under the signed permission record of Section 3.2; it never enters Git or the export.
+
 ## 4. Methods and models
 
 The prototype uses several frameworks and models. Each fills one role in the framework of Section 9,
@@ -463,7 +481,7 @@ to the records that serve it and to a verdict: **adopt** (the design serves it a
 
 | # | Role | Story (abridged) | Verdict | What serves it | Grade |
 |---|---|---|---|---|---|
-| 1 | Trader | One dashboard for prices, demand, available capacity and grid condition | reframe | a situational page with demand, price, flows, reserve and the operator's notices, replaying eight days | demonstrated on a replay; no live feed |
+| 1 | Trader | One dashboard for prices, demand, available capacity and grid condition | reframe | a situational page with demand, price, flows, reserve and the operator's notices, replaying recorded days to 14 October 2026 | demonstrated on a replay; no live feed |
 | 2 | Trader | An alert when price passes a threshold, with the driving factor | reframe | the alert record: the ranking of likely drivers as evidence, and attribution to an owned belief | demonstrated on case 1 |
 | 3 | Trader | Outages, capacity reductions and grid constraints that may move price | adopt | signal records from operator advisories, linked to the availability beliefs they touch | demonstrated |
 | 4 | Portfolio manager | Trace a market event through grid condition and prices to the affected part of the portfolio | adopt | event → belief → forecast version → impact | demonstrated to the belief; impact on a synthetic portfolio; customer and contract records absent |
@@ -1157,7 +1175,8 @@ propositions 1 to 4 testable and loses the review share.
 
 The prototype supports market intelligence and analyst decisions; it performs no grid control, issues
 no dispatch instruction and executes no trade. Market data is used under the signed permission record
-of Section 3.2. The public site shows a recorded replay and makes no live model call. AI output cannot
+of Section 3.2. The public site replays recorded data; its event page shows a recorded judgment, and its command bar
+calls a model live only for a signed-in visitor, over the records, with its steps shown. AI output cannot
 grant a role or approve a change. The design aims to make human responsibility clearer, not to move it
 to a model: the person who accepts a belief or takes a decision is named in the record.
 
@@ -1168,8 +1187,9 @@ when". We built a decision desk, InGRID, on a real market and measured what it c
 schedule that lags its own advisories by hours where it reflects them and misses most trips, simple
 forecasts that are hard to beat beyond a day and untestable at the month horizon with the origins in
 hand, a card that lists the conditions present at any price
-with the time each was knowable and shows how the answer changes with what was known, and a recorded
-AI judgment whose one disagreement is kept. We named each model used and the role it fills. From these
+with the time each was knowable and shows how the answer changes with what was known, a recorded
+AI judgment whose one disagreement is kept, and a live question path for signed-in analysts that shows
+its steps. We named each model used and the role it fills. From these
 we framed AI-assisted decision work as an accountability problem to be designed before deployment,
 translated stakeholder-supplied stories into desk questions with mandatory parts, graded the factors
 the desk watches by what is a record, specified seven record kinds under one time contract and a
