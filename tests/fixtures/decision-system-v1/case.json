@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "synthetic": true,
+  "case_id": "fictional-return-001",
+  "title": "Harbor Unit 2 return-to-service review",
+  "source_notice": "All names, passages, times and quantities are fictional. No inference or simulation has been run.",
+  "information_cutoff": "2026-10-04T17:00:00+08:00",
+  "review_time": "2026-10-04T17:05:00+08:00",
+  "assumption": {
+    "revision_id": "assumption-r1",
+    "content_kind": "assumption",
+    "review_status": "accepted",
+    "subject": "unit-harbor-2",
+    "predicate": "available_from",
+    "value": "2026-10-04T18:00:00+08:00",
+    "capacity_mw": 200
+  },
+  "mapping": {
+    "revision_id": "mapping-r1",
+    "source_type": "GeneratingUnit",
+    "source_id": "unit-harbor-2",
+    "target_type": "ModelRepresentation",
+    "target_id": "model-unit-2",
+    "status": "reviewed"
+  },
+  "sources": [
+    {
+      "id": "source-briefing",
+      "revision_id": "s0-r1",
+      "first_available_at": "2026-10-04T14:02:00+08:00",
+      "lineage": "briefing-1",
+      "locator": "paragraph 1",
+      "text": "Harbor Unit 2 is expected to be available from 18:00, subject to final confirmation."
+    },
+    {
+      "id": "source-update",
+      "revision_id": "s1-r1",
+      "first_available_at": "2026-10-04T16:25:00+08:00",
+      "lineage": "update-1",
+      "locator": "paragraph 2",
+      "text": "Testing is expected to begin at 18:00, subject to clearance. Commercial availability is not confirmed."
+    },
+    {
+      "id": "source-copy",
+      "revision_id": "s2-r1",
+      "first_available_at": "2026-10-04T16:45:00+08:00",
+      "lineage": "update-1",
+      "locator": "paragraph 1",
+      "text": "A report repeats the update about testing at 18:00; it gives no independent confirmation."
+    },
+    {
+      "id": "source-later",
+      "revision_id": "s3-r1",
+      "first_available_at": "2026-10-04T19:01:00+08:00",
+      "lineage": "confirmation-1",
+      "locator": "paragraph 1",
+      "text": "A later fictional notice confirms a revised availability time of 21:00."
+    }
+  ],
+  "task": {
+    "id": "evidence_assumption_relation.v1",
+    "allowed_labels": [
+      "supports",
+      "challenges",
+      "mixed",
+      "unrelated",
+      "insufficient"
+    ],
+    "execution_mode": "synthetic_fixture",
+    "fixture_answer": "challenges",
+    "scores": null
+  },
+  "scenario": {
+    "mode": "proposal_only",
+    "baseline": "assumption-r1",
+    "alternative_available_from": "2026-10-04T21:00:00+08:00",
+    "compatible_run_outputs": null,
+    "quantitative_system_consequences": "uncomputed"
+  }
+}

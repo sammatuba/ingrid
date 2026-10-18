@@ -1,0 +1,114 @@
+{
+ "generated_by": "scripts/corpus/excerpt.py",
+ "pypdf_version": "6.20.1",
+ "excerpt_limit": 400,
+ "compendium": {
+  "directory": "Compendium_of_Market_Documents_as_of_01_April_2026",
+  "zip": "compendium-2026-04-01.zip",
+  "zip_sha256": "78b719ba318cd81940c55557b08a7e93f9bbba75348700322c4a2babf06a7f68"
+ },
+ "sources": [
+  {
+   "file": "WESM RULES_as of 31 Aug 2025 (DC2025-08-0011_ILP)-final.pdf",
+   "sha256": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+   "pages": 297
+  },
+  {
+   "file": "WESM-BSM-16.0_31Aug2025 (DC2025-08-0011_ILP)_final.pdf",
+   "sha256": "0e132577fee5e11cc911caf826322a69a94f8b7d7739648931de5a7180ac30dd",
+   "pages": 63
+  },
+  {
+   "file": "WESM-DP-25_12Mar2026 (DC2026-03-0009_DIR)-final.pdf",
+   "sha256": "bcd810c8566b243e6a7c7e6d8e710660a9e072214d4594275f4a5e1befeaf567",
+   "pages": 133
+  },
+  {
+   "file": "WESM-MSP-16.0_18Feb2023_(Metering_Vallidation)_fin.pdf",
+   "sha256": "98c3118d6171fa9ad048c192a946f2dbab538bab60969e5b6f423bb92230992b",
+   "pages": 171
+  }
+ ],
+ "excerpts": [
+  {
+   "id": "wesm-rules-contents-chapters",
+   "file": "WESM RULES_as of 31 Aug 2025 (DC2025-08-0011_ILP)-final.pdf",
+   "page": 3,
+   "start": 156,
+   "end": 556,
+   "text": "The WESM Rules is organized into eleven (11) Chapters. These are:  \n \n \nChapter 1. Introduction \nChapter 2. Registration \nChapter 3. The Market \nChapter 4. Metering \nChapter 5. Market Information and Confidentiality \nChapter 6. Intervention and Market Suspension \nChapter 7. Enforcement and Disputes \nChapter 8. Rules Change Process \nChapter 9. Interpretation \nChapter 10.  Transitory Provisions \nCha",
+   "text_sha256": "b842a93e08626526856f2c9c7b47062ca7fda6db35227b4179422012f7f029fe",
+   "page_text_sha256": "fe81bc26952a1df081c3cfc5bbcbf1eff43ad7d80cce881080ac7ceb34263edd"
+  },
+  {
+   "id": "wesm-rules-chapter-3",
+   "file": "WESM RULES_as of 31 Aug 2025 (DC2025-08-0011_ILP)-final.pdf",
+   "page": 61,
+   "start": 149,
+   "end": 549,
+   "text": "CHAPTER 3 \n \nTHE MARKET \n \n3.1 SCOPE OF CHAPTER 3 \nThis chapter 3 sets out the rules which govern operation of the spot market, and related \nmatters, including but not limited to: \n(a) The definition of the market network model, Customer pricing zones, reserve \ncategories and reserve regions, dispatch interval, settlement interval  and \ntimetable; (As amended by DOE DC No. 2016-10-0014 dated 14 Oc",
+   "text_sha256": "10de6f74210b21f6cccf2db4c3b04c47cf48610a66a5798e11d947a1850d50cc",
+   "page_text_sha256": "f1f7c046dbfd561e30d07eccedfe4e402db3bb8d28f03cbc50f6950f98cacd3a"
+  },
+  {
+   "id": "wesm-rules-subsection-3-5-4",
+   "file": "WESM RULES_as of 31 Aug 2025 (DC2025-08-0011_ILP)-final.pdf",
+   "page": 77,
+   "start": 258,
+   "end": 658,
+   "text": "3.5.4 Load Forecasting \nAll load forecasts at each market trading node  in the market network model \nshall be specified in units of megawatt (MW) and will apply to the end of the \nrelevant dispatch interval unless otherwise stated. (As amended by DOE DC. \nNo. 2018-08-0022 dated 06 August 2018) \n \n3.5.4.1 Each Customer may submit a forecast in respect of each \ndispatch interval for each of its regi",
+   "text_sha256": "70f1cb358586eade37e3e2ee353395112f95cc7ea0640898573019cc0f6ee5ab",
+   "page_text_sha256": "ec739fb27f541d8b14653624b824f526c73b3bc34e24ecabcab9e5155d41c9e2"
+  },
+  {
+   "id": "wesm-rules-appendix-a1",
+   "file": "WESM RULES_as of 31 Aug 2025 (DC2025-08-0011_ILP)-final.pdf",
+   "page": 293,
+   "start": 164,
+   "end": 564,
+   "text": "APPENDIX A \n \nAPPENDICES TO CHAPTER 3 \nAppendix A1. Information to be Supplied with Offers to Supply and to Buy \nElectricity \n \nA1.1 Generation Offers  \n(As amended by DOE DC No. 2016-10-0014 dated 14 October 2016) \nGeneration offers: \n(a) May include up to ten (10) generation offer blocks per (aggregate) unit , and  the \nmaximum combined capacity of generation and reserve offers must not be less ",
+   "text_sha256": "6340b92a09ade0d34f46d4d5d9fbb8fb27837a710d522fb4743dc4852ed41ba3",
+   "page_text_sha256": "959ec3f77b84f9fb875ee195c84e4b83edc2256f305ff7d46ce4bf5c5060dd9b"
+  },
+  {
+   "id": "manual-bsm-section-1",
+   "file": "WESM-BSM-16.0_31Aug2025 (DC2025-08-0011_ILP)_final.pdf",
+   "page": 8,
+   "start": 48,
+   "end": 448,
+   "text": "SECTION 1 INTRODUCTION \n \n \n1.1 BACKGROUND \n \nThis Market Manual  provides the procedures on the preparation of settlement \nstatements as basis for the settlement of transactions of Trading Participants in the \nWholesale Electricity Spot Market (WESM). \n \n1.2 PURPOSE \n \nThis Market Manual implements relevant provisions from WESM Rules Clauses 3.14 \nand 3.15 . It describes the procedures which the ",
+   "text_sha256": "b9bb88ee3fcb4b510833f4cf193696ed958f7125418ea5becfb8eaf1b8c21c71",
+   "page_text_sha256": "70bb4147dc2968155b9e25ea65ca3e7eab8cd03c9e67afd72f02f07c13a6e1b3"
+  },
+  {
+   "id": "manual-dp-section-1",
+   "file": "WESM-DP-25_12Mar2026 (DC2026-03-0009_DIR)-final.pdf",
+   "page": 13,
+   "start": 46,
+   "end": 446,
+   "text": "SECTION 1 INTRODUCTION \n \n1.1 Overview of WESM Operations  \n \n1.1.1 In the WESM, the Market Operator provides the System Operator with energy dispatch \nand reserve schedules to be implemented by the System Operator and the Trading \nParticipants for each dispatch interval using various inputs such as load forecasts and \nstate-estimated data from the Market Operator, reserve requirements, real-time ",
+   "text_sha256": "7dbb20780a887035be2cff516f3ac7b1b3d2cb4f079fa8494d9821289b494aa9",
+   "page_text_sha256": "18a4284cc000c67a0e9a29446b1933b68bed193d2ce97bf762e1e66d3ccd7f09"
+  },
+  {
+   "id": "manual-msp-appendix-c",
+   "file": "WESM-MSP-16.0_18Feb2023_(Metering_Vallidation)_fin.pdf",
+   "page": 106,
+   "start": 55,
+   "end": 455,
+   "text": "APPENDIX C \n  \nGOVERNING PROVISIONS OF THE WESM RULES \n \nThe  following pertinent provisions in the WESM Rules  on the   the requirements \nfor potential candidates as   Trading Participants and Metering Services Providers \nare detailed below, to wit: \n \nClause   4.3.2 Election of a Metering Services Provider by a Trading Participant \n \nClause  4.3.2.1 A Trading Participant who is a Direct WESM Mem",
+   "text_sha256": "82b9d1704871f3810f7c531820f26538df16698629cf2c3a9a7c5d5cd3e38137",
+   "page_text_sha256": "434e8a3af426bcd1f4e61107125f82884ce71b1b9bac69154b7835265a58d630"
+  },
+  {
+   "id": "manual-msp-annex-a",
+   "file": "WESM-MSP-16.0_18Feb2023_(Metering_Vallidation)_fin.pdf",
+   "page": 123,
+   "start": 56,
+   "end": 154,
+   "text": "Annex “A” \n \nSECRETARY’S CERTIFICATE – NGCP \n \n \n \n \n \n \n \n \n \n \n \n \n(Intentionally left blank) \n ",
+   "text_sha256": "641c7e350512726d65ed2fcae764302b017c3f91ba4861f73960eab51ec8ade8",
+   "page_text_sha256": "9659980562755e81c57b6988f1cd4e57a7099036738334d48e3fba75a0405b47"
+  }
+ ]
+}

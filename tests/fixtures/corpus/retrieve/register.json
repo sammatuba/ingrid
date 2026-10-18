@@ -1,0 +1,112 @@
+{
+ "schema": "corpus.register.fixture.v1",
+ "purpose": "A synthetic register in the shape of docs/work/corpus/register-2026-10.json, for tests/test_corpus_retrieve.py. Every name, date and word is fictional.",
+ "compendium": {
+  "name": "Synthetic compendium",
+  "compendium_date": "2026-04-01",
+  "unpacked_at": "documents",
+  "archive": {
+   "path": "archive.bin",
+   "sha256": "3738b73398486dcaa5c102e680961dc5cf0635ce3a7dcdff8859278b8e893039",
+   "bytes": 54
+  },
+  "documents": 5
+ },
+ "entries": [
+  {
+   "id": "synthetic-alpha-1-0",
+   "kind": "document",
+   "issuer": "Fictional market operator",
+   "title": "Synthetic Alpha Manual",
+   "version": "Synthetic fixture issue",
+   "date": {
+    "approval": "2026-01-10",
+    "publication": "2026-01-15",
+    "pemc_posting": "2026-01-20",
+    "effective": "2026-01-25"
+   },
+   "file_name": "Synthetic_Alpha_Manual_1.0_final.txt",
+   "url_or_path": "tests/fixtures/corpus/retrieve/documents/Synthetic_Alpha_Manual_1.0_final.txt",
+   "format": "txt",
+   "sha256": "8b66c78b17a765e1c8e0194fb8b97ff1e299c552afb8757fa4866d7c2a87da2a",
+   "licence": "synthetic fixture; no real document",
+   "synthetic": true
+  },
+  {
+   "id": "synthetic-beta-2-0",
+   "kind": "document",
+   "issuer": "Fictional market operator",
+   "title": "Synthetic Beta Manual",
+   "version": "Synthetic fixture issue",
+   "date": {
+    "approval": "",
+    "publication": "",
+    "pemc_posting": "2026-02-01",
+    "effective": ""
+   },
+   "file_name": "Synthetic_Beta_Manual_2.0_final.txt",
+   "url_or_path": "tests/fixtures/corpus/retrieve/documents/Synthetic_Beta_Manual_2.0_final.txt",
+   "format": "txt",
+   "sha256": "0d55116331612c18f3905e9dc9454fc8b23b7936118c383912a033044c7e7bdf",
+   "licence": "synthetic fixture; no real document",
+   "synthetic": true
+  },
+  {
+   "id": "synthetic-delta-1-0",
+   "kind": "document",
+   "issuer": "Fictional market operator",
+   "title": "Synthetic Delta Manual",
+   "version": "Synthetic fixture issue",
+   "date": {
+    "approval": "",
+    "publication": "",
+    "pemc_posting": "",
+    "effective": ""
+   },
+   "file_name": "Synthetic_Delta_Manual_05Mar2026_final.txt",
+   "url_or_path": "tests/fixtures/corpus/retrieve/documents/Synthetic_Delta_Manual_05Mar2026_final.txt",
+   "format": "txt",
+   "sha256": "33beddfab48bc034ada8fbd20d6e95ce8d584a06bd9c0846d976d601c896c9a0",
+   "licence": "synthetic fixture; no real document",
+   "synthetic": true
+  },
+  {
+   "id": "synthetic-gamma-1-0",
+   "kind": "document",
+   "issuer": "Fictional market operator",
+   "title": "Synthetic Gamma Notes",
+   "version": "Synthetic fixture issue",
+   "date": {
+    "approval": "",
+    "publication": "",
+    "pemc_posting": "",
+    "effective": ""
+   },
+   "file_name": "Synthetic_Gamma_Notes_final.txt",
+   "url_or_path": "tests/fixtures/corpus/retrieve/documents/Synthetic_Gamma_Notes_final.txt",
+   "format": "txt",
+   "sha256": "37a0f5e3402e08eedb4db82748ed4fe5ac33251138faedf30cc407f01638ee6f",
+   "licence": "synthetic fixture; no real document",
+   "synthetic": true
+  },
+  {
+   "id": "synthetic-epsilon-1-0",
+   "kind": "document",
+   "issuer": "Fictional market operator",
+   "title": "Synthetic Epsilon Manual",
+   "version": "Synthetic fixture issue",
+   "date": {
+    "approval": "2026-04-20",
+    "publication": "2026-05-02",
+    "pemc_posting": "2026-05-04",
+    "effective": "2026-05-10"
+   },
+   "file_name": "Synthetic_Epsilon_Manual_1.0_final.txt",
+   "url_or_path": "tests/fixtures/corpus/retrieve/documents/Synthetic_Epsilon_Manual_1.0_final.txt",
+   "format": "txt",
+   "sha256": "cdf9506714ddd12a6f3fe3dc73b51cc514ec89b78e9f9365e3150ee772da2e93",
+   "licence": "synthetic fixture; no real document",
+   "synthetic": true
+  }
+ ]
+}

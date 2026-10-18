@@ -1,0 +1,94 @@
+/* Outlooks page (`/outlooks`). Platform polish, 2026-10-18.
+   The frame, empty state, tables, cards and disclosure are the shared components in ui.css
+   (docs/work/platform-polish-2026-10-18/design-system.md). This file holds only what is unique to
+   the outlooks: the plain answer beside its chart, the chart itself, the vintages table with its
+   detail panel, and the record prose. Nothing here is a market state, so nothing is coloured. */
+
+.ol-none { max-width: var(--read-max, 760px); }
+
+.ol-target + .ol-target { margin-top: var(--s-6, 32px); padding-top: var(--s-5, 24px); border-top: 1px solid var(--rule); }
+
+/* OUTLOOK-7: the plain answer. The month is the block's heading and the first sentence, the
+   month's figure, is the page's anchor; the chart sits beside the sentences on a wide screen. */
+.ol-answer { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 480px); gap: var(--s-4, 16px) var(--s-6, 32px); align-items: start; }
+.ol-answer-month { margin: 0; font-size: var(--t-h2, 15px); font-weight: 600; }
+.ol-answer-text { margin: 3px 0 0; color: var(--text-2); font-size: var(--t-body, 13px); max-width: 72ch; }
+.ol-answer-text:first-of-type { margin: 6px 0 8px; color: var(--text); font-size: 20px; font-weight: 500; line-height: 1.35; letter-spacing: -.01em; }
+.ol-answer-asof { margin-top: 8px; }
+
+/* OUTLOOK-7: the chart of the vintages' values: direct labels, a source line, no scale the reader
+   has to guess at, and never wider than its column. */
+.ol-chart { margin: 0; padding: var(--s-3, 12px); border: 1px solid var(--rule); border-radius: var(--radius, 12px); background: var(--panel); }
+.ol-chart svg { display: block; width: 100%; height: auto; }
+.ol-chart-unit { fill: var(--faint); font-size: 9.5px; }
+.ol-chart-band { stroke: var(--rule-strong); stroke-width: 2; }
+.ol-chart-point circle { fill: var(--text-2); }
+.ol-chart-value { fill: var(--text); font-family: var(--mono); font-size: 11px; }
+.ol-chart-bandtext { fill: var(--faint); font-family: var(--mono); font-size: 9.5px; }
+.ol-chart-date { fill: var(--muted); font-size: 10px; }
+.ol-chart-record { fill: var(--faint); font-family: var(--mono); font-size: 9.5px; }
+.ol-chart-source { margin-top: 2px; color: var(--faint); font-size: 11px; }
+
+/* The vintages table and the chosen vintage beside it. */
+.ol-vintage-grid { margin-top: var(--s-5, 24px); align-items: start; }
+.ol-vintage-list { min-width: 0; }
+.ol-vintage-list .gn-section-head h3 { margin: 0; }
+.ol-vtable { --gn-table-min: 900px; }
+.ol-vtable .ol-c-id { width: auto; }
+.ol-vtable .ol-c-time { width: 168px; }
+.ol-vtable .ol-c-mean { width: 140px; }
+.ol-vtable .ol-c-n { width: 100px; }
+.ol-vtable td.mono { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ol-vtable .ol-c-standing { width: 104px; }
+.ol-score-table { --gn-table-min: 1040px; }
+.ol-score-table .ol-s-name { width: 200px; }
+.ol-score-table .ol-s-unavail { width: 220px; }
+/* Three rows a horizon: no sort, so each figure header can wrap onto two lines. */
+.gn-table.ol-score-table thead th { white-space: normal; height: auto; padding-top: 6px; padding-bottom: 6px; }
+.ol-vtable tbody tr { cursor: pointer; }
+.ol-vtable tbody tr.is-selected > td { background: var(--sel, var(--accent-soft)); }
+.ol-pick { all: unset; cursor: pointer; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; color: var(--text); }
+.ol-pick:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+.ol-standing { color: var(--text); font-weight: 600; }
+
+.ol-detail { min-width: 0; }
+.ol-vintages { list-style: none; margin: 0; padding: 0; }
+.ol-headline { color: var(--text); }
+.ol-headline b { display: block; font-family: var(--mono); font-size: 13px; font-weight: 500; overflow-wrap: anywhere; }
+.ol-headline .unit { color: var(--muted); font-size: var(--t-small, 12px); }
+.ol-line { margin-top: 4px; color: var(--muted); font-size: var(--t-small, 12px); overflow-wrap: anywhere; }
+.ol-line .mono { color: var(--text-2); }
+.ol-change { margin-top: 8px; color: var(--text-2); font-size: var(--t-small, 12px); overflow-wrap: anywhere; }
+.ol-sub { margin: var(--s-3, 12px) 0 2px; color: var(--muted); font-size: var(--t-meta, 11px); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+.ol-rows, .ol-links { list-style: none; margin: 0; padding: 0; }
+.ol-rows li, .ol-links li { padding: 2px 0; font-size: var(--t-small, 12px); color: var(--text-2); overflow-wrap: anywhere; }
+.ol-rows .unit { color: var(--faint); }
+
+.ol-receipt { margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--rule); }
+.ol-receipt:first-of-type { border-top: 0; padding-top: 0; }
+.ol-cause { margin-top: 5px; color: var(--muted); font-size: 11px; }
+.ol-cause b { color: var(--text-2); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.ol-attribution { margin-top: 2px; color: var(--text-2); font-size: var(--t-small, 12px); overflow-wrap: anywhere; }
+.ol-share-problem { margin-top: 3px; color: var(--faint); font-size: var(--t-small, 12px); }
+
+/* DESK-6: the target's baseline track record. */
+.ol-score { margin-top: var(--s-5, 24px); }
+.ol-score h3 { margin: 0; }
+.ol-score-horizon { margin-top: var(--s-3, 12px); }
+.ol-score-slice { margin-bottom: 4px; color: var(--muted); font-size: var(--t-small, 12px); }
+.ol-score-inputs { margin-top: 6px; color: var(--faint); font-size: 11px; overflow-wrap: anywhere; }
+.ol-score-inputs .mono { color: var(--muted); }
+
+/* The record fold. */
+.ol-records { margin-top: var(--s-4, 16px); }
+.ol-series { margin: 6px 0 0; }
+.ol-series .mono { font-size: var(--t-small, 12px); color: var(--text); }
+.ol-records > .asof { margin-top: 3px; }
+.ol-record-list { list-style: none; margin: 8px 0 0; padding: 0; }
+.ol-record-list > li { padding: 6px 0; border-top: 1px solid var(--rule); font-size: var(--t-small, 12px); color: var(--muted); overflow-wrap: anywhere; }
+.ol-record-list b { font-weight: 500; color: var(--text); }
+
+@media (max-width: 1100px) {
+  .ol-answer { grid-template-columns: minmax(0, 1fr); }
+  .ol-chart { max-width: 520px; }
+}

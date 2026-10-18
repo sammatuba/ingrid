@@ -1,0 +1,453 @@
+/* InGRID shell (ericka-desk slice 1): one palette for dark and light mode, the shared top
+   bar, the "More" menu and the ticker. Loaded last on every page, so its tokens win over a page's
+   own `:root`. `html[data-theme]` is set by shell.js before the first paint. */
+@font-face { font-family: Inter; src: url(fonts/inter-latin-400-normal.woff2) format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: Inter; src: url(fonts/inter-latin-500-normal.woff2) format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: Inter; src: url(fonts/inter-latin-600-normal.woff2) format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: Plex; src: url(fonts/ibm-plex-mono-latin-400-normal.woff2) format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: Plex; src: url(fonts/ibm-plex-mono-latin-500-normal.woff2) format('woff2'); font-weight: 500; font-display: swap; }
+/* The peso sign (U+20B1) from Inter's extended set, so pages without grid.css draw it in the same face. */
+@font-face { font-family: Inter; src: url(fonts/inter-latin-ext-400-normal.woff2) format('woff2'); font-weight: 400; unicode-range: U+20B1; font-display: swap; }
+@font-face { font-family: Inter; src: url(fonts/inter-latin-ext-500-normal.woff2) format('woff2'); font-weight: 500; unicode-range: U+20B1; font-display: swap; }
+@font-face { font-family: Inter; src: url(fonts/inter-latin-ext-600-normal.woff2) format('woff2'); font-weight: 600; unicode-range: U+20B1; font-display: swap; }
+
+/* ---------- tokens ---------- */
+:root[data-theme], :root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0b1018;
+  --panel: #111824;
+  --panel-2: #172131;
+  --sea: #0d1520;
+  --land: #172232;
+  --land-edge: #2a3a50;
+  --rule: #212d40;
+  --rule-strong: #2f3f58;
+  --text: #e8edf5;
+  --text-2: #b8c4d6;
+  --muted: #8794aa;
+  --faint: #66748a;
+  --accent: #7cc4ff;
+  --accent-soft: rgba(124, 196, 255, .14);
+  --ok: #3ccf8e;
+  --ok-soft: rgba(60, 207, 142, .14);
+  --warn: #f2b134;
+  --warn-soft: rgba(242, 177, 52, .14);
+  --bad: #ff6b6b;
+  --bad-soft: rgba(255, 107, 107, .14);
+  --link: #a6d4ff;
+  --p0: #3b6fd9; --p1: #6fb0e8; --p2: #d9e2ea; --p3: #f2b134; --p4: #ff5a5a;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .35), 0 8px 24px rgba(0, 0, 0, .25);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --gap: 14px;
+  /* UX-4, shared by every slice: the bar's geometry, the severity colours (desk-api.md: alert,
+     warning, info) and the price colour of an unknown price. The price scale itself is --p0
+     (well below the usual) to --p4 (at the cap); `GNShell.priceTone(price, usual)` names the stop. */
+  --gn-row1-h: 52px;
+  --gn-row1-h-phone: 48px;
+  --gn-strip-h: 40px;
+  --gn-ctl-h: 32px;
+  --sev-alert: var(--bad);
+  --sev-warning: var(--warn);
+  --sev-info: var(--accent);
+  --p-none: var(--faint);
+  /* Platform polish (design-system.md): spacing, type, layout and surface tokens for ui.css.
+     `--bar-h` is the shell bar's measured height (shell.js keeps it current); the value here is
+     only its first-paint estimate (two rows and the rule). */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px;
+  --t-meta: 11px; --t-small: 12px; --t-body: 13px; --t-lead: 14px;
+  --t-h3: 13px; --t-h2: 15px; --t-h1: 22px; --t-figure: 22px; --t-figure-sm: 14px;
+  --page-max: 1440px;
+  --read-max: 760px;
+  --gutter: clamp(16px, 3vw, 32px);
+  --bar-h: 93px;
+  --cmd-clear: 112px;
+  --row-hover: rgba(148, 170, 204, .06);
+  --row-zebra: rgba(148, 170, 204, .028);
+  --sel: rgba(124, 196, 255, .11);
+  --on-accent: #0b1018;
+  --alert-bg: rgba(255, 107, 107, .14); --alert-fg: #ff8f8f;
+  --warning-bg: rgba(242, 177, 52, .14); --warning-fg: #f5c35c;
+  --info-bg: rgba(124, 196, 255, .13); --info-fg: #9dd3ff;
+  --ok-bg: rgba(60, 207, 142, .13); --ok-fg: #5edba3;
+  --sans: Inter, ui-sans-serif, system-ui, sans-serif;
+  --mono: Plex, Inter, ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  /* names the explainer, paper and catalog pages use for the same roles */
+  --fg: var(--text);
+  --ink: var(--text);
+  --line: var(--rule);
+  --card: var(--panel);
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f4f6fa;
+  --panel: #ffffff;
+  --panel-2: #eef2f8;
+  --sea: #e3ecf6;
+  --land: #ffffff;
+  --land-edge: #c3cedb;
+  --rule: #e0e6ef;
+  --rule-strong: #c9d2df;
+  --text: #0f172a;
+  --text-2: #334155;
+  --muted: #5b6b82;
+  --faint: #8794a8;
+  --accent: #2563eb;
+  --accent-soft: rgba(37, 99, 235, .10);
+  --ok: #15803d;
+  --ok-soft: rgba(21, 128, 61, .10);
+  --warn: #b45309;
+  --warn-soft: rgba(180, 83, 9, .10);
+  --bad: #dc2626;
+  --bad-soft: rgba(220, 38, 38, .10);
+  --link: #1d4ed8;
+  --p0: #2f5fc4; --p1: #4f95d6; --p2: #8a9bb2; --p3: #d08a0c; --p4: #dc2626;
+  --shadow: 0 1px 2px rgba(15, 23, 42, .05), 0 6px 20px rgba(15, 23, 42, .06);
+  --row-hover: rgba(15, 23, 42, .035);
+  --row-zebra: rgba(15, 23, 42, .02);
+  --sel: rgba(37, 99, 235, .08);
+  --on-accent: #ffffff;
+  --alert-bg: #fdecec; --alert-fg: #b42318;
+  --warning-bg: #fcf1df; --warning-fg: #8f4a06;
+  --info-bg: #e8effd; --info-fg: #1d4ed8;
+  --ok-bg: #e5f4ea; --ok-fg: #166534;
+}
+
+/* ---------- base ---------- */
+html, body { background: var(--bg); color: var(--text); }
+body { font-family: var(--sans); transition: background-color .2s ease, color .2s ease; }
+/* Zero weight, so a component's own link colour (breadcrumbs, table links) wins over it. */
+:where(a) { color: var(--link); }
+.card { background: var(--panel); border: 1px solid var(--rule); border-radius: var(--radius); box-shadow: var(--shadow); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+
+/* ---------- top bar ---------- */
+/* SHELL-1: shell.js builds this bar (`header#gn-bar`) on every page. Its type is set here, on the
+   bar itself, so no page stylesheet's body font (the paper's 18px serif page, the explainer's
+   16px system face) reaches it, and it carries no `.bar` class, so no page's own bar rules match. */
+#gn-bar { font: 400 13px/1.45 var(--sans); letter-spacing: normal; text-align: left; text-transform: none;
+  margin: 0; box-sizing: border-box; color: var(--text); }
+#gn-bar *, #gn-bar *::before, #gn-bar *::after { box-sizing: border-box; }
+#gn-bar .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }  /* grid.css's class, which the paper and explainer do not load */
+/* While the shell runs, each page's own static bar (the no-script fallback) is hidden from the
+   first paint; shell.js keeps what a page still needs from it. */
+:root.gn-shell body > header.bar, :root.gn-shell .bk-top > header.bar,
+:root.gn-shell .bar > nav.sites, :root.gn-shell .bar > .brand,
+:root.gn-shell .gn-page-bar[hidden] { display: none !important; }
+/* A page's own line pinned under the bar starts below it (the explainer's header). */
+:root.gn-shell body > header:not(#gn-bar) { top: var(--gn-bar-h, 0px); }
+/* UX-4: one solid surface (no blur), two rows of fixed height: the menu row (--gn-row1-h) and
+   the live strip (--gn-strip-h). Every control in the bar is --gn-ctl-h tall. */
+.gn-bar { display: flex; align-items: center; flex-wrap: wrap; gap: 0 16px; padding: 0 16px;
+  background: var(--bg); border-bottom: 1px solid var(--rule); position: sticky; top: 0; z-index: 45; }
+/* z-index 45: the bar's own popovers (More, As of) open above the floating dock (40) under it. */
+.gn-bar > .gn-brand, .gn-bar > .gn-nav, .gn-bar > .gn-tools { min-height: var(--gn-row1-h); }
+#gn-bar .gn-brand { display: flex; align-items: center; gap: 8px; color: var(--text); text-decoration: none; font-weight: 600; font-size: 14px; white-space: nowrap;
+  border-radius: var(--radius-sm); }
+#gn-bar .gn-brand svg { width: 20px; height: 20px; color: var(--accent); flex: none; }  /* the InGRID mark (ingrid-mark.svg) */
+.gn-nav { display: flex; align-items: center; gap: 2px; flex-wrap: nowrap; min-width: 0; }
+.gn-nav > a, .gn-navbtn { position: relative; display: inline-flex; align-items: center; gap: 5px; height: var(--gn-ctl-h); margin: 0; color: var(--text-2);
+  text-decoration: none; font: 500 13px var(--sans); padding: 0 10px; border: 0; border-radius: var(--radius-sm); background: transparent; white-space: nowrap; cursor: pointer; }
+.gn-nav > a:hover, .gn-navbtn:hover, .gn-navbtn[aria-expanded="true"] { color: var(--text); background: var(--panel-2); }
+/* The current section: full text colour and a 2px accent rule under it (a menu holding the page carries it too). */
+.gn-nav > a[aria-current="page"], .gn-navbtn.gn-here { color: var(--text); }
+.gn-nav > a[aria-current="page"]::before, .gn-navbtn.gn-here::before { content: ''; position: absolute; left: 10px; right: 10px; bottom: 2px;
+  height: 2px; border-radius: 2px; background: var(--accent); }
+.gn-navbtn .gn-navbtn-chev { width: 12px; height: 12px; color: var(--muted); transition: transform .14s ease-out; }
+.gn-navbtn[aria-expanded="true"] .gn-navbtn-chev { transform: rotate(180deg); }
+.gn-nav > .gn-navgroup:first-of-type { margin-left: 6px; padding-left: 8px; border-left: 1px solid var(--rule); }
+.gn-navgroup { position: relative; display: flex; align-items: center; }
+.gn-navmenu { position: absolute; top: calc(100% + 8px); left: 0; z-index: 30; width: 320px; display: grid; gap: 1px; padding: 6px;
+  background: var(--panel); border: 1px solid var(--rule-strong); border-radius: var(--radius); box-shadow: var(--shadow); animation: gn-pop .16s ease-out; }
+.gn-navmenu[hidden] { display: none; }
+.gn-navitem { display: grid; gap: 2px; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--text-2); text-decoration: none; outline: none; }
+.gn-navitem:hover, .gn-navitem:focus { background: var(--panel-2); color: var(--text); }
+.gn-navitem:focus-visible { box-shadow: inset 0 0 0 2px var(--accent); }
+.gn-navitem-t { font: 500 13px/1.3 var(--sans); color: var(--text); }
+.gn-navitem-d { font: 400 12px/1.4 var(--sans); color: var(--muted); }
+.gn-navitem[aria-current="page"] .gn-navitem-t::after { content: ''; display: inline-block; width: 6px; height: 6px; margin: 0 0 1px 7px; border-radius: 50%; background: var(--accent); }
+/* The phone's Menu button, hidden on wider screens. */
+.gn-menu-btn { display: none; align-items: center; gap: 6px; height: var(--gn-ctl-h); padding: 0 10px 0 8px; margin: 0; border: 1px solid var(--rule);
+  border-radius: var(--radius-sm); background: transparent; color: var(--text-2); font: 500 12.5px var(--sans); cursor: pointer; }
+.gn-menu-btn:hover, .gn-menu-btn[aria-expanded="true"] { color: var(--text); background: var(--panel-2); }
+#gn-bar .gn-menu { position: absolute; top: calc(100% + 6px); left: 0; min-width: 220px; display: grid; padding: 6px; z-index: 30;
+  background: var(--panel); border: 1px solid var(--rule); border-radius: var(--radius); box-shadow: var(--shadow); }
+#gn-bar .gn-menu a { color: var(--text-2); text-decoration: none; font-size: 13px; padding: 8px 10px; border-radius: var(--radius-sm); }
+#gn-bar .gn-menu a:hover, #gn-bar .gn-menu a[aria-current="page"] { color: var(--text); background: var(--panel-2); }
+.gn-tools { margin-left: auto; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.gn-theme, .gn-settings, .gn-account > button, .gn-account > a { display: inline-flex; align-items: center; height: var(--gn-ctl-h); font: 500 12.5px var(--sans);
+  color: var(--text-2); text-decoration: none; background: transparent; border: 1px solid var(--rule); border-radius: var(--radius-sm); padding: 0 12px;
+  cursor: pointer; white-space: nowrap; }
+.gn-theme:hover, .gn-settings:hover, .gn-account > button:hover, .gn-account > a:hover { color: var(--text); border-color: var(--rule-strong); background: var(--panel-2); }
+.gn-settings[aria-current="page"] { color: var(--text); background: var(--panel-2); border-color: var(--rule-strong); }
+/* An icon-only button: square, the glyph centred, named by its aria-label. */
+#gn-bar .gn-icon-btn { width: var(--gn-ctl-h); padding: 0; justify-content: center; }
+.gn-glyph { width: 16px; height: 16px; flex: none; display: block; }
+.gn-account { display: flex; align-items: center; gap: 6px; }
+.gn-signin { position: relative; }
+.gn-signin > summary { list-style: none; display: inline-flex; align-items: center; height: var(--gn-ctl-h); font: 600 12.5px var(--sans); color: #fff;
+  background: var(--accent); border-radius: var(--radius-sm); padding: 0 13px; cursor: pointer; }
+:root[data-theme="dark"] .gn-signin > summary { color: #0b1018; }
+.gn-signin > summary::-webkit-details-marker { display: none; }
+#gn-bar .gn-menu-right { left: auto; right: 0; }
+.gn-menu-item { display: block; width: 100%; text-align: left; font: 500 13px var(--sans); color: var(--text-2); background: transparent; border: 0;
+  text-decoration: none; padding: 8px 10px; border-radius: var(--radius-sm); cursor: pointer; }
+.gn-menu-item:hover { color: var(--text); background: var(--panel-2); }
+.gn-muted { color: var(--muted); }
+.gn-user { font-size: 12px; color: var(--text-2); max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gn-user.gn-muted { color: var(--faint); }
+
+/* Grid filters belong to the page, never the top bar: a page's own grid tabs keep their markup
+   (its script reads them) but are hidden here. */
+.gn-bar > .grids { display: none !important; }
+.gn-bar > .gn-tools { order: 1; margin-left: auto; }
+
+/* ---------- the bar's second row: the live strip, and As of at the right ---------- */
+/* The whole bar is pinned (above), so both rows stay at the top while the page scrolls. The row
+   has one height on every page, whatever it holds (the strip, the As of control, the desk's time
+   label, or a page's own clock), so the bar is the same height everywhere. */
+.gn-bar > .gn-row2 { order: 2; flex: 1 0 calc(100% + 32px); margin: 0 -16px; padding: 0 16px; height: var(--gn-strip-h); display: flex; flex-wrap: nowrap;
+  align-items: center; gap: 12px; min-width: 0; border-top: 1px solid var(--rule); }
+.gn-row2-left { flex: 1 1 auto; min-width: 0; height: 100%; display: flex; }
+.gn-row2-right { flex: none; display: flex; align-items: center; gap: 8px; height: 100%; margin-left: auto; min-width: 0; position: relative; }
+
+/* The strip: sections split by hairline rules, each a run of compact links. */
+.gn-strip { flex: 1 1 auto; min-width: 0; height: 100%; display: flex; align-items: center; overflow: hidden; }
+.gn-sec { flex: none; display: flex; align-items: center; gap: 2px; height: 100%; padding: 0 10px; border-left: 1px solid var(--rule); min-width: 0; }
+.gn-sec:first-child { padding-left: 0; border-left: 0; }
+.gn-sec-notes { flex: 1 1 auto; padding-right: 0; }
+.gn-sec-h { font: 600 10.5px var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-right: 4px; white-space: nowrap; }
+.gn-sec-unit, .gn-sec-basis { font-size: 11px; color: var(--faint); white-space: nowrap; }
+.gn-sec-basis { margin: 0 2px 0 5px; }
+.gn-sec-basis:empty { display: none; }
+.gn-px, .gn-ln, .gn-note, .gn-viewall { display: inline-flex; align-items: center; height: var(--gn-ctl-h); padding: 0 6px; border-radius: var(--radius-sm);
+  color: var(--text-2); text-decoration: none; white-space: nowrap; }
+.gn-px, .gn-ln { gap: 4px; padding: 0 5px; }
+.gn-px:hover, .gn-ln:hover, .gn-note[href]:hover, .gn-viewall:hover { background: var(--panel-2); color: var(--text); }
+.gn-px-code { font: 600 11px var(--sans); letter-spacing: .04em; color: var(--muted); }
+.gn-px-v { font-size: 13px; color: var(--text); min-width: 5.5ch; text-align: right; }
+.gn-px-bad .gn-px-v { color: var(--bad); }
+.gn-nodata-v, .gn-px .gn-nodata-v, #gn-bar .gn-nodata-v { color: var(--faint); font-family: var(--sans); font-size: 11.5px; font-weight: 400; min-width: 0; text-align: left; }
+.gn-px-d { font-size: 11.5px; color: var(--muted); min-width: 4.5ch; }
+.gn-px-d:empty { display: none; }
+.gn-px-d.gn-up { color: var(--p3); }
+.gn-px-d.gn-down { color: var(--p1); }
+.gn-px-vs { color: var(--faint); font-size: 10.5px; }
+.gn-px-flag { font: 600 10px/1 var(--sans); letter-spacing: .05em; text-transform: uppercase; padding: 3px 5px; border-radius: 4px;
+  background: var(--bad-soft); color: var(--bad); }
+.gn-px-warn .gn-px-flag { background: var(--warn-soft); color: var(--warn); }
+.gn-px-flag[hidden] { display: none; }
+/* Sparklines: 1.25px line in --text-2, a dashed baseline at the usual price, an end dot in the price colour. */
+.gn-spark { flex: none; display: block; overflow: visible; }
+.gn-spark-line { fill: none; stroke: var(--text-2); stroke-width: 1.25; stroke-linejoin: round; stroke-linecap: round; }
+.gn-spark-usual { stroke: var(--rule-strong); stroke-width: 1; stroke-dasharray: 2 2; }
+.gn-spark-dot { stroke: var(--bg); stroke-width: 1; }
+.gn-spark-dot.gn-p0 { fill: var(--p0); } .gn-spark-dot.gn-p1 { fill: var(--p1); } .gn-spark-dot.gn-p2 { fill: var(--p2); }
+.gn-spark-dot.gn-p3 { fill: var(--p3); } .gn-spark-dot.gn-p4 { fill: var(--p4); } .gn-spark-dot.gn-pn { fill: var(--p-none); }
+.gn-spark-empty { display: none; }
+.gn-ln-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--faint); flex: none; }
+.gn-ln-ok .gn-ln-dot { background: var(--ok); }
+.gn-ln-hot .gn-ln-dot { background: var(--bad); }
+.gn-ln-name { font-size: 12px; color: var(--text-2); }
+.gn-short { display: none; }
+.gn-ln-flow { font-size: 12.5px; color: var(--text); }
+.gn-ln-arrow { color: var(--muted); margin-right: 3px; font-family: var(--sans); }
+#gn-bar .gn-unit { color: var(--faint); font-size: 11px; margin: 0; }
+.gn-ln-state { font: 600 10.5px/1 var(--mono); padding: 3px 5px; border-radius: 4px; background: var(--bad-soft); color: var(--bad); }
+.gn-ln-state .gn-long { font-family: var(--sans); text-transform: uppercase; letter-spacing: .05em; font-size: 10px; }
+.gn-ln-state[hidden] { display: none; }
+.gn-sev-counts { flex: none; display: inline-flex; align-items: center; gap: 8px; height: var(--gn-ctl-h); padding: 0 6px; margin-right: 2px;
+  border-radius: var(--radius-sm); text-decoration: none; }
+.gn-sev-counts:hover { background: var(--panel-2); }
+#gn-bar .gn-sev { display: inline-flex; align-items: center; gap: 3px; font-size: 12px; height: auto; padding: 0; background: none; }
+#gn-bar .gn-sev::before { content: none; }
+.gn-sev .gn-glyph { width: 14px; height: 14px; }
+.gn-sev-alert, .gn-note-alert .gn-note-kind { color: var(--sev-alert); }
+.gn-sev-warning, .gn-note-warning .gn-note-kind { color: var(--sev-warning); }
+.gn-sev-info, .gn-note-info .gn-note-kind { color: var(--sev-info); }
+.gn-sev.gn-sev-zero { color: var(--faint); }
+.gn-note-line { flex: 1 1 auto; min-width: 0; display: flex; overflow: hidden; transition: opacity .18s ease-out; }
+.gn-note-line.gn-fade { opacity: 0; }
+.gn-note { gap: 8px; min-width: 0; max-width: 100%; overflow: hidden; }
+.gn-note-kind { font: 600 10.5px var(--sans); letter-spacing: .05em; text-transform: uppercase; flex: none; }
+.gn-note-glyph { display: inline-flex; flex: none; }
+.gn-note .gn-glyph { width: 14px; height: 14px; display: none; }
+.gn-note-alert .gn-glyph { color: var(--sev-alert); } .gn-note-warning .gn-glyph { color: var(--sev-warning); } .gn-note-info .gn-glyph { color: var(--sev-info); }
+.gn-note-time { font-size: 11.5px; color: var(--muted); flex: none; }
+.gn-note-grid { font-size: 11.5px; color: var(--muted); flex: none; }
+.gn-note-grid:empty { display: none; }
+.gn-note-text { font-size: 12.5px; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.gn-note-empty .gn-note-text { color: var(--faint); }
+.gn-viewall { flex: none; font-size: 12px; font-weight: 500; color: var(--link); }
+
+/* "As of 21 Sep 13:40": opens the replay popover. On the desk it is a plain label. */
+.gn-asof-wrap { position: relative; display: flex; align-items: center; height: 100%; }
+.gn-asof { display: inline-flex; align-items: center; gap: 6px; height: var(--gn-ctl-h); padding: 0 8px 0 10px; font: 500 12px var(--sans); color: var(--text-2);
+  background: var(--panel); border: 1px solid var(--rule); border-radius: var(--radius-sm); cursor: pointer; white-space: nowrap; }
+button.gn-asof:hover { color: var(--text); border-color: var(--rule-strong); }
+.gn-asof[aria-expanded="true"] { border-color: var(--accent); color: var(--text); }
+.gn-asof .gn-glyph { width: 14px; height: 14px; color: var(--muted); }
+.gn-asof.gn-playing > .gn-glyph:first-child { color: var(--accent); }
+.gn-asof-lead { color: var(--muted); }
+.gn-asof-when { color: var(--text); font-size: 12.5px; }
+.gn-asof .gn-asof-chev { width: 12px; height: 12px; transition: transform .16s ease-out; }
+.gn-asof[aria-expanded="true"] .gn-asof-chev { transform: rotate(180deg); }
+.gn-asof-static { cursor: default; background: transparent; border-color: transparent; padding: 0 2px; }
+.gn-asof-pop { position: absolute; top: calc(100% - 2px); right: 0; z-index: 30; width: 340px; display: grid; gap: 10px; padding: 12px;
+  background: var(--panel); border: 1px solid var(--rule); border-radius: var(--radius); box-shadow: var(--shadow); animation: gn-pop .16s ease-out; }
+.gn-asof-pop[hidden] { display: none; }
+@keyframes gn-pop { from { opacity: 0; transform: translateY(-4px); } }
+.gn-pop-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.gn-pop-title { font: 600 11px var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.gn-pop-note { font-size: 11px; color: var(--faint); }
+.gn-pop-desk { font-size: 12.5px; color: var(--link); text-decoration: none; justify-self: start; }
+.gn-pop-desk:hover { text-decoration: underline; }
+.gn-replay { display: grid; gap: 8px; min-width: 0; }
+.gn-rp-line { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.gn-rp-btn { width: 26px; height: 26px; display: grid; place-items: center; padding: 0; border: 1px solid var(--rule); background: var(--panel); border-radius: 5px; cursor: pointer; color: var(--text-2); }
+.gn-rp-btn:hover { color: var(--text); border-color: var(--rule-strong); }
+.gn-rp-btn svg { width: 14px; height: 14px; }
+.gn-rp-day { font: 500 12.5px var(--mono); color: var(--text); background: var(--panel); border: 1px solid var(--rule); border-radius: 5px; padding: 3px 6px; }
+.gn-rp-time { font-size: 13px; color: var(--text); white-space: nowrap; }
+.gn-rp-scrub { width: 160px; accent-color: var(--accent); }
+.gn-asof-pop .gn-rp-btn { width: var(--gn-ctl-h); height: var(--gn-ctl-h); border-radius: var(--radius-sm); flex: none; }
+.gn-asof-pop .gn-rp-day { height: var(--gn-ctl-h); border-radius: var(--radius-sm); padding: 0 8px; }
+.gn-asof-pop .gn-rp-time { margin-left: auto; }
+.gn-asof-pop .gn-rp-scrub { flex: 1 1 auto; width: auto; min-width: 0; margin-left: 4px; }
+
+/* Narrower screens: the strip gives way section by section, prices last. */
+@media (max-width: 1759px) {
+  .gn-sec > .gn-sec-h, .gn-viewall { display: none; }
+  .gn-ln-state .gn-long { display: none; }
+  .gn-ln-name .gn-long { display: none; }
+  .gn-ln-name .gn-short { display: inline; }
+  .gn-asof-lead, .gn-asof .gn-asof-chev, .gn-note-kind, .gn-note-grid { display: none; }
+  .gn-note .gn-glyph { display: block; }
+}
+@media (max-width: 1379px) {
+  .gn-note-line { display: none; }
+  .gn-sec-notes { flex: none; }
+}
+@media (max-width: 1099px) {
+  .gn-sec-basis { display: none; }
+}
+@media (max-width: 979px) {
+  .gn-px-d, .gn-sec-unit { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gn-asof-pop { animation: none; }
+  .gn-note-line, .gn-asof .gn-asof-chev { transition: none; }
+}
+
+/* ---------- shared pieces the new features use ---------- */
+.gn-pill { display: inline-flex; align-items: center; gap: 5px; font: 600 11px var(--sans); padding: 3px 9px; border-radius: 999px; background: var(--panel-2); color: var(--text-2); white-space: nowrap; }
+.gn-pill.bad { background: var(--bad-soft); color: var(--bad); }
+.gn-pill.warn { background: var(--warn-soft); color: var(--warn); }
+.gn-pill.ok { background: var(--ok-soft); color: var(--ok); }
+.gn-pill.info { background: var(--accent-soft); color: var(--accent); }
+.gn-unclear { display: inline-flex; gap: 5px; align-items: center; font: 600 11px var(--sans); padding: 2px 8px; border-radius: 999px;
+  background: var(--warn-soft); color: var(--warn); border: 1px dashed color-mix(in srgb, var(--warn) 55%, transparent); }
+.gn-nodata { color: var(--muted); font-style: italic; }
+/* Buttons and form controls (.gn-btn, .gn-input, .gn-select, .gn-textarea) live in ui.css. */
+
+@media (max-width: 760px) {
+  /* a phone keeps the bar pinned too, kept short: the menu scrolls sideways on its own line, and
+     the strip scrolls sideways inside its row, prices first */
+  .gn-bar { padding: 0 12px; gap: 0 10px; }
+  .gn-bar > .gn-brand, .gn-bar > .gn-tools { min-height: var(--gn-row1-h-phone); }
+  .gn-bar > .gn-nav { display: none; }
+  .gn-menu-btn { display: inline-flex; order: 0; margin-left: auto; }
+  .gn-bar > .gn-tools { order: 0; margin-left: 0; }
+  .gn-bar > .gn-row2 { flex-basis: calc(100% + 24px); margin: 0 -12px; padding: 0 12px; gap: 8px; }
+  .gn-strip { overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain; }
+  .gn-strip::-webkit-scrollbar { display: none; }
+  .gn-sec { padding: 0 8px; }
+  .gn-sec-notes { flex: none; }
+  .gn-asof-pop { position: fixed; left: 12px; right: 12px; width: auto; }
+  .gn-asof { padding: 0 6px 0 8px; }
+  .gn-account .gn-user.gn-muted { display: none; }
+}
+
+/* The shared pager (alerts, notices, plants). */
+.gn-pager { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 12px 0 2px; }
+.gn-pager-range { margin-right: auto; font-size: 12px; color: var(--muted); }
+.gn-pager-btn { all: unset; cursor: pointer; min-width: 28px; text-align: center; font-size: 12px; padding: 4px 9px; border: 1px solid var(--rule); border-radius: 6px; color: var(--text-2); }
+.gn-pager-btn:hover:not(:disabled) { color: var(--text); border-color: var(--rule-strong); }
+.gn-pager-btn.on { color: var(--text); border-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); cursor: default; }
+.gn-pager-btn:disabled:not(.on) { opacity: .4; cursor: default; }
+.gn-pager-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.gn-pager-gap { color: var(--muted); font-size: 12px; padding: 0 2px; }
+
+/* The ask panel (Sam's ask.js) prints "No recorded questions for this page yet" on pages with no
+   recorded questions; hide the empty panel instead of showing that line at the top. */
+#ask:has(> .ak-empty:only-child) { display: none; }
+
+/* ---------- the sign-in screen (app design, screen 0) ---------- */
+/* Until the server answers: a returning user sees nothing, anyone else sees the sign-in screen. */
+html.gn-gate-wait body { visibility: hidden; }
+html.gn-gate-early body > :not(.gn-gate), html.gn-gated body > :not(.gn-gate) { display: none !important; }
+.gn-gate { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center;
+  padding: 32px 16px; box-sizing: border-box; overflow-y: auto; background: #0b1730; font-family: var(--sans); visibility: visible; }
+.gn-gate-card { width: 100%; max-width: 400px; margin: auto; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;
+  padding: 32px; border-radius: 16px; background: var(--panel); color: var(--text); border: 1px solid var(--rule); }
+.gn-gate-brand { display: flex; align-items: center; gap: 10px; color: var(--accent); }
+.gn-gate-brand h1 { margin: 0; font-size: 20px; font-weight: 700; color: var(--text); }
+.gn-gate-lede { margin: 0; font-size: 14px; line-height: 1.5; color: var(--muted); }
+.gn-gate-field { display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500; color: var(--text); }
+.gn-gate-field input { min-height: 44px; box-sizing: border-box; padding: 0 12px; border-radius: 8px; border: 1px solid var(--rule-strong);
+  background: var(--bg); color: var(--text); font: 15px var(--sans); }
+.gn-gate-field input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.gn-gate-status { margin: 0; min-height: 1.4em; font-size: 13px; color: var(--muted); }
+.gn-gate-status.gn-gate-bad { color: var(--bad); }
+.gn-gate-primary, .gn-gate-google { min-height: 48px; border-radius: 8px; font: 600 15px var(--sans); cursor: pointer; }
+.gn-gate-primary { border: 0; background: #1d4ed8; color: #fff; }
+.gn-gate-primary:hover:not(:disabled) { background: #1e40af; }
+.gn-gate-google { border: 1px solid var(--rule-strong); background: transparent; color: var(--text); }
+.gn-gate-google:hover:not(:disabled) { background: var(--accent-soft); }
+.gn-gate-or { text-align: center; font-size: 12px; color: var(--faint); }
+.gn-gate-link { align-self: center; min-height: 44px; border: 0; background: none; color: var(--accent); font: 14px var(--sans); cursor: pointer; text-decoration: underline; }
+.gn-gate-card button:disabled { opacity: .55; cursor: default; }
+
+/* ---------- sheets: the phone menu and the keyboard shortcuts ---------- */
+:root.gn-sheet-open, :root.gn-sheet-open body { overflow: hidden; }
+.gn-sheet { position: fixed; inset: 0; z-index: 90; display: flex; justify-content: center; align-items: flex-start; padding: 10vh 16px 16px;
+  background: rgba(3, 6, 12, .55); font: 400 13px/1.5 var(--sans); color: var(--text); animation: gn-fade .14s ease-out; }
+:root[data-theme="light"] .gn-sheet { background: rgba(15, 23, 42, .28); }
+.gn-sheet[hidden] { display: none; }
+.gn-sheet *, .gn-sheet *::before, .gn-sheet *::after { box-sizing: border-box; }
+.gn-sheet-panel { width: min(520px, 100%); max-height: 80vh; display: flex; flex-direction: column; background: var(--panel); border: 1px solid var(--rule-strong);
+  border-radius: var(--radius); box-shadow: var(--shadow); animation: gn-pop .16s ease-out; }
+.gn-sheet-head { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 8px; height: 48px; padding: 0 8px 0 16px; border-bottom: 1px solid var(--rule); }
+.gn-sheet-title { margin: 0; font: 600 14px/1.3 var(--sans); color: var(--text); letter-spacing: 0; text-transform: none; }
+.gn-sheet-x { width: 32px; height: 32px; display: grid; place-items: center; padding: 0; border: 0; border-radius: var(--radius-sm); background: transparent; color: var(--muted); cursor: pointer; }
+.gn-sheet-x:hover { background: var(--panel-2); color: var(--text); }
+.gn-sheet-body { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 8px 16px 16px; }
+.gn-sheet-group-h { margin: 14px 0 4px; font: 600 11px/1.3 var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.gn-sheet-group .gn-navitem { padding: 8px 10px; margin: 0 -10px; }
+.gn-sheet-main { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; padding: 8px 0 4px; }
+.gn-sheet-main > a { display: flex; align-items: center; height: 44px; padding: 0 12px; border: 1px solid var(--rule); border-radius: var(--radius-sm);
+  color: var(--text); text-decoration: none; font: 500 14px var(--sans); }
+.gn-sheet-main > a[aria-current="page"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.gn-sheet-foot { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--rule); }
+.gn-sheet-link { display: inline-flex; align-items: center; height: 36px; padding: 0 12px; border: 1px solid var(--rule-strong); border-radius: var(--radius-sm);
+  background: transparent; color: var(--text-2); font: 500 13px var(--sans); text-decoration: none; cursor: pointer; }
+.gn-sheet-link:hover { color: var(--text); background: var(--panel-2); }
+.gn-keys { margin: 0; display: grid; }
+.gn-keys-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 34px; border-bottom: 1px solid var(--rule); }
+.gn-keys-row:last-child { border-bottom: 0; }
+.gn-keys dd { margin: 0; color: var(--text-2); }
+.gn-keys dt { display: flex; align-items: center; gap: 5px; flex: none; }
+.gn-kbd { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px; font: 500 11.5px/1 var(--mono); color: var(--text);
+  background: var(--panel-2); border: 1px solid var(--rule-strong); border-bottom-width: 2px; border-radius: 5px; }
+.gn-keys-then { font-size: 11px; color: var(--faint); }
+.gn-keys-note { margin: 14px 0 0; font-size: 12px; color: var(--faint); }
+@keyframes gn-fade { from { opacity: 0; } }
+@media (max-width: 760px) {
+  .gn-sheet.gn-navsheet { padding: 0; align-items: stretch; }
+  .gn-navsheet .gn-sheet-panel { width: 100%; max-height: none; height: 100%; border: 0; border-radius: 0; }
+  .gn-sheet { padding-top: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gn-sheet, .gn-sheet-panel, .gn-navmenu { animation: none; }
+  .gn-navbtn .gn-navbtn-chev { transition: none; }
+}

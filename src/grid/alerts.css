@@ -1,0 +1,91 @@
+/* InGRID alerts inbox (`/alerts`). The frame, the head, the filter bar, the table, badges,
+   buttons and empty states are the shared components (ui.css, docs/work/platform-polish-2026-10-18/
+   design-system.md). This file holds only what is unique to the inbox: the glance band, the
+   table's column widths and group rows, and the fold under More filters. The content security
+   policy admits no inline style: every rule lives in a file. */
+
+/* The static bar's account slot (the no-script fallback; shell.js rebuilds the bar). */
+.account { margin-left: auto; display: flex; align-items: center; gap: 8px; min-width: 0; }
+.who { color: var(--text-2); font-size: 11.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 220px; }
+.notice { margin: 0; font-size: var(--t-small, 12px); color: var(--text-2); }
+.notice:empty { display: none; }
+.al-page [hidden] { display: none !important; }
+/* A visually hidden caption is positioned: keep it inside the table's own scroller. */
+.al-page .gn-table-wrap { position: relative; }
+
+/* ---- the glance band: in force now | the day and all days | the one to look at first ---- */
+.al-page .al-glance { display: grid; grid-template-columns: minmax(150px, max-content) minmax(220px, max-content) minmax(0, 1fr); align-items: stretch; gap: 0; padding: 0; overflow: hidden; }
+.al-page .al-glance > * { padding: var(--s-4, 16px) var(--s-5, 24px); min-width: 0; }
+.al-page .al-glance > * + * { border-left: 1px solid var(--rule); }
+.al-page .al-glance-now { display: flex; flex-direction: column; gap: 6px; }
+.al-page .al-glance-now .gn-value--lg { font-size: 34px; line-height: 1; letter-spacing: -.01em; }
+.al-page .al-glance:not(.is-quiet) .al-glance-now .gn-value--lg { color: var(--sev-alert); }
+.al-page .al-glance-sev { display: flex; flex-wrap: wrap; gap: 4px; }
+.al-page .al-glance-counts.gn-stats { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(90px, 1fr)); gap: var(--s-4, 16px); align-content: center; }
+.al-page .al-glance-counts .gn-value { font-size: var(--t-figure, 22px); }
+.al-page .al-glance-counts .gn-stat { display: flex; flex-direction: column; gap: 4px; padding: 0; border: 0; box-shadow: none; }
+.al-page .al-glance-worst { display: flex; align-items: center; gap: var(--s-4, 16px); }
+.al-page .al-worst-text { flex: 1 1 auto; min-width: 0; display: grid; gap: 4px; }
+.al-page .al-worst-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+.al-page .al-worst-head .gn-label { margin-right: 4px; }
+.al-page .al-worst-title { margin: 0; font-size: var(--t-lead, 14px); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.al-page .al-worst-fig { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; }
+.al-page .al-worst-fig .gn-value { font-size: var(--t-figure, 22px); }
+.al-page .al-worst-fig .gn-unit { margin-left: 0; }
+.al-page .al-worst-cause { margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.al-page .al-worst-go { flex: 0 0 auto; }
+.al-page .al-live { color: var(--sev-alert); }
+.al-page .al-live::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; margin-right: 5px; display: inline-block; vertical-align: 1px; }
+
+/* ---- More filters: one labelled segment per row ---- */
+.al-page .al-more-body { display: grid; grid-template-columns: max-content max-content; align-items: center; gap: 8px 12px; }
+.al-page .al-more-row { display: contents; }
+
+/* ---- the table: column widths, group rows, the linked and in-force rows ---- */
+.al-page .al-table th.al-c-sev { width: 96px; }
+.al-page .al-table th.al-c-num { width: 132px; }
+.al-page .al-table th.al-c-x { width: 92px; }
+.al-page .al-table th.al-c-when { width: 176px; }
+.al-page .al-table td.al-when { white-space: nowrap; }
+.al-page .al-table th.al-c-cause { width: 30%; }
+.al-page .al-table th.al-c-go { width: 84px; }
+.al-page .al-table .gn-row-actions { text-align: right; overflow: visible; }
+.al-page .al-title a { font-weight: 500; }
+.al-page .al-title .al-live { margin-left: 8px; }
+.al-page .al-na { color: var(--faint); }
+.al-page .al-when { color: var(--text-2); }
+.al-page .al-notice { font-size: var(--t-meta, 11px); color: var(--muted); }
+.al-page .al-group-row th { position: static; text-transform: none; letter-spacing: 0; height: auto; text-align: left; font-weight: 600; font-size: var(--t-small, 12px); color: var(--text-2); background: var(--panel-2); padding: 6px 12px; border-bottom: 1px solid var(--rule); }
+.al-page .al-group-row th .gn-meta { font-weight: 400; margin-left: 6px; }
+.al-page .al-group-label a { color: inherit; }
+.al-page .al-row { scroll-margin-top: calc(var(--bar-h, 96px) + 48px); }
+.al-page .al-linked a { color: var(--link); }
+
+.al-page .al-method { margin: 8px 0 0; padding-left: 18px; display: grid; gap: 4px; }
+
+@media (max-width: 1100px) {
+  .al-page .al-glance { grid-template-columns: minmax(140px, max-content) minmax(0, 1fr); }
+  .al-page .al-glance-worst { grid-column: 1 / -1; border-left: 0 !important; border-top: 1px solid var(--rule); }
+}
+@media (max-width: 760px) {
+  .account { margin-left: 0; width: 100%; justify-content: space-between; }
+  .al-page .al-glance { grid-template-columns: minmax(0, 1fr); }
+  .al-page .al-glance > * { padding: var(--s-3, 12px) var(--s-4, 16px); }
+  .al-page .al-glance > * + * { border-left: 0; border-top: 1px solid var(--rule); }
+  .al-page .al-glance-now { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+  .al-page .al-glance-now .gn-label { flex-basis: 100%; }
+  .al-page .al-glance-now .gn-value--lg { font-size: 28px; }
+  .al-page .al-glance-worst { flex-wrap: wrap; }
+  .al-page .al-worst-go { width: 100%; justify-content: center; }
+  /* A phone drops the multiple and the Open column (the title and the row open the alert); the
+     rest scrolls sideways inside the card, the alert first. */
+  .al-page .al-table { --gn-table-min: 720px; }
+  .al-page .al-table .al-wide { display: none; }
+  .al-page .al-table th.al-c-sev { width: 84px; }
+  .al-page .al-table th.al-c-title { width: 190px; }
+  .al-page .al-table th.al-c-num { width: 84px; }
+  .al-page .al-table th.al-c-when { width: 176px; }
+  .al-page .al-table th.al-c-cause { width: auto; }
+  .al-page .al-more-body { grid-template-columns: minmax(0, 1fr); }
+  .al-page .al-more-row { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+}

@@ -1,0 +1,8 @@
+[{"t":"2026-09-21T13:39:37","id":"V133937","grid":"CVIS","kind":"trip","text":"Sample Unit 2 Tripped at 1334H (Unplanned Outage)"},
+{"t":"2026-09-21T15:55:56","id":"V155556","grid":"CVIS","kind":"online","text":"PEDC Unit 2 re-online at 1550H (Unplanned Outage)"},
+{"t":"2026-09-22T08:00:00","id":"V080000","grid":"CVIS","kind":"trip","text":"GEN Unit 1 Tripped at 0755H (Unplanned Outage)"},
+{"t":"2026-09-22T12:00:00","id":"V120000","grid":"CVIS","kind":"online","text":"GEN Unit 1 re-online at 1155H (Unplanned Outage)"},
+{"t":"2026-09-23T10:00:00","id":"V100000","grid":"CVIS","kind":"notice","text":"SAMPLE Unit 3 Declared deration at 0958H from 50mw to 30mw. (Force Derating)"},
+{"t":"2026-09-24T11:00:00","id":"V110000","grid":"CVIS","kind":"trip","text":"SAMPLE and GEN units tripped at 1058H (Unplanned Outage)"},
+{"t":"2026-09-25T07:00:00","id":"L070000","grid":"CLUZ","kind":"trip","text":"LUZ Solar Unit 1 Tripped at 0655H due to fuel oil inlet low pressure (Unplanned Outage)"},
+{"t":"2026-09-26T09:00:00","id":"V090000","grid":"CVIS","kind":"trip","text":"GEN Unit 2 Tripped at 0855H (Unplanned Outage)"}]

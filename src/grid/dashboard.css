@@ -1,0 +1,251 @@
+/* Dashboard layout (UX-3, the map-first desk). The map fills the first screen under the shared
+   bar, full-bleed; the "Grid now" card, the scope and layer pills, the zoom column, the legend,
+   the replay and the detail drawer float on it. The alerts, the notices, the outage tracker and
+   the scope summary follow under the map. The older blocks (front strip, ask mount, brief, grids
+   table, chart, briefing panel) keep their markup for the scripts that fill them and are folded
+   away. Overlays: --panel at full opacity, a 1px rule, the shell's shadow, 12px radius; pills
+   999px; controls 8px. Colours come from shell.css tokens, so dark and light follow the toggle. */
+.desk { display: block; padding: 0; position: relative; }
+.desk > .front, .desk > #ask, .desk > .col.left, .desk > .chart-wrap, .desk .briefs-mount { display: none !important; }
+.desk .sr-only { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* the shared shell draws no replay of its own on this page: the page's own is in the map */
+body[data-replay="page"] .gn-replay { display: none !important; }
+
+/* ---------- the map, full-bleed ---------- */
+.desk > .desk-map {
+  position: relative; display: block; width: 100%;
+  height: calc(100vh - var(--bar-h, var(--gn-bar-h, 96px))); min-height: 560px;
+  border: 0; border-radius: 0; background: var(--sea); overflow: hidden;
+}
+.desk-map #map { position: absolute; inset: 0; width: 100%; height: 100%; }
+.desk-map .gmap { border-radius: 0; }
+.desk .gmap-chips { display: none !important; }
+.desk-map .map-trips { display: none; }
+.desk-map.loading::after { z-index: 6; }
+.desk-map.pricing::after {
+  right: auto; bottom: auto; left: 50%; top: 66px; transform: translateX(-50%); z-index: 6;
+  background: var(--panel); color: var(--muted); border-color: var(--rule); border-radius: 999px; padding: 4px 10px;
+}
+
+/* ---------- the overlays: one surface ---------- */
+.desk-map .overview, .desk-map .map-replay, .desk-map .map-regions, .desk-map .ml-list, .desk > .dash-side > .detail {
+  background: var(--panel); border: 1px solid var(--rule); box-shadow: var(--shadow); pointer-events: auto;
+}
+
+/* the scope and layer pills: one row along the top edge, right of the state card and left of the
+   zoom column (PP-B5). The scope is a segmented capsule, the four primary layers share a second
+   capsule, then "More" (the lower-priority layers) and, at the end, the "Unplaced" chip. */
+.map-toolbar {
+  position: absolute; top: 14px; left: 384px; right: 64px; z-index: 4;
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap; pointer-events: none;
+}
+.map-toolbar > * { pointer-events: auto; }
+.map-toolbar > [hidden] { display: none; }
+.desk-map .map-regions, .desk-map .ml-list { display: flex; gap: 2px; padding: 3px; border-radius: 999px; margin: 0; flex-wrap: nowrap; }
+.desk-map .map-regions button, .desk-map .ml-list .ml-pill {
+  all: unset; box-sizing: border-box; cursor: pointer; height: 26px; padding: 0 10px; display: inline-flex; align-items: center; gap: 6px;
+  border-radius: 999px; font-size: 12px; color: var(--text-2); white-space: nowrap;
+}
+.desk-map .map-regions button:hover, .desk-map .ml-list .ml-pill:hover { color: var(--text); background: var(--panel-2); }
+.desk-map .map-regions button[aria-pressed="true"] { color: var(--text); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+.desk-map .ml-list .ml-pill[aria-pressed="true"] { color: var(--text); }
+.desk-map .ml-list .ml-pill[aria-pressed="false"] { color: var(--faint); }
+.ml-pill[aria-pressed="false"] .ml-sw { opacity: .3; }
+/* the stand-alone capsules: More and Unplaced */
+.desk-map .ml-more, .desk-map .ml-unplaced {
+  all: unset; box-sizing: border-box; cursor: pointer; height: 32px; padding: 0 11px; display: inline-flex; align-items: center; gap: 6px;
+  border-radius: 999px; font-size: 12px; color: var(--text-2); white-space: nowrap;
+  background: var(--panel); border: 1px solid var(--rule); box-shadow: var(--shadow); pointer-events: auto;
+}
+.desk-map .ml-more:hover, .desk-map .ml-unplaced:hover { color: var(--text); border-color: var(--rule-strong); }
+.desk-map .ml-more[aria-expanded="true"], .desk-map .ml-unplaced[aria-expanded="true"] { color: var(--text); border-color: var(--accent); }
+.desk-map .ml-unplaced { position: absolute; left: 14px; bottom: 112px; z-index: 4; height: 28px; padding: 0 10px; font-size: 11.5px; color: var(--muted); box-shadow: none; }
+.desk-map .ml-unplaced[hidden] { display: none; }
+.desk-map .ml-unplaced[aria-expanded="true"] .ml-chev { transform: rotate(180deg); }
+.desk-map .ml-unplaced .ml-count { color: var(--text); font-size: 12px; }
+.ml-chev { width: 12px; height: 12px; transition: transform .14s ease-out; }
+.ml-more[aria-expanded="true"] .ml-chev { transform: rotate(180deg); }
+.ml-more.has-off::after { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); margin-left: -2px; }
+.ml-count { color: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.ml-count:empty { display: none; }
+.ml-pill.hot .ml-count { color: var(--bad); }
+.desk-map .map-regions button:focus-visible, .ml-pill:focus-visible, .ov-row:focus-visible, .ov-fold:focus-visible,
+.map-replay button:focus-visible, .map-replay input:focus-visible, .up-row:focus-visible, .up-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.ml-sw { width: 9px; height: 9px; border-radius: 50%; flex: 0 0 auto; }
+.sw-price { background: linear-gradient(90deg, var(--p0), var(--p2), var(--p4)); }
+.sw-gen { background: transparent; box-shadow: inset 0 0 0 1.5px var(--text-2); }
+.sw-load { width: 8px; height: 8px; border-radius: 1px; box-shadow: inset 0 0 0 1.5px var(--text-2); }
+.sw-link { height: 3px; width: 12px; border-radius: 2px; background: var(--accent); }
+.ml-pill.hot .sw-link { background: var(--bad); }
+.sw-event { width: 0; height: 0; border-radius: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 9px solid var(--warn); }
+.sw-pending { border-radius: 2px; width: 9px; height: 9px; background: repeating-linear-gradient(90deg, var(--muted) 0 1.5px, transparent 1.5px 3.5px); }
+
+/* the toolbar's popovers: under their trigger, inside the map */
+.desk-map .map-pop {
+  position: absolute; z-index: 7; box-sizing: border-box; margin: 0;
+  background: var(--panel); border: 1px solid var(--rule-strong); border-radius: 12px; box-shadow: var(--shadow);
+  animation: map-pop .14s ease-out;
+}
+.desk-map .map-pop[hidden] { display: none; }
+@keyframes map-pop { from { opacity: 0; transform: translateY(-2px); } to { opacity: 1; transform: none; } }
+.ml-more-pop { width: 216px; padding: 4px; display: grid; gap: 2px; }
+.ml-more-pop .ml-pill {
+  all: unset; box-sizing: border-box; cursor: pointer; display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 10px;
+  border-radius: 8px; font-size: 12.5px; color: var(--text);
+}
+.ml-more-pop .ml-pill:hover { background: var(--row-hover, var(--panel-2)); }
+.ml-more-pop .ml-count { margin-left: 2px; }
+.ml-more-pop .ml-state { margin-left: auto; font-size: 11px; color: var(--muted); }
+.ml-more-pop .ml-pill[aria-pressed="true"] .ml-state { color: var(--accent); }
+.unplaced-pop { width: 360px; max-width: calc(100% - 16px); display: flex; flex-direction: column; overflow: hidden; }
+.up-head { display: flex; align-items: center; gap: 8px; padding: 8px 8px 0 14px; }
+.up-head h3 { margin: 0; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.up-meta { font-size: 11px; color: var(--faint); }
+.up-close { all: unset; box-sizing: border-box; cursor: pointer; margin-left: auto; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 8px; color: var(--muted); }
+.up-close:hover { color: var(--text); background: var(--panel-2); }
+.up-close svg { width: 14px; height: 14px; }
+.up-note { margin: 2px 14px 8px; font-size: 11.5px; line-height: 1.45; color: var(--faint); }
+.up-body { overflow: auto; overscroll-behavior: contain; padding: 0 6px 8px; border-top: 1px solid var(--rule); }
+.up-grid { position: sticky; top: 0; display: flex; align-items: baseline; gap: 6px; margin: 0; padding: 8px 8px 4px; background: var(--panel);
+  font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.up-n { font-weight: 500; letter-spacing: 0; color: var(--faint); }
+.up-list { list-style: none; margin: 0; padding: 0; }
+.up-row {
+  display: grid; grid-template-columns: 8px minmax(0, 1fr) 64px 64px; gap: 8px; align-items: center;
+  height: 28px; padding: 0 8px; border-radius: 6px; color: var(--text); text-decoration: none; font-size: 12px;
+}
+.up-row:hover { background: var(--row-hover, var(--panel-2)); }
+/* the whole row is the plant link; only its code carries the entity underline */
+.up-row[data-entity] { text-decoration: none; }
+.up-row .up-code { text-decoration: underline dotted; text-decoration-color: var(--rule-strong); text-underline-offset: 3px; }
+.up-row:hover .up-code { text-decoration-color: var(--accent); }
+.up-dot { width: 8px; height: 8px; }
+.up-id { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.up-code { font-size: 11.5px; }
+.up-name { margin-left: 6px; color: var(--muted); }
+.up-cap { color: var(--muted); font-size: 11px; text-align: right; white-space: nowrap; }
+.up-price { text-align: right; font-size: 12px; white-space: nowrap; }
+.up-empty { margin: 10px 8px; font-size: 12px; color: var(--muted); }
+
+/* the replay: bottom right, beside the command bar's clear band at the centre. Quiet chrome: the
+   clock and its day on top, the step and play buttons beside the scrub track and its notice
+   ticks below. Play is the one filled control, in the accent's soft tone. */
+.desk-map .map-replay {
+  position: absolute; right: 16px; bottom: 16px; z-index: 4; margin: 0;
+  width: min(352px, calc(50% - 340px)); min-width: 276px; box-sizing: border-box; padding: 8px 10px 6px 12px; border-radius: 12px;
+  display: grid; gap: 4px;
+}
+.rp-head { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.rp-label { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.rp-when { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; justify-content: flex-end; }
+.map-replay #clock-time { order: 2; font: 500 15px/1 var(--mono); font-variant-numeric: tabular-nums; color: var(--text); white-space: nowrap; }
+.rp-date { order: 1; color: var(--muted); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.map-replay .gn-rp-day { order: 1; flex: 0 1 auto; min-width: 0; width: 112px; height: 24px; padding: 0 4px; font: 400 11px var(--mono); color: var(--text-2); background: transparent; border: 1px solid var(--rule); border-radius: 8px; }
+.rp-speed { all: unset; box-sizing: border-box; cursor: pointer; flex: 0 0 auto; min-width: 30px; height: 24px; padding: 0 6px; text-align: center; border-radius: 8px; border: 1px solid var(--rule); color: var(--muted); font-size: 11px; line-height: 22px; }
+.rp-speed:hover { color: var(--text); border-color: var(--rule-strong); }
+.rp-row { display: flex; align-items: flex-start; gap: 4px; min-width: 0; }
+.map-replay .icon { width: 28px; height: 28px; border-radius: 8px; flex: 0 0 auto; background: transparent; border: 1px solid var(--rule); color: var(--text-2); }
+.map-replay .icon:hover { color: var(--text); border-color: var(--rule-strong); background: var(--panel-2); }
+.map-replay .rp-play { width: 30px; height: 28px; background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 45%, transparent); color: var(--accent); }
+.map-replay .rp-play:hover { color: var(--accent); background: color-mix(in srgb, var(--accent) 22%, transparent); border-color: var(--accent); }
+.rp-scrub { flex: 1; min-width: 0; margin-left: 8px; }
+.rp-track { position: relative; height: 28px; }
+.rp-ticks { position: absolute; left: 7px; right: 7px; top: 2px; height: 8px; pointer-events: none; }
+.rp-tick { position: absolute; top: 0; width: 2px; height: 7px; margin-left: -1px; border-radius: 1px; background: var(--warn); }
+.rp-tick.alert { background: var(--bad); height: 9px; top: -1px; }
+.map-replay #scrub { position: absolute; left: 0; right: 0; bottom: 2px; width: 100%; height: 16px; margin: 0; accent-color: var(--accent); cursor: pointer; }
+.rp-axis { display: flex; justify-content: space-between; padding: 0 3px; font-size: 9px; color: var(--faint); margin-top: -2px; }
+
+/* the detail drawer: what a click opened, in the left panel column over the state card (that
+   column is already kept clear of the country, so nothing on the map is hidden), above the legend */
+.desk > .dash-side {
+  position: absolute; top: 14px; left: 14px; width: 356px; z-index: 5; pointer-events: none; display: flex; flex-direction: column;
+  height: calc(max(560px, 100vh - var(--bar-h, var(--gn-bar-h, 96px))) - 170px);
+}
+.desk > .dash-side > .detail { pointer-events: auto; margin: 0; max-height: 100%; overflow: auto; border-radius: 12px; box-sizing: border-box; }
+
+/* ---------- under the map (PP-B5): the design system's matrix ----------
+   `.gn-page` gives the width, the gutters and the bottom room for the command bar; `.gn-grid
+   --main-side` the 2/3 and 1/3 columns from 1100px. The components (sections, cards, tables,
+   badges, empty states, sources) are ui.css's own; only what is unique to these panels is here. */
+.desk-below { padding-top: var(--s-6, 32px); }
+.below-main, .below-side { display: grid; gap: var(--s-6, 32px); align-content: start; min-width: 0; }
+.desk-below .gn-section-head h2 { font-size: var(--t-h2, 15px); }
+
+/* alerts: one row per risk event, its story behind the chevron */
+.da-table .da-c-sev { width: 96px; }
+.da-table .da-c-when { width: 104px; }
+.da-table .da-c-grid { width: 96px; }
+.da-table .da-c-cause { width: 168px; }
+.da-title .gn-row-toggle { margin-right: 4px; vertical-align: middle; }
+.da-title a { color: var(--text); font-weight: 500; }
+.da-at { margin-left: 2px; }
+.da-none { color: var(--faint); }
+.da-detail td { padding: var(--s-3) var(--s-4) var(--s-4); background: var(--panel-2); }
+.da-pairs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-3) var(--s-5); }
+.da-pair { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.da-pair-v { font-size: var(--t-body, 13px); line-height: 1.45; color: var(--text); white-space: normal; }
+.da-how { margin-top: var(--s-3); padding-top: var(--s-3); border-top: 1px solid var(--rule); }
+.da-how ol { margin: 4px 0 0; padding-left: 18px; display: grid; gap: 2px; font-size: 12.5px; line-height: 1.45; color: var(--text-2); white-space: normal; }
+.da-grouped { margin: var(--s-3) 0 0; }
+.da-reading td { padding: var(--s-3) var(--s-4); }
+.da-empty, .feed-empty { padding: var(--s-4, 16px); }
+.da-empty .gn-empty, .feed-empty .gn-empty { border: 0; padding: 0; }
+
+/* notices: a dense table, newest first; a row opens the notice on the map */
+.feed-wrap { max-height: 420px; overflow: auto; overscroll-behavior: contain; }
+.desk-below .feed-table thead th { top: 0; }
+.feed-table .f-c-time { width: 60px; }
+.feed-table .f-c-kind { width: 120px; }
+.feed-table .f-c-grid { width: 84px; }
+.feed-table .f-c-sched { width: 100px; }
+.feed-table .f-row { cursor: pointer; }
+.feed-table .f-row:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.feed-table .f-row.sel > td { background-image: linear-gradient(var(--sel), var(--sel)); }
+.feed-table .f-row.sel > td:first-child { box-shadow: inset 2px 0 0 var(--accent); }
+.feed-table .f-row.new > td { animation: f-new 1.6s ease-out; }
+@keyframes f-new { from { background-image: linear-gradient(var(--accent-soft), var(--accent-soft)); } to { background-image: none; } }
+.feed-table .ft-text { color: var(--text-2); }
+.feed-table .ft-event { margin-right: 8px; font-size: 11.5px; font-weight: 500; }
+.feed-table .f-sched { font-size: 11.5px; color: var(--muted); }
+
+/* the scope summary: three stats a row in the side column */
+.desk-below .ov-stats { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+
+/* ---------- narrower screens ---------- */
+@media (max-width: 1180px) {
+  .desk-map .map-replay { width: 300px; }
+}
+@media (max-width: 1100px) {
+  .map-toolbar { left: 340px; }
+  .desk > .dash-side { width: 316px; }
+}
+
+/* ---------- a phone: the map takes 72% of the screen, the card is a strip, the pills scroll
+   sideways inside their own row, the replay spans the bottom ---------- */
+@media (max-width: 760px) {
+  .desk > .desk-map { height: calc(100svh - var(--bar-h, var(--gn-bar-h, 96px)) - 72px); min-height: 500px; }
+  .map-toolbar { top: 62px; left: 8px; right: 8px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: 2px 0 6px; }
+  .map-toolbar::-webkit-scrollbar { display: none; }
+  .ml-list { flex-wrap: nowrap; }
+  .desk-map .map-regions button { padding: 0 10px; font-size: 12px; }
+  .desk-map .ml-list .ml-pill { padding: 0 9px; }
+  .desk-map .map-pop { left: 8px !important; right: 8px; width: auto; max-width: none; }
+  .desk-map .map-replay { left: 8px; right: 8px; bottom: 8px; width: auto; min-width: 0; padding: 8px 10px 6px; }
+  .map-replay #clock-time { font-size: 15px; }
+  .map-replay .gn-rp-day { width: 108px; }
+  /* on a phone the detail follows the map in the page, so the map stays whole to tap */
+  .desk > .dash-side { position: static; width: auto; height: auto; padding: 12px 12px 0; }
+  .desk > .dash-side > .detail { max-height: none; }
+  .desk-below { padding-top: var(--s-5, 24px); }
+  .da-pairs { grid-template-columns: minmax(0, 1fr); }
+  .feed-table { --gn-table-min: 560px; }
+  .da-table { --gn-table-min: 760px; }
+}
+
+/* while a detail is open on a wide screen, the drawer takes the left column and the state card
+   steps back (on a phone the detail follows the map and the card stays) */
+@media (min-width: 761px) {
+  .desk:has(> .dash-side > .detail:not([hidden])) .desk-map .overview { visibility: hidden; }
+}

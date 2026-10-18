@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- __NOWCAST_STAMP__ is the build stamp the server writes in: it names this build's assets
+     and data, so they can be cached for a year while this page revalidates. -->
+<meta charset="utf-8">
+<meta id="nowcast-build" name="nowcast-build" content="__NOWCAST_STAMP__">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>InGRID · Notices</title>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0b1018" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f6fa" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/grid.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/notices.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ui.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/shell.css">
+<script src="/grid/__NOWCAST_STAMP__/shell.js"></script>
+<script src="/grid/__NOWCAST_STAMP__/notices.js" defer></script>
+</head>
+<body class="notices-page">
+<header class="bar">
+  <a class="brand" href="/" aria-label="InGRID home">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 15 8 6l4 6 2-3 3 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+    <span>InGRID</span>
+  </a>
+  <!-- The no-script fallback navigation; shell.js rebuilds it into the shared top bar. -->
+  <nav class="sites" aria-label="Sections">
+    <a href="/">Dashboard</a>
+    <a href="/alerts">Alerts</a>
+    <a href="/notices" aria-current="page">Notices</a>
+    <a href="/plants">Plants</a>
+    <a href="/journal">Journal</a>
+    <a href="/data">Data</a>
+    <a href="/paper">Paper</a>
+  </nav>
+</header>
+
+<!-- ericka-desk, platform polish PP-B1: every operator notice (NGCP advisories) up to the shared
+     as-of clock, newest first, grouped by day. The anchor line counts the last six hours by kind.
+     One filter bar (grid, kind, period, search) keeps its state in the address. A row opens the
+     notice in full in the side panel (in the row itself on a narrow screen), with its event and
+     the plant it names. `#adv-<id>` (the command bar and the live strip link there) scrolls to
+     and marks one notice. Text only: technology words in the notice text are withheld. -->
+<main class="gn-page nt-page" aria-labelledby="nt-title">
+  <header class="gn-page-head">
+    <div class="gn-page-title">
+      <h1 id="nt-title">Operator notices</h1>
+      <p class="gn-page-sub">The system operator's own messages, as posted, up to the replay time.</p>
+    </div>
+    <div class="gn-page-meta"><span class="gn-meta mono" id="nt-asof"></span></div>
+  </header>
+
+  <section class="gn-card nt-glance" id="nt-glance" aria-label="The last six hours">
+    <span class="gn-label">Last 6 hours</span>
+    <span class="gn-value gn-value--lg" id="nt-recent-count">–</span>
+    <div class="gn-badges" id="nt-recent"></div>
+    <span class="gn-meta nt-glance-latest" id="nt-latest"></span>
+  </section>
+
+  <div class="gn-filters" role="toolbar" aria-label="Filter notices" id="nt-filters">
+    <div class="gn-seg" role="group" aria-label="Grid" data-filter="grid">
+      <button type="button" data-value="all" aria-pressed="true">All grids</button>
+      <button type="button" data-value="CLUZ" aria-pressed="false">Luzon</button>
+      <button type="button" data-value="CVIS" aria-pressed="false">Visayas</button>
+      <button type="button" data-value="CMIN" aria-pressed="false">Mindanao</button>
+    </div>
+    <div class="gn-seg" role="group" aria-label="Kind" data-filter="kind">
+      <button type="button" data-value="all" aria-pressed="true">All kinds</button>
+      <button type="button" data-value="trip" aria-pressed="false">Trips</button>
+      <button type="button" data-value="derate" aria-pressed="false">Derates</button>
+      <button type="button" data-value="alert" aria-pressed="false" title="Yellow alert, red alert and load dropping">Grid alerts</button>
+      <button type="button" data-value="online" aria-pressed="false">Back online</button>
+      <button type="button" data-value="notice" aria-pressed="false">Other</button>
+    </div>
+    <div class="gn-seg" role="group" aria-label="Period" data-filter="period">
+      <button type="button" data-value="all" aria-pressed="true">All days</button>
+      <button type="button" data-value="day" aria-pressed="false">Replay day</button>
+      <button type="button" data-value="6h" aria-pressed="false">Last 6 h</button>
+    </div>
+    <label class="gn-search"><span class="sr-only">Search notices</span>
+      <input id="nt-q" type="search" placeholder="Search text, ID or plant code" autocomplete="off" data-filter="q"></label>
+    <span class="gn-filters-count" id="nt-count" role="status" aria-live="polite">Loading…</span>
+    <button type="button" class="gn-clear" id="nt-clear" hidden>Clear</button>
+  </div>
+
+  <p class="gn-meta nt-linked" id="nt-linked" role="status" hidden></p>
+
+  <div class="gn-grid gn-grid--main-side nt-grid">
+    <section class="nt-list-col" aria-label="Notices">
+      <div class="gn-card gn-card--flush" id="nt-table-card">
+        <div class="gn-table-wrap">
+          <table class="gn-table nt-table" id="nt-table">
+            <caption class="sr-only">Operator notices, newest first, grouped by day</caption>
+            <thead><tr>
+              <th scope="col" class="nt-c-time">Time</th><th scope="col" class="nt-c-kind">Kind</th><th scope="col" class="nt-c-grid nt-wide">Grid</th><th scope="col" class="nt-c-id nt-wide">Notice</th><th scope="col">Text</th><th scope="col" class="nt-c-rel nt-wide">Related</th>
+            </tr></thead>
+            <tbody id="nt-list"></tbody>
+          </table>
+        </div>
+      </div>
+      <div id="nt-empty" hidden></div>
+      <nav class="gn-pager" id="nt-pager" aria-label="Notice pages" hidden></nav>
+    </section>
+    <aside class="gn-card nt-detail" id="nt-detail" aria-labelledby="nt-detail-h" aria-live="polite">
+      <header class="gn-card-head"><h2 id="nt-detail-h">Latest notice</h2></header>
+      <div id="nt-detail-body"><p class="gn-loading">Loading the notices…</p></div>
+    </aside>
+  </div>
+
+  <footer class="gn-sources">
+    <details>
+      <summary>Sources and method</summary>
+      <ul class="nt-method">
+        <li>NGCP advisories as posted, read from the baked replay. Nothing after the replay time is shown.</li>
+        <li>Times are Manila time. A notice's own time is when it was posted.</li>
+        <li>Technology words in the text are withheld, as on every page.</li>
+        <li>A derate is a notice whose text says derated.</li>
+        <li>A notice names a plant when the event record maps it. Otherwise one plant of that grid must have its code in the text. A notice that fits two or more plants links none.</li>
+        <li>A notice that opened a recorded event links to the event's page.</li>
+      </ul>
+    </details>
+  </footer>
+</main>
+</body>
+</html>

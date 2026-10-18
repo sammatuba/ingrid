@@ -1,0 +1,512 @@
+{
+  "schema": "probe-bundle-fixture-set.v1",
+  "fixture_label": "Fictional synthetic probe-bundle fixture; no real unit, operator, document or event",
+  "frozen_at": "2026-10-13",
+  "frozen_by": "executor agent (CORE-8) on task/CORE-8; second and only re-freeze; labels stay annotations, not model output",
+  "bundle_version_at_freeze": "probe-bundle.v5",
+  "refreeze_causes": [
+    "probe-bundle.v5 (CORE-8): the Q2 event vocabulary from the operator-advisory corpus, the availability-kind predicate read from the model representation, and the direction_conflict row; annotation policy v2 re-annotates every q2 by rule",
+    "h0.v2 record envelope (CORE-9): every fixture record is now written with schema_version h0.v2, the typed availability_basis object, and the declared (synthetic, permission_ref) pair — (True, None) for every payload here; the frozen labels are unchanged by both causes"
+  ],
+  "annotation_policy": {
+    "policy_id": "probe-bundle-annotation.v2",
+    "path": "annotation-policy.json",
+    "digest": "0c2f32eaa581a4db46cab14e7833ddc92dea5d11a2675634acfa41771fb5483c"
+  },
+  "question_legend": {
+    "q1": "identity",
+    "q2": "event",
+    "q3": "time",
+    "q4": "conditional",
+    "q5": "lineage",
+    "q6": "observation",
+    "q7": "sufficiency",
+    "q8": "direction"
+  },
+  "pairs": 25,
+  "compiles": 28,
+  "classes": [
+    {
+      "edge_class": "testing_vs_commercial",
+      "pairs": [
+        "pb-tc-1",
+        "pb-tc-2",
+        "pb-tc-3"
+      ]
+    },
+    {
+      "edge_class": "planned_vs_confirmed_outage",
+      "pairs": [
+        "pb-po-1",
+        "pb-po-2",
+        "pb-po-3"
+      ]
+    },
+    {
+      "edge_class": "near_name_asset",
+      "pairs": [
+        "pb-na-1",
+        "pb-na-2",
+        "pb-na-3"
+      ]
+    },
+    {
+      "edge_class": "copied_lineage",
+      "pairs": [
+        "pb-cl-1",
+        "pb-cl-2",
+        "pb-cl-3"
+      ]
+    },
+    {
+      "edge_class": "conditional_clause",
+      "pairs": [
+        "pb-cc-1",
+        "pb-cc-2",
+        "pb-cc-3"
+      ]
+    },
+    {
+      "edge_class": "later_than_cutoff_document",
+      "pairs": [
+        "pb-lc-1",
+        "pb-lc-2",
+        "pb-lc-3"
+      ]
+    },
+    {
+      "edge_class": "negation",
+      "pairs": [
+        "pb-ng-1",
+        "pb-ng-2",
+        "pb-ng-3"
+      ]
+    },
+    {
+      "edge_class": "earlier_observed_return",
+      "pairs": [
+        "pb-er-1",
+        "pb-er-2",
+        "pb-er-3",
+        "pb-er-4"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "pb-cc-1.json",
+      "pair_id": "pb-cc-1",
+      "edge_class": "conditional_clause",
+      "digest": "b6e717ba98c664a76125a1a5e34996b0de7664a3ddf83851cb533e68a2ff76e8"
+    },
+    {
+      "path": "pb-cc-2.json",
+      "pair_id": "pb-cc-2",
+      "edge_class": "conditional_clause",
+      "digest": "33c46e09d9681e6bf2e96d3fd9549523635668213a72e4ab21c0cac77486e3d6"
+    },
+    {
+      "path": "pb-cc-3.json",
+      "pair_id": "pb-cc-3",
+      "edge_class": "conditional_clause",
+      "digest": "d7047b839818be4e20c57c63a6b622eaf011dae83284705ffcb13ee948c8710b"
+    },
+    {
+      "path": "pb-cl-1.json",
+      "pair_id": "pb-cl-1",
+      "edge_class": "copied_lineage",
+      "digest": "5f8ee17793610feaf7df83621db00b29ad21603b1e0b4f554223bf64ddca0964"
+    },
+    {
+      "path": "pb-cl-2.json",
+      "pair_id": "pb-cl-2",
+      "edge_class": "copied_lineage",
+      "digest": "3bf7f5214867a283e3d9112312966205b752b967799b628487088a06802618a7"
+    },
+    {
+      "path": "pb-cl-3.json",
+      "pair_id": "pb-cl-3",
+      "edge_class": "copied_lineage",
+      "digest": "e29ea98bd957bd5c94d97adb2cabaa1f2ba98a7aaaf8ab3aa09c690b67e02fb3"
+    },
+    {
+      "path": "pb-er-1.json",
+      "pair_id": "pb-er-1",
+      "edge_class": "earlier_observed_return",
+      "digest": "d6ea3a55ae9f50a40daedfe4cc35841bb8bd274d6e0dc2ff4da70e849bc69ae2"
+    },
+    {
+      "path": "pb-er-2.json",
+      "pair_id": "pb-er-2",
+      "edge_class": "earlier_observed_return",
+      "digest": "55d2b682c1b72e51bf6c515ae254be4b771782e9b8a83961dbad6014fa723e9e"
+    },
+    {
+      "path": "pb-er-3.json",
+      "pair_id": "pb-er-3",
+      "edge_class": "earlier_observed_return",
+      "digest": "ed0e961533ef59d02160bb566504e791c02fac3c699763002a15c2291427a452"
+    },
+    {
+      "path": "pb-er-4.json",
+      "pair_id": "pb-er-4",
+      "edge_class": "earlier_observed_return",
+      "digest": "97fb2d1437c166a41d04e0b33fc00a8c02fb54a1916e0b9e76642ba704b00035"
+    },
+    {
+      "path": "pb-lc-1.json",
+      "pair_id": "pb-lc-1",
+      "edge_class": "later_than_cutoff_document",
+      "digest": "6d5f381c8baebffdb724a5d3419fd4f1c55003253260a4761fd069d0cb511c0f"
+    },
+    {
+      "path": "pb-lc-2.json",
+      "pair_id": "pb-lc-2",
+      "edge_class": "later_than_cutoff_document",
+      "digest": "49137821e2b58a51a6c7f08d65361c1eae99a393e7631fb99e08e6280bf655fb"
+    },
+    {
+      "path": "pb-lc-3.json",
+      "pair_id": "pb-lc-3",
+      "edge_class": "later_than_cutoff_document",
+      "digest": "8ee70abd645b059903f1df46163a7dfec648524e76949f11ac76735188470b21"
+    },
+    {
+      "path": "pb-na-1.json",
+      "pair_id": "pb-na-1",
+      "edge_class": "near_name_asset",
+      "digest": "a93bcc03380d88a08db959407c19bf4c6e37eea4cc078f0f9e9cf0a2bbb42eac"
+    },
+    {
+      "path": "pb-na-2.json",
+      "pair_id": "pb-na-2",
+      "edge_class": "near_name_asset",
+      "digest": "ec6ae7f5053e67d47cb73e8af33fe6d494d4a6a023b8a3925f18acc016d1014e"
+    },
+    {
+      "path": "pb-na-3.json",
+      "pair_id": "pb-na-3",
+      "edge_class": "near_name_asset",
+      "digest": "9830ea65e9b5d5038c17c871067ef448643f9370297a3dc0498821196a4e99c9"
+    },
+    {
+      "path": "pb-ng-1.json",
+      "pair_id": "pb-ng-1",
+      "edge_class": "negation",
+      "digest": "592afa85421aeb93cd3a803ba00e33ec2cacbd8b5a7fa26b8fe4a02b77176dfb"
+    },
+    {
+      "path": "pb-ng-2.json",
+      "pair_id": "pb-ng-2",
+      "edge_class": "negation",
+      "digest": "0627aaa07e50175d11c54059c9cb2fa91031dde5cc603ecf66225ae961a16e99"
+    },
+    {
+      "path": "pb-ng-3.json",
+      "pair_id": "pb-ng-3",
+      "edge_class": "negation",
+      "digest": "892a74a8e56ba7732c975999c6fe0da2b18f1ce6c3de0d072d836fa7e61d04c4"
+    },
+    {
+      "path": "pb-po-1.json",
+      "pair_id": "pb-po-1",
+      "edge_class": "planned_vs_confirmed_outage",
+      "digest": "22f266643093cd98f9263bc16c30bd0ce27da1beafe3e5bd2c33c2396a75e317"
+    },
+    {
+      "path": "pb-po-2.json",
+      "pair_id": "pb-po-2",
+      "edge_class": "planned_vs_confirmed_outage",
+      "digest": "b033eddff5d3c7fa158812934f81ca22afafc462fd7ee0850d7f3303f4b52e0e"
+    },
+    {
+      "path": "pb-po-3.json",
+      "pair_id": "pb-po-3",
+      "edge_class": "planned_vs_confirmed_outage",
+      "digest": "7c27b762d527786a27753dae2fddf50680c94653d23de95006230d9591f1d22a"
+    },
+    {
+      "path": "pb-tc-1.json",
+      "pair_id": "pb-tc-1",
+      "edge_class": "testing_vs_commercial",
+      "digest": "4ee51567c8a3e2f9c293b90490eae4a90fba2fc98c9ef9525c931bcc48050f30"
+    },
+    {
+      "path": "pb-tc-2.json",
+      "pair_id": "pb-tc-2",
+      "edge_class": "testing_vs_commercial",
+      "digest": "ed3c49905d1f89f0d9e2eeab004aa8e29762c092f086cf28167e8fab788ec1b1"
+    },
+    {
+      "path": "pb-tc-3.json",
+      "pair_id": "pb-tc-3",
+      "edge_class": "testing_vs_commercial",
+      "digest": "19665f10d9ed65f31d9f6c9ad4b9663476b5229e6b11f7b7d46183ffbf00502f"
+    }
+  ],
+  "frozen_labels": [
+    {
+      "pair_id": "pb-cc-1",
+      "at": "t1",
+      "assumption_kind": "commercial_availability_from",
+      "frozen_label": "mixed",
+      "table_label": "mixed",
+      "agrees_with_frozen_label": true
+    },
+    {
+      "pair_id": "pb-cc-2",
+      "at": "t1",
+      "assumption_kind": "commercial_availability_from",
+      "frozen_label": "mixed",
+      "table_label": "mixed",
+      "agrees_with_frozen_label": true
+    },
+    {
+      "pair_id": "pb-cc-3",
+      "at": "t1",
+      "assumption_kind": "assumed_available_capacity",
+      "frozen_label": "mixed",
+      "table_label": "mixed",
+      "agrees_with_frozen_label": true
+    },
+    {
+      "pair_id": "pb-cl-1",
+      "at": "t1",
+      "assumption_kind": "commercial_availability_from",
+      "frozen_label": "challenges",
+      "table_label": "challenges",
+      "agrees_with_frozen_label": true
+    },
+    {
+      "pair_id": "pb-cl-2",
+      "at": "t1",
+      "assumption_kind": "commercial_availability_from",
+      "frozen_label": "challenges",
+      "table_label": "challenges",
+      "agrees_with_frozen_label": true
+    },
+    {
+      "pair_id": "pb-cl-3",
+      "at": "t1",
+      "assumption_kind": "assumed_available_capacity",
+      "frozen_label": "challenges",
+      "table_label": "insufficient",
+      "agrees_with_frozen_label": false
+    },
+    {
+      "pair_id": "pb-er-1",
+      "at": "t1",
+      "assumption_kind": "commercial_availability_from",
+      "frozen_label": "challenges",
+      "table_label": "mixed",
+      "agrees_with_frozen_label": false
+    },
+    {
+      "pair_id": "pb-er-2",
+      "at": "t1",
+      "assumption_kind": "commercial_availability_from",
+      "frozen_label": "challenges",
+      "table_label": "supports",
+      "agrees_with_frozen_label": false
+    },
+    {
+      "pair_id": "pb-er-3",
+      "at": "t1",
+      "assumption_kind": "assumed_available_capacity",
+      "frozen_label": "supports",
+      "table_label": "supports",
+      "agrees_with_frozen_label": true
+    },
+    {
+      "pair_id": "pb-er-4",
+      "at": "t1",
+      "assumption_kind": "assumed_available_capacity",
+      "frozen_label": "supports",
+      "table_label": "supports",
+      "agrees_with_frozen_label": true
+    },
+    {
+      "pair_id": "pb-lc-1",
+      "at": "t0",
+      "assumption_kind": "commercial_availability_from",
+      "frozen_label": "challenges",
+      "table_label": "challenges",
+      "agrees_with_frozen_label": true
+    },
+    {
+      "pair_id": "pb-lc-1",
+      "at": "t1",
+      "assumption_kind": "commercial_availability_from",
+      "frozen_label": "supports",
+      "table_label": "supports",
+      "agrees_with_frozen_label": true
+    },
+    {
+      "pair_id": "pb-lc-2",
+      "at": "t0",
+      "assumption_kind": "assumed_available_capacity",
+      "frozen_label": "challenges",
+      "table_label": "challenges",
+      "agrees_with_frozen_label": true
+    },
+    {
+      "pair_id": "pb-lc-2",
+      "at": "t1",
+      "assumption_kind": "assumed_available_capacity",
+      "frozen_label": "supports",
+      "table_label": "supports",
+      "agrees_with_frozen_label": true
+    },
+    {
+      "pair_id": "pb-lc-3",
+      "at": "t0",
+      "assumption_kind": "commercial_availability_from",
+      "frozen_label": "challenges",
+      "table_label": "challenges",
+      "agrees_with_frozen_label": true
+    },
+    {
+      "pair_id": "pb-lc-3",
+      "at": "t1",
+      "assumption_kind": "commercial_availability_from",
+      "frozen_label": "challenges",
+      "table_label": "challenges",
+      "agrees_with_frozen_label": true
+    },
+    {
+      "pair_id": "pb-na-1",
+      "at": "t1",
+      "assumption_kind": "commercial_availability_from",
+      "frozen_label": "unrelated",
+      "table_label": "insufficient",
+      "agrees_with_frozen_label": false
+    },
+    {
+      "pair_id": "pb-na-2",
+      "at": "t1",
+      "assumption_kind": "commercial_availability_from",
+      "frozen_label": "challenges",
+      "table_label": "challenges",
+      "agrees_with_frozen_label": true
+    },
+    {
+      "pair_id": "pb-na-3",
+      "at": "t1",
+      "assumption_kind": "commercial_availability_from",
+      "frozen_label": "unrelated",
+      "table_label": "insufficient",
+      "agrees_with_frozen_label": false
+    },
+    {
+      "pair_id": "pb-ng-1",
+      "at": "t1",
+      "assumption_kind": "commercial_availability_from",
+      "frozen_label": "challenges",
+      "table_label": "challenges",
+      "agrees_with_frozen_label": true
+    },
+    {
+      "pair_id": "pb-ng-2",
+      "at": "t1",
+      "assumption_kind": "commercial_availability_from",
+      "frozen_label": "insufficient",
+      "table_label": "insufficient",
+      "agrees_with_frozen_label": true
+    },
+    {
+      "pair_id": "pb-ng-3",
+      "at": "t1",
+      "assumption_kind": "commercial_availability_from",
+      "frozen_label": "supports",
+      "table_label": "supports",
+      "agrees_with_frozen_label": true
+    },
+    {
+      "pair_id": "pb-po-1",
+      "at": "t1",
+      "assumption_kind": "assumed_available_capacity",
+      "frozen_label": "challenges",
+      "table_label": "challenges",
+      "agrees_with_frozen_label": true
+    },
+    {
+      "pair_id": "pb-po-2",
+      "at": "t1",
+      "assumption_kind": "assumed_available_capacity",
+      "frozen_label": "challenges",
+      "table_label": "challenges",
+      "agrees_with_frozen_label": true
+    },
+    {
+      "pair_id": "pb-po-3",
+      "at": "t1",
+      "assumption_kind": "assumed_available_capacity",
+      "frozen_label": "challenges",
+      "table_label": "challenges",
+      "agrees_with_frozen_label": true
+    },
+    {
+      "pair_id": "pb-tc-1",
+      "at": "t1",
+      "assumption_kind": "commercial_availability_from",
+      "frozen_label": "challenges",
+      "table_label": "challenges",
+      "agrees_with_frozen_label": true
+    },
+    {
+      "pair_id": "pb-tc-2",
+      "at": "t1",
+      "assumption_kind": "commercial_availability_from",
+      "frozen_label": "supports",
+      "table_label": "supports",
+      "agrees_with_frozen_label": true
+    },
+    {
+      "pair_id": "pb-tc-3",
+      "at": "t1",
+      "assumption_kind": "assumed_available_capacity",
+      "frozen_label": "mixed",
+      "table_label": "challenges",
+      "agrees_with_frozen_label": false
+    }
+  ],
+  "contestable_rule": {
+    "rule": "q3 = before and q6 = yes -> supports",
+    "meaning": "Pairs whose expected atomic answers carry the row's pattern, grouped by assumption kind; the earlier_observed_return class is the decisive subset for ablation A1, and both kinds are present there.",
+    "pairs_by_assumption_kind": {
+      "assumed_available_capacity": [
+        "pb-cl-3",
+        "pb-er-3",
+        "pb-er-4",
+        "pb-lc-2"
+      ],
+      "commercial_availability_from": [
+        "pb-cl-1",
+        "pb-cl-2",
+        "pb-er-1",
+        "pb-er-2",
+        "pb-lc-1",
+        "pb-lc-3",
+        "pb-na-1",
+        "pb-na-2",
+        "pb-tc-1"
+      ]
+    }
+  },
+  "frozen_label_disagreements": [
+    "pb-cl-3/t1",
+    "pb-er-1/t1",
+    "pb-er-2/t1",
+    "pb-na-1/t1",
+    "pb-na-3/t1",
+    "pb-tc-3/t1"
+  ],
+  "fixture_digest": "ce6cddf08046769748c0babefcdd70be93eba9ac8d8bac4d7e013d42a979a996",
+  "digest_rule": "Each file digest is compute_content_digest of the parsed JSON; fixture_digest is compute_content_digest of the path-to-digest mapping over the pair files and annotation-policy.json. The frozen set is those files; manifest.json and build.py are not part of it.",
+  "load_rule": "Records load in list order through the repository (Case via register_case, SourceVersion via register with source_bytes = utf-8 of payload.original_text, Passage and MappingRevision via register), then assumption_seed through seed_assumption, passing every declared string verbatim. The pair's single BeliefSnapshot is rebuilt once from the 'snapshot' block (audit_cutoff, recorded_at); every compile entry compiles against that snapshot with its own information_cutoff and recorded_at, then renders with model_id.",
+  "pairing_rule": "One snapshot per pair, per the frozen pairing contract: every compile of a pair binds the document's single 'snapshot' block, and a multi-compile pair differs only in information_cutoff, with strictly increasing cutoffs so the pair endpoint's ordering requirement holds. '--check' asserts snapshot-reference equality and the cutoff ordering for every pair file.",
+  "no_backend_run": "No System One backend, model, transport, credential or network call was made before or during the freeze; slice S2 of the probe-bundle intent is not built.",
+  "recheck": [
+    "/usr/bin/python3 tests/fixtures/probe-bundle/build.py --check"
+  ]
+}

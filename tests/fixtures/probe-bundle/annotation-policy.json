@@ -1,0 +1,63 @@
+{
+  "policy_id": "probe-bundle-annotation.v2",
+  "frozen_at": "2026-10-13",
+  "scope": "Evidence-assumption pairs compiled from the H0 synthetic case (fictional units and sources). The label is the relation of the supplied evidence to the assumption as stated, judged from the passage text and the reviewed mapping alone, at the declared cutoffs.",
+  "labels": {
+    "supports": "Consistent with and directly relevant to the proposition.",
+    "challenges": "Relevant reason to reconsider; does not establish falsity.",
+    "mixed": "Supported elements pull in different directions.",
+    "unrelated": "Does not bear on the proposition under the declared scope.",
+    "insufficient": "Necessary meaning or context is missing."
+  },
+  "assumption_kinds": {
+    "assumed_available_capacity": "Supply outlook: the assumed value is available capacity (MW) over the assumption's validity period, and the assumed time is that period. An availability kind: the v5 availability-kind predicate reads the field's quantity kind from the model representation, so testing, outage and return events about the unit compose against the assumption.",
+    "commercial_availability_from": "Return-date assumption: the proposition states the assumed commercial availability date and the value is the assumed capacity from that date; the assumed time is the stated date. An availability kind, and its evidence maps to the commercial_operation token: an entered commercial operation, or a return to service, is that event and not a commissioning milestone."
+  },
+  "question_conventions": {
+    "q1_identity": "The subject entity of the statement, chosen from the reviewed candidates of the pair's mapping; cannot_tell when the passage names no reviewed candidate, including a clearly different, non-candidate entity.",
+    "q2_event": "The single event the passages describe for that entity: planned_outage, forced_outage, return_to_service, derating, grid_alert, testing, commercial_operation, or other when none of those is described. The vocabulary is the operator-advisory feed's own verbs: an outage the passage states as planned, scheduled or extended is planned_outage; an outage or shutdown the passage states with no plan is forced_outage (the feed's unplanned outage); a return or restore, including a completed synchronisation back to service, is return_to_service; a reduced capability is derating; a grid-level alert is grid_alert; testing covers a test or commissioning state; commercial_operation covers reaching commercial operation or the assumed commercial availability. synchronisation is not a token: in the corpus it names a failed return (forced_outage) or a completed one (return_to_service).",
+    "q3_time": "The time the passage attributes to its reported event or condition: an explicit date or instant, or, where none is stated, the passage's publication instant as the latest time the condition is asserted. same means the stated time falls inside the assumed time; before and after are strictly earlier and later; not_stated means the time reference cannot be located against the assumed time.",
+    "q4_conditional": "yes when the statement is conditional, planned, expected or subject to clearance rather than confirmed; no when it is an unconditional statement of fact.",
+    "q5_lineage": "yes when the passage repeats the content of an earlier source already present in the supplied context, rather than adding new information.",
+    "q6_observation": "yes when the passage reports something that happened or currently holds; no when it reports a target, plan, expectation or schedule.",
+    "q7_sufficiency": "yes when the supplied passages alone suffice to decide whether the assumption is supported or challenged; no when they do not.",
+    "q8_direction": "The direction a reader would take from the supplied passages alone, without the decomposition; it is the single-render baseline of ablation A1 and does not follow the composite label."
+  },
+  "label_rules": [
+    {
+      "id": "scope",
+      "rule": "Evidence about a clearly different entity (near-name or sister unit) does not bear on the assumption: unrelated."
+    },
+    {
+      "id": "identity",
+      "rule": "Evidence whose subject entity cannot be determined from the passage and the reviewed mapping is insufficient; an ambiguous mapping cannot change an assumption."
+    },
+    {
+      "id": "lineage",
+      "rule": "A passage that repeats an in-context earlier source takes the label of the repeated statement; repetition is never independent corroboration."
+    },
+    {
+      "id": "milestone",
+      "rule": "A testing or outage state is not an observation that the assumed availability holds at the assumed time."
+    },
+    {
+      "id": "outage",
+      "rule": "An outage, an extension of an outage, or a stated time later than the assumed time challenges the assumption as stated."
+    },
+    {
+      "id": "conditional",
+      "rule": "A conditional, planned or subject-to-clearance statement names a possibility, not the assumed fact: mixed (conditional support), unless the statement also asserts an outage or a later time, which is challenges."
+    },
+    {
+      "id": "earlier_return",
+      "rule": "An observed return earlier than the assumed time supports a supply outlook (assumed_available_capacity) and challenges a return-date assumption (commercial_availability_from) as stated, because the observed return contradicts the assumed date."
+    },
+    {
+      "id": "insufficient",
+      "rule": "Evidence whose meaning cannot be determined, or that is silent on the assumed time with no direction, is insufficient."
+    }
+  ],
+  "evidence_set_rule": "When a compile's context holds several passages, each atomic answer describes the set; where the passages disagree, the annotation follows the latest known statement about the entity, and q5 records repetition.",
+  "contestable_rule": "The composition row 'q3 = before and q6 = yes -> supports' (working paper 5.2) is deliberately contestable. The pair set contains both assumption kinds for it so ablation A1 can decide whether the row is kept. The frozen labels are the annotation and do not follow the table.",
+  "no_backend_rule": "Labels and the frozen digests are recorded before any backend run; they are annotations of synthetic fixtures and are not analyst validation or model output."
+}

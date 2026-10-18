@@ -1,0 +1,2132 @@
+{
+ "advisory": {
+  "date_only": true,
+  "first_availability": {
+   "basis_kind": "capture_logged_at",
+   "basis_ref": "the corpus fetch log, sidecar of dfe95e78db9e247e43b5c3c582d73c566091bf57a80cf7b9d02f7b8bb92ec3d1.html",
+   "note": "the fetch time of the bytes this case quotes; the page's byline date is the issuer's stated publication, not this workflow's evidence of access",
+   "state": "known",
+   "value": "2026-10-15T16:20:12Z"
+  },
+  "id": "claim:reserve-market-suspension",
+  "published_basis": "the page's own byline date",
+  "t": "2026-10-13",
+  "text": "Following recent developments in the reserve market, and pursuant to ERC Case No. 2023-002 RC, promulgated on 12 October 2026, the commercial dispatch and settlement of the Reserve Market will be suspended effective 14 October 2026 at trading interval 0005H pending a review of the Reserve Market design and pricing framework."
+ },
+ "assumption": {
+  "kv": [
+   [
+    "State",
+    "prepared"
+   ],
+   [
+    "Case",
+    "reserve-market-2026-10-14"
+   ],
+   [
+    "Prepared",
+    "the repository holds no accepted assumption about reserve procurement (CORP-0's spike, section 5), so this case prepares one for an analyst; nothing here accepts it"
+   ]
+  ],
+  "proposition": "Reserve requirements are procured and priced through the WESM reserve market.",
+  "unit": "MW",
+  "value": null
+ },
+ "decision": {
+  "mode": "read_only",
+  "note": "This event's decisions are prepared in the case pack and were not recorded through the judge routes; the form is off so nothing is filed against another case."
+ },
+ "event_at": "2026-10-14T00:05",
+ "figures": [],
+ "fixture_note": "built by scripts/grid/build_rules.py from docs/cases/reserve-market/evidence-manifest.json and the corpus store; every quote and number names its record",
+ "grid": "",
+ "grid_kind": "market",
+ "grid_name": "WESM",
+ "id": "reserve-market-2026-10-14",
+ "judgment": null,
+ "limits": [
+  "The ERC order itself is not held: the action is known through IEMOP's report of it, and the two are different records.",
+  "The compendium copies carry no first-availability evidence, so the strict cutoff rule places no clause version; the gap is named, never filled.",
+  "The reserve series is referenced, not baked: the case holds the series record and no five-minute values.",
+  "The assumption is prepared: no analyst has accepted it, and no judgment record exists for this event."
+ ],
+ "market": {
+  "imp": [],
+  "lmp": [],
+  "marks": [],
+  "short": [],
+  "t": []
+ },
+ "rules": {
+  "governs": {
+   "assumption": {
+    "prepared_note": "the repository holds no accepted assumption about reserve procurement (CORP-0's spike, section 5), so this case prepares one for an analyst; nothing here accepts it",
+    "proposition": "Reserve requirements are procured and priced through the WESM reserve market.",
+    "ref": "assumption:reserve-procurement",
+    "state": "prepared"
+   },
+   "dependency": {
+    "availability_basis": {
+     "basis_kind": "attested",
+     "basis_ref": "the case pack's own record, docs/cases/reserve-market/evidence-manifest.json",
+     "note": "the case's mapping, recorded at the pack's build instant; not evidence about the world"
+    },
+    "availability_value": "2026-10-16T00:00:00Z",
+    "from_ref": "assumption:reserve-procurement",
+    "notes": "the prepared assumption is about how reserve is procured and priced, so it depends on the market product the action stops",
+    "relation_id": "rel-assumption-depends-on-market",
+    "review_state": "proposed",
+    "to_ref": "market-product:reserve-market"
+   },
+   "series": {
+    "definition": "the dispatchable reserve the operator requires, and the shortfall against it, MW",
+    "definition_ref": "src/grid/grid.js",
+    "open": "whether the operator keeps computing and publishing this series unchanged during the suspension is unknown; the spike records it as a documentation question for acquisition, never inferred from the suspension notice",
+    "page_series": "the event page draws it as short[] (src/grid/event.js)",
+    "series_ref": "series:wesm-five-minute:dr_short_mw",
+    "source": "WESM five-minute data, company copy; the corpus holds the series reference, never the bytes"
+   }
+  },
+  "note": "The corpus store's own answers at each cutoff: a clause version is in force when its first availability and its effective period have both ended by the cutoff, and a passage is available when its first availability has ended by it. Availability is not force. Anything else is named with its reason, and a later amendment or announcement never appears on an earlier day.",
+  "states": [
+   {
+    "announcements": [
+     {
+      "attributed_to": "ERC (reported by IEMOP)",
+      "bears_on": [
+       "3.3.4.1",
+       "3.8.7"
+      ],
+      "claim_ref": "claim:reserve-market-suspension",
+      "first_availability": {
+       "basis_kind": "capture_logged_at",
+       "basis_ref": "the corpus fetch log, sidecar of dfe95e78db9e247e43b5c3c582d73c566091bf57a80cf7b9d02f7b8bb92ec3d1.html",
+       "note": "the fetch time of the bytes this case quotes; the page's byline date is the issuer's stated publication, not this workflow's evidence of access",
+       "state": "known",
+       "value": "2026-10-15T16:20:12Z"
+      },
+      "issuer": "IEMOP",
+      "locator": {
+       "end": 12038,
+       "into": "the page's text with tags removed, entities decoded and whitespace runs collapsed, as the CORP-0 spike reads it",
+       "page": null,
+       "start": 11712
+      },
+      "modality": "actual",
+      "passage_id": "p-iemop-direction",
+      "passage_key": "direction",
+      "published": "2026-10-13",
+      "published_basis": "the page's own byline date",
+      "quote": null,
+      "quote_digest": "4821e7fb78d9986b28856b7ad77a6b79faf062bb3871bc4aec0b4fe44028b528",
+      "source_digest": "dfe95e78db9e247e43b5c3c582d73c566091bf57a80cf7b9d02f7b8bb92ec3d1",
+      "source_ref": "src:iemop-news-2026-10-13",
+      "status": "not_placed",
+      "status_reason": "after_cutoff",
+      "text_basis": "this cutoff does not place the passage, so its text is withheld; the record is named",
+      "title": "September WESM prices rise slightly as supply constraints persist in Visayas and Mindanao (the reserve-market suspension section)"
+     },
+     {
+      "attributed_to": "IEMOP (of the ERC's act)",
+      "bears_on": [],
+      "claim_ref": "claim:erc-promulgation",
+      "first_availability": {
+       "basis_kind": "capture_logged_at",
+       "basis_ref": "the corpus fetch log, sidecar of dfe95e78db9e247e43b5c3c582d73c566091bf57a80cf7b9d02f7b8bb92ec3d1.html",
+       "note": "the fetch time of the bytes this case quotes; the page's byline date is the issuer's stated publication, not this workflow's evidence of access",
+       "state": "known",
+       "value": "2026-10-15T16:20:12Z"
+      },
+      "issuer": "IEMOP",
+      "locator": {
+       "end": 12038,
+       "into": "the page's text with tags removed, entities decoded and whitespace runs collapsed, as the CORP-0 spike reads it",
+       "page": null,
+       "start": 11712
+      },
+      "modality": "actual",
+      "passage_id": "p-iemop-direction",
+      "passage_key": "direction",
+      "published": "2026-10-13",
+      "published_basis": "the page's own byline date",
+      "quote": null,
+      "quote_digest": "4821e7fb78d9986b28856b7ad77a6b79faf062bb3871bc4aec0b4fe44028b528",
+      "source_digest": "dfe95e78db9e247e43b5c3c582d73c566091bf57a80cf7b9d02f7b8bb92ec3d1",
+      "source_ref": "src:iemop-news-2026-10-13",
+      "status": "not_placed",
+      "status_reason": "after_cutoff",
+      "text_basis": "this cutoff does not place the passage, so its text is withheld; the record is named",
+      "title": "September WESM prices rise slightly as supply constraints persist in Visayas and Mindanao (the reserve-market suspension section)"
+     },
+     {
+      "attributed_to": "IEMOP",
+      "bears_on": [],
+      "claim_ref": "claim:aspa-fallback",
+      "first_availability": {
+       "basis_kind": "capture_logged_at",
+       "basis_ref": "the corpus fetch log, sidecar of dfe95e78db9e247e43b5c3c582d73c566091bf57a80cf7b9d02f7b8bb92ec3d1.html",
+       "note": "the fetch time of the bytes this case quotes; the page's byline date is the issuer's stated publication, not this workflow's evidence of access",
+       "state": "known",
+       "value": "2026-10-15T16:20:12Z"
+      },
+      "issuer": "IEMOP",
+      "locator": {
+       "end": 12299,
+       "into": "the page's text with tags removed, entities decoded and whitespace runs collapsed, as the CORP-0 spike reads it",
+       "page": null,
+       "start": 12039
+      },
+      "modality": "conditional_intention",
+      "passage_id": "p-iemop-fallback",
+      "passage_key": "fallback",
+      "published": "2026-10-13",
+      "published_basis": "the page's own byline date",
+      "quote": null,
+      "quote_digest": "555e566a2baeb77dbeeb73ebecd7764ecc373e7bff3b59f970f36ec26d4595fd",
+      "source_digest": "dfe95e78db9e247e43b5c3c582d73c566091bf57a80cf7b9d02f7b8bb92ec3d1",
+      "source_ref": "src:iemop-news-2026-10-13",
+      "status": "not_placed",
+      "status_reason": "after_cutoff",
+      "text_basis": "this cutoff does not place the passage, so its text is withheld; the record is named",
+      "title": "September WESM prices rise slightly as supply constraints persist in Visayas and Mindanao (the reserve-market suspension section)"
+     },
+     {
+      "attributed_to": "PEMC (the library's own listing)",
+      "bears_on": [],
+      "claim_ref": "claim:pemc-mirror-2023-002-rc",
+      "first_availability": {
+       "basis_kind": "capture_logged_at",
+       "basis_ref": "the corpus fetch log, sidecar of 6e3f379262713a8406634fb1f80e217c06f1d6f6d825f6371fb34dd78acc2c69.html",
+       "note": "the fetch time of the bytes read; the listed orders carry their own dates in the listing",
+       "state": "known",
+       "value": "2026-10-15T16:19:55Z"
+      },
+      "issuer": "PEMC",
+      "locator": {
+       "end": 2942,
+       "into": "the page's text with tags removed, entities decoded and whitespace runs collapsed, as the CORP-0 spike reads it",
+       "page": null,
+       "start": 2728
+      },
+      "modality": "actual",
+      "passage_id": "p-pemc-case-entry",
+      "passage_key": "pemc-case-entry",
+      "published": null,
+      "published_basis": "the listing states no publication for the page itself",
+      "quote": null,
+      "quote_digest": "b7a6827c1edfffeacf65156bce422c9d0606f4b94f8e1166184b2ccef64aaef7",
+      "source_digest": "6e3f379262713a8406634fb1f80e217c06f1d6f6d825f6371fb34dd78acc2c69",
+      "source_ref": "src:pemc-erc-issuances-2026-10-15",
+      "status": "not_placed",
+      "status_reason": "after_cutoff",
+      "text_basis": "this cutoff does not place the passage, so its text is withheld; the record is named",
+      "title": "PEMC library, ERC issuances listing (the library's mirror of the ERC issuances; the entry naming ERC Case No. 2023-002 RC)"
+     }
+    ],
+    "clauses": [
+     {
+      "amendments": [
+       {
+        "dated": "2016-10-14",
+        "first_availability": {
+         "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+         "state": "unknown"
+        },
+        "held": false,
+        "kind": "added",
+        "locator": {
+         "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+         "end": 847,
+         "page": 69,
+         "source_id": "src:wesm-rules-2025-08-31",
+         "source_revision": "2025-08-31",
+         "start": 790
+        },
+        "note": "(Added per DOE DC No. 2016-10-0014 dated 14 October 2016)",
+        "note_digest": "458a923519f9cea70622242a034d15d49ca022113b8941b2e9926971aab0fb40",
+        "reached": "3.3.4.3 and 3.3.4.4",
+        "ref": "DOE DC No. 2016-10-0014"
+       }
+      ],
+      "chain": [],
+      "clause_label": "3.3.4.1",
+      "effective": {
+       "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+       "precision": "day",
+       "value": "2025-08-31"
+      },
+      "excluded": [
+       {
+        "amendments": [
+         "DOE DC No. 2016-10-0014"
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "reason": "availability_unknown",
+        "text_shown": true,
+        "version_id": "rv-wesm-rules-2025-08-31-3.3.4.1"
+       }
+      ],
+      "locator": {
+       "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "end": 1171,
+       "into": "the page's extracted text, offsets in Unicode characters, line breaks kept",
+       "page": 68,
+       "source_id": "src:wesm-rules-2025-08-31",
+       "source_revision": "2025-08-31",
+       "start": 945
+      },
+      "source": {
+       "first_availability": {
+        "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+        "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+        "state": "unknown",
+        "upper_bound": "2026-04-01"
+       },
+       "issuer": "PEMC",
+       "sha256": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "source_ref": "src:wesm-rules-2025-08-31",
+       "stated": {
+        "approving_doe_circular": "DC2025-08-0011",
+        "effective": "2025-08-31",
+        "pemc_posting": "2025-09-03"
+       },
+       "title": "Wholesale Electricity Spot Market Rules (WESM Rules)",
+       "version": "as of 2025-08-31"
+      },
+      "status": "not_placed",
+      "status_reason": "availability_unknown",
+      "text": "3.3.4 Reserve Market Arrangements \n3.3.4.1 When reasonably feasible, the Market Operator, in coordination \nwith the System operator, shall establish and administer a spot \nmarket for the purchase of certain reserve categories.",
+      "text_basis": "the newest version this pack holds; the cutoff places none",
+      "text_digest": "95e449fa99771e5eaa7a36d770d108761f8e95bd6376e81f70118a01dfa0d2cd",
+      "title": "Reserve Market Arrangements",
+      "version_id": null,
+      "versions": [
+       {
+        "amendments": [
+         {
+          "dated": "2016-10-14",
+          "first_availability": {
+           "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+           "state": "unknown"
+          },
+          "held": false,
+          "kind": "added",
+          "locator": {
+           "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+           "end": 847,
+           "page": 69,
+           "source_id": "src:wesm-rules-2025-08-31",
+           "source_revision": "2025-08-31",
+           "start": 790
+          },
+          "note": "(Added per DOE DC No. 2016-10-0014 dated 14 October 2016)",
+          "note_digest": "458a923519f9cea70622242a034d15d49ca022113b8941b2e9926971aab0fb40",
+          "reached": "3.3.4.3 and 3.3.4.4",
+          "ref": "DOE DC No. 2016-10-0014"
+         }
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "first_availability": {
+         "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+         "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+         "state": "unknown",
+         "upper_bound": "2026-04-01"
+        },
+        "text": "3.3.4 Reserve Market Arrangements \n3.3.4.1 When reasonably feasible, the Market Operator, in coordination \nwith the System operator, shall establish and administer a spot \nmarket for the purchase of certain reserve categories.",
+        "version_id": "rv-wesm-rules-2025-08-31-3.3.4.1"
+       }
+      ],
+      "why": "establishes the spot market for reserve categories that the ERC suspended"
+     },
+     {
+      "amendments": [
+       {
+        "dated": "2016-10-14",
+        "first_availability": {
+         "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+         "state": "unknown"
+        },
+        "held": false,
+        "kind": "amended",
+        "locator": {
+         "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+         "end": 644,
+         "page": 70,
+         "source_id": "src:wesm-rules-2025-08-31",
+         "source_revision": "2025-08-31",
+         "start": 583
+        },
+        "note": "(As amended by DOE DC No. 2016-10-0014 dated 14 October 2016)",
+        "note_digest": "d4203a12d5cd9661309c70c26f9e46b0fc749032f65805e7dd00ce3eb6b9eddc",
+        "reached": "3.3.7",
+        "ref": "DOE DC No. 2016-10-0014"
+       }
+      ],
+      "chain": [],
+      "clause_label": "3.3.7",
+      "effective": {
+       "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+       "precision": "day",
+       "value": "2025-08-31"
+      },
+      "excluded": [
+       {
+        "amendments": [
+         "DOE DC No. 2016-10-0014"
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "reason": "availability_unknown",
+        "text_shown": true,
+        "version_id": "rv-wesm-rules-2025-08-31-3.3.7"
+       }
+      ],
+      "locator": {
+       "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "end": 644,
+       "into": "the page's extracted text, offsets in Unicode characters, line breaks kept",
+       "page": 70,
+       "source_id": "src:wesm-rules-2025-08-31",
+       "source_revision": "2025-08-31",
+       "start": 486
+      },
+      "source": {
+       "first_availability": {
+        "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+        "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+        "state": "unknown",
+        "upper_bound": "2026-04-01"
+       },
+       "issuer": "PEMC",
+       "sha256": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "source_ref": "src:wesm-rules-2025-08-31",
+       "stated": {
+        "approving_doe_circular": "DC2025-08-0011",
+        "effective": "2025-08-31",
+        "pemc_posting": "2025-09-03"
+       },
+       "title": "Wholesale Electricity Spot Market Rules (WESM Rules)",
+       "version": "as of 2025-08-31"
+      },
+      "status": "not_placed",
+      "status_reason": "availability_unknown",
+      "text": "3.3.7 Approval, Periodic    Review    and    Evaluation    of    Reserve Market  \nArrangements  \n(As amended by DOE DC No. 2016-10-0014 dated 14 October 2016)",
+      "text_basis": "the newest version this pack holds; the cutoff places none",
+      "text_digest": "b2697744883bba26c929a542b681de642f5d47d2bcfc292fa60a561683cc95a2",
+      "title": "Approval, Periodic Review and Evaluation of Reserve Market Arrangements",
+      "version_id": null,
+      "versions": [
+       {
+        "amendments": [
+         {
+          "dated": "2016-10-14",
+          "first_availability": {
+           "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+           "state": "unknown"
+          },
+          "held": false,
+          "kind": "amended",
+          "locator": {
+           "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+           "end": 644,
+           "page": 70,
+           "source_id": "src:wesm-rules-2025-08-31",
+           "source_revision": "2025-08-31",
+           "start": 583
+          },
+          "note": "(As amended by DOE DC No. 2016-10-0014 dated 14 October 2016)",
+          "note_digest": "d4203a12d5cd9661309c70c26f9e46b0fc749032f65805e7dd00ce3eb6b9eddc",
+          "reached": "3.3.7",
+          "ref": "DOE DC No. 2016-10-0014"
+         }
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "first_availability": {
+         "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+         "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+         "state": "unknown",
+         "upper_bound": "2026-04-01"
+        },
+        "text": "3.3.7 Approval, Periodic    Review    and    Evaluation    of    Reserve Market  \nArrangements  \n(As amended by DOE DC No. 2016-10-0014 dated 14 October 2016)",
+        "version_id": "rv-wesm-rules-2025-08-31-3.3.7"
+       }
+      ],
+      "why": "sends changes that affect ancillary-service fees to the ERC for approval"
+     },
+     {
+      "amendments": [],
+      "chain": [],
+      "clause_label": "3.5.7.1",
+      "effective": {
+       "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+       "precision": "day",
+       "value": "2025-08-31"
+      },
+      "excluded": [
+       {
+        "amendments": [],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "reason": "availability_unknown",
+        "text_shown": true,
+        "version_id": "rv-wesm-rules-2025-08-31-3.5.7.1"
+       }
+      ],
+      "locator": {
+       "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "end": 1836,
+       "into": "the page's extracted text, offsets in Unicode characters, line breaks kept",
+       "page": 82,
+       "source_id": "src:wesm-rules-2025-08-31",
+       "source_revision": "2025-08-31",
+       "start": 1665
+      },
+      "source": {
+       "first_availability": {
+        "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+        "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+        "state": "unknown",
+        "upper_bound": "2026-04-01"
+       },
+       "issuer": "PEMC",
+       "sha256": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "source_ref": "src:wesm-rules-2025-08-31",
+       "stated": {
+        "approving_doe_circular": "DC2025-08-0011",
+        "effective": "2025-08-31",
+        "pemc_posting": "2025-09-03"
+       },
+       "title": "Wholesale Electricity Spot Market Rules (WESM Rules)",
+       "version": "as of 2025-08-31"
+      },
+      "status": "not_placed",
+      "status_reason": "availability_unknown",
+      "text": "3.5.7 Generation Company Reserve Offers \n3.5.7.1 This section shall apply only upon commencement of the spot \nmarket for ancillary services established under Clause 3.3.4.",
+      "text_basis": "the newest version this pack holds; the cutoff places none",
+      "text_digest": "c599857b70020b8ca4d25f3c6931e738d468b63799158c5a800f6169079df505",
+      "title": "Generation Company Reserve Offers",
+      "version_id": null,
+      "versions": [
+       {
+        "amendments": [],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "first_availability": {
+         "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+         "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+         "state": "unknown",
+         "upper_bound": "2026-04-01"
+        },
+        "text": "3.5.7 Generation Company Reserve Offers \n3.5.7.1 This section shall apply only upon commencement of the spot \nmarket for ancillary services established under Clause 3.3.4.",
+        "version_id": "rv-wesm-rules-2025-08-31-3.5.7.1"
+       }
+      ],
+      "why": "the reserve offers whose commencement is tied to the market under Clause 3.3.4"
+     },
+     {
+      "amendments": [
+       {
+        "dated": "2022-11-07",
+        "first_availability": {
+         "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+         "state": "unknown"
+        },
+        "held": false,
+        "kind": "added",
+        "locator": {
+         "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+         "end": 1606,
+         "page": 113,
+         "source_id": "src:wesm-rules-2025-08-31",
+         "source_revision": "2025-08-31",
+         "start": 1493
+        },
+        "note": "(Added per DOE DC 2022-11-0032 dated 07 November 2022 and amended by \nDOE DC No. 2024-06-0019 dated 10 June 2024)",
+        "note_digest": "e525dd0d177e26d235d6f24dc3fa876838c9a8bb4716dfbc1639e31b293cb548",
+        "reached": "3.8.7",
+        "ref": "DOE DC 2022-11-0032"
+       },
+       {
+        "dated": "2024-06-10",
+        "first_availability": {
+         "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+         "state": "unknown"
+        },
+        "held": false,
+        "kind": "amended",
+        "locator": {
+         "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+         "end": 1606,
+         "page": 113,
+         "source_id": "src:wesm-rules-2025-08-31",
+         "source_revision": "2025-08-31",
+         "start": 1493
+        },
+        "note": "(Added per DOE DC 2022-11-0032 dated 07 November 2022 and amended by \nDOE DC No. 2024-06-0019 dated 10 June 2024)",
+        "note_digest": "e525dd0d177e26d235d6f24dc3fa876838c9a8bb4716dfbc1639e31b293cb548",
+        "reached": "3.8.7",
+        "ref": "DOE DC No. 2024-06-0019"
+       }
+      ],
+      "chain": [],
+      "clause_label": "3.8.7",
+      "effective": {
+       "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+       "precision": "day",
+       "value": "2025-08-31"
+      },
+      "excluded": [
+       {
+        "amendments": [
+         "DOE DC 2022-11-0032",
+         "DOE DC No. 2024-06-0019"
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "reason": "availability_unknown",
+        "text_shown": true,
+        "version_id": "rv-wesm-rules-2025-08-31-3.8.7"
+       }
+      ],
+      "locator": {
+       "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "end": 1606,
+       "into": "the page's extracted text, offsets in Unicode characters, line breaks kept",
+       "page": 113,
+       "source_id": "src:wesm-rules-2025-08-31",
+       "source_revision": "2025-08-31",
+       "start": 1460
+      },
+      "source": {
+       "first_availability": {
+        "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+        "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+        "state": "unknown",
+        "upper_bound": "2026-04-01"
+       },
+       "issuer": "PEMC",
+       "sha256": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "source_ref": "src:wesm-rules-2025-08-31",
+       "stated": {
+        "approving_doe_circular": "DC2025-08-0011",
+        "effective": "2025-08-31",
+        "pemc_posting": "2025-09-03"
+       },
+       "title": "Wholesale Electricity Spot Market Rules (WESM Rules)",
+       "version": "as of 2025-08-31"
+      },
+      "status": "not_placed",
+      "status_reason": "availability_unknown",
+      "text": "3.8.7 Reserve Market Compliance \n(Added per DOE DC 2022-11-0032 dated 07 November 2022 and amended by \nDOE DC No. 2024-06-0019 dated 10 June 2024)",
+      "text_basis": "the newest version this pack holds; the cutoff places none",
+      "text_digest": "1e0e9e0558ccfa161cb02ba2c5b19bcaf9574faa97a7e21d9c264aaa65114d53",
+      "title": "Reserve Market Compliance",
+      "version_id": null,
+      "versions": [
+       {
+        "amendments": [
+         {
+          "dated": "2022-11-07",
+          "first_availability": {
+           "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+           "state": "unknown"
+          },
+          "held": false,
+          "kind": "added",
+          "locator": {
+           "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+           "end": 1606,
+           "page": 113,
+           "source_id": "src:wesm-rules-2025-08-31",
+           "source_revision": "2025-08-31",
+           "start": 1493
+          },
+          "note": "(Added per DOE DC 2022-11-0032 dated 07 November 2022 and amended by \nDOE DC No. 2024-06-0019 dated 10 June 2024)",
+          "note_digest": "e525dd0d177e26d235d6f24dc3fa876838c9a8bb4716dfbc1639e31b293cb548",
+          "reached": "3.8.7",
+          "ref": "DOE DC 2022-11-0032"
+         },
+         {
+          "dated": "2024-06-10",
+          "first_availability": {
+           "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+           "state": "unknown"
+          },
+          "held": false,
+          "kind": "amended",
+          "locator": {
+           "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+           "end": 1606,
+           "page": 113,
+           "source_id": "src:wesm-rules-2025-08-31",
+           "source_revision": "2025-08-31",
+           "start": 1493
+          },
+          "note": "(Added per DOE DC 2022-11-0032 dated 07 November 2022 and amended by \nDOE DC No. 2024-06-0019 dated 10 June 2024)",
+          "note_digest": "e525dd0d177e26d235d6f24dc3fa876838c9a8bb4716dfbc1639e31b293cb548",
+          "reached": "3.8.7",
+          "ref": "DOE DC No. 2024-06-0019"
+         }
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "first_availability": {
+         "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+         "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+         "state": "unknown",
+         "upper_bound": "2026-04-01"
+        },
+        "text": "3.8.7 Reserve Market Compliance \n(Added per DOE DC 2022-11-0032 dated 07 November 2022 and amended by \nDOE DC No. 2024-06-0019 dated 10 June 2024)",
+        "version_id": "rv-wesm-rules-2025-08-31-3.8.7"
+       }
+      ],
+      "why": "the reserve conformance standards and their enforcement, added and amended later than the baseline"
+     },
+     {
+      "amendments": [
+       {
+        "dated": "2022-11-07",
+        "first_availability": {
+         "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+         "state": "unknown"
+        },
+        "held": false,
+        "kind": "amended",
+        "locator": {
+         "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+         "end": 1764,
+         "page": 129,
+         "source_id": "src:wesm-rules-2025-08-31",
+         "source_revision": "2025-08-31",
+         "start": 1706
+        },
+        "note": "(As amended by DOE DC 2022-11-0032 dated 07 November 2022)",
+        "note_digest": "29ad4ccc8e14039cc012cb309822f7a2ecc6292b7fb72ad39aba98faeaa9c306",
+        "reached": "3.13.8",
+        "ref": "DOE DC 2022-11-0032"
+       }
+      ],
+      "chain": [],
+      "clause_label": "3.13.8",
+      "effective": {
+       "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+       "precision": "day",
+       "value": "2025-08-31"
+      },
+      "excluded": [
+       {
+        "amendments": [
+         "DOE DC 2022-11-0032"
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "reason": "availability_unknown",
+        "text_shown": true,
+        "version_id": "rv-wesm-rules-2025-08-31-3.13.8"
+       }
+      ],
+      "locator": {
+       "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "end": 1764,
+       "into": "the page's extracted text, offsets in Unicode characters, line breaks kept",
+       "page": 129,
+       "source_id": "src:wesm-rules-2025-08-31",
+       "source_revision": "2025-08-31",
+       "start": 1659
+      },
+      "source": {
+       "first_availability": {
+        "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+        "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+        "state": "unknown",
+        "upper_bound": "2026-04-01"
+       },
+       "issuer": "PEMC",
+       "sha256": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "source_ref": "src:wesm-rules-2025-08-31",
+       "stated": {
+        "approving_doe_circular": "DC2025-08-0011",
+        "effective": "2025-08-31",
+        "pemc_posting": "2025-09-03"
+       },
+       "title": "Wholesale Electricity Spot Market Rules (WESM Rules)",
+       "version": "as of 2025-08-31"
+      },
+      "status": "not_placed",
+      "status_reason": "availability_unknown",
+      "text": "3.13.8 Determining the Reserve Trading Amount \n(As amended by DOE DC 2022-11-0032 dated 07 November 2022)",
+      "text_basis": "the newest version this pack holds; the cutoff places none",
+      "text_digest": "7934ea830f16842c7fbf67aeb2286a3c459db99281567b160628295e36df46a3",
+      "title": "Determining the Reserve Trading Amount",
+      "version_id": null,
+      "versions": [
+       {
+        "amendments": [
+         {
+          "dated": "2022-11-07",
+          "first_availability": {
+           "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+           "state": "unknown"
+          },
+          "held": false,
+          "kind": "amended",
+          "locator": {
+           "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+           "end": 1764,
+           "page": 129,
+           "source_id": "src:wesm-rules-2025-08-31",
+           "source_revision": "2025-08-31",
+           "start": 1706
+          },
+          "note": "(As amended by DOE DC 2022-11-0032 dated 07 November 2022)",
+          "note_digest": "29ad4ccc8e14039cc012cb309822f7a2ecc6292b7fb72ad39aba98faeaa9c306",
+          "reached": "3.13.8",
+          "ref": "DOE DC 2022-11-0032"
+         }
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "first_availability": {
+         "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+         "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+         "state": "unknown",
+         "upper_bound": "2026-04-01"
+        },
+        "text": "3.13.8 Determining the Reserve Trading Amount \n(As amended by DOE DC 2022-11-0032 dated 07 November 2022)",
+        "version_id": "rv-wesm-rules-2025-08-31-3.13.8"
+       }
+      ],
+      "why": "the settlement the suspension stops"
+     },
+     {
+      "amendments": [
+       {
+        "dated": "2013-12-16",
+        "first_availability": {
+         "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+         "state": "unknown"
+        },
+        "held": false,
+        "kind": "renumbered",
+        "locator": {
+         "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+         "end": 1535,
+         "page": 195,
+         "source_id": "src:wesm-rules-2025-08-31",
+         "source_revision": "2025-08-31",
+         "start": 1472
+        },
+        "note": "(Renumbered per DOE DC No. 2013-12-0028 dated 16 December 2013)",
+        "note_digest": "3d76a7969ca56d4b7ffbee278a76c08e0f517bdf1925802cefb597963ef8915d",
+        "reached": "6.9.1",
+        "ref": "DOE DC No. 2013-12-0028"
+       }
+      ],
+      "chain": [],
+      "clause_label": "6.9.1.1",
+      "effective": {
+       "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+       "precision": "day",
+       "value": "2025-08-31"
+      },
+      "excluded": [
+       {
+        "amendments": [
+         "DOE DC No. 2013-12-0028"
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "reason": "availability_unknown",
+        "text_shown": true,
+        "version_id": "rv-wesm-rules-2025-08-31-6.9.1.1"
+       }
+      ],
+      "locator": {
+       "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "end": 1914,
+       "into": "the page's extracted text, offsets in Unicode characters, line breaks kept",
+       "page": 195,
+       "source_id": "src:wesm-rules-2025-08-31",
+       "source_revision": "2025-08-31",
+       "start": 1585
+      },
+      "source": {
+       "first_availability": {
+        "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+        "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+        "state": "unknown",
+        "upper_bound": "2026-04-01"
+       },
+       "issuer": "PEMC",
+       "sha256": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "source_ref": "src:wesm-rules-2025-08-31",
+       "stated": {
+        "approving_doe_circular": "DC2025-08-0011",
+        "effective": "2025-08-31",
+        "pemc_posting": "2025-09-03"
+       },
+       "title": "Wholesale Electricity Spot Market Rules (WESM Rules)",
+       "version": "as of 2025-08-31"
+      },
+      "status": "not_placed",
+      "status_reason": "availability_unknown",
+      "text": "6.9.1.1 Pursuant to Section 30 of the Act, the ERC shall suspend the \noperation of the spot market or declare a temporary wholesale \nelectricity spot market failure in cases of:  \n(a) Natural calamities; or \n(b) Following official declaration of a national and \ninternational security emergency by the President of the \nRepublic.",
+      "text_basis": "the newest version this pack holds; the cutoff places none",
+      "text_digest": "7271feb357aec7922ed5f4d14795ebd7b623a3f463e0f0857cf394c54a713325",
+      "title": "Conditions for Suspension of the Market",
+      "version_id": null,
+      "versions": [
+       {
+        "amendments": [
+         {
+          "dated": "2013-12-16",
+          "first_availability": {
+           "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+           "state": "unknown"
+          },
+          "held": false,
+          "kind": "renumbered",
+          "locator": {
+           "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+           "end": 1535,
+           "page": 195,
+           "source_id": "src:wesm-rules-2025-08-31",
+           "source_revision": "2025-08-31",
+           "start": 1472
+          },
+          "note": "(Renumbered per DOE DC No. 2013-12-0028 dated 16 December 2013)",
+          "note_digest": "3d76a7969ca56d4b7ffbee278a76c08e0f517bdf1925802cefb597963ef8915d",
+          "reached": "6.9.1",
+          "ref": "DOE DC No. 2013-12-0028"
+         }
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "first_availability": {
+         "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+         "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+         "state": "unknown",
+         "upper_bound": "2026-04-01"
+        },
+        "text": "6.9.1.1 Pursuant to Section 30 of the Act, the ERC shall suspend the \noperation of the spot market or declare a temporary wholesale \nelectricity spot market failure in cases of:  \n(a) Natural calamities; or \n(b) Following official declaration of a national and \ninternational security emergency by the President of the \nRepublic.",
+        "version_id": "rv-wesm-rules-2025-08-31-6.9.1.1"
+       }
+      ],
+      "why": "the Rules' own suspension provision; whether the reserve-market suspension rests on it is the case's open applicability question"
+     },
+     {
+      "amendments": [
+       {
+        "dated": "2016-10-14",
+        "first_availability": {
+         "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+         "state": "unknown"
+        },
+        "held": false,
+        "kind": "amended",
+        "locator": {
+         "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+         "end": 804,
+         "page": 196,
+         "source_id": "src:wesm-rules-2025-08-31",
+         "source_revision": "2025-08-31",
+         "start": 742
+        },
+        "note": "(As amended by DOE DC \nNo. 2016-10-0014 dated 14 October 2016)",
+        "note_digest": "6bf47943d49eda287be01d3fb6fc25b8991f84869b16ef1e140dab356e474d9c",
+        "reached": "6.9.2.2",
+        "ref": "DOE DC No. 2016-10-0014"
+       }
+      ],
+      "chain": [],
+      "clause_label": "6.9.2.2",
+      "effective": {
+       "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+       "precision": "day",
+       "value": "2025-08-31"
+      },
+      "excluded": [
+       {
+        "amendments": [
+         "DOE DC No. 2016-10-0014"
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "reason": "availability_unknown",
+        "text_shown": true,
+        "version_id": "rv-wesm-rules-2025-08-31-6.9.2.2"
+       }
+      ],
+      "locator": {
+       "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "end": 804,
+       "into": "the page's extracted text, offsets in Unicode characters, line breaks kept",
+       "page": 196,
+       "source_id": "src:wesm-rules-2025-08-31",
+       "source_revision": "2025-08-31",
+       "start": 577
+      },
+      "source": {
+       "first_availability": {
+        "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+        "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+        "state": "unknown",
+        "upper_bound": "2026-04-01"
+       },
+       "issuer": "PEMC",
+       "sha256": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "source_ref": "src:wesm-rules-2025-08-31",
+       "stated": {
+        "approving_doe_circular": "DC2025-08-0011",
+        "effective": "2025-08-31",
+        "pemc_posting": "2025-09-03"
+       },
+       "title": "Wholesale Electricity Spot Market Rules (WESM Rules)",
+       "version": "as of 2025-08-31"
+      },
+      "status": "not_placed",
+      "status_reason": "availability_unknown",
+      "text": "6.9.2.2 The spot market  is deemed suspended at the start of the \ndispatch interval in which the ERC advises the Market Operator \nthat the spot market is suspended. (As amended by DOE DC \nNo. 2016-10-0014 dated 14 October 2016)",
+      "text_basis": "the newest version this pack holds; the cutoff places none",
+      "text_digest": "7e3f6e6a55067e35309d86164f02841cf414dfd9d3fadc2a5c633fa9826f71c0",
+      "title": "Declaration and Lifting of Market Suspension",
+      "version_id": null,
+      "versions": [
+       {
+        "amendments": [
+         {
+          "dated": "2016-10-14",
+          "first_availability": {
+           "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+           "state": "unknown"
+          },
+          "held": false,
+          "kind": "amended",
+          "locator": {
+           "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+           "end": 804,
+           "page": 196,
+           "source_id": "src:wesm-rules-2025-08-31",
+           "source_revision": "2025-08-31",
+           "start": 742
+          },
+          "note": "(As amended by DOE DC \nNo. 2016-10-0014 dated 14 October 2016)",
+          "note_digest": "6bf47943d49eda287be01d3fb6fc25b8991f84869b16ef1e140dab356e474d9c",
+          "reached": "6.9.2.2",
+          "ref": "DOE DC No. 2016-10-0014"
+         }
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "first_availability": {
+         "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+         "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+         "state": "unknown",
+         "upper_bound": "2026-04-01"
+        },
+        "text": "6.9.2.2 The spot market  is deemed suspended at the start of the \ndispatch interval in which the ERC advises the Market Operator \nthat the spot market is suspended. (As amended by DOE DC \nNo. 2016-10-0014 dated 14 October 2016)",
+        "version_id": "rv-wesm-rules-2025-08-31-6.9.2.2"
+       }
+      ],
+      "why": "when a suspension begins and how it is lifted"
+     }
+    ],
+    "cutoff": {
+     "label": "2026-10-13T23:59:00+08:00 (second)",
+     "precision": "second",
+     "until": "2026-10-13T15:59:00.000001Z",
+     "value": "2026-10-13T23:59:00+08:00"
+    },
+    "dependents": {
+     "budget": 8,
+     "note": "No accepted record depends on the market at this cutoff. The store walks accepted dependsOn and usesAssumption edges only, and a still-proposed mapping never counts.",
+     "rows": [],
+     "truncated": false
+    },
+    "id": "day_before",
+    "label": "One day before the action",
+    "why": "the last minute of 13 October 2026 in Manila, before the suspension takes effect at trading interval 0005H on 14 October"
+   },
+   {
+    "announcements": [
+     {
+      "attributed_to": "ERC (reported by IEMOP)",
+      "bears_on": [
+       "3.3.4.1",
+       "3.8.7"
+      ],
+      "claim_ref": "claim:reserve-market-suspension",
+      "first_availability": {
+       "basis_kind": "capture_logged_at",
+       "basis_ref": "the corpus fetch log, sidecar of dfe95e78db9e247e43b5c3c582d73c566091bf57a80cf7b9d02f7b8bb92ec3d1.html",
+       "note": "the fetch time of the bytes this case quotes; the page's byline date is the issuer's stated publication, not this workflow's evidence of access",
+       "state": "known",
+       "value": "2026-10-15T16:20:12Z"
+      },
+      "issuer": "IEMOP",
+      "locator": {
+       "end": 12038,
+       "into": "the page's text with tags removed, entities decoded and whitespace runs collapsed, as the CORP-0 spike reads it",
+       "page": null,
+       "start": 11712
+      },
+      "modality": "actual",
+      "passage_id": "p-iemop-direction",
+      "passage_key": "direction",
+      "published": "2026-10-13",
+      "published_basis": "the page's own byline date",
+      "quote": "Following recent developments in the reserve market, and pursuant to ERC Case No. 2023-002 RC, promulgated on 12 October 2026, the commercial dispatch and settlement of the Reserve Market will be suspended effective 14 October 2026 at trading interval 0005H pending a review of the Reserve Market design and pricing framework.",
+      "quote_digest": "4821e7fb78d9986b28856b7ad77a6b79faf062bb3871bc4aec0b4fe44028b528",
+      "source_digest": "dfe95e78db9e247e43b5c3c582d73c566091bf57a80cf7b9d02f7b8bb92ec3d1",
+      "source_ref": "src:iemop-news-2026-10-13",
+      "status": "placed",
+      "status_reason": null,
+      "text_basis": "the passage's own text, as its record carries it",
+      "title": "September WESM prices rise slightly as supply constraints persist in Visayas and Mindanao (the reserve-market suspension section)"
+     },
+     {
+      "attributed_to": "IEMOP (of the ERC's act)",
+      "bears_on": [],
+      "claim_ref": "claim:erc-promulgation",
+      "first_availability": {
+       "basis_kind": "capture_logged_at",
+       "basis_ref": "the corpus fetch log, sidecar of dfe95e78db9e247e43b5c3c582d73c566091bf57a80cf7b9d02f7b8bb92ec3d1.html",
+       "note": "the fetch time of the bytes this case quotes; the page's byline date is the issuer's stated publication, not this workflow's evidence of access",
+       "state": "known",
+       "value": "2026-10-15T16:20:12Z"
+      },
+      "issuer": "IEMOP",
+      "locator": {
+       "end": 12038,
+       "into": "the page's text with tags removed, entities decoded and whitespace runs collapsed, as the CORP-0 spike reads it",
+       "page": null,
+       "start": 11712
+      },
+      "modality": "actual",
+      "passage_id": "p-iemop-direction",
+      "passage_key": "direction",
+      "published": "2026-10-13",
+      "published_basis": "the page's own byline date",
+      "quote": "Following recent developments in the reserve market, and pursuant to ERC Case No. 2023-002 RC, promulgated on 12 October 2026, the commercial dispatch and settlement of the Reserve Market will be suspended effective 14 October 2026 at trading interval 0005H pending a review of the Reserve Market design and pricing framework.",
+      "quote_digest": "4821e7fb78d9986b28856b7ad77a6b79faf062bb3871bc4aec0b4fe44028b528",
+      "source_digest": "dfe95e78db9e247e43b5c3c582d73c566091bf57a80cf7b9d02f7b8bb92ec3d1",
+      "source_ref": "src:iemop-news-2026-10-13",
+      "status": "placed",
+      "status_reason": null,
+      "text_basis": "the passage's own text, as its record carries it",
+      "title": "September WESM prices rise slightly as supply constraints persist in Visayas and Mindanao (the reserve-market suspension section)"
+     },
+     {
+      "attributed_to": "IEMOP",
+      "bears_on": [],
+      "claim_ref": "claim:aspa-fallback",
+      "first_availability": {
+       "basis_kind": "capture_logged_at",
+       "basis_ref": "the corpus fetch log, sidecar of dfe95e78db9e247e43b5c3c582d73c566091bf57a80cf7b9d02f7b8bb92ec3d1.html",
+       "note": "the fetch time of the bytes this case quotes; the page's byline date is the issuer's stated publication, not this workflow's evidence of access",
+       "state": "known",
+       "value": "2026-10-15T16:20:12Z"
+      },
+      "issuer": "IEMOP",
+      "locator": {
+       "end": 12299,
+       "into": "the page's text with tags removed, entities decoded and whitespace runs collapsed, as the CORP-0 spike reads it",
+       "page": null,
+       "start": 12039
+      },
+      "modality": "conditional_intention",
+      "passage_id": "p-iemop-fallback",
+      "passage_key": "fallback",
+      "published": "2026-10-13",
+      "published_basis": "the page's own byline date",
+      "quote": "During the suspension, reserve requirements will continue to be sourced through existing Ancillary Service Procurement Agreements (ASPAs) and other designated ancillary service arrangements to support the continued reliability and security of the power system.",
+      "quote_digest": "555e566a2baeb77dbeeb73ebecd7764ecc373e7bff3b59f970f36ec26d4595fd",
+      "source_digest": "dfe95e78db9e247e43b5c3c582d73c566091bf57a80cf7b9d02f7b8bb92ec3d1",
+      "source_ref": "src:iemop-news-2026-10-13",
+      "status": "placed",
+      "status_reason": null,
+      "text_basis": "the passage's own text, as its record carries it",
+      "title": "September WESM prices rise slightly as supply constraints persist in Visayas and Mindanao (the reserve-market suspension section)"
+     },
+     {
+      "attributed_to": "PEMC (the library's own listing)",
+      "bears_on": [],
+      "claim_ref": "claim:pemc-mirror-2023-002-rc",
+      "first_availability": {
+       "basis_kind": "capture_logged_at",
+       "basis_ref": "the corpus fetch log, sidecar of 6e3f379262713a8406634fb1f80e217c06f1d6f6d825f6371fb34dd78acc2c69.html",
+       "note": "the fetch time of the bytes read; the listed orders carry their own dates in the listing",
+       "state": "known",
+       "value": "2026-10-15T16:19:55Z"
+      },
+      "issuer": "PEMC",
+      "locator": {
+       "end": 2942,
+       "into": "the page's text with tags removed, entities decoded and whitespace runs collapsed, as the CORP-0 spike reads it",
+       "page": null,
+       "start": 2728
+      },
+      "modality": "actual",
+      "passage_id": "p-pemc-case-entry",
+      "passage_key": "pemc-case-entry",
+      "published": null,
+      "published_basis": "the listing states no publication for the page itself",
+      "quote": "In the Matter of the Application for the Issuance of Rules on the Price Determination Methodology for the Implementation of the Co-Optimized Energy and Reserve Market in the Wholesale Electricity Spot Market (WESM)",
+      "quote_digest": "b7a6827c1edfffeacf65156bce422c9d0606f4b94f8e1166184b2ccef64aaef7",
+      "source_digest": "6e3f379262713a8406634fb1f80e217c06f1d6f6d825f6371fb34dd78acc2c69",
+      "source_ref": "src:pemc-erc-issuances-2026-10-15",
+      "status": "placed",
+      "status_reason": null,
+      "text_basis": "the passage's own text, as its record carries it",
+      "title": "PEMC library, ERC issuances listing (the library's mirror of the ERC issuances; the entry naming ERC Case No. 2023-002 RC)"
+     }
+    ],
+    "clauses": [
+     {
+      "amendments": [
+       {
+        "dated": "2016-10-14",
+        "first_availability": {
+         "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+         "state": "unknown"
+        },
+        "held": false,
+        "kind": "added",
+        "locator": {
+         "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+         "end": 847,
+         "page": 69,
+         "source_id": "src:wesm-rules-2025-08-31",
+         "source_revision": "2025-08-31",
+         "start": 790
+        },
+        "note": "(Added per DOE DC No. 2016-10-0014 dated 14 October 2016)",
+        "note_digest": "458a923519f9cea70622242a034d15d49ca022113b8941b2e9926971aab0fb40",
+        "reached": "3.3.4.3 and 3.3.4.4",
+        "ref": "DOE DC No. 2016-10-0014"
+       }
+      ],
+      "chain": [],
+      "clause_label": "3.3.4.1",
+      "effective": {
+       "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+       "precision": "day",
+       "value": "2025-08-31"
+      },
+      "excluded": [
+       {
+        "amendments": [
+         "DOE DC No. 2016-10-0014"
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "reason": "availability_unknown",
+        "text_shown": true,
+        "version_id": "rv-wesm-rules-2025-08-31-3.3.4.1"
+       }
+      ],
+      "locator": {
+       "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "end": 1171,
+       "into": "the page's extracted text, offsets in Unicode characters, line breaks kept",
+       "page": 68,
+       "source_id": "src:wesm-rules-2025-08-31",
+       "source_revision": "2025-08-31",
+       "start": 945
+      },
+      "source": {
+       "first_availability": {
+        "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+        "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+        "state": "unknown",
+        "upper_bound": "2026-04-01"
+       },
+       "issuer": "PEMC",
+       "sha256": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "source_ref": "src:wesm-rules-2025-08-31",
+       "stated": {
+        "approving_doe_circular": "DC2025-08-0011",
+        "effective": "2025-08-31",
+        "pemc_posting": "2025-09-03"
+       },
+       "title": "Wholesale Electricity Spot Market Rules (WESM Rules)",
+       "version": "as of 2025-08-31"
+      },
+      "status": "not_placed",
+      "status_reason": "availability_unknown",
+      "text": "3.3.4 Reserve Market Arrangements \n3.3.4.1 When reasonably feasible, the Market Operator, in coordination \nwith the System operator, shall establish and administer a spot \nmarket for the purchase of certain reserve categories.",
+      "text_basis": "the newest version this pack holds; the cutoff places none",
+      "text_digest": "95e449fa99771e5eaa7a36d770d108761f8e95bd6376e81f70118a01dfa0d2cd",
+      "title": "Reserve Market Arrangements",
+      "version_id": null,
+      "versions": [
+       {
+        "amendments": [
+         {
+          "dated": "2016-10-14",
+          "first_availability": {
+           "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+           "state": "unknown"
+          },
+          "held": false,
+          "kind": "added",
+          "locator": {
+           "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+           "end": 847,
+           "page": 69,
+           "source_id": "src:wesm-rules-2025-08-31",
+           "source_revision": "2025-08-31",
+           "start": 790
+          },
+          "note": "(Added per DOE DC No. 2016-10-0014 dated 14 October 2016)",
+          "note_digest": "458a923519f9cea70622242a034d15d49ca022113b8941b2e9926971aab0fb40",
+          "reached": "3.3.4.3 and 3.3.4.4",
+          "ref": "DOE DC No. 2016-10-0014"
+         }
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "first_availability": {
+         "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+         "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+         "state": "unknown",
+         "upper_bound": "2026-04-01"
+        },
+        "text": "3.3.4 Reserve Market Arrangements \n3.3.4.1 When reasonably feasible, the Market Operator, in coordination \nwith the System operator, shall establish and administer a spot \nmarket for the purchase of certain reserve categories.",
+        "version_id": "rv-wesm-rules-2025-08-31-3.3.4.1"
+       }
+      ],
+      "why": "establishes the spot market for reserve categories that the ERC suspended"
+     },
+     {
+      "amendments": [
+       {
+        "dated": "2016-10-14",
+        "first_availability": {
+         "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+         "state": "unknown"
+        },
+        "held": false,
+        "kind": "amended",
+        "locator": {
+         "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+         "end": 644,
+         "page": 70,
+         "source_id": "src:wesm-rules-2025-08-31",
+         "source_revision": "2025-08-31",
+         "start": 583
+        },
+        "note": "(As amended by DOE DC No. 2016-10-0014 dated 14 October 2016)",
+        "note_digest": "d4203a12d5cd9661309c70c26f9e46b0fc749032f65805e7dd00ce3eb6b9eddc",
+        "reached": "3.3.7",
+        "ref": "DOE DC No. 2016-10-0014"
+       }
+      ],
+      "chain": [],
+      "clause_label": "3.3.7",
+      "effective": {
+       "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+       "precision": "day",
+       "value": "2025-08-31"
+      },
+      "excluded": [
+       {
+        "amendments": [
+         "DOE DC No. 2016-10-0014"
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "reason": "availability_unknown",
+        "text_shown": true,
+        "version_id": "rv-wesm-rules-2025-08-31-3.3.7"
+       }
+      ],
+      "locator": {
+       "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "end": 644,
+       "into": "the page's extracted text, offsets in Unicode characters, line breaks kept",
+       "page": 70,
+       "source_id": "src:wesm-rules-2025-08-31",
+       "source_revision": "2025-08-31",
+       "start": 486
+      },
+      "source": {
+       "first_availability": {
+        "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+        "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+        "state": "unknown",
+        "upper_bound": "2026-04-01"
+       },
+       "issuer": "PEMC",
+       "sha256": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "source_ref": "src:wesm-rules-2025-08-31",
+       "stated": {
+        "approving_doe_circular": "DC2025-08-0011",
+        "effective": "2025-08-31",
+        "pemc_posting": "2025-09-03"
+       },
+       "title": "Wholesale Electricity Spot Market Rules (WESM Rules)",
+       "version": "as of 2025-08-31"
+      },
+      "status": "not_placed",
+      "status_reason": "availability_unknown",
+      "text": "3.3.7 Approval, Periodic    Review    and    Evaluation    of    Reserve Market  \nArrangements  \n(As amended by DOE DC No. 2016-10-0014 dated 14 October 2016)",
+      "text_basis": "the newest version this pack holds; the cutoff places none",
+      "text_digest": "b2697744883bba26c929a542b681de642f5d47d2bcfc292fa60a561683cc95a2",
+      "title": "Approval, Periodic Review and Evaluation of Reserve Market Arrangements",
+      "version_id": null,
+      "versions": [
+       {
+        "amendments": [
+         {
+          "dated": "2016-10-14",
+          "first_availability": {
+           "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+           "state": "unknown"
+          },
+          "held": false,
+          "kind": "amended",
+          "locator": {
+           "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+           "end": 644,
+           "page": 70,
+           "source_id": "src:wesm-rules-2025-08-31",
+           "source_revision": "2025-08-31",
+           "start": 583
+          },
+          "note": "(As amended by DOE DC No. 2016-10-0014 dated 14 October 2016)",
+          "note_digest": "d4203a12d5cd9661309c70c26f9e46b0fc749032f65805e7dd00ce3eb6b9eddc",
+          "reached": "3.3.7",
+          "ref": "DOE DC No. 2016-10-0014"
+         }
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "first_availability": {
+         "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+         "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+         "state": "unknown",
+         "upper_bound": "2026-04-01"
+        },
+        "text": "3.3.7 Approval, Periodic    Review    and    Evaluation    of    Reserve Market  \nArrangements  \n(As amended by DOE DC No. 2016-10-0014 dated 14 October 2016)",
+        "version_id": "rv-wesm-rules-2025-08-31-3.3.7"
+       }
+      ],
+      "why": "sends changes that affect ancillary-service fees to the ERC for approval"
+     },
+     {
+      "amendments": [],
+      "chain": [],
+      "clause_label": "3.5.7.1",
+      "effective": {
+       "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+       "precision": "day",
+       "value": "2025-08-31"
+      },
+      "excluded": [
+       {
+        "amendments": [],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "reason": "availability_unknown",
+        "text_shown": true,
+        "version_id": "rv-wesm-rules-2025-08-31-3.5.7.1"
+       }
+      ],
+      "locator": {
+       "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "end": 1836,
+       "into": "the page's extracted text, offsets in Unicode characters, line breaks kept",
+       "page": 82,
+       "source_id": "src:wesm-rules-2025-08-31",
+       "source_revision": "2025-08-31",
+       "start": 1665
+      },
+      "source": {
+       "first_availability": {
+        "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+        "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+        "state": "unknown",
+        "upper_bound": "2026-04-01"
+       },
+       "issuer": "PEMC",
+       "sha256": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "source_ref": "src:wesm-rules-2025-08-31",
+       "stated": {
+        "approving_doe_circular": "DC2025-08-0011",
+        "effective": "2025-08-31",
+        "pemc_posting": "2025-09-03"
+       },
+       "title": "Wholesale Electricity Spot Market Rules (WESM Rules)",
+       "version": "as of 2025-08-31"
+      },
+      "status": "not_placed",
+      "status_reason": "availability_unknown",
+      "text": "3.5.7 Generation Company Reserve Offers \n3.5.7.1 This section shall apply only upon commencement of the spot \nmarket for ancillary services established under Clause 3.3.4.",
+      "text_basis": "the newest version this pack holds; the cutoff places none",
+      "text_digest": "c599857b70020b8ca4d25f3c6931e738d468b63799158c5a800f6169079df505",
+      "title": "Generation Company Reserve Offers",
+      "version_id": null,
+      "versions": [
+       {
+        "amendments": [],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "first_availability": {
+         "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+         "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+         "state": "unknown",
+         "upper_bound": "2026-04-01"
+        },
+        "text": "3.5.7 Generation Company Reserve Offers \n3.5.7.1 This section shall apply only upon commencement of the spot \nmarket for ancillary services established under Clause 3.3.4.",
+        "version_id": "rv-wesm-rules-2025-08-31-3.5.7.1"
+       }
+      ],
+      "why": "the reserve offers whose commencement is tied to the market under Clause 3.3.4"
+     },
+     {
+      "amendments": [
+       {
+        "dated": "2022-11-07",
+        "first_availability": {
+         "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+         "state": "unknown"
+        },
+        "held": false,
+        "kind": "added",
+        "locator": {
+         "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+         "end": 1606,
+         "page": 113,
+         "source_id": "src:wesm-rules-2025-08-31",
+         "source_revision": "2025-08-31",
+         "start": 1493
+        },
+        "note": "(Added per DOE DC 2022-11-0032 dated 07 November 2022 and amended by \nDOE DC No. 2024-06-0019 dated 10 June 2024)",
+        "note_digest": "e525dd0d177e26d235d6f24dc3fa876838c9a8bb4716dfbc1639e31b293cb548",
+        "reached": "3.8.7",
+        "ref": "DOE DC 2022-11-0032"
+       },
+       {
+        "dated": "2024-06-10",
+        "first_availability": {
+         "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+         "state": "unknown"
+        },
+        "held": false,
+        "kind": "amended",
+        "locator": {
+         "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+         "end": 1606,
+         "page": 113,
+         "source_id": "src:wesm-rules-2025-08-31",
+         "source_revision": "2025-08-31",
+         "start": 1493
+        },
+        "note": "(Added per DOE DC 2022-11-0032 dated 07 November 2022 and amended by \nDOE DC No. 2024-06-0019 dated 10 June 2024)",
+        "note_digest": "e525dd0d177e26d235d6f24dc3fa876838c9a8bb4716dfbc1639e31b293cb548",
+        "reached": "3.8.7",
+        "ref": "DOE DC No. 2024-06-0019"
+       }
+      ],
+      "chain": [],
+      "clause_label": "3.8.7",
+      "effective": {
+       "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+       "precision": "day",
+       "value": "2025-08-31"
+      },
+      "excluded": [
+       {
+        "amendments": [
+         "DOE DC 2022-11-0032",
+         "DOE DC No. 2024-06-0019"
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "reason": "availability_unknown",
+        "text_shown": true,
+        "version_id": "rv-wesm-rules-2025-08-31-3.8.7"
+       }
+      ],
+      "locator": {
+       "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "end": 1606,
+       "into": "the page's extracted text, offsets in Unicode characters, line breaks kept",
+       "page": 113,
+       "source_id": "src:wesm-rules-2025-08-31",
+       "source_revision": "2025-08-31",
+       "start": 1460
+      },
+      "source": {
+       "first_availability": {
+        "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+        "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+        "state": "unknown",
+        "upper_bound": "2026-04-01"
+       },
+       "issuer": "PEMC",
+       "sha256": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "source_ref": "src:wesm-rules-2025-08-31",
+       "stated": {
+        "approving_doe_circular": "DC2025-08-0011",
+        "effective": "2025-08-31",
+        "pemc_posting": "2025-09-03"
+       },
+       "title": "Wholesale Electricity Spot Market Rules (WESM Rules)",
+       "version": "as of 2025-08-31"
+      },
+      "status": "not_placed",
+      "status_reason": "availability_unknown",
+      "text": "3.8.7 Reserve Market Compliance \n(Added per DOE DC 2022-11-0032 dated 07 November 2022 and amended by \nDOE DC No. 2024-06-0019 dated 10 June 2024)",
+      "text_basis": "the newest version this pack holds; the cutoff places none",
+      "text_digest": "1e0e9e0558ccfa161cb02ba2c5b19bcaf9574faa97a7e21d9c264aaa65114d53",
+      "title": "Reserve Market Compliance",
+      "version_id": null,
+      "versions": [
+       {
+        "amendments": [
+         {
+          "dated": "2022-11-07",
+          "first_availability": {
+           "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+           "state": "unknown"
+          },
+          "held": false,
+          "kind": "added",
+          "locator": {
+           "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+           "end": 1606,
+           "page": 113,
+           "source_id": "src:wesm-rules-2025-08-31",
+           "source_revision": "2025-08-31",
+           "start": 1493
+          },
+          "note": "(Added per DOE DC 2022-11-0032 dated 07 November 2022 and amended by \nDOE DC No. 2024-06-0019 dated 10 June 2024)",
+          "note_digest": "e525dd0d177e26d235d6f24dc3fa876838c9a8bb4716dfbc1639e31b293cb548",
+          "reached": "3.8.7",
+          "ref": "DOE DC 2022-11-0032"
+         },
+         {
+          "dated": "2024-06-10",
+          "first_availability": {
+           "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+           "state": "unknown"
+          },
+          "held": false,
+          "kind": "amended",
+          "locator": {
+           "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+           "end": 1606,
+           "page": 113,
+           "source_id": "src:wesm-rules-2025-08-31",
+           "source_revision": "2025-08-31",
+           "start": 1493
+          },
+          "note": "(Added per DOE DC 2022-11-0032 dated 07 November 2022 and amended by \nDOE DC No. 2024-06-0019 dated 10 June 2024)",
+          "note_digest": "e525dd0d177e26d235d6f24dc3fa876838c9a8bb4716dfbc1639e31b293cb548",
+          "reached": "3.8.7",
+          "ref": "DOE DC No. 2024-06-0019"
+         }
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "first_availability": {
+         "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+         "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+         "state": "unknown",
+         "upper_bound": "2026-04-01"
+        },
+        "text": "3.8.7 Reserve Market Compliance \n(Added per DOE DC 2022-11-0032 dated 07 November 2022 and amended by \nDOE DC No. 2024-06-0019 dated 10 June 2024)",
+        "version_id": "rv-wesm-rules-2025-08-31-3.8.7"
+       }
+      ],
+      "why": "the reserve conformance standards and their enforcement, added and amended later than the baseline"
+     },
+     {
+      "amendments": [
+       {
+        "dated": "2022-11-07",
+        "first_availability": {
+         "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+         "state": "unknown"
+        },
+        "held": false,
+        "kind": "amended",
+        "locator": {
+         "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+         "end": 1764,
+         "page": 129,
+         "source_id": "src:wesm-rules-2025-08-31",
+         "source_revision": "2025-08-31",
+         "start": 1706
+        },
+        "note": "(As amended by DOE DC 2022-11-0032 dated 07 November 2022)",
+        "note_digest": "29ad4ccc8e14039cc012cb309822f7a2ecc6292b7fb72ad39aba98faeaa9c306",
+        "reached": "3.13.8",
+        "ref": "DOE DC 2022-11-0032"
+       }
+      ],
+      "chain": [],
+      "clause_label": "3.13.8",
+      "effective": {
+       "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+       "precision": "day",
+       "value": "2025-08-31"
+      },
+      "excluded": [
+       {
+        "amendments": [
+         "DOE DC 2022-11-0032"
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "reason": "availability_unknown",
+        "text_shown": true,
+        "version_id": "rv-wesm-rules-2025-08-31-3.13.8"
+       }
+      ],
+      "locator": {
+       "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "end": 1764,
+       "into": "the page's extracted text, offsets in Unicode characters, line breaks kept",
+       "page": 129,
+       "source_id": "src:wesm-rules-2025-08-31",
+       "source_revision": "2025-08-31",
+       "start": 1659
+      },
+      "source": {
+       "first_availability": {
+        "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+        "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+        "state": "unknown",
+        "upper_bound": "2026-04-01"
+       },
+       "issuer": "PEMC",
+       "sha256": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "source_ref": "src:wesm-rules-2025-08-31",
+       "stated": {
+        "approving_doe_circular": "DC2025-08-0011",
+        "effective": "2025-08-31",
+        "pemc_posting": "2025-09-03"
+       },
+       "title": "Wholesale Electricity Spot Market Rules (WESM Rules)",
+       "version": "as of 2025-08-31"
+      },
+      "status": "not_placed",
+      "status_reason": "availability_unknown",
+      "text": "3.13.8 Determining the Reserve Trading Amount \n(As amended by DOE DC 2022-11-0032 dated 07 November 2022)",
+      "text_basis": "the newest version this pack holds; the cutoff places none",
+      "text_digest": "7934ea830f16842c7fbf67aeb2286a3c459db99281567b160628295e36df46a3",
+      "title": "Determining the Reserve Trading Amount",
+      "version_id": null,
+      "versions": [
+       {
+        "amendments": [
+         {
+          "dated": "2022-11-07",
+          "first_availability": {
+           "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+           "state": "unknown"
+          },
+          "held": false,
+          "kind": "amended",
+          "locator": {
+           "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+           "end": 1764,
+           "page": 129,
+           "source_id": "src:wesm-rules-2025-08-31",
+           "source_revision": "2025-08-31",
+           "start": 1706
+          },
+          "note": "(As amended by DOE DC 2022-11-0032 dated 07 November 2022)",
+          "note_digest": "29ad4ccc8e14039cc012cb309822f7a2ecc6292b7fb72ad39aba98faeaa9c306",
+          "reached": "3.13.8",
+          "ref": "DOE DC 2022-11-0032"
+         }
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "first_availability": {
+         "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+         "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+         "state": "unknown",
+         "upper_bound": "2026-04-01"
+        },
+        "text": "3.13.8 Determining the Reserve Trading Amount \n(As amended by DOE DC 2022-11-0032 dated 07 November 2022)",
+        "version_id": "rv-wesm-rules-2025-08-31-3.13.8"
+       }
+      ],
+      "why": "the settlement the suspension stops"
+     },
+     {
+      "amendments": [
+       {
+        "dated": "2013-12-16",
+        "first_availability": {
+         "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+         "state": "unknown"
+        },
+        "held": false,
+        "kind": "renumbered",
+        "locator": {
+         "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+         "end": 1535,
+         "page": 195,
+         "source_id": "src:wesm-rules-2025-08-31",
+         "source_revision": "2025-08-31",
+         "start": 1472
+        },
+        "note": "(Renumbered per DOE DC No. 2013-12-0028 dated 16 December 2013)",
+        "note_digest": "3d76a7969ca56d4b7ffbee278a76c08e0f517bdf1925802cefb597963ef8915d",
+        "reached": "6.9.1",
+        "ref": "DOE DC No. 2013-12-0028"
+       }
+      ],
+      "chain": [],
+      "clause_label": "6.9.1.1",
+      "effective": {
+       "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+       "precision": "day",
+       "value": "2025-08-31"
+      },
+      "excluded": [
+       {
+        "amendments": [
+         "DOE DC No. 2013-12-0028"
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "reason": "availability_unknown",
+        "text_shown": true,
+        "version_id": "rv-wesm-rules-2025-08-31-6.9.1.1"
+       }
+      ],
+      "locator": {
+       "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "end": 1914,
+       "into": "the page's extracted text, offsets in Unicode characters, line breaks kept",
+       "page": 195,
+       "source_id": "src:wesm-rules-2025-08-31",
+       "source_revision": "2025-08-31",
+       "start": 1585
+      },
+      "source": {
+       "first_availability": {
+        "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+        "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+        "state": "unknown",
+        "upper_bound": "2026-04-01"
+       },
+       "issuer": "PEMC",
+       "sha256": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "source_ref": "src:wesm-rules-2025-08-31",
+       "stated": {
+        "approving_doe_circular": "DC2025-08-0011",
+        "effective": "2025-08-31",
+        "pemc_posting": "2025-09-03"
+       },
+       "title": "Wholesale Electricity Spot Market Rules (WESM Rules)",
+       "version": "as of 2025-08-31"
+      },
+      "status": "not_placed",
+      "status_reason": "availability_unknown",
+      "text": "6.9.1.1 Pursuant to Section 30 of the Act, the ERC shall suspend the \noperation of the spot market or declare a temporary wholesale \nelectricity spot market failure in cases of:  \n(a) Natural calamities; or \n(b) Following official declaration of a national and \ninternational security emergency by the President of the \nRepublic.",
+      "text_basis": "the newest version this pack holds; the cutoff places none",
+      "text_digest": "7271feb357aec7922ed5f4d14795ebd7b623a3f463e0f0857cf394c54a713325",
+      "title": "Conditions for Suspension of the Market",
+      "version_id": null,
+      "versions": [
+       {
+        "amendments": [
+         {
+          "dated": "2013-12-16",
+          "first_availability": {
+           "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+           "state": "unknown"
+          },
+          "held": false,
+          "kind": "renumbered",
+          "locator": {
+           "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+           "end": 1535,
+           "page": 195,
+           "source_id": "src:wesm-rules-2025-08-31",
+           "source_revision": "2025-08-31",
+           "start": 1472
+          },
+          "note": "(Renumbered per DOE DC No. 2013-12-0028 dated 16 December 2013)",
+          "note_digest": "3d76a7969ca56d4b7ffbee278a76c08e0f517bdf1925802cefb597963ef8915d",
+          "reached": "6.9.1",
+          "ref": "DOE DC No. 2013-12-0028"
+         }
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "first_availability": {
+         "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+         "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+         "state": "unknown",
+         "upper_bound": "2026-04-01"
+        },
+        "text": "6.9.1.1 Pursuant to Section 30 of the Act, the ERC shall suspend the \noperation of the spot market or declare a temporary wholesale \nelectricity spot market failure in cases of:  \n(a) Natural calamities; or \n(b) Following official declaration of a national and \ninternational security emergency by the President of the \nRepublic.",
+        "version_id": "rv-wesm-rules-2025-08-31-6.9.1.1"
+       }
+      ],
+      "why": "the Rules' own suspension provision; whether the reserve-market suspension rests on it is the case's open applicability question"
+     },
+     {
+      "amendments": [
+       {
+        "dated": "2016-10-14",
+        "first_availability": {
+         "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+         "state": "unknown"
+        },
+        "held": false,
+        "kind": "amended",
+        "locator": {
+         "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+         "end": 804,
+         "page": 196,
+         "source_id": "src:wesm-rules-2025-08-31",
+         "source_revision": "2025-08-31",
+         "start": 742
+        },
+        "note": "(As amended by DOE DC \nNo. 2016-10-0014 dated 14 October 2016)",
+        "note_digest": "6bf47943d49eda287be01d3fb6fc25b8991f84869b16ef1e140dab356e474d9c",
+        "reached": "6.9.2.2",
+        "ref": "DOE DC No. 2016-10-0014"
+       }
+      ],
+      "chain": [],
+      "clause_label": "6.9.2.2",
+      "effective": {
+       "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+       "precision": "day",
+       "value": "2025-08-31"
+      },
+      "excluded": [
+       {
+        "amendments": [
+         "DOE DC No. 2016-10-0014"
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "reason": "availability_unknown",
+        "text_shown": true,
+        "version_id": "rv-wesm-rules-2025-08-31-6.9.2.2"
+       }
+      ],
+      "locator": {
+       "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "end": 804,
+       "into": "the page's extracted text, offsets in Unicode characters, line breaks kept",
+       "page": 196,
+       "source_id": "src:wesm-rules-2025-08-31",
+       "source_revision": "2025-08-31",
+       "start": 577
+      },
+      "source": {
+       "first_availability": {
+        "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+        "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+        "state": "unknown",
+        "upper_bound": "2026-04-01"
+       },
+       "issuer": "PEMC",
+       "sha256": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+       "source_ref": "src:wesm-rules-2025-08-31",
+       "stated": {
+        "approving_doe_circular": "DC2025-08-0011",
+        "effective": "2025-08-31",
+        "pemc_posting": "2025-09-03"
+       },
+       "title": "Wholesale Electricity Spot Market Rules (WESM Rules)",
+       "version": "as of 2025-08-31"
+      },
+      "status": "not_placed",
+      "status_reason": "availability_unknown",
+      "text": "6.9.2.2 The spot market  is deemed suspended at the start of the \ndispatch interval in which the ERC advises the Market Operator \nthat the spot market is suspended. (As amended by DOE DC \nNo. 2016-10-0014 dated 14 October 2016)",
+      "text_basis": "the newest version this pack holds; the cutoff places none",
+      "text_digest": "7e3f6e6a55067e35309d86164f02841cf414dfd9d3fadc2a5c633fa9826f71c0",
+      "title": "Declaration and Lifting of Market Suspension",
+      "version_id": null,
+      "versions": [
+       {
+        "amendments": [
+         {
+          "dated": "2016-10-14",
+          "first_availability": {
+           "reason": "the circular itself is not held; the compendium holds the rules, not the DOE circulars they name",
+           "state": "unknown"
+          },
+          "held": false,
+          "kind": "amended",
+          "locator": {
+           "digest": "7141fde3e249f33e6c9e668c907c1be8eb38f288f34de2f4821dd8b8959fb4db",
+           "end": 804,
+           "page": 196,
+           "source_id": "src:wesm-rules-2025-08-31",
+           "source_revision": "2025-08-31",
+           "start": 742
+          },
+          "note": "(As amended by DOE DC \nNo. 2016-10-0014 dated 14 October 2016)",
+          "note_digest": "6bf47943d49eda287be01d3fb6fc25b8991f84869b16ef1e140dab356e474d9c",
+          "reached": "6.9.2.2",
+          "ref": "DOE DC No. 2016-10-0014"
+         }
+        ],
+        "effective": {
+         "note": "the copy's own issue date, as the register states the document's effective date; the clause's own earlier amendment history is not held",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "first_availability": {
+         "basis_rule": "unknown with a reason; upper bound 2026-04-01, the compendium date given by the owner. The cover's approval, publication, PEMC posting and effective dates are stated dates of the issuer, not evidence of when this workflow could first access the file.",
+         "reason": "the register states an upper bound, not evidence of when this workflow could first access the copy, so the strict cutoff rule cannot place it",
+         "state": "unknown",
+         "upper_bound": "2026-04-01"
+        },
+        "text": "6.9.2.2 The spot market  is deemed suspended at the start of the \ndispatch interval in which the ERC advises the Market Operator \nthat the spot market is suspended. (As amended by DOE DC \nNo. 2016-10-0014 dated 14 October 2016)",
+        "version_id": "rv-wesm-rules-2025-08-31-6.9.2.2"
+       }
+      ],
+      "why": "when a suspension begins and how it is lifted"
+     }
+    ],
+    "cutoff": {
+     "label": "2026-10-16T01:00:00+08:00 (second)",
+     "precision": "second",
+     "until": "2026-10-15T17:00:00.000001Z",
+     "value": "2026-10-16T01:00:00+08:00"
+    },
+    "dependents": {
+     "budget": 8,
+     "note": "No accepted record depends on the market at this cutoff. The store walks accepted dependsOn and usesAssumption edges only, and a still-proposed mapping never counts.",
+     "rows": [],
+     "truncated": false
+    },
+    "id": "day_after",
+    "label": "One day after the action",
+    "why": "just after the corpus fetches of 2026-10-15T16:19:55Z and 2026-10-15T16:20:12Z, the first cutoff that permits every fetch record this case cites"
+   }
+  ]
+ },
+ "source_label": "IEMOP",
+ "timeline": [
+  {
+   "kind": "notice",
+   "src": "claim:reserve-market-suspension",
+   "t": "2026-10-13",
+   "t_basis": "the issuer's own stated publication",
+   "text": "IEMOP · Following recent developments in the reserve market, and pursuant to ERC Case No. 2023-002 RC, promulgated on 12 October 2026, the commercial dispatch and settl"
+  },
+  {
+   "kind": "notice",
+   "src": "claim:erc-promulgation",
+   "t": "2026-10-13",
+   "t_basis": "the issuer's own stated publication",
+   "text": "IEMOP · Following recent developments in the reserve market, and pursuant to ERC Case No. 2023-002 RC, promulgated on 12 October 2026, the commercial dispatch and settl"
+  },
+  {
+   "kind": "notice",
+   "src": "claim:aspa-fallback",
+   "t": "2026-10-13",
+   "t_basis": "the issuer's own stated publication",
+   "text": "IEMOP · During the suspension, reserve requirements will continue to be sourced through existing Ancillary Service Procurement Agreements (ASPAs) and other designated a"
+  },
+  {
+   "kind": "notice",
+   "src": "claim:pemc-mirror-2023-002-rc",
+   "t": "2026-10-15",
+   "t_basis": "this corpus's first read of the page",
+   "text": "PEMC · In the Matter of the Application for the Issuance of Rules on the Price Determination Methodology for the Implementation of the Co-Optimized Energy and Reserve "
+  }
+ ],
+ "title": "The ERC suspends the reserve market from 14 October 2026"
+}

@@ -1,0 +1,141 @@
+{
+  "expected": {
+    "covariate_basis": {
+      "accepted_levels": {
+        "accepted_mw": "0",
+        "prior_mw": "100"
+      },
+      "context_level_mw": "0",
+      "covariate_past_basis": "constructed: level held constant; not observed, not an accepted assumption"
+    },
+    "labels": {
+      "caveat": "preview feature; default covariate interfaces can attenuate or ignore covariate effects; not a measured real-world effect; never an event probability",
+      "consequences": "computed",
+      "content_kind": "simulation output",
+      "execution_mode": "synthetic fixture",
+      "feature_status": "Preview",
+      "interpretation": "directional"
+    },
+    "path": {
+      "accepted_mw": "0",
+      "context_window": 64,
+      "covariate_past_basis": "constructed: level held constant; not observed, not an accepted assumption",
+      "delta_refs": {
+        "decision_content_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "input_field": "assumed_available_capacity",
+        "mapping_content_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "new_assumption_content_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "new_value": "0",
+        "old_assumption_content_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "old_value": "100",
+        "proposal_content_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "quantity_kind": "assumed_available_capacity",
+        "unit": "MW",
+        "valid_period": {
+          "end": "2026-10-05T00:00:00",
+          "start": "2026-10-03T00:00:00"
+        }
+      },
+      "h0": "2026-10-02T23:00:00",
+      "horizon_clipped": true,
+      "horizon_effective": 48,
+      "horizon_requested": 72,
+      "model": "TimesFM 3.0",
+      "prior_mw": "100",
+      "series_id": "CVIS",
+      "series_relation": "synthetic-project.whatif.price_hourly_fixture",
+      "timezone_convention": "assumed Asia/Manila, unverified (scripts/data/sql/02_intervals.sql:2-3)",
+      "window": {
+        "end": "2026-10-05T00:00:00",
+        "start": "2026-10-03T00:00:00"
+      },
+      "window_last_step": "2026-10-04T23:00:00"
+    },
+    "path_digest": {
+      "A": "472a510162d3bae6cc85506f4c81b216da0840ca4396fda8562a5864127e09ea",
+      "B": "c4dfb49c3c82f06eb92533b9265924927f399f95d5c632c65a1d4813250ab630"
+    },
+    "statement_digest": {
+      "A": "c0cbb05c45a7aa9220657c645c001b7753da4298de5a9e30d463dcf3809666ca",
+      "B": "73ab9eebd583e84842f7977fcd27bbeee6636c1a599981c819bb12ec77d427c6"
+    },
+    "statements": {
+      "A": "WITH context_rows AS (\n  SELECT 'CVIS' AS series_id, hour_start, price_php_mwh,\n         n_resources_out_hour, CAST(0 AS FLOAT64) AS assumed_available_capacity_mw\n  FROM `synthetic-project.whatif.price_hourly_fixture`\n  WHERE hour_start > TIMESTAMP_SUB(TIMESTAMP '2026-10-02T23:00:00', INTERVAL 64 HOUR)\n    AND hour_start <= TIMESTAMP '2026-10-02T23:00:00'\n), future_rows AS (\n  SELECT 'CVIS' AS series_id, hour_start, CAST(NULL AS FLOAT64) AS price_php_mwh,\n         CAST(NULL AS INT64) AS n_resources_out_hour,\n         CAST(100 AS FLOAT64) AS assumed_available_capacity_mw\n  FROM UNNEST(GENERATE_TIMESTAMP_ARRAY(TIMESTAMP_ADD(TIMESTAMP '2026-10-02T23:00:00', INTERVAL 1 HOUR),\n        TIMESTAMP_ADD(TIMESTAMP '2026-10-02T23:00:00', INTERVAL 48 HOUR), INTERVAL 1 HOUR)) AS hour_start\n), model_input AS (\n  SELECT * FROM context_rows UNION ALL SELECT * FROM future_rows\n)\nSELECT *\nFROM AI.FORECAST((SELECT * FROM model_input),\n  target_cols => ['price_php_mwh'], timestamp_col => 'hour_start', id_cols => ['series_id'],\n  model => 'TimesFM 3.0', horizon => 48, context_window => 64, confidence_level => 0.95,\n  past_covariate_cols => ['n_resources_out_hour'],\n  future_covariate_cols => ['assumed_available_capacity_mw']);\n",
+      "B": "WITH context_rows AS (\n  SELECT 'CVIS' AS series_id, hour_start, price_php_mwh,\n         n_resources_out_hour, CAST(0 AS FLOAT64) AS assumed_available_capacity_mw\n  FROM `synthetic-project.whatif.price_hourly_fixture`\n  WHERE hour_start > TIMESTAMP_SUB(TIMESTAMP '2026-10-02T23:00:00', INTERVAL 64 HOUR)\n    AND hour_start <= TIMESTAMP '2026-10-02T23:00:00'\n), future_rows AS (\n  SELECT 'CVIS' AS series_id, hour_start, CAST(NULL AS FLOAT64) AS price_php_mwh,\n         CAST(NULL AS INT64) AS n_resources_out_hour,\n         CAST(0 AS FLOAT64) AS assumed_available_capacity_mw\n  FROM UNNEST(GENERATE_TIMESTAMP_ARRAY(TIMESTAMP_ADD(TIMESTAMP '2026-10-02T23:00:00', INTERVAL 1 HOUR),\n        TIMESTAMP_ADD(TIMESTAMP '2026-10-02T23:00:00', INTERVAL 48 HOUR), INTERVAL 1 HOUR)) AS hour_start\n), model_input AS (\n  SELECT * FROM context_rows UNION ALL SELECT * FROM future_rows\n)\nSELECT *\nFROM AI.FORECAST((SELECT * FROM model_input),\n  target_cols => ['price_php_mwh'], timestamp_col => 'hour_start', id_cols => ['series_id'],\n  model => 'TimesFM 3.0', horizon => 48, context_window => 64, confidence_level => 0.95,\n  past_covariate_cols => ['n_resources_out_hour'],\n  future_covariate_cols => ['assumed_available_capacity_mw']);\n"
+    }
+  },
+  "inputs": {
+    "anchor": "2026-10-02T23:00:00",
+    "context_window": 64,
+    "horizon": 72,
+    "proposal": {
+      "case_id": "case",
+      "content_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "payload": {
+        "comparison": "pending_outputs",
+        "consequences": "uncomputed",
+        "decision_ref": {
+          "content_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "record_id": "reviewdecision:1",
+          "record_kind": "ReviewDecision",
+          "revision_id": "r1"
+        },
+        "delta": {
+          "cardinality": "one_to_one",
+          "entity": {
+            "entity_id": "unit-1",
+            "entity_type": "GeneratingUnit"
+          },
+          "input_field": "assumed_available_capacity",
+          "new_value": {
+            "quantity_kind": "assumed_available_capacity",
+            "unit": "MW",
+            "value": "0"
+          },
+          "old_value": {
+            "quantity_kind": "assumed_available_capacity",
+            "unit": "MW",
+            "value": "100"
+          },
+          "representation_id": "rep-1",
+          "valid_period": {
+            "end": "2026-10-05",
+            "start": "2026-10-03"
+          }
+        },
+        "execution": "proposal_only",
+        "mapping_ref": {
+          "content_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "record_id": "mappingrevision:1",
+          "record_kind": "MappingRevision",
+          "revision_id": "r1"
+        },
+        "new_assumption_ref": {
+          "content_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "record_id": "assumptionrevision:1",
+          "record_kind": "AssumptionRevision",
+          "revision_id": "r1"
+        },
+        "old_assumption_ref": {
+          "content_digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "record_id": "assumptionrevision:1",
+          "record_kind": "AssumptionRevision",
+          "revision_id": "r1"
+        },
+        "synthetic": true
+      },
+      "record_id": "scenario:1",
+      "record_kind": "ScenarioProposal",
+      "recorded_at": "2026-10-11T00:00:00Z",
+      "revision_id": "r1",
+      "schema_version": "h0.v1",
+      "tenant_id": "tenant",
+      "time_metadata": {}
+    },
+    "series_id": "CVIS",
+    "series_relation": "synthetic-project.whatif.price_hourly_fixture"
+  },
+  "name": "what-if golden statements",
+  "note": "Normative rendering of the two AI.FORECAST statements for the boundary example of docs/work/whatif/intent.md (valid_period 2026-10-03..2026-10-05, H0 2026-10-02T23:00:00, requested N 72 clipped to N_eff 48, K 64). The series id, relation and covariate levels are synthetic placeholders for rendering only; no registered case value and no engine run is recorded here.",
+  "version": 1
+}

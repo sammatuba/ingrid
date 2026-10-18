@@ -1,0 +1,743 @@
+{
+ "advisory": {
+  "date_only": true,
+  "first_availability": {
+   "basis_kind": "capture_logged_at",
+   "basis_ref": "the fixture's own fetch log (invented)",
+   "note": "the time the fixture says this workflow first read the order; invented with the fixture",
+   "state": "known",
+   "value": "2026-10-15T16:19:55Z"
+  },
+  "id": "claim:fixture-suspension",
+  "published_basis": "the fixture copy's own stated date",
+  "t": "2026-10-12",
+  "text": "The fixture regulator has stopped reserve trading under the fixture rules from trading interval 0005H on 14 October 2026, pending a review. (Invented passage: this fixture's own words, not a real document's.)"
+ },
+ "assumption": {
+  "kv": [
+   [
+    "State",
+    "prepared"
+   ],
+   [
+    "Case",
+    "fixture-rules-in-force"
+   ],
+   [
+    "Prepared",
+    "the fixture prepares it and no analyst has accepted it"
+   ]
+  ],
+  "proposition": "Reserve is procured through the fixture's spot market for reserve.",
+  "unit": "MW",
+  "value": null
+ },
+ "decision": {
+  "mode": "read_only",
+  "note": "This event's decisions are prepared in the case pack and were not recorded through the judge routes; the form is off so nothing is filed against another case."
+ },
+ "event_at": "2026-10-14T00:05",
+ "figures": [],
+ "fixture_note": "built by scripts/grid/build_rules.py from tests/fixtures/grid/event/rules-in-force/evidence-manifest.json and the corpus store; every record here is a labelled synthetic fixture record, invented to demonstrate the path the real case cannot yet show",
+ "grid": "",
+ "grid_kind": "market",
+ "grid_name": "WESM",
+ "id": "fixture-rules-in-force",
+ "judgment": null,
+ "limits": [
+  "This page is a fixture: every record behind it is invented for the test, and no line here is a fact about the WESM reserve market or the real ERC case.",
+  "The fixture exists because the real case's copies carry no evidence of access, so no cutoff places a clause there. The fixture keeps that shape and invents the evidence, so the whole path is shown once, end to end.",
+  "The dates, fingerprints, offsets and fetch times are invented with it; nothing was fetched, read from a document, or produced by a model.",
+  "The dependency walk returns one accepted edge because the fixture accepts it; the real case's own mapping is still proposed, and the page says so there."
+ ],
+ "market": {
+  "imp": [],
+  "lmp": [],
+  "marks": [],
+  "short": [],
+  "t": []
+ },
+ "rules": {
+  "governs": {
+   "assumption": {
+    "prepared_note": "the fixture prepares it and no analyst has accepted it",
+    "proposition": "Reserve is procured through the fixture's spot market for reserve.",
+    "ref": "assumption:fixture-reserve-procurement",
+    "state": "prepared"
+   },
+   "dependency": {
+    "availability_basis": {
+     "basis_kind": "attested",
+     "basis_ref": "the fixture's own record, evidence-manifest.json",
+     "note": "the fixture's mapping, invented with the fixture"
+    },
+    "availability_value": "2026-01-12T09:00:00Z",
+    "from_ref": "assumption:fixture-reserve-procurement",
+    "notes": "the fixture accepts this edge, so the store's own walk returns it; the real case's mapping is still proposed",
+    "relation_id": "rel-fixture-assumption-depends-on-market",
+    "review_state": "accepted",
+    "to_ref": "market-product:fixture-reserve-market"
+   },
+   "series": {
+    "definition": "the dispatchable reserve the fixture operator requires, and the shortfall against it, MW",
+    "definition_ref": "src/grid/grid.js",
+    "open": "nothing is open about an invented series",
+    "series_ref": "series:fixture-five-minute:dr_short_mw",
+    "source": "the fixture's own series record (invented); no bytes"
+   }
+  },
+  "note": "The corpus store's own answers at each cutoff: a clause version is in force when its first availability and its effective period have both ended by the cutoff, and a passage is available when its first availability has ended by it. Availability is not force. Anything else is named with its reason, and a later amendment or announcement never appears on an earlier day.",
+  "states": [
+   {
+    "announcements": [
+     {
+      "attributed_to": "Fixture Regulator",
+      "bears_on": [
+       "4.2.1"
+      ],
+      "claim_ref": "claim:fixture-suspension",
+      "first_availability": {
+       "basis_kind": "capture_logged_at",
+       "basis_ref": "the fixture's own fetch log (invented)",
+       "note": "the time the fixture says this workflow first read the order; invented with the fixture",
+       "state": "known",
+       "value": "2026-10-15T16:19:55Z"
+      },
+      "issuer": "Fixture Regulator",
+      "locator": {
+       "end": 808,
+       "into": "the fixture order's extracted text",
+       "page": 1,
+       "start": 600
+      },
+      "modality": "actual",
+      "passage_id": "p-fixture-suspension",
+      "passage_key": "suspension",
+      "published": "2026-10-12",
+      "published_basis": "the fixture copy's own stated date",
+      "quote": null,
+      "quote_digest": "dcf462a726fa55a06d56ca521333af0999d467a4a0391e43deb198ef41bdc6c0",
+      "source_digest": "5928ecfce15786fb714eb3d8f9945bd20ceb69545d19db284dc6bce9659a74f7",
+      "source_ref": "src:fixture-order-2026-10-12",
+      "status": "not_placed",
+      "status_reason": "after_cutoff",
+      "text_basis": "this cutoff does not place the passage, so its text is withheld; the record is named",
+      "title": "Synthetic order stopping reserve trading (fixture copy)"
+     },
+     {
+      "attributed_to": "Fixture Regulator",
+      "bears_on": [
+       "4.2.1"
+      ],
+      "claim_ref": "claim:fixture-commencement",
+      "first_availability": {
+       "basis_kind": "capture_logged_at",
+       "basis_ref": "the fixture's own fetch log (invented)",
+       "note": "the time the fixture says this workflow first read the copy; invented with the fixture",
+       "state": "known",
+       "value": "2026-01-12T09:00:00Z"
+      },
+      "issuer": "Fixture Regulator",
+      "locator": {
+       "end": 1039,
+       "into": "the fixture copy's extracted text",
+       "page": 12,
+       "start": 900
+      },
+      "modality": "actual",
+      "passage_id": "p-fixture-commencement",
+      "passage_key": "commencement",
+      "published": "2025-09-03",
+      "published_basis": "the fixture copy's own stated posting date",
+      "quote": "Reserve trading under the fixture rules commenced on 26 December 2025. (Invented passage: this fixture's own words, not a real document's.)",
+      "quote_digest": "ec6d8b4ebd774ff4f61c88aff33b6bbb923cf57a197793f681073592b966d084",
+      "source_digest": "71621d1cd2671e2628440b28a11fd146e1b38a950def343801ee6bb730856f8a",
+      "source_ref": "src:fixture-rules-2025-08-31",
+      "status": "placed",
+      "status_reason": null,
+      "text_basis": "the passage's own text, as its record carries it",
+      "title": "Synthetic reserve market rules, as of 31 August 2025 (fixture copy)"
+     }
+    ],
+    "clauses": [
+     {
+      "amendments": [
+       {
+        "dated": "2016-10-14",
+        "first_availability": {
+         "reason": "the fixture holds no rules copy carrying this amendment; the note is read from the order copy's own text",
+         "state": "unknown"
+        },
+        "held": false,
+        "kind": "added",
+        "locator": {
+         "end": 603,
+         "page": 12,
+         "start": 500
+        },
+        "note": "(This clause is the fixture's baseline: it states the reserve trading the fixture order later stopped.)",
+        "note_digest": "ba1cff0b3fea6e484157d77f6cc082e146fa50bfaf7c3b32e8d18ec06585ccc1",
+        "reached": "4.2.1",
+        "ref": "Fixture DC No. 2016-10-0014"
+       }
+      ],
+      "chain": [
+       "rv-fixture-4.2.1-2025-08-31"
+      ],
+      "clause_label": "4.2.1",
+      "effective": {
+       "note": "the fixture copy's own issue date",
+       "precision": "day",
+       "value": "2025-08-31"
+      },
+      "excluded": [
+       {
+        "amendments": [
+         "Fixture Order No. 2026-002"
+        ],
+        "effective": {
+         "note": "the date the fixture order states the stop takes effect",
+         "precision": "day",
+         "value": "2026-10-14"
+        },
+        "reason": "after_cutoff",
+        "text_shown": false,
+        "version_id": "rv-fixture-4.2.1-2026-10-14"
+       }
+      ],
+      "locator": {
+       "digest": "71621d1cd2671e2628440b28a11fd146e1b38a950def343801ee6bb730856f8a",
+       "end": 498,
+       "into": "the fixture copy's extracted text, offsets in Unicode characters (invented with the fixture)",
+       "page": 12,
+       "source_id": "src:fixture-rules-2025-08-31",
+       "source_revision": "2025-08-31",
+       "start": 400
+      },
+      "source": {
+       "first_availability": {
+        "basis_kind": "capture_logged_at",
+        "basis_ref": "the fixture's own fetch log (invented)",
+        "note": "the time the fixture says this workflow first read the copy; invented with the fixture",
+        "state": "known",
+        "value": "2026-01-12T09:00:00Z"
+       },
+       "issuer": "Fixture Regulator",
+       "sha256": "71621d1cd2671e2628440b28a11fd146e1b38a950def343801ee6bb730856f8a",
+       "source_ref": "src:fixture-rules-2025-08-31",
+       "stated": {
+        "approving_circular": "Fixture DC No. 2025-08-0011",
+        "effective": "2025-08-31"
+       },
+       "title": "Synthetic reserve market rules, as of 31 August 2025 (fixture copy)",
+       "version": "as of 2025-08-31"
+      },
+      "status": "in_force",
+      "status_reason": null,
+      "text": "4.2.1 Reserve trading. The market operator shall operate a spot market for the trading of reserve.",
+      "text_basis": "the version the store places at this cutoff",
+      "text_digest": "71b4034366f5c6bb6e8ba1efe3780858aea51869e034f5792cf349b995365d71",
+      "title": "Reserve trading",
+      "version_id": "rv-fixture-4.2.1-2025-08-31",
+      "versions": [
+       {
+        "amendments": [
+         {
+          "dated": "2016-10-14",
+          "first_availability": {
+           "reason": "the fixture holds no rules copy carrying this amendment; the note is read from the order copy's own text",
+           "state": "unknown"
+          },
+          "held": false,
+          "kind": "added",
+          "locator": {
+           "end": 603,
+           "page": 12,
+           "start": 500
+          },
+          "note": "(This clause is the fixture's baseline: it states the reserve trading the fixture order later stopped.)",
+          "note_digest": "ba1cff0b3fea6e484157d77f6cc082e146fa50bfaf7c3b32e8d18ec06585ccc1",
+          "reached": "4.2.1",
+          "ref": "Fixture DC No. 2016-10-0014"
+         }
+        ],
+        "effective": {
+         "note": "the fixture copy's own issue date",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "first_availability": {
+         "basis_kind": "capture_logged_at",
+         "basis_ref": "the fixture's own fetch log (invented)",
+         "note": "the time the fixture says this workflow first read the copy; invented with the fixture",
+         "state": "known",
+         "value": "2026-01-12T09:00:00Z"
+        },
+        "text": "4.2.1 Reserve trading. The market operator shall operate a spot market for the trading of reserve.",
+        "version_id": "rv-fixture-4.2.1-2025-08-31"
+       },
+       {
+        "amendments": [
+         {
+          "dated": "2026-10-12",
+          "first_availability": {
+           "basis": {
+            "basis_kind": "capture_logged_at",
+            "basis_ref": "the fixture's own fetch log (invented)"
+           },
+           "state": "known",
+           "value": "2026-10-15T16:19:55Z"
+          },
+          "held": true,
+          "kind": "amended",
+          "locator": {
+           "end": 314,
+           "page": 3,
+           "start": 250
+          },
+          "note": "Amended by the fixture order No. 2026-002 dated 12 October 2026.",
+          "note_digest": "249f5a7dac0414e3d3c8b0d21348329239ca3b343f3db94b9c6a10cfc049190c",
+          "reached": "4.2.1",
+          "ref": "Fixture Order No. 2026-002"
+         }
+        ],
+        "effective": {
+         "note": "the date the fixture order states the stop takes effect",
+         "precision": "day",
+         "value": "2026-10-14"
+        },
+        "first_availability": {
+         "basis_kind": "capture_logged_at",
+         "basis_ref": "the fixture's own fetch log (invented)",
+         "note": "the time the fixture says this workflow first read the order; invented with the fixture",
+         "state": "known",
+         "value": "2026-10-15T16:19:55Z"
+        },
+        "text": null,
+        "version_id": "rv-fixture-4.2.1-2026-10-14"
+       }
+      ],
+      "why": "the clause the fixture's action stops"
+     },
+     {
+      "amendments": [],
+      "chain": [
+       "rv-fixture-4.2.2-2025-08-31"
+      ],
+      "clause_label": "4.2.2",
+      "effective": {
+       "note": "the fixture copy's own issue date",
+       "precision": "day",
+       "value": "2025-08-31"
+      },
+      "excluded": [],
+      "locator": {
+       "digest": "71621d1cd2671e2628440b28a11fd146e1b38a950def343801ee6bb730856f8a",
+       "end": 174,
+       "into": "the fixture copy's extracted text, offsets in Unicode characters (invented with the fixture)",
+       "page": 13,
+       "source_id": "src:fixture-rules-2025-08-31",
+       "source_revision": "2025-08-31",
+       "start": 100
+      },
+      "source": {
+       "first_availability": {
+        "basis_kind": "capture_logged_at",
+        "basis_ref": "the fixture's own fetch log (invented)",
+        "note": "the time the fixture says this workflow first read the copy; invented with the fixture",
+        "state": "known",
+        "value": "2026-01-12T09:00:00Z"
+       },
+       "issuer": "Fixture Regulator",
+       "sha256": "71621d1cd2671e2628440b28a11fd146e1b38a950def343801ee6bb730856f8a",
+       "source_ref": "src:fixture-rules-2025-08-31",
+       "stated": {
+        "approving_circular": "Fixture DC No. 2025-08-0011",
+        "effective": "2025-08-31"
+       },
+       "title": "Synthetic reserve market rules, as of 31 August 2025 (fixture copy)",
+       "version": "as of 2025-08-31"
+      },
+      "status": "in_force",
+      "status_reason": null,
+      "text": "4.2.2 Reports. The market operator shall report reserve trading weekly.",
+      "text_basis": "the version the store places at this cutoff",
+      "text_digest": "16423bb8cf6abbf3dc4cd40c34b7649db585b1c5bb37bfc49d2d3f191be7913d",
+      "title": "Reserve market reports",
+      "version_id": "rv-fixture-4.2.2-2025-08-31",
+      "versions": [
+       {
+        "amendments": [],
+        "effective": {
+         "note": "the fixture copy's own issue date",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "first_availability": {
+         "basis_kind": "capture_logged_at",
+         "basis_ref": "the fixture's own fetch log (invented)",
+         "note": "the time the fixture says this workflow first read the copy; invented with the fixture",
+         "state": "known",
+         "value": "2026-01-12T09:00:00Z"
+        },
+        "text": "4.2.2 Reports. The market operator shall report reserve trading weekly.",
+        "version_id": "rv-fixture-4.2.2-2025-08-31"
+       }
+      ],
+      "why": "a clause with no amendment, so the block shows both shapes"
+     }
+    ],
+    "cutoff": {
+     "label": "2026-10-13T23:59:00+08:00 (second)",
+     "precision": "second",
+     "until": "2026-10-13T15:59:00.000001Z",
+     "value": "2026-10-13T23:59:00+08:00"
+    },
+    "dependents": {
+     "budget": 8,
+     "note": "No accepted record depends on the market at this cutoff. The store walks accepted dependsOn and usesAssumption edges only, and a still-proposed mapping never counts.",
+     "rows": [
+      {
+       "depth": 1,
+       "ref": "assumption:fixture-reserve-procurement",
+       "ref_type": "AssumptionRevision",
+       "relation_id": "rel-fixture-assumption-depends-on-market"
+      }
+     ],
+     "truncated": false
+    },
+    "id": "day_before",
+    "label": "One day before the action",
+    "why": "the last minute of 13 October 2026 in Manila, before the stop takes effect at trading interval 0005H on 14 October"
+   },
+   {
+    "announcements": [
+     {
+      "attributed_to": "Fixture Regulator",
+      "bears_on": [
+       "4.2.1"
+      ],
+      "claim_ref": "claim:fixture-suspension",
+      "first_availability": {
+       "basis_kind": "capture_logged_at",
+       "basis_ref": "the fixture's own fetch log (invented)",
+       "note": "the time the fixture says this workflow first read the order; invented with the fixture",
+       "state": "known",
+       "value": "2026-10-15T16:19:55Z"
+      },
+      "issuer": "Fixture Regulator",
+      "locator": {
+       "end": 808,
+       "into": "the fixture order's extracted text",
+       "page": 1,
+       "start": 600
+      },
+      "modality": "actual",
+      "passage_id": "p-fixture-suspension",
+      "passage_key": "suspension",
+      "published": "2026-10-12",
+      "published_basis": "the fixture copy's own stated date",
+      "quote": "The fixture regulator has stopped reserve trading under the fixture rules from trading interval 0005H on 14 October 2026, pending a review. (Invented passage: this fixture's own words, not a real document's.)",
+      "quote_digest": "dcf462a726fa55a06d56ca521333af0999d467a4a0391e43deb198ef41bdc6c0",
+      "source_digest": "5928ecfce15786fb714eb3d8f9945bd20ceb69545d19db284dc6bce9659a74f7",
+      "source_ref": "src:fixture-order-2026-10-12",
+      "status": "placed",
+      "status_reason": null,
+      "text_basis": "the passage's own text, as its record carries it",
+      "title": "Synthetic order stopping reserve trading (fixture copy)"
+     },
+     {
+      "attributed_to": "Fixture Regulator",
+      "bears_on": [
+       "4.2.1"
+      ],
+      "claim_ref": "claim:fixture-commencement",
+      "first_availability": {
+       "basis_kind": "capture_logged_at",
+       "basis_ref": "the fixture's own fetch log (invented)",
+       "note": "the time the fixture says this workflow first read the copy; invented with the fixture",
+       "state": "known",
+       "value": "2026-01-12T09:00:00Z"
+      },
+      "issuer": "Fixture Regulator",
+      "locator": {
+       "end": 1039,
+       "into": "the fixture copy's extracted text",
+       "page": 12,
+       "start": 900
+      },
+      "modality": "actual",
+      "passage_id": "p-fixture-commencement",
+      "passage_key": "commencement",
+      "published": "2025-09-03",
+      "published_basis": "the fixture copy's own stated posting date",
+      "quote": "Reserve trading under the fixture rules commenced on 26 December 2025. (Invented passage: this fixture's own words, not a real document's.)",
+      "quote_digest": "ec6d8b4ebd774ff4f61c88aff33b6bbb923cf57a197793f681073592b966d084",
+      "source_digest": "71621d1cd2671e2628440b28a11fd146e1b38a950def343801ee6bb730856f8a",
+      "source_ref": "src:fixture-rules-2025-08-31",
+      "status": "placed",
+      "status_reason": null,
+      "text_basis": "the passage's own text, as its record carries it",
+      "title": "Synthetic reserve market rules, as of 31 August 2025 (fixture copy)"
+     }
+    ],
+    "clauses": [
+     {
+      "amendments": [
+       {
+        "dated": "2026-10-12",
+        "first_availability": {
+         "basis": {
+          "basis_kind": "capture_logged_at",
+          "basis_ref": "the fixture's own fetch log (invented)"
+         },
+         "state": "known",
+         "value": "2026-10-15T16:19:55Z"
+        },
+        "held": true,
+        "kind": "amended",
+        "locator": {
+         "end": 314,
+         "page": 3,
+         "start": 250
+        },
+        "note": "Amended by the fixture order No. 2026-002 dated 12 October 2026.",
+        "note_digest": "249f5a7dac0414e3d3c8b0d21348329239ca3b343f3db94b9c6a10cfc049190c",
+        "reached": "4.2.1",
+        "ref": "Fixture Order No. 2026-002"
+       }
+      ],
+      "chain": [
+       "rv-fixture-4.2.1-2025-08-31",
+       "rv-fixture-4.2.1-2026-10-14"
+      ],
+      "clause_label": "4.2.1",
+      "effective": {
+       "note": "the date the fixture order states the stop takes effect",
+       "precision": "day",
+       "value": "2026-10-14"
+      },
+      "excluded": [],
+      "locator": {
+       "digest": "5928ecfce15786fb714eb3d8f9945bd20ceb69545d19db284dc6bce9659a74f7",
+       "end": 419,
+       "into": "the fixture order's extracted text, offsets in Unicode characters (invented with the fixture)",
+       "page": 3,
+       "source_id": "src:fixture-order-2026-10-12",
+       "source_revision": "2026-10-12",
+       "start": 200
+      },
+      "source": {
+       "first_availability": {
+        "basis_kind": "capture_logged_at",
+        "basis_ref": "the fixture's own fetch log (invented)",
+        "note": "the time the fixture says this workflow first read the order; invented with the fixture",
+        "state": "known",
+        "value": "2026-10-15T16:19:55Z"
+       },
+       "issuer": "Fixture Regulator",
+       "sha256": "5928ecfce15786fb714eb3d8f9945bd20ceb69545d19db284dc6bce9659a74f7",
+       "source_ref": "src:fixture-order-2026-10-12",
+       "stated": {},
+       "title": "Synthetic order stopping reserve trading (fixture copy)",
+       "version": "2026-10-12"
+      },
+      "status": "in_force",
+      "status_reason": null,
+      "text": "4.2.1 Reserve trading. The market operator shall operate a spot market for the trading of reserve, except while the regulator has stopped reserve trading. Amended by the fixture order No. 2026-002 dated 12 October 2026.",
+      "text_basis": "the version the store places at this cutoff",
+      "text_digest": "3d608c02e075862797d4895a78ce4dcc6e6b8fd307be2e3bc05bcfd4df3d636a",
+      "title": "Reserve trading",
+      "version_id": "rv-fixture-4.2.1-2026-10-14",
+      "versions": [
+       {
+        "amendments": [
+         {
+          "dated": "2016-10-14",
+          "first_availability": {
+           "reason": "the fixture holds no rules copy carrying this amendment; the note is read from the order copy's own text",
+           "state": "unknown"
+          },
+          "held": false,
+          "kind": "added",
+          "locator": {
+           "end": 603,
+           "page": 12,
+           "start": 500
+          },
+          "note": "(This clause is the fixture's baseline: it states the reserve trading the fixture order later stopped.)",
+          "note_digest": "ba1cff0b3fea6e484157d77f6cc082e146fa50bfaf7c3b32e8d18ec06585ccc1",
+          "reached": "4.2.1",
+          "ref": "Fixture DC No. 2016-10-0014"
+         }
+        ],
+        "effective": {
+         "note": "the fixture copy's own issue date",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "first_availability": {
+         "basis_kind": "capture_logged_at",
+         "basis_ref": "the fixture's own fetch log (invented)",
+         "note": "the time the fixture says this workflow first read the copy; invented with the fixture",
+         "state": "known",
+         "value": "2026-01-12T09:00:00Z"
+        },
+        "text": "4.2.1 Reserve trading. The market operator shall operate a spot market for the trading of reserve.",
+        "version_id": "rv-fixture-4.2.1-2025-08-31"
+       },
+       {
+        "amendments": [
+         {
+          "dated": "2026-10-12",
+          "first_availability": {
+           "basis": {
+            "basis_kind": "capture_logged_at",
+            "basis_ref": "the fixture's own fetch log (invented)"
+           },
+           "state": "known",
+           "value": "2026-10-15T16:19:55Z"
+          },
+          "held": true,
+          "kind": "amended",
+          "locator": {
+           "end": 314,
+           "page": 3,
+           "start": 250
+          },
+          "note": "Amended by the fixture order No. 2026-002 dated 12 October 2026.",
+          "note_digest": "249f5a7dac0414e3d3c8b0d21348329239ca3b343f3db94b9c6a10cfc049190c",
+          "reached": "4.2.1",
+          "ref": "Fixture Order No. 2026-002"
+         }
+        ],
+        "effective": {
+         "note": "the date the fixture order states the stop takes effect",
+         "precision": "day",
+         "value": "2026-10-14"
+        },
+        "first_availability": {
+         "basis_kind": "capture_logged_at",
+         "basis_ref": "the fixture's own fetch log (invented)",
+         "note": "the time the fixture says this workflow first read the order; invented with the fixture",
+         "state": "known",
+         "value": "2026-10-15T16:19:55Z"
+        },
+        "text": "4.2.1 Reserve trading. The market operator shall operate a spot market for the trading of reserve, except while the regulator has stopped reserve trading. Amended by the fixture order No. 2026-002 dated 12 October 2026.",
+        "version_id": "rv-fixture-4.2.1-2026-10-14"
+       }
+      ],
+      "why": "the clause as the fixture order leaves it: reserve trading stops"
+     },
+     {
+      "amendments": [],
+      "chain": [
+       "rv-fixture-4.2.2-2025-08-31"
+      ],
+      "clause_label": "4.2.2",
+      "effective": {
+       "note": "the fixture copy's own issue date",
+       "precision": "day",
+       "value": "2025-08-31"
+      },
+      "excluded": [],
+      "locator": {
+       "digest": "71621d1cd2671e2628440b28a11fd146e1b38a950def343801ee6bb730856f8a",
+       "end": 174,
+       "into": "the fixture copy's extracted text, offsets in Unicode characters (invented with the fixture)",
+       "page": 13,
+       "source_id": "src:fixture-rules-2025-08-31",
+       "source_revision": "2025-08-31",
+       "start": 100
+      },
+      "source": {
+       "first_availability": {
+        "basis_kind": "capture_logged_at",
+        "basis_ref": "the fixture's own fetch log (invented)",
+        "note": "the time the fixture says this workflow first read the copy; invented with the fixture",
+        "state": "known",
+        "value": "2026-01-12T09:00:00Z"
+       },
+       "issuer": "Fixture Regulator",
+       "sha256": "71621d1cd2671e2628440b28a11fd146e1b38a950def343801ee6bb730856f8a",
+       "source_ref": "src:fixture-rules-2025-08-31",
+       "stated": {
+        "approving_circular": "Fixture DC No. 2025-08-0011",
+        "effective": "2025-08-31"
+       },
+       "title": "Synthetic reserve market rules, as of 31 August 2025 (fixture copy)",
+       "version": "as of 2025-08-31"
+      },
+      "status": "in_force",
+      "status_reason": null,
+      "text": "4.2.2 Reports. The market operator shall report reserve trading weekly.",
+      "text_basis": "the version the store places at this cutoff",
+      "text_digest": "16423bb8cf6abbf3dc4cd40c34b7649db585b1c5bb37bfc49d2d3f191be7913d",
+      "title": "Reserve market reports",
+      "version_id": "rv-fixture-4.2.2-2025-08-31",
+      "versions": [
+       {
+        "amendments": [],
+        "effective": {
+         "note": "the fixture copy's own issue date",
+         "precision": "day",
+         "value": "2025-08-31"
+        },
+        "first_availability": {
+         "basis_kind": "capture_logged_at",
+         "basis_ref": "the fixture's own fetch log (invented)",
+         "note": "the time the fixture says this workflow first read the copy; invented with the fixture",
+         "state": "known",
+         "value": "2026-01-12T09:00:00Z"
+        },
+        "text": "4.2.2 Reports. The market operator shall report reserve trading weekly.",
+        "version_id": "rv-fixture-4.2.2-2025-08-31"
+       }
+      ],
+      "why": "a clause with no amendment, so the block shows both shapes"
+     }
+    ],
+    "cutoff": {
+     "label": "2026-10-16T01:00:00+08:00 (second)",
+     "precision": "second",
+     "until": "2026-10-15T17:00:00.000001Z",
+     "value": "2026-10-16T01:00:00+08:00"
+    },
+    "dependents": {
+     "budget": 8,
+     "note": "No accepted record depends on the market at this cutoff. The store walks accepted dependsOn and usesAssumption edges only, and a still-proposed mapping never counts.",
+     "rows": [
+      {
+       "depth": 1,
+       "ref": "assumption:fixture-reserve-procurement",
+       "ref_type": "AssumptionRevision",
+       "relation_id": "rel-fixture-assumption-depends-on-market"
+      }
+     ],
+     "truncated": false
+    },
+    "id": "day_after",
+    "label": "One day after the action",
+    "why": "just after the fixture's own record of reading the order, the first cutoff that permits every record this fixture cites"
+   }
+  ]
+ },
+ "source_label": "IEMOP",
+ "timeline": [
+  {
+   "kind": "notice",
+   "src": "claim:fixture-suspension",
+   "t": "2026-10-12",
+   "t_basis": "the issuer's own stated publication",
+   "text": "Fixture Regulator · The fixture regulator has stopped reserve trading under the fixture rules from trading interval 0005H on 14 October 2026, pending a review. (Invented passage: t"
+  },
+  {
+   "kind": "notice",
+   "src": "claim:fixture-commencement",
+   "t": "2025-09-03",
+   "t_basis": "the issuer's own stated publication",
+   "text": "Fixture Regulator · Reserve trading under the fixture rules commenced on 26 December 2025. (Invented passage: this fixture's own words, not a real document's.)"
+  }
+ ],
+ "title": "Fixture (synthetic): a clause in force at each cutoff and the announcement that changed it"
+}

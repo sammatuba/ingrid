@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- __NOWCAST_STAMP__ is the build stamp the server writes in: it names this build's assets
+     and replay files, so they can be cached for a year while this page revalidates. -->
+<meta charset="utf-8">
+<meta id="nowcast-build" name="nowcast-build" content="__NOWCAST_STAMP__">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>InGRID · Price outlooks</title>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0b1018" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f6fa" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/grid.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/outlooks.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ask.css">
+<script src="/grid/__NOWCAST_STAMP__/outlooks.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/ask.js" defer></script>
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ui.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/shell.css">
+<script src="/grid/__NOWCAST_STAMP__/shell.js"></script>
+</head>
+<body class="outlooks-page">
+<header class="bar">
+  <a class="brand" href="/" aria-label="InGRID home">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 15 8 6l4 6 2-3 3 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+    <span>InGRID</span>
+  </a>
+  <!-- The same section block every page of the site family carries. The outlooks page marks its
+       own entry current; ROUTES-1 adds Models, Work and Map after Paper, and the ask panel has
+       no entry of its own. -->
+  <nav class="sites" aria-label="Sections">
+    <a href="/">Grid</a>
+    <a href="/data">Data</a>
+    <a href="/plants">Plants</a>
+    <a href="/explain">Explain</a>
+    <a href="/outlooks" aria-current="page">Outlooks</a>
+    <a href="/paper">Paper</a>
+    <a href="/models">Models</a>
+    <a href="/work">Work</a>
+    <a href="/map">Map</a>
+    <a href="/alerts">Alerts</a>
+  </nav>
+</header>
+
+<!-- ROUTES-1: the desk assistant's mount point. The command bar holds it in its sheet. -->
+<section id="ask" data-context="outlooks" aria-label="Ask Ingrid"></section>
+
+<main class="gn-page outlooks">
+  <header class="gn-page-head">
+    <div class="gn-page-title">
+      <h1>Price outlooks</h1>
+      <!-- OUTLOOK-7: the title line says what an outlook is here, in one sentence, and what it is
+           not: a position the desk issued and never edits, not a forecast model. -->
+      <p class="gn-page-sub ol-def">An outlook here is a position: the desk's stated expectation for a month, issued and never edited. It is not a forecast model.</p>
+    </div>
+    <div class="gn-page-actions"><a class="gn-btn" href="/register">Register</a><a class="gn-btn" href="/book">Book exposure</a></div>
+    <!-- DESK-3: the one summary sentence, composed by outlooks.js from the baked index. -->
+    <div class="gn-page-meta"><span class="gn-meta" id="ol-summary"></span></div>
+  </header>
+
+  <!-- The empty state: what an outlook is, why none shows in this build, and where to go next.
+       The reason line is composed by outlooks.js from the baked index. -->
+  <div class="gn-empty ol-none" id="ol-none" role="status" hidden>
+    <svg class="gn-empty-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16M6 16l4-5 3 3 5-7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="7" r="1.6" fill="currentColor"/></svg>
+    <p class="gn-empty-title">No outlook issued in this build</p>
+    <p class="gn-empty-body" id="ol-empty" hidden></p>
+    <p class="gn-empty-body">An outlook is the desk's stated price for a month. The desk issues it once and never edits it. A later view becomes a new vintage beside it.</p>
+    <p class="gn-empty-body">With an archive, this page lists each vintage, what it rests on and how the month scored it.</p>
+    <div class="gn-empty-actions"><a class="gn-btn gn-btn--primary" href="/register">Open the register</a><a class="gn-btn" href="/explain#ch-2">How outlooks work</a></div>
+  </div>
+
+  <!-- One block per target, drawn from the baked index only: OUTLOOK-7's plain answer and chart
+       first, the vintages as a table with the chosen vintage's record beside it, DESK-6's
+       baseline track record, and the record ids and digests under "Show the records". -->
+  <div id="targets"></div>
+
+  <div class="gn-sources">
+    <details>
+      <summary>Sources and method</summary>
+      <footer class="caption" id="caption">Source: the price-outlook archive and the assumption register, read as records · every time is the record's own, in UTC</footer>
+    </details>
+  </div>
+</main>
+</body>
+</html>

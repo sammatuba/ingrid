@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- __NOWCAST_STAMP__ is the build stamp the server writes in: it names this build's assets
+     and data, so they can be cached for a year while this page revalidates. -->
+<meta charset="utf-8">
+<meta id="nowcast-build" name="nowcast-build" content="__NOWCAST_STAMP__">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>InGRID · Alert</title>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0b1018" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f6fa" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/grid.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/journal.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/spike.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ui.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/shell.css">
+<script src="/grid/__NOWCAST_STAMP__/shell.js"></script>
+<script src="/grid/__NOWCAST_STAMP__/journal-box.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/spike.js" defer></script>
+</head>
+<body class="spike-page">
+<header class="bar">
+  <a class="brand" href="/" aria-label="InGRID home">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 15 8 6l4 6 2-3 3 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+    <span>InGRID</span>
+  </a>
+  <!-- The no-script fallback navigation; shell.js rebuilds it into the shared top bar. -->
+  <nav class="sites" aria-label="Sections">
+    <a href="/">Dashboard</a>
+    <a href="/alerts" aria-current="page">Alerts</a>
+    <a href="/notices">Notices</a>
+    <a href="/plants">Plants</a>
+    <a href="/journal">Journal</a>
+    <a href="/data">Data</a>
+    <a href="/paper">Paper</a>
+  </nav>
+</header>
+
+<!-- ericka-desk, platform polish PP-B1: one alert's own page at /alert/<key>, built on request
+     from the baked replay (/api/alerts/alert/<key>). The head is the anchor (severity, grid,
+     window, whether the price is still past the level); the figures follow with unknowns on one
+     line; the price chart leads the main column and the cause, the notices around it and the
+     decision box sit in the side column. A cause is shown only when a recorded event matches.
+     It never shows a peso figure and never forecasts. Nothing after the shared replay clock. -->
+<main class="gn-page sp-page" aria-labelledby="sp-title">
+  <header class="gn-page-head">
+    <nav class="gn-crumbs" aria-label="Breadcrumb"><a href="/alerts">Alerts</a><span aria-current="page" id="sp-crumb">Alert</span></nav>
+    <div class="gn-page-title">
+      <h1 id="sp-title">Alert</h1>
+      <p class="gn-page-sub" id="sp-trigger"></p>
+    </div>
+    <div class="gn-page-actions" id="sp-actions"></div>
+    <div class="gn-page-meta" id="sp-pills"></div>
+  </header>
+
+  <div class="sp-state" id="sp-state" role="status"><p class="gn-loading">Loading the alert…</p></div>
+
+  <div class="sp-body" id="sp-body" hidden>
+    <section class="sp-figures" aria-label="The alert in figures">
+      <div class="gn-stats" id="sp-kpis"></div>
+      <p class="gn-unknowns" id="sp-unknowns" hidden></p>
+    </section>
+
+    <div class="gn-grid gn-grid--main-side sp-grid">
+      <div class="sp-main">
+        <section class="gn-card sp-chart-card" aria-labelledby="sp-price-h">
+          <header class="gn-card-head"><h2 id="sp-price-h">Price around the alert</h2>
+            <span class="gn-meta">recorded data, not a forecast</span>
+            <div class="sp-legend" id="sp-price-legend"></div></header>
+          <svg class="sp-chart" id="sp-price" role="img" aria-labelledby="sp-price-h sp-price-note"></svg>
+          <p class="gn-meta sp-graph-note" id="sp-price-note"></p>
+        </section>
+        <div class="sp-minis">
+          <section class="gn-card sp-mini" id="sp-short-fig" aria-labelledby="sp-short-h">
+            <header class="gn-card-head"><h2 id="sp-short-h">Reserve short</h2><span class="gn-meta">MW</span></header>
+            <svg class="sp-chart" id="sp-short" role="img" aria-labelledby="sp-short-h sp-short-note"></svg>
+            <p class="gn-meta sp-graph-note" id="sp-short-note"></p>
+          </section>
+          <section class="gn-card sp-mini" id="sp-demand-fig" aria-labelledby="sp-demand-h">
+            <header class="gn-card-head"><h2 id="sp-demand-h">Demand</h2><span class="gn-meta">MW</span></header>
+            <svg class="sp-chart" id="sp-demand" role="img" aria-labelledby="sp-demand-h sp-demand-note"></svg>
+            <p class="gn-meta sp-graph-note" id="sp-demand-note"></p>
+          </section>
+        </div>
+
+        <!-- events-ai: the alert's likely drivers at its peak and the paragraph about them, read from
+             the saved batch result (/api/alerts/explain/<key>). Evidence, not proof. Never a cause. -->
+        <!-- When the full driver card (the ontology card) is saved for this alert, the same card shows it:
+             the view switch, the view's note, a row per family, then its confidence and facts behind a
+             disclosure. Its state line (`ontology_status` of /api/alerts/explain/<key>): computed on the
+             first signed-in open, then saved for everyone. The page asks again while it computes. -->
+        <section class="gn-card sp-ranked" id="sp-ranked" aria-labelledby="sp-ranked-h">
+          <header class="gn-card-head"><h2 id="sp-ranked-h">What stood out</h2><span class="gn-meta">evidence, not proof</span>
+            <div class="gn-seg sp-ont-modes" id="sp-ont-modes" role="group" aria-label="Which facts to count" hidden></div></header>
+          <p class="gn-meta sp-ranked-line" id="sp-ranked-line">Reading the likely drivers…</p>
+          <p class="gn-meta sp-ont-note" id="sp-ont-note" hidden></p>
+          <div class="sp-rk" id="sp-ranked-rows"></div>
+          <p class="gn-meta sp-ranked-ctx" id="sp-ranked-ctx" hidden></p>
+          <details class="gn-disclosure sp-ont-more-box" id="sp-ont-more-box" hidden>
+            <summary>Confidence, facts and what to check</summary>
+            <div class="sp-ont-more" id="sp-ont-more"></div>
+          </details>
+          <p class="gn-meta sp-onto-state" id="sp-onto-state" role="status" hidden></p>
+          <p class="gn-meta sp-foot" id="sp-ranked-src"></p>
+        </section>
+        <section class="gn-card sp-ai" id="sp-ai" aria-labelledby="sp-ai-h">
+          <header class="gn-card-head"><h2 id="sp-ai-h">AI explanation</h2><span class="gn-meta">evidence, not proof</span></header>
+          <p class="sp-ai-para" id="sp-ai-para"></p>
+          <p class="gn-meta sp-ai-note" id="sp-ai-note" hidden></p>
+          <details class="gn-disclosure sp-ai-more">
+            <summary>Severity, confidence and wording</summary>
+            <dl class="sp-kv" id="sp-ai-kv"></dl>
+          </details>
+          <p class="gn-meta sp-foot" id="sp-ai-foot"></p>
+        </section>
+      </div>
+
+      <aside class="sp-side" aria-label="Cause, notices and your decision">
+        <section class="gn-card sp-cause" id="sp-cause" aria-labelledby="sp-cause-h">
+          <header class="gn-card-head"><h2 id="sp-cause-h">Cause</h2><span class="gn-meta" id="sp-cause-meta"></span></header>
+          <div id="sp-cause-body"></div>
+        </section>
+        <!-- The region's outage, trip and grid notices from six hours before the alert, each with how sure
+             its plant match is (owner rule: an uncertain match is shown as Unclear, never made). -->
+        <section class="gn-card sp-related" id="sp-related" aria-labelledby="sp-related-h">
+          <header class="gn-card-head"><h2 id="sp-related-h">Notices around this alert</h2><span class="gn-meta">not a confirmed cause</span></header>
+          <p class="gn-meta sp-related-note" id="sp-related-note"></p>
+          <ol class="sp-steps" id="sp-related-list"></ol>
+          <p class="gn-meta sp-foot" id="sp-related-rule"></p>
+        </section>
+        <section class="gn-card sp-around" aria-labelledby="sp-around-h">
+          <header class="gn-card-head"><h2 id="sp-around-h">Around this time</h2><span class="gn-meta">not claimed as the cause</span></header>
+          <p class="gn-meta sp-around-note" id="sp-around-note"></p>
+          <ol class="sp-steps" id="sp-steps"></ol>
+        </section>
+        <section class="gn-card sp-decide" id="sp-journal" aria-labelledby="sp-journal-h">
+          <header class="gn-card-head"><h2 id="sp-journal-h">Your decision</h2></header>
+          <p class="sp-next"><span class="gn-label">Next step</span> <span id="sp-next"></span></p>
+          <p class="sp-cost"><span class="gn-label">Cost to us</span> <span class="gn-meta" title="A peso figure needs your positions and contracts. It is never guessed.">Not available · Needs your portfolio</span></p>
+          <div class="sp-journal-box" id="sp-journal-box"></div>
+          <p class="sp-more"><a href="/journal">Open the journal</a></p>
+        </section>
+      </aside>
+    </div>
+
+    <footer class="gn-sources">
+      <details>
+        <summary>Sources and method</summary>
+        <ul class="sp-list" id="sp-made"></ul>
+      </details>
+    </footer>
+  </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "label": "synthetic fixture: invented outages and invented prices; a method demonstration, not a measurement",
+  "written_by": "tests/fixtures/price/event_study/make_synthetic.py",
+  "files": [
+    "lwap_final_hourly-synthetic.csv",
+    "outages_forced-synthetic.csv",
+    "demand_hourly-synthetic.csv",
+    "rtd_regional_prices-realtime-synthetic.csv",
+    "prices_interval_shape-synthetic.csv"
+  ],
+  "notes": "No row, unit name, region figure or price comes from an export. The units SYN_* are invented. The prices rise by an invented slope per MW lost during each invented outage (CLUZ 2.0, CVIS 8.0, CMIN 5.0 PHP/MWh per MW), so the study must recover about those slopes. The invented demand is constant per region (CLUZ 10000, CVIS 2000, CMIN 2500 MW), so a response per MW over demand is the slope times that demand. SYN_L15 and SYN_L16 overlap on purpose and are left out. The two realtime files exist only to be refused."
+}

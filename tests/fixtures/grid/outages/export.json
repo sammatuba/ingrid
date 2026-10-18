@@ -1,0 +1,187 @@
+{
+ "_label": "SYNTHETIC: written for tests/test_grid_outages.py; no real plant, message or schedule. Rows have the shape of the two BigQuery reads in scripts/grid/build_outages.py.",
+ "mentions": [
+  {
+   "adv_id": "V095900",
+   "posted_at_manila": "2026-09-20 23:00:00",
+   "event_at_manila": "2026-09-20 22:55:00",
+   "region_code": "CVIS",
+   "form": "single_event",
+   "kind": "tripped",
+   "plant_prefix": "04SYNA",
+   "match_status": "resolved"
+  },
+  {
+   "adv_id": "V100000",
+   "posted_at_manila": "2026-09-21 10:00:00",
+   "event_at_manila": "2026-09-21 09:55:00",
+   "region_code": "CVIS",
+   "form": "single_event",
+   "kind": "tripped",
+   "plant_prefix": "04SYNA",
+   "match_status": "resolved"
+  },
+  {
+   "adv_id": "V110000",
+   "posted_at_manila": "2026-09-21 11:00:00",
+   "event_at_manila": "2026-09-21 10:58:00",
+   "region_code": "CVIS",
+   "form": "single_event",
+   "kind": "tripped",
+   "plant_prefix": null,
+   "match_status": "ambiguous"
+  },
+  {
+   "adv_id": "V120000",
+   "posted_at_manila": "2026-09-21 12:00:00",
+   "event_at_manila": "2026-09-21 11:58:00",
+   "region_code": "CVIS",
+   "form": "single_event",
+   "kind": "tripped",
+   "plant_prefix": "04SYNB",
+   "match_status": "resolved"
+  },
+  {
+   "adv_id": "L130000",
+   "posted_at_manila": "2026-09-21 13:00:00",
+   "event_at_manila": "2026-09-21 12:55:00",
+   "region_code": "CLUZ",
+   "form": "single_event",
+   "kind": "returned",
+   "plant_prefix": "01SYNC",
+   "match_status": "resolved"
+  },
+  {
+   "adv_id": "M140000",
+   "posted_at_manila": "2026-09-21 14:00:00",
+   "event_at_manila": "2026-09-21 13:55:00",
+   "region_code": "CMIN",
+   "form": "single_event",
+   "kind": "tripped",
+   "plant_prefix": "10SYND",
+   "match_status": "resolved"
+  },
+  {
+   "adv_id": "V133937",
+   "posted_at_manila": "2026-09-21 13:39:37",
+   "event_at_manila": "2026-09-21 13:34:00",
+   "region_code": "CVIS",
+   "form": "single_event",
+   "kind": "tripped",
+   "plant_prefix": "08PEDC",
+   "match_status": "resolved"
+  },
+  {
+   "adv_id": "M160000",
+   "posted_at_manila": "2026-09-21 16:00:00",
+   "event_at_manila": null,
+   "region_code": "CMIN",
+   "form": "derated_list",
+   "kind": "derated",
+   "plant_prefix": "10SYND",
+   "match_status": "resolved"
+  },
+  {
+   "adv_id": "M160000",
+   "posted_at_manila": "2026-09-21 16:00:00",
+   "event_at_manila": null,
+   "region_code": "CMIN",
+   "form": "derated_list",
+   "kind": "derated",
+   "plant_prefix": null,
+   "match_status": "unmatched"
+  },
+  {
+   "adv_id": "M170000",
+   "posted_at_manila": "2026-09-21 17:00:00",
+   "event_at_manila": null,
+   "region_code": "CMIN",
+   "form": "derated_list",
+   "kind": "derated",
+   "plant_prefix": "10SYND",
+   "match_status": "resolved"
+  },
+  {
+   "adv_id": "M170000",
+   "posted_at_manila": "2026-09-21 17:00:00",
+   "event_at_manila": null,
+   "region_code": "CMIN",
+   "form": "derated_list",
+   "kind": "derated",
+   "plant_prefix": "10SYNE",
+   "match_status": "resolved"
+  },
+  {
+   "adv_id": "M170000",
+   "posted_at_manila": "2026-09-21 17:00:00",
+   "event_at_manila": null,
+   "region_code": "CMIN",
+   "form": "derated_list",
+   "kind": "derated",
+   "plant_prefix": null,
+   "match_status": "unmatched"
+  }
+ ],
+ "schedule": [
+  {
+   "run": "RTD",
+   "resource_name": "04SYNA_U01",
+   "plant_prefix": "04SYNA",
+   "region_code": "CVIS",
+   "start_manila": "2026-09-21 09:56:00",
+   "end_manila": "2026-09-21 18:00:00",
+   "first_seen_manila": "2026-09-21 10:40:00",
+   "revision_no": "1"
+  },
+  {
+   "run": "RTD",
+   "resource_name": "04SYNA_U01",
+   "plant_prefix": "04SYNA",
+   "region_code": "CVIS",
+   "start_manila": "2026-09-21 09:56:00",
+   "end_manila": "2026-09-21 20:00:00",
+   "first_seen_manila": "2026-09-21 12:00:00",
+   "revision_no": "2"
+  },
+  {
+   "run": "RTD",
+   "resource_name": "04SYNB_U01",
+   "plant_prefix": "04SYNB",
+   "region_code": "CVIS",
+   "start_manila": "2026-09-21 11:55:00",
+   "end_manila": "2026-09-21 20:00:00",
+   "first_seen_manila": "2026-09-21 11:50:00",
+   "revision_no": "1"
+  },
+  {
+   "run": "RTD",
+   "resource_name": "01SYNC_G01",
+   "plant_prefix": "01SYNC",
+   "region_code": "CLUZ",
+   "start_manila": "2026-09-20 08:00:00",
+   "end_manila": "2026-09-22 00:00:00",
+   "first_seen_manila": "2026-09-19 08:00:00",
+   "revision_no": "1"
+  },
+  {
+   "run": "RTD",
+   "resource_name": "04SYNB_BAT",
+   "plant_prefix": "04SYNB",
+   "region_code": "CVIS",
+   "start_manila": "2026-09-21 20:00:00",
+   "end_manila": "2026-09-21 22:00:00",
+   "first_seen_manila": "2026-09-21 19:00:00",
+   "revision_no": "1"
+  },
+  {
+   "run": "DAP",
+   "resource_name": "10SYND_U01",
+   "plant_prefix": "10SYND",
+   "region_code": "CMIN",
+   "start_manila": "2026-09-21 14:00:00",
+   "end_manila": "2026-09-21 23:00:00",
+   "first_seen_manila": "2026-09-21 06:00:00",
+   "revision_no": "1"
+  }
+ ]
+}

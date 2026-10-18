@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- __NOWCAST_STAMP__ is the build stamp the server writes in: it names this build's assets,
+     so they can be cached for a year while this page revalidates. -->
+<meta charset="utf-8">
+<meta id="nowcast-build" name="nowcast-build" content="__NOWCAST_STAMP__">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>The future of work case · About · InGRID</title>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0b1018" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f6fa" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/grid.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/work.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ask.css">
+<script src="/grid/__NOWCAST_STAMP__/work.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/ask.js" defer></script>
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ui.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/shell.css">
+<script src="/grid/__NOWCAST_STAMP__/shell.js"></script>
+</head>
+<body class="work-page">
+<header class="bar">
+  <a class="brand" href="/" aria-label="InGRID home">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 15 8 6l4 6 2-3 3 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+    <span>InGRID</span>
+  </a>
+  <!-- ATG-8: the site's own sections, the same block on every page; the page's own section is
+       the one marked current. ROUTES-1 adds Models, Work and Map after Paper. -->
+  <nav class="sites" aria-label="Sections">
+    <a href="/">Grid</a>
+    <a href="/data">Data</a>
+    <a href="/plants">Plants</a>
+    <a href="/explain">Explain</a>
+    <a href="/outlooks">Outlooks</a>
+    <a href="/paper">Paper</a>
+    <a href="/models">Models</a>
+    <a href="/work" aria-current="page">Work</a>
+    <a href="/map">Map</a>
+    <a href="/alerts">Alerts</a>
+  </nav>
+</header>
+
+<!-- Platform polish (PP-B4): the case in the reading frame. Every block shares one wide left
+     edge, so the three levels, the step table and the workers read at a glance, and prose keeps
+     the reading measure inside it. -->
+<main class="gn-page gn-page--read work">
+  <header class="gn-page-head wk-head wk-wide">
+    <div class="gn-page-title">
+      <h1>The future of work case</h1>
+      <p class="gn-page-sub wk-lede">AI can read every signal and draft every change. People still decide, and people still answer for the result.</p>
+    </div>
+    <div class="gn-page-meta">
+      <span class="gn-badge">Real case</span>
+      <span class="gn-meta asof">The case is the PEDC Unit 2 trip of 21 September 2026. Every figure below is as of the record named beside it.</span>
+    </div>
+  </header>
+
+  <!-- ROUTES-1: the desk assistant's one mount point on this page. VIEW-1 renders into it; the
+       ask.js shell that loads beside this page's own script renders nothing until then. -->
+  <section id="ask" data-context="work" aria-label="Ask Ingrid"></section>
+
+  <section class="wk-levels gn-section wk-wide" aria-labelledby="wk-levels-title">
+    <header class="gn-section-head">
+      <h2 id="wk-levels-title">Three levels of the problem</h2>
+      <p class="gn-section-meta asof">The Future of Work case record's three levels, with its own evidence grade. Record: the case record, 16 October 2026.</p>
+    </header>
+    <div class="gn-grid gn-grid--3 wk-grid-three">
+      <article class="gn-card wk-level">
+        <h3>People</h3>
+        <p>The job moves from finding and reading information to judging it and answering for it.</p>
+        <p class="wk-grade">Framing. No measure of the effect on analysts exists yet, and experiment 3 has not run.</p>
+      </article>
+      <article class="gn-card wk-level">
+        <h3>Organization</h3>
+        <p>Without trust, an organization holds AI back. Without traceability, it uses AI blind. Both cost money, in lost work or in decisions nobody can review.</p>
+        <p class="wk-grade">The case record grades this a belief with first numbers. VAL-1 and PROJ-1 supply the numbers. No measure of incidence exists.</p>
+      </article>
+      <article class="gn-card wk-level">
+        <h3>Sector</h3>
+        <p>A board and a regulator must see who decided what, on which evidence, and when.</p>
+        <p class="wk-grade">The operating company names the readers. The case record holds no observation of them.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="wk-case gn-section wk-wide" aria-labelledby="wk-case-title">
+    <header class="gn-section-head">
+      <h2 id="wk-case-title">The PEDC case, step by step</h2>
+      <p class="gn-section-meta asof">Each row carries one status word: done on the real case, recorded, or no analyst decision. Each row names its record and that record's date.</p>
+    </header>
+    <div class="gn-filters" role="toolbar" aria-label="Filter the steps">
+      <div class="gn-seg wk-filter" role="group" aria-label="Show rows by worker">
+        <button type="button" data-worker="all" aria-pressed="true">All</button>
+        <button type="button" data-worker="code" aria-pressed="false">Code</button>
+        <button type="button" data-worker="ai-reader" aria-pressed="false">AI reader</button>
+        <button type="button" data-worker="person" aria-pressed="false">Person</button>
+      </div>
+      <span class="gn-filters-count" id="wk-count" aria-live="polite">8 of 8 steps</span>
+    </div>
+    <div class="gn-card gn-card--flush">
+    <div class="gn-table-wrap wk-table-wrap">
+      <table class="gn-table wk-steps">
+        <colgroup><col class="wk-c-step"><col><col class="wk-c-worker"><col class="wk-c-status"><col class="wk-c-record"></colgroup>
+        <thead>
+          <tr><th scope="col">Step</th><th scope="col">The record says</th><th scope="col">Worker</th><th scope="col">Status</th><th scope="col">Record (as of)</th></tr>
+        </thead>
+        <tbody>
+          <tr data-worker="code">
+            <th scope="row">Notice received</th>
+            <td>Advisory V133937 reported the PEDC U2 trip at 1334H. NGCP posted it at 13:39:37 on 21 September 2026.</td>
+            <td>Code</td>
+            <td><span class="gn-badge gn-badge--ok">done on the real case</span></td>
+            <td class="wk-record">The case evidence manifest, 21 September 2026.</td>
+          </tr>
+          <tr data-worker="code">
+            <th scope="row">Assumption found</th>
+            <td>The desk linked PEDC U2 to unit 08PEDC_U02. The unit's assumed available capacity was 83.7 MW for the day.</td>
+            <td>Code</td>
+            <td><span class="gn-badge gn-badge--ok">done on the real case</span></td>
+            <td class="wk-record">The case assembly reviewed <span class="mono">mapping:regcap:08PEDC_U02:PEDC:83.7:2026-02-05</span> on 14 October 2026. The register run starts on 5 February 2026.</td>
+          </tr>
+          <tr data-worker="code">
+            <th scope="row">Questions asked</th>
+            <td>Code compiled eight closed questions in four presentation forms each. The trip cutoff held one passage, and the return cutoff held four.</td>
+            <td>Code</td>
+            <td><span class="gn-badge gn-badge--ok">done on the real case</span></td>
+            <td class="wk-record">The live-run record, 14 October 2026, and the paper, 17 October 2026.</td>
+          </tr>
+          <tr data-worker="ai-reader">
+            <th scope="row">Answers read</th>
+            <td>The AI reader answered 08PEDC_U02, forced outage, same, no, no, yes, yes and challenges. It gave the same eight answers at both cutoffs. The trip run used 9,743 tokens in and 1,784 out in 11.1 seconds. The return run used 11,609 in, 1,776 out and 11.9 seconds.</td>
+            <td>AI reader</td>
+            <td><span class="gn-badge gn-badge--info">recorded</span></td>
+            <td class="wk-record">Trip receipt <span class="mono">probe:e575d3c9e91a6e96…</span>, request <span class="mono">512a7faa6554…</span>. Return receipt <span class="mono">probe:6e4f9a819e8a1149…</span>, request <span class="mono">1ff0b7856a2b…</span>. Live-run record, 14 October 2026.</td>
+          </tr>
+          <tr data-worker="code">
+            <th scope="row">Label composed</th>
+            <td>Fourteen fixed rules over the modal answers composed the label challenges at both cutoffs. Both runs were stable. The trip receipt's maximum flip rate was 0.</td>
+            <td>Code</td>
+            <td><span class="gn-badge gn-badge--ok">done on the real case</span></td>
+            <td class="wk-record">The live-run record, 14 October 2026, for stable at both cutoffs. The event-page record, 14 October 2026, for the trip receipt's maximum flip rate 0. The paper's Appendix C, 17 October 2026, for the fourteen rules.</td>
+          </tr>
+          <tr data-worker="ai-reader">
+            <th scope="row">Proposal stated</th>
+            <td>The label says the trip challenges the 83.7 MW availability assumption. The live run of 14 October 2026 said challenges at both cutoffs. The scripted reading said supports at the return cutoff. The case records the disagreement and leaves it unsettled.</td>
+            <td>AI reader</td>
+            <td><span class="gn-badge gn-badge--info">recorded</span></td>
+            <td class="wk-record">The live-run record and the case review, 14 October 2026.</td>
+          </tr>
+          <tr data-worker="person">
+            <th scope="row">Decision recorded</th>
+            <td>The <a href="/event/pedc-u2-2026-09-21" data-entity="event:pedc-u2-2026-09-21">event page</a> offers retain, revise or open for review, with a reason. The real case records no analyst decision. Tests and hosted smoke tests exercised the form on copies.</td>
+            <td>Person</td>
+            <td><span class="gn-badge">no analyst decision</span></td>
+            <td class="wk-record">The case review, 14 October 2026.</td>
+          </tr>
+          <tr data-worker="code">
+            <th scope="row">Receipt kept</th>
+            <td>The AI run keeps its artifact, request digest, token counts and time. A saved decision keeps a receipt too, for example <span class="mono">event:pedc-u2-2026-09-21:retain:1</span>. That receipt came from a copy, not the real case.</td>
+            <td>Code</td>
+            <td><span class="gn-badge gn-badge--info">recorded</span></td>
+            <td class="wk-record">The live-run record and the event-page record, 14 October 2026.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+    <p class="wk-share">Code did five of the eight steps. The AI reader did two. The person owns the decision step, and the real case records no analyst decision.</p>
+  </section>
+
+  <section class="wk-workers gn-section wk-wide" aria-labelledby="wk-workers-title">
+    <header class="gn-section-head">
+      <h2 id="wk-workers-title">The AI workers, and what each has not done yet</h2>
+      <p class="gn-section-meta asof">Four workers the product names. Each card names its record and its status word.</p>
+    </header>
+    <div class="gn-grid wk-grid-two">
+      <article class="gn-card wk-worker">
+        <h3>The reader</h3>
+        <p>It answers the eight bounded questions over the cited passages.</p>
+        <p><b>Did:</b> it ran twice on the PEDC case on 14 October 2026. It cited its passages and kept its answers stable at both cutoffs.</p>
+        <p><b>Did not:</b> it has not run live since. The site replays the recorded run, and one real case is its whole record.</p>
+        <p class="asof">Record: the live-run record, 14 October 2026. Status: recorded.</p>
+      </article>
+      <article class="gn-card wk-worker">
+        <h3>The rules extractor</h3>
+        <p>It reads rule documents and proposes each rule as a cited claim.</p>
+        <p><b>Did:</b> its code exists and its tests pass. The request carries the owner's decided thinking level of high.</p>
+        <p><b>Did not:</b> the transport accepts a zero thinking budget only. No live run has read the 30 rule documents.</p>
+        <p class="asof">Record: the extraction record, owner decision of 16 October 2026, and the price outlook plan note, 16 October 2026. Status: code and tests, no recorded run.</p>
+      </article>
+      <article class="gn-card wk-worker">
+        <h3>The composer</h3>
+        <p>It chooses components from a fixed catalogue and puts a view together under a validator.</p>
+        <p><b>Did:</b> it has three plans for the sample case, and the record marks each one synthetic.</p>
+        <p><b>Did not:</b> no recorded model plan and no live composition exist. A live backend sits behind a flag that stays off.</p>
+        <p class="asof">Record: the composer record, 17 October 2026. Status: built on fixture plans, no live composition.</p>
+      </article>
+      <article class="gn-card wk-worker">
+        <h3>The scorer</h3>
+        <p>It scores an issued outlook against settled prices and keeps the receipt.</p>
+        <p><b>Did:</b> its code exists and its tests pass. The baselines record of 16 October 2026 holds the track record it scores against.</p>
+        <p><b>Did not:</b> no issued outlook has a scoring receipt. The first settled pair is November to December 2026.</p>
+        <p class="asof">Record: the baselines record and the first-outlook record, 16 October 2026. Status: code and tests, no settled month scored.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="wk-productivity gn-section wk-wide" aria-labelledby="wk-productivity-title">
+    <header class="gn-section-head">
+      <h2 id="wk-productivity-title">The honest line on productivity</h2>
+    </header>
+    <p class="wk-claim">Every productivity sentence is a hypothesis until the relabelling experiment and the first scored month.</p>
+    <p>The product defines productivity as reviewed belief changes per analyst day. Quality is the share of misses the review can attribute. It is also the share of decisions the record alone defends. Both are countable from the records.</p>
+    <p>VAL-2 asks the reviewer model to relabel 28 test items blind. It has not run.</p>
+    <p>The first scored month is the November to December 2026 pair. Nothing has settled yet, so no scoring receipt exists.</p>
+    <p class="asof">Records: the Future of Work case, section 8, 16 October 2026, and the first-outlook record, 16 October 2026.</p>
+  </section>
+
+  <footer class="gn-sources wk-wide" id="caption">
+    <details>
+      <summary>Sources and method</summary>
+      <p>Source: the real PEDC Unit 2 case records of 21 September 2026, under perm:wesm-company-copy:2026-10-13. The AI judgment is a recorded Gemini run of 14 October 2026. The composer's plans are fixture plans (synthetic). The real case records no analyst decision. Every figure is as of the record named beside it.</p>
+    </details>
+  </footer>
+</main>
+</body>
+</html>

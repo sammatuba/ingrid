@@ -1,0 +1,7 @@
+t,adv_id,msg
+2026-09-21T13:39:37,V133937,"Visayas Grid-09/21/2026 13:40: Sample Unit 2 Tripped at 1334H (Unplanned Outage)  [WEBSMS]"
+2026-09-21T14:02:00,V140200,"Visayas Grid-09/21/2026 14:02: Sample Line de-energized at 1400H (Planned Outage)  [WEBSMS]"
+2026-09-21T15:00:00,V150000,"Visayas Grid-09/21/2026 15:00: Yellow Alert declared for the Visayas Grid effective 1500H  [WEBSMS]"
+2026-09-21T16:00:00,L160000,"[NSO Advisory] Luzon Grid-09/21/2026 16:00: Sample plant re-online at 1555H (Unplanned Outage)  [WEBSMS]"
+2026-09-21T16:30:00,M163000,"Message without a grid header  [WEBSMS]"
+2026-09-21T17:40:00,V174000,"Visayas Grid-09/21/2026 18:30: Sample Unit 4 Tripped at 1830H (Unplanned Outage)  [WEBSMS]"

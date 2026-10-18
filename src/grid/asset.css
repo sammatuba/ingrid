@@ -1,0 +1,171 @@
+/* Plants list and plant page (`/plants`, `/plant/<code>`). Platform polish, 2026-10-18.
+   The frame, stats, tables, filters, badges and cards are the shared components in ui.css
+   (docs/work/platform-polish-2026-10-18/design-system.md). This file holds only what is unique
+   to these two pages: the status anchor, the position glyph, the column widths of the sites
+   table, the price and schedule chart, and the register table's fixed columns. */
+
+/* ---------------------------------------------------------------- the status anchor (both pages) */
+/* ui.css loads after this file, so these rules name the card class too. */
+.gn-card.pl-anchor { display: grid; gap: var(--s-4, 16px) var(--s-6, 32px); align-items: start; }
+.gn-card.pl-anchor > * + * { margin-top: 0; }
+.assets-page .gn-card.pl-anchor { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+.pl-anchor .gn-label { margin: 0 0 var(--s-2, 8px); }
+.pl-anchor-sum { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--s-2, 8px) var(--s-5, 24px); }
+/* Each count is a button that filters the table to its status. */
+.pl-fig {
+  all: unset; box-sizing: border-box; cursor: pointer;
+  display: inline-flex; flex-direction: column; align-items: flex-start; gap: 6px;
+  min-width: 88px; padding: 6px 10px 8px; margin-left: -10px; border-radius: var(--radius-sm, 8px);
+}
+.pl-fig .gn-value--lg { font-size: 30px; line-height: 1; }
+.pl-fig:hover { background: var(--row-hover, var(--panel-2)); }
+.pl-fig[aria-pressed="true"] { background: var(--sel, var(--accent-soft)); }
+.pl-fig:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.pl-fig-note { flex-basis: 100%; margin: 0; }
+.pl-anchor .gn-disclosure { margin-top: var(--s-3, 12px); }
+.pl-anchor .gn-disclosure summary .gn-unclear { margin-right: 4px; }
+
+/* The newest status notices beside the counts: one line each, the text truncated. */
+.pl-feed { list-style: none; margin: 0; padding: 0; }
+.pl-feed li {
+  display: grid; grid-template-columns: 92px auto auto minmax(0, 1fr); align-items: center; gap: 0 10px;
+  min-height: 32px; border-bottom: 1px solid var(--rule); font-size: var(--t-body, 13px);
+}
+.pl-feed li:last-child { border-bottom: 0; }
+.pl-feed .pl-x { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text-2); }
+.pl-anchor-feed > .gn-meta { margin: 6px 0 0; }
+.pl-t { color: var(--muted); font-size: var(--t-small, 12px); white-space: nowrap; }
+
+.pl-unclear { list-style: none; margin: 6px 0 0; padding: 0; }
+.pl-unclear li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; padding: 6px 0; border-bottom: 1px solid var(--rule); font-size: var(--t-small, 12px); color: var(--text-2); }
+.pl-unclear li:last-child { border-bottom: 0; }
+.pl-unclear .pl-x { color: var(--text); flex: 1 1 240px; min-width: 0; }
+.pl-why { color: var(--muted); flex-basis: 100%; }
+
+/* ---------------------------------------------------------------- the plants list */
+.pl-counts { margin: 0; }
+.pl-caption { margin: 0 0 var(--s-2, 8px); }
+.pl-toggle[aria-pressed="true"] { background: var(--panel-2); color: var(--text); border-color: var(--accent); }
+.pl-table { --gn-table-min: 1180px; }
+@media (max-width: 760px) { .pl-table .pl-c-name { width: 200px; } }
+.pl-table .pl-c-name { width: auto; }
+.pl-table .pl-c-kind { width: 128px; }
+.pl-table .pl-c-sched { width: 116px; }
+.pl-table .pl-status-cell .gn-unclear { margin-left: 4px; }
+.pl-table th.pl-pos-h, .pl-table td.pl-pos-cell { text-align: center; }
+/* Position, as a quiet glyph: a filled dot located to the plant, a half dot to the area, a dashed
+   ring with a centre point at an approximate position, a faint ring where no position is on
+   record. The words are in the title and for screen readers. */
+.pl-pos { display: inline-block; width: 8px; height: 8px; border-radius: 50%; vertical-align: middle; border: 1.5px solid var(--muted); }
+.pl-pos--plant { background: var(--muted); border-color: var(--muted); }
+.pl-pos--area { box-shadow: inset 3px 0 0 var(--muted); }
+.pl-pos--none { border-color: var(--faint); border-style: dashed; }
+/* The plants page's "More filters" panel: its three groups stacked in one panel, wide enough for
+   the kind and position groups. On a phone each group scrolls inside the panel. */
+.gn-more-filters > .pl-more-body { width: max-content; max-width: calc(100vw - 32px); }
+.pl-more-body .gn-seg { overflow-x: auto; }
+/* An approximate position: the map's dashed ring, in the text colour with a centre point, so it
+   reads apart from the faint ring of a position not known. */
+.pl-pos--approx { width: 9px; height: 9px; border-color: var(--text-2); border-style: dashed;
+  background: radial-gradient(circle, var(--text-2) 0 1.2px, transparent 1.6px); }
+
+/* ---------------------------------------------------------------- the plant page */
+.asset-page .gn-card.pl-anchor { grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; }
+.pl-status .gn-badge { height: 28px; padding: 0 12px; font-size: 13px; }
+.pl-status .gn-unclear { margin-left: 6px; }
+.pl-latest p { margin: 0; }
+.pl-latest-text { color: var(--text); font-size: var(--t-lead, 14px); font-weight: 500; overflow-wrap: anywhere; }
+.pl-latest .gn-meta { margin-top: 2px; }
+.pl-facts { display: flex; gap: var(--s-5, 24px); margin: 0; }
+.pl-fact { display: flex; flex-direction: column; gap: 2px; }
+.pl-fact dd { margin: 0; font-size: var(--t-figure-sm, 14px); }
+.pl-fact dd b { font-weight: 500; }
+.pl-at { display: none; }
+
+.a-matrix { align-items: start; }
+.a-side { display: flex; flex-direction: column; gap: var(--s-4, 16px); min-width: 0; }
+.a-side h2 { margin: 0 0 var(--s-2, 8px); }
+.a-side .gn-card > * + h2 { margin-top: var(--s-5, 24px); }
+.a-side .gn-card > h2 + * { margin-top: 0; }
+.pl-list { margin: 0; padding-left: 16px; font-size: var(--t-body, 13px); color: var(--text-2); }
+.pl-list li { margin: 3px 0; }
+.pl-next { list-style: none; padding: 0; }
+.pl-next li { padding: 5px 0; border-bottom: 1px solid var(--rule); }
+.pl-next li:last-child { border-bottom: 0; }
+.a-note { margin: 10px 0 0; }
+.a-unknown { margin: 0 0 4px; color: var(--text); font-weight: 500; }
+.a-kv { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 4px 10px; margin: 0; font-size: var(--t-small, 12px); }
+.a-kv dt { color: var(--muted); }
+.a-kv dd { margin: 0; color: var(--text-2); overflow-wrap: anywhere; }
+
+/* The register: four fixed columns, so the headers never run into each other. */
+.a-reg { table-layout: fixed; width: 100%; }
+.a-reg .a-reg-type { width: 64px; }
+.a-reg .a-reg-n { width: 72px; }
+.a-reg .a-reg-mw { width: 80px; }
+.a-reg td.a-reg-units { font-size: var(--t-small, 12px); }
+.a-reg td.a-reg-units span { display: inline-block; margin-right: 6px; }
+
+/* The notices table. */
+.a-msgs .a-m-time { width: 128px; }
+.a-msgs td.mono { white-space: nowrap; }
+.a-msgs .a-m-id { width: 96px; }
+.a-msgs .a-m-kind { width: 124px; }
+.a-msgs .a-m-match { width: 30%; }
+.a-msgs tr.is-unclear td.a-m-text { color: var(--text-2); }
+.a-msgs + .gn-pager { margin-top: var(--s-3, 12px); }
+
+/* Sources: the events and catalog lists are plain lines. */
+.a-events, .a-cat { list-style: none; margin: 0 0 var(--s-3, 12px); padding: 0; }
+.a-events li, .a-cat li { padding: 3px 0; }
+
+/* ---------------------------------------------------------------- the chart */
+.a-charts { min-width: 0; }
+.a-readout { margin: 0 0 var(--s-2, 8px); min-height: 18px; color: var(--text); font-size: var(--t-small, 12px); }
+#price, #mw { display: block; width: 100%; }
+#price:focus-visible, #mw:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+#mw { margin-top: var(--s-2, 8px); }
+#price .axis, #mw .axis { stroke: var(--rule-strong); }
+#price .grid, #mw .grid { stroke: var(--rule); stroke-dasharray: 2 3; }
+#price .tick, #mw .tick { fill: var(--faint); font: 400 10px var(--mono); }
+#price .lab, #mw .lab { font: 500 11px var(--mono); fill: var(--text-2); }
+#price .lab-axis, #mw .lab-axis { font: 600 10px var(--sans); fill: var(--muted); letter-spacing: .04em; }
+#price .price { fill: none; stroke: var(--text-2); stroke-width: 1.5; }
+#mw .mw { fill: none; stroke: var(--accent); stroke-width: 1.5; }
+#price .peak-dot, #mw .peak-dot { fill: var(--text); }
+.clock-line { stroke: var(--accent); stroke-width: 1; stroke-dasharray: 4 3; }
+.xhair { stroke: var(--muted); stroke-width: 1; pointer-events: none; }
+.xhair-dot { fill: var(--panel); stroke: var(--text); stroke-width: 1.5; pointer-events: none; }
+.mark-line { stroke-width: 1; stroke-dasharray: 1 3; opacity: .7; }
+.mark--alert .mark-glyph { fill: var(--sev-alert, var(--bad)); }
+.mark--alert .mark-line { stroke: var(--sev-alert, var(--bad)); }
+.mark--warning .mark-glyph { fill: var(--sev-warning, var(--warn)); }
+.mark--warning .mark-line { stroke: var(--sev-warning, var(--warn)); }
+.mark--info .mark-glyph { fill: var(--sev-info, var(--accent)); }
+.mark--info .mark-line { stroke: var(--sev-info, var(--accent)); }
+.mark--event .mark-glyph { fill: var(--text); }
+.mark--event .mark-line { stroke: var(--text-2); }
+.mark--note .mark-glyph { fill: var(--muted); }
+.mark--note .mark-line { stroke: var(--muted); }
+.a-legend { margin: var(--s-2, 8px) 0 0; }
+.a-key { display: inline-block; width: 8px; height: 8px; margin-right: 4px; border-radius: 2px; vertical-align: 0; }
+.a-key--clock { width: 12px; height: 0; border-top: 1.5px dashed var(--accent); border-radius: 0; vertical-align: 3px; }
+.a-key--alert { background: var(--sev-alert, var(--bad)); }
+.a-key--info { background: var(--sev-info, var(--accent)); }
+.a-key--event { background: var(--text); transform: rotate(45deg) scale(.8); }
+
+/* ---------------------------------------------------------------- narrow screens */
+@media (max-width: 1100px) {
+  .assets-page .gn-card.pl-anchor { grid-template-columns: minmax(0, 1fr); }
+  .asset-page .gn-card.pl-anchor { grid-template-columns: auto minmax(0, 1fr); }
+  .asset-page .pl-facts { grid-column: 1 / -1; }
+}
+@media (max-width: 640px) {
+  .pl-counts.gn-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .asset-page .gn-stats .gn-value--lg { font-size: 18px; white-space: nowrap; }
+  .asset-page .gn-card.pl-anchor { grid-template-columns: minmax(0, 1fr); }
+  .pl-facts { flex-wrap: wrap; gap: var(--s-3, 12px) var(--s-5, 24px); }
+  .pl-feed li { grid-template-columns: auto auto minmax(0, 1fr); }
+  .pl-feed .pl-t { grid-column: 1 / -1; padding-top: 6px; }
+  .pl-fig .gn-value--lg { font-size: 26px; }
+}

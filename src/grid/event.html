@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- __NOWCAST_STAMP__ is the build stamp the server writes in: it names this build's assets
+     and replay files, so they can be cached for a year while this page revalidates. -->
+<meta charset="utf-8">
+<meta id="nowcast-build" name="nowcast-build" content="__NOWCAST_STAMP__">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>InGRID · Event review</title>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0b1018" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f6fa" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/grid.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/event.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ask.css">
+<script src="/grid/__NOWCAST_STAMP__/event-api.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/event.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/ask.js" defer></script>
+<!-- Platform polish: the shared component layer (ui.css) comes just before the shell's tokens. -->
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ui.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/shell.css">
+<script src="/grid/__NOWCAST_STAMP__/shell.js"></script>
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/journal.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/event-desk.css">
+<script src="/grid/__NOWCAST_STAMP__/journal-box.js" defer></script>
+<!-- "How we got this": the "?" on section heads and its data-flow dialog (flow.js, loaded before event-desk.js, which mounts it). -->
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/flow.css">
+<script src="/grid/__NOWCAST_STAMP__/flow.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/event-desk.js" defer></script>
+</head>
+<body class="event-page">
+<header class="bar">
+  <a class="brand" href="/" aria-label="InGRID home">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 15 8 6l4 6 2-3 3 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+    <span>InGRID</span>
+  </a>
+  <!-- ATG-8: the no-script fallback block, the same on every page (tests/test_cache_headers.py
+       pins it). shell.js hides it and builds the shared bar, where an event page sits under
+       Alerts and the breadcrumb below says so. -->
+  <nav class="sites" aria-label="Sections">
+    <a href="/" aria-current="page">Grid</a>
+    <a href="/data">Data</a>
+    <a href="/plants">Plants</a>
+    <a href="/explain">Explain</a>
+    <a href="/outlooks">Outlooks</a>
+    <a href="/paper">Paper</a>
+    <a href="/models">Models</a>
+    <a href="/work">Work</a>
+    <a href="/map">Map</a>
+    <a href="/alerts">Alerts</a>
+  </nav>
+</header>
+
+<!-- Platform polish (PP-B2): the event page is a decision workspace. The head is the anchor (the
+     event, its trigger and the price move); the wide column says what happened; the side column is
+     the decision region, where the AI reader's proposal and the person's decision sit apart and
+     both stay on the record. Secondary records sit behind tabs. A replay of recorded data: nothing
+     here is a forecast. -->
+<main class="gn-page ev" id="ev-main">
+  <header class="gn-page-head ev-head">
+    <nav class="gn-crumbs" aria-label="Breadcrumb"><a href="/alerts">Alerts</a><span aria-current="page" id="ev-crumb">Event</span></nav>
+    <div class="gn-page-title">
+      <h1 id="ev-title">—</h1>
+      <p class="gn-page-sub" id="ev-meta"></p>
+    </div>
+    <div class="gn-page-actions">
+      <a class="gn-btn gn-btn--sm" id="back" href="/">Open the desk</a>
+      <a class="gn-btn gn-btn--sm ev-jump" href="#ev-decide">Go to decision</a>
+    </div>
+    <div class="gn-page-meta" id="ed-pills"></div>
+  </header>
+
+  <!-- The anchor: the trigger notice, then the price move as the key figure. Stats show only
+       figures the record carries; every unknown folds into the one line under them. -->
+  <section class="ev-anchor" aria-label="The event at a glance">
+    <div class="ev-trigger">
+      <span class="gn-label">Trigger</span>
+      <p class="ed-lead" id="ed-lead"></p>
+      <div class="ed-rules" id="ed-rules"></div>
+    </div>
+    <div class="gn-stats ev-stats" id="ed-kpis"></div>
+    <p class="gn-unknowns" id="ed-unknowns" hidden></p>
+  </section>
+
+  <div class="gn-grid gn-grid--main-side ev-cols">
+  <div class="ev-col-main">
+    <!-- The ontology's three views, as one segmented control. Off the page without the record. -->
+    <div class="gn-filters ed-view" id="ed-view" role="toolbar" aria-labelledby="ed-view-h" hidden>
+      <span class="gn-label" id="ed-view-h">What was known</span>
+      <div class="gn-seg ed-modes" id="ed-modes" role="group" aria-labelledby="ed-view-h"></div>
+      <p class="gn-meta ed-mode-line" id="ed-mode-line"></p>
+      <div class="ed-hidden" id="ed-hidden"></div>
+    </div>
+
+    <!-- What happened: the price around the event with the trigger and the highest price marked,
+         then the notices and readings in order. Written by event-desk.js from the baked view. -->
+    <section class="gn-card gn-card--flush ed-glance" id="ed-glance" aria-labelledby="ed-glance-h" hidden>
+      <header class="gn-card-head">
+        <h2 id="ed-glance-h">What happened</h2>
+        <span class="gn-section-meta">Recorded data, not a forecast</span>
+        <div class="gn-section-actions"><button class="gf-q" type="button" data-flow="glance" aria-haspopup="dialog" aria-label="How we got this: What happened" hidden>?</button></div>
+      </header>
+      <figure class="ed-graph" id="ed-price-fig">
+        <figcaption class="sr-only" id="ed-price-h">Price around the event</figcaption>
+        <svg class="ed-chart" id="ed-price" role="img" aria-labelledby="ed-price-h ed-price-note"></svg>
+        <div class="ed-legend" id="ed-legend" aria-hidden="true"></div>
+        <p class="gn-meta ed-graph-note" id="ed-price-note"></p>
+      </figure>
+      <section class="ed-desk" id="ed-desk" aria-labelledby="ed-trail-h" hidden>
+        <div class="ed-desk-head"><h3 id="ed-trail-h">How we got here</h3><p class="gn-meta" id="ed-trail-note"></p></div>
+        <ol class="ed-trail" id="ed-trail"></ol>
+        <div class="ed-uncertain" id="ed-uncertain" hidden></div>
+      </section>
+    </section>
+
+    <!-- "What stood out": one row per family from the baked ontology record, each opening its
+         detail in place. Off the page without the record. -->
+    <section class="gn-card ed-ranked" id="ed-ranked" aria-labelledby="ed-ranked-h" hidden>
+      <header class="gn-card-head">
+        <h2 id="ed-ranked-h">What stood out</h2>
+        <span class="gn-section-meta">Evidence, not proof</span>
+        <div class="gn-section-actions"><button class="gf-q" type="button" data-flow="ranked" aria-haspopup="dialog" aria-label="How we got this: What stood out, ranked" hidden>?</button></div>
+      </header>
+      <p class="gn-meta ed-ranked-line" id="ed-ranked-line"></p>
+      <p class="ed-sub">Ranked by how far each was from the same hour on each of the 28 days before. These were present. They are not proven causes.</p>
+      <div class="ed-rk" id="ed-ranked-rows"></div>
+      <p class="gn-meta ed-foot" id="ed-ranked-src"></p>
+    </section>
+
+    <!-- The ontology's explanation in short, its full text one fold away. Off the page without it. -->
+    <article class="gn-card ed-ai" id="ed-ai" aria-labelledby="ed-ai-h" hidden>
+      <header class="gn-card-head">
+        <h2 id="ed-ai-h">Explanation</h2>
+        <span class="gn-section-meta">Written from the record, checked by code</span>
+        <div class="gn-section-actions"><button class="gf-q" type="button" data-flow="ai" aria-haspopup="dialog" aria-label="How we got this: AI explanation" hidden>?</button></div>
+      </header>
+      <div id="ed-ai-body"></div>
+    </article>
+
+    <!-- The records behind the event, as alternatives rather than a sequence: one tab each. -->
+    <section class="gn-card ev-records" aria-label="Records behind the event">
+      <div class="gn-tabs ev-tabs" role="tablist" data-tabs="records" aria-label="Records behind the event">
+        <button type="button" role="tab" id="ev-tab-more" data-tab="related" aria-controls="ed-more" aria-selected="true">Related records</button>
+        <button type="button" role="tab" id="ev-tab-rules" data-tab="rules" aria-controls="ed-prules" aria-selected="false" tabindex="-1" hidden>Price rules</button>
+        <button type="button" role="tab" id="ev-tab-read" data-tab="read" aria-controls="ed-read" aria-selected="false" tabindex="-1" hidden>What the system read</button>
+        <button type="button" role="tab" id="ev-tab-audit" data-tab="audit" aria-controls="ed-audit" aria-selected="false" tabindex="-1">Audit trail</button>
+      </div>
+
+      <!-- Related records: outages, notices, island links, lines, alerts around the same time and
+           the AI second opinion. Every row is a record with its evidence. -->
+      <div class="ed-more" id="ed-more" role="tabpanel" aria-labelledby="ev-tab-more">
+        <p class="gn-meta">Every row is a record you can open. Nothing after the as-of clock is shown.</p>
+        <div id="ed-more-body"></div>
+      </div>
+
+      <div class="ed-prules" id="ed-prules" role="tabpanel" aria-labelledby="ev-tab-rules" hidden>
+        <div class="ev-panel-head"><p class="gn-meta">Pricing flags for the interval, as known at the time. Listed, never scored.</p>
+        <button class="gf-q" type="button" data-flow="rules" aria-haspopup="dialog" aria-label="How we got this: Price rules" hidden>?</button></div>
+        <div class="ed-tiles" id="ed-tiles"></div>
+      </div>
+
+      <!-- RAG-5: "What the system read", from the event view's optional retrieval block. A view
+           without the block leaves this panel and its tab hidden and empty. -->
+      <section class="ed-read" id="ed-read" role="tabpanel" aria-labelledby="ev-tab-read" hidden>
+        <h2 class="sr-only" id="ed-read-h">What the system read</h2>
+        <p class="gn-meta">The passages ranked closest to the case question, using only what was available at the cutoff. Smaller distance is closer.</p>
+        <div id="ed-read-body"></div>
+      </section>
+
+      <div class="ed-audit" id="ed-audit" role="tabpanel" aria-labelledby="ev-tab-audit" hidden>
+        <p class="gn-meta">How every figure on this page was made. Each row can be checked against its record.</p>
+        <div id="ed-audit-body"></div>
+      </div>
+    </section>
+
+    <!-- ROUTES-1: the desk assistant's mount point; ask.js renders into it. -->
+    <section id="ask" data-context="event" aria-label="Ask Ingrid"></section>
+  </div>
+
+  <!-- The decision region (Ericka's layout, restored by the team on 18 October). The AI reader
+       proposes and the person decides in the journal: three numbered steps in one container,
+       read top to bottom, with the assumption the event touches and the next check beside them.
+       event-desk.js writes every part: the AI reader's recorded conclusion or its empty state,
+       the next check, the assumption, the journal box (Retain, Change or Note, a reason and the
+       pinned evidence) and this person's journal entries with their receipts. Sam's DESK-7 cards
+       (the desk line, price outlook, impact, decision form and history) are off this page. Their
+       renderers in event.js stay, tested against tests/fixtures/grid/event/legacy-cards.html. -->
+  <aside class="ev-col-side ev-side" id="ev-decide" aria-labelledby="ev-decide-h">
+    <section class="gn-card gn-card--flush ev-region">
+      <header class="gn-card-head">
+        <h2 id="ev-decide-h">Decision</h2>
+        <span class="gn-section-meta">The AI proposes. You decide in the journal.</span>
+      </header>
+
+      <!-- The AI reader's recorded conclusion: its label, the cutoff it read at and its answers,
+           or an empty state that says why nothing is proposed. -->
+      <div class="ev-step ev-step-ai" id="ev-ai" data-state="none">
+        <div class="ev-step-head"><span class="ev-step-n" aria-hidden="true">1</span><h3>What the AI reader concluded</h3><span class="gn-badge ev-who">Proposal</span></div>
+        <div class="ev-ai-label" id="ev-ai-label" hidden></div>
+        <p class="ev-ai-line" id="ev-ai-line" hidden></p>
+        <p class="ev-cutoff" id="ev-ai-cutoff" hidden></p>
+        <p class="ev-ai-hint" id="ev-ai-hint" hidden></p>
+        <!-- DESK-8: the two readings at the return cutoff, in the view's own words, with their
+             receipts folded. Kept on the live page when the desk line left it (18 October). -->
+        <p class="ev-ai-readings" id="ev-ai-readings" hidden></p>
+        <details class="gn-disclosure ev-ai-readings-fold" id="ev-ai-readings-fold" hidden>
+          <summary>Show the two readings' records</summary>
+          <ul class="ev-ai-readings-list" id="ev-ai-readings-list"></ul>
+        </details>
+        <div class="ev-answers" id="ev-answers" hidden></div>
+        <p class="ev-ai-more" id="ev-ai-more" hidden><a class="gn-link" href="#ed-ai">Read the AI explanation</a></p>
+      </div>
+
+      <div class="ev-step ed-next" id="ed-next" aria-labelledby="ed-next-h" hidden>
+        <div class="ev-step-head"><h3 id="ed-next-h">What to check next</h3></div>
+        <div id="ed-next-body"></div>
+      </div>
+
+      <!-- The register assumption the event touches, with its value and unit. -->
+      <div class="ev-step ev-assume" id="ev-assume">
+        <div class="ev-step-head"><h3>The assumption it touches</h3></div>
+        <div id="ev-assume-body"></div>
+        <p class="ev-cost" id="ed-cost"><span class="gn-label">Cost to us</span> <b>Needs your portfolio</b> <span class="gn-meta">Peso impact needs your positions and contracts. It is never guessed.</span></p>
+      </div>
+
+      <!-- The person's decision: the journal box, saved with what was known at the clock. -->
+      <div class="ev-step ev-step-you" id="ev-you">
+        <div class="ev-step-head"><span class="ev-step-n" aria-hidden="true">2</span><h3>Your decision</h3><span class="gn-badge ev-who">Decision</span></div>
+        <p class="gn-meta ev-you-line">Retain or Change the accepted value, or keep a Note. Give your reason and pin the evidence.</p>
+        <div class="ed-journal" id="ed-journal" hidden>
+          <div class="ed-journal-box" id="ed-journal-box"></div>
+        </div>
+      </div>
+
+      <!-- On the record: this person's journal entries on the event, each with its receipt. -->
+      <div class="ev-step ev-receipts" id="ev-receipts">
+        <div class="ev-step-head"><span class="ev-step-n" aria-hidden="true">3</span><h3>On the record</h3></div>
+        <div id="ev-journal-list"></div>
+      </div>
+    </section>
+  </aside>
+  </div>
+
+  <footer class="gn-sources caption" id="caption"><button type="button" class="caption-btn" id="limits-btn">Sources and limits: NGCP system-operator messages, IEMOP registered capacity and WESM five-minute data (company copy), in Manila time</button><ul class="limits" id="limits" hidden></ul></footer>
+</main>
+</body>
+</html>

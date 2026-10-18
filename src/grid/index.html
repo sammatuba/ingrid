@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- __NOWCAST_STAMP__ is the build stamp the server writes in: it names this build's assets
+     and replay files, so they can be cached for a year while this page revalidates. -->
+<meta charset="utf-8">
+<meta id="nowcast-build" name="nowcast-build" content="__NOWCAST_STAMP__">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>InGRID · Philippine grid</title>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0b1018" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f6fa" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/grid.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/map.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/briefs.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ask.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/outages.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/overview.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/dashboard.css">
+<script src="/grid/__NOWCAST_STAMP__/map.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/grid.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/briefs.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/ask.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/outages.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/overview.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/dash-alerts.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/dash-map.js" defer></script>
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ui.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/shell.css">
+<script src="/grid/__NOWCAST_STAMP__/shell.js"></script>
+</head>
+<body data-replay="page">
+<header class="bar">
+  <a class="brand" href="/" aria-label="InGRID home">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 15 8 6l4 6 2-3 3 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+    <span>InGRID</span>
+  </a>
+  <!-- ATG-8: the site's own sections, the same block on every page; the page's own section is
+       the one marked current. Each target is a route the application serves (the staged page
+       never names a file that is not in the stage). ROUTES-1 adds Models, Work and Map after
+       Paper; the ask panel has no entry of its own. -->
+  <nav class="sites" aria-label="Sections">
+    <a href="/" aria-current="page">Grid</a>
+    <a href="/data">Data</a>
+    <a href="/plants">Plants</a>
+    <a href="/explain">Explain</a>
+    <a href="/outlooks">Outlooks</a>
+    <a href="/paper">Paper</a>
+    <a href="/models">Models</a>
+    <a href="/work">Work</a>
+    <a href="/map">Map</a>
+    <a href="/alerts">Alerts</a>
+    <a href="/book">Book</a>
+  </nav>
+  <nav class="grids" aria-label="Grid">
+    <button type="button" data-grid="CLUZ">Luzon</button>
+    <button type="button" data-grid="CVIS" aria-pressed="true">Visayas</button>
+    <button type="button" data-grid="CMIN">Mindanao</button>
+  </nav>
+  <!-- UX-3: the replay clock lives inside the map below; `body[data-replay="page"]` tells the
+       shared shell not to draw or adopt a replay in its bar on this page. -->
+</header>
+
+<main class="desk">
+  <!-- FRONT-1: the front door. The words are explainer chapter 6's ("Why a review desk exists",
+       reached at /explain#ch-6): what the desk is, what to click first, what the AI reader did
+       and what the person does. The status line says what this is (a replay and a recorded run)
+       and claims nothing more. The map-first desk (UX-3) folds it away in dashboard.css; grid.js
+       still folds it to its summary on a later visit. -->
+  <section class="front card" id="front" aria-labelledby="front-title">
+    <details id="front-details" open>
+      <summary><h2 id="front-title">InGRID is a review desk.</h2></summary>
+      <p class="front-what">It reads new evidence, such as an operator notice, and finds the forecast assumption it touches. It asks an AI model fixed questions, then the analyst decides whether to keep or change the assumption.</p>
+      <ol class="front-steps">
+        <li><a href="/event/pedc-u2-2026-09-21">Open the PEDC Unit 2 trip</a>, a real operator notice of 21 September 2026.</li>
+        <li><a href="/event/pedc-u2-2026-09-21">Read what the AI reader answered under the cutoff</a>.</li>
+        <li><a href="/event/pedc-u2-2026-09-21">Record your decision</a>, which goes to your own copy.</li>
+      </ol>
+      <p class="front-more"><a href="/explain#ch-6">How the desk works</a> · <a href="/paper">Read the paper</a></p>
+      <p class="front-status">A replay of 21 September 2026. The AI reading is a recorded run of 14 October 2026. The site makes no live model call.</p>
+    </details>
+  </section>
+
+  <!-- ROUTES-1: the desk assistant's mount point. VIEW-1 renders into it. -->
+  <section id="ask" data-context="home" aria-label="Ask Ingrid"></section>
+
+  <!-- UX-3: the map is the page. It fills the first screen under the shared bar, and what a
+       reader needs to read the grid now floats on it: the "Grid now" card (top left), the scope
+       and layer pills (top), the zoom controls (right, the module's own), the price legend
+       (bottom left, the module's own), the replay (bottom right) and the detail drawer (right).
+       The centre of the bottom edge is left clear for the floating command bar. -->
+  <section class="map-wrap desk-map" id="desk-map" aria-labelledby="map-h">
+    <h2 id="map-h" class="sr-only">Grid map</h2>
+    <span class="sr-only" id="map-sub"></span>
+    <!-- ATG-6's canvas, mounted here by ATG-8 from the baked files the page already reads. The
+         module builds its own zoom controls, legend and popover inside this host, and hands a site or a link click back through the page's own openers. `map-marks`
+         is the page's one own mark: the ring on the site the reader opened. -->
+    <div id="map"></div>
+    <div class="map-marks" id="map-marks" aria-hidden="true"></div>
+    <div class="map-trips" id="map-trips" aria-hidden="true"></div>
+
+    <!-- ericka-desk's "Grid now", as one card on the map: per grid its status, its price with
+         the day's sparkline against its usual, demand and reserves; the two HVDC links; the
+         notices in force by severity. Filled by overview.js from the files the page already
+         read. A grid row scopes the map to that grid. -->
+    <section class="overview" id="overview" aria-labelledby="now-h">
+      <div class="ov-title">
+        <h1 id="now-h">Grid now</h1>
+        <span class="mono asof" id="ov-asof"></span>
+        <button type="button" class="ov-fold" id="ov-fold" aria-expanded="true" aria-controls="ov-body" aria-label="Fold the card" title="Fold the card">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 10 4-4 4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="ov-strip-mini" id="ov-mini" aria-hidden="true"></div>
+      <div class="ov-body" id="ov-body">
+        <div class="ov-cards" id="ov-cards"><p class="ov-none">Loading…</p></div>
+        <div class="ov-links-card" aria-labelledby="ov-links-title">
+          <h3 id="ov-links-title">HVDC links</h3>
+          <div id="ov-links"></div>
+          <div id="ov-congestion"></div>
+        </div>
+        <div class="ov-sev" id="ov-sev" aria-live="polite"></div>
+        <p class="ov-unknowns" id="ov-unknowns"></p>
+      </div>
+      <div class="ov-folded" hidden>
+        <ul class="ov-trips" id="ov-trips"></ul>
+      </div>
+    </section>
+
+    <!-- The scope and the layers, one row at the top of the map; dash-map.js fills the layers.
+         "More" holds the lower-priority layers (PP-B5). -->
+    <div class="map-toolbar" id="map-toolbar">
+      <div class="map-regions" id="map-regions" role="group" aria-label="Grid">
+        <button type="button" data-scope="all" aria-pressed="true">All grids</button>
+        <button type="button" data-scope="CLUZ" aria-pressed="false">Luzon</button>
+        <button type="button" data-scope="CVIS" aria-pressed="false">Visayas</button>
+        <button type="button" data-scope="CMIN" aria-pressed="false">Mindanao</button>
+      </div>
+      <div class="ml-list" id="ml-list" role="group" aria-label="Map layers"></div>
+      <button type="button" class="ml-pill ml-more" id="ml-more" aria-expanded="false" aria-controls="ml-more-pop" aria-haspopup="true">
+        <span class="ml-label">More</span>
+        <svg class="ml-chev" viewBox="0 0 12 12" aria-hidden="true"><path d="m3 4.5 3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <!-- The sites with no position on record: the map never draws them, so this chip above the
+         legend counts them and opens their list, by grid, with their prices (PP-B5). -->
+    <button type="button" class="ml-unplaced" id="ml-unplaced" aria-expanded="false" aria-controls="unplaced-pop" aria-haspopup="dialog" hidden>
+      <span class="ml-sw sw-pending"></span><span class="ml-count mono" id="ml-unplaced-n"></span><span class="ml-label">sites not on the map</span>
+      <svg class="ml-chev" viewBox="0 0 12 12" aria-hidden="true"><path d="m3 7.5 3-3 3 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="map-pop ml-more-pop" id="ml-more-pop" role="group" aria-label="More layers" hidden></div>
+    <div class="map-pop unplaced-pop" id="unplaced-pop" role="dialog" aria-labelledby="unplaced-h" hidden>
+      <div class="up-head">
+        <h3 id="unplaced-h">Not on the map</h3>
+        <span class="up-meta mono" id="unplaced-meta"></span>
+        <button type="button" class="up-close" aria-label="Close the list">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <p class="up-note">No position on record, so the map does not draw them. Dots use the map's price colour.</p>
+      <div class="up-body" id="unplaced-body"></div>
+    </div>
+
+    <!-- The replay, inside the map: step, play, the clock and its day, the speed, and a scrub
+         track with the day's notices ticked by severity. grid.js drives it, and the shell's
+         shared "as of" follows it (overview.js). -->
+    <div class="clock map-replay" id="map-replay" role="group" aria-label="Replay clock">
+      <div class="rp-head">
+        <span class="rp-label">Replay</span>
+        <div class="rp-when"><time id="clock-time" class="mono">—</time><span class="rp-date" id="clock-date"></span></div>
+        <button type="button" class="rp-speed mono" id="play-speed" aria-label="Replay speed" title="Replay speed">1×</button>
+      </div>
+      <div class="rp-row">
+        <button type="button" class="icon" data-step="-1" aria-label="Back five minutes" title="Back five minutes">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+        </button>
+        <button type="button" class="icon rp-play" id="play" aria-label="Play" title="Play or pause">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path id="play-glyph" d="M5 3v10l8-5z" fill="currentColor"/></svg>
+        </button>
+        <button type="button" class="icon" data-step="1" aria-label="Forward five minutes" title="Forward five minutes">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+        </button>
+        <div class="rp-scrub">
+          <div class="rp-track">
+            <div class="rp-ticks" id="scrub-ticks" aria-hidden="true"></div>
+            <input id="scrub" type="range" min="0" max="287" step="1" value="0" aria-label="Replay time">
+          </div>
+          <div class="rp-axis mono" aria-hidden="true"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- The detail drawer: what a click on a site, a link, a notice or a figure opened. On a wide
+       screen it floats over the map's left column (dashboard.css), on a phone it follows the map. -->
+  <aside class="dash-side" aria-label="Map focus">
+    <article class="card detail" id="detail" hidden aria-live="polite">
+      <div class="d-head"><h3 id="d-title">Detail</h3><button type="button" class="icon d-close" id="d-close" aria-label="Close detail"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
+      <div id="d-body" class="d-body"></div>
+    </article>
+  </aside>
+
+  <!-- Under the map (PP-B5): the design system's matrix. The main 2/3 holds what needs a
+       decision, the alerts, then the operator notices, as dense tables. The side 1/3 holds the
+       outage and derating tracker and what the map's scope holds at the clock. Each section
+       has its head, its empty state and its sources, collapsed. -->
+  <div class="desk-below gn-page">
+    <div class="gn-grid gn-grid--main-side">
+      <div class="below-main">
+        <!-- The alert inbox at the shared as-of clock, one row per risk event, from
+             /api/alerts/inbox; drawn by dash-alerts.js. A row opens its event or alert page, its
+             chevron opens how the alert came about. -->
+        <section class="gn-section dash-alerts" id="dash-alerts" aria-labelledby="da-h">
+          <header class="gn-section-head">
+            <h2 id="da-h">Alerts</h2>
+            <span class="gn-section-meta" id="da-count">Loading…</span>
+            <div class="gn-section-actions">
+              <div class="gn-seg" id="da-filters" role="group" aria-label="Alert filter">
+                <button type="button" data-view="all" aria-pressed="true">All</button><button type="button" data-view="high" aria-pressed="false">High and extreme</button>
+              </div>
+              <a class="gn-btn gn-btn--sm" id="da-more" href="/alerts">All alerts</a>
+            </div>
+          </header>
+          <div class="gn-card gn-card--flush da-card">
+            <div class="gn-table-wrap">
+              <table class="gn-table da-table" id="da-table">
+                <caption class="sr-only">Risk events since 00:00, up to the replay clock</caption>
+                <colgroup><col class="w-badge da-c-sev"><col><col class="w-time da-c-when"><col class="w-sm da-c-grid"><col class="da-c-cause"><col class="w-act"></colgroup>
+                <thead><tr>
+                  <th scope="col">Level</th>
+                  <th scope="col">Risk event</th>
+                  <th scope="col">Window</th>
+                  <th scope="col">Grid</th>
+                  <th scope="col">Cause</th>
+                  <th scope="col"><span class="sr-only">Actions</span></th>
+                </tr></thead>
+                <tbody id="da-list" aria-live="polite"></tbody>
+              </table>
+            </div>
+            <div class="da-empty" id="da-empty" hidden></div>
+          </div>
+          <footer class="gn-sources"><details><summary>Sources and method</summary>
+            <p>Alerts come from the alert inbox at the replay clock, since 00:00 of its day. Nothing after the clock shows.</p>
+            <p>The cost of an alert needs your portfolio, so the desk never computes one.</p>
+          </details></footer>
+        </section>
+
+        <section class="gn-section notices" id="notices" aria-labelledby="feed-h">
+          <header class="gn-section-head">
+            <h2 id="feed-h">Operator notices</h2>
+            <span class="gn-section-meta mono" id="feed-count"></span>
+            <div class="gn-section-actions">
+              <div class="gn-seg filters" role="group" aria-label="Notice grid filter">
+                <button type="button" data-filter="all" aria-pressed="true">All</button><button type="button" data-filter="CLUZ" aria-pressed="false">Luzon</button><button type="button" data-filter="CVIS" aria-pressed="false">Visayas</button><button type="button" data-filter="CMIN" aria-pressed="false">Mindanao</button>
+              </div>
+              <a class="gn-btn gn-btn--sm" href="/notices">All notices</a>
+            </div>
+          </header>
+          <div class="gn-card gn-card--flush feed-card">
+            <div class="gn-table-wrap feed-wrap" id="feed-wrap">
+              <table class="gn-table gn-table--compact feed-table">
+                <caption class="sr-only">Operator notices since 00:00, newest first. A row opens it on the map.</caption>
+                <colgroup><col class="w-xs f-c-time"><col class="w-badge f-c-kind"><col class="w-sm f-c-grid"><col><col class="w-sm f-c-sched"></colgroup>
+                <thead><tr>
+                  <th scope="col">Time</th>
+                  <th scope="col">Kind</th>
+                  <th scope="col">Grid</th>
+                  <th scope="col">Notice</th>
+                  <th scope="col" title="How long before the official schedule showed the same change">Lag</th>
+                </tr></thead>
+                <tbody id="feed"></tbody>
+              </table>
+            </div>
+            <div class="feed-empty" id="feed-empty" hidden></div>
+          </div>
+          <footer class="gn-sources"><details><summary>Sources and method</summary>
+            <p>NGCP system-operator notices, as received. Each plant notice is checked against the official schedule.</p>
+            <p>Lag says how long before the schedule showed the same change. A plant name we are less than 50% sure of is not linked.</p>
+          </details></footer>
+          <!-- ATG-8: the briefing and the findings feed, mounted by briefs.js from the bake's
+               briefs.json and findings.json after the first paint; folded on this desk. -->
+          <div class="briefs-mount" id="briefs-mount" hidden></div>
+        </section>
+      </div>
+
+      <aside class="below-side" aria-label="Outages and the map's scope">
+        <!-- ericka-desk E9, E10: the outage and derating tracker, filled by outages.js from the
+             bake's outages.json at the dashboard's clock and grid; without the file it reads No data. -->
+        <section class="gn-section outages" id="outages" aria-labelledby="outages-title">
+          <header class="gn-section-head">
+            <h2 id="outages-title">Outages and deratings</h2>
+            <span class="gn-section-meta mono" id="outages-count"></span>
+          </header>
+          <div class="gn-card gn-card--flush">
+            <div class="gn-meta o-asof" id="outages-asof"></div>
+            <ol id="outages-list" aria-live="polite"></ol>
+          </div>
+          <footer class="gn-sources"><details><summary>Sources and method</summary>
+            <p>First known from an operator notice or the official schedule. A scheduled outage leaves when it ends.</p>
+            <p>A unit matched with less than 50% confidence is listed as Unclear. It is not linked or counted.</p>
+          </details></footer>
+        </section>
+        <!-- ericka-desk E6: what the map's scope holds at the clock. -->
+        <section class="gn-section ov-scope" id="ov-scope" aria-live="polite"></section>
+      </aside>
+    </div>
+  </div>
+  <!-- Folded on the map-first desk; their markup stays for the scripts and tests that fill and
+       read them: the brief, the grids table, the review list, the chart and the day path. -->
+  <section class="col left" aria-label="Situation">
+    <article class="card brief">
+      <h2 id="brief-title">What's happening in Visayas</h2>
+      <p id="brief-text" class="brief-text"></p>
+      <p id="brief-asof" class="asof"></p>
+    </article>
+    <article class="card">
+      <h3>Grids</h3>
+      <table class="figures" id="figures">
+        <thead><tr><th scope="col">Grid</th><th scope="col" class="num" title="Demand, MW: the load the grid serves at the clock time">MW</th><th scope="col" class="num" title="Median generator price, ₱/MWh, at the clock time">₱/MWh</th><th scope="col" class="num" title="Net flow, MW: + import into the grid, − export">Flow</th><th scope="col" class="num" title="Dispatchable reserve against its requirement at the clock time">Reserve</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <p class="asof" id="figures-asof"></p>
+    </article>
+    <article class="card reviews" id="reviews" hidden>
+      <h3>Reviews</h3>
+      <ul id="review-list"></ul>
+    </article>
+  </section>
+
+  <section class="chart-wrap card" aria-label="Demand and price">
+    <div class="chart-head">
+      <h3 id="chart-title">Visayas demand and price, 21 Sep 2026</h3>
+      <p class="asof" id="chart-asof">Five-minute intervals · demand MW (area) · median generator price ₱/MWh (line)</p>
+    </div>
+    <div class="chart-row">
+      <svg id="chart" role="img" aria-labelledby="chart-title"></svg>
+      <div class="path-wrap" id="path-wrap" hidden>
+        <h3 id="path-title">The day as a path</h3>
+        <svg id="path" role="img" aria-labelledby="path-title"></svg>
+        <p class="asof" id="path-asof"></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="caption" id="caption">Source: WESM five-minute market data (company copy) and NGCP system-operator messages · replay in Manila time · prices in ₱/MWh</footer>
+</body>
+</html>

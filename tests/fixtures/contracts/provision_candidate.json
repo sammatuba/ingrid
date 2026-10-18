@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "artifact_id": "prov-synthetic-market-rule-001",
+  "artifact_type": "provision_candidate",
+  "revision_id": "rev-001",
+  "producer": {"name": "synthetic-fixture", "version": "0.1.0"},
+  "created_at": "2026-10-03T10:00:00+08:00",
+  "information_cutoff": "2026-10-03T09:00:00+08:00",
+  "access_policy_ref": "policy:internal-analyst",
+  "scope": {"kind": "case", "id": "synthetic-case-001"},
+  "source_refs": [
+    {
+      "source_id": "src-doc-001",
+      "source_version": "doc-rev-7",
+      "content_digest": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "locator": {"kind": "exact", "path": "docs/synthetic/market-rules-7.pdf", "start": 10, "end": 12},
+      "availability": {"known_at": "2026-10-03T08:00:00+08:00", "basis": "publisher-feed"}
+    }
+  ],
+  "payload": {
+    "passages": [
+      {
+        "source_ref_id": "src-doc-001",
+        "locator": {"kind": "exact", "path": "docs/synthetic/market-rules-7.pdf", "start": 10, "end": 12},
+        "content_digest": "0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    ],
+    "issuer": "Synthetic Independent Market Operator",
+    "jurisdiction": {"code": "PH", "name": "Philippines"},
+    "actor": {"kind": "market_operator", "name": "Synthetic IMO", "unknown_reason": null},
+    "action": "impose_price_cap",
+    "object": {"kind": "price_cap", "identifier": "synthetic-cap-2026", "unknown_reason": null},
+    "conditions": ["applies during a declared synthetic market intervention"],
+    "exceptions": [],
+    "publication_date": "2026-09-28",
+    "publication_date_unknown_reason": null,
+    "effectivity": {"kind": "from_date", "date": "2026-10-01", "unknown_reason": null},
+    "deadlines": [
+      {"label": "comment-period", "date": "2026-10-15", "unknown_reason": null}
+    ],
+    "amendment_refs": [],
+    "supersession_refs": [],
+    "unresolved_fields": [
+      {"field": "effectivity_end", "reason": "not stated in the synthetic passage"}
+    ]
+  },
+  "synthetic": true,
+  "content_digest": "7465df4c3803918a42187f7764e06118781faa99ee97341876aefcac10cf652b"
+}

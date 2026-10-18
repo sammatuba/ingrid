@@ -1,0 +1,30 @@
+FICTIONAL SYNTHETIC GAMMA NOTES
+Synthetic fixture issue 1.0
+Every word here is fictional.
+
+SECTION 1 SPOT PRICE
+1.1 Spot Price rules
+The fictional operator reviews the spot price against the market suspension in clause 1.1. No real issuer, unit or market is described.
+
+1.2 Billing Statement rules
+The fictional operator reviews the billing statement against the registration criteria in clause 1.2. No real issuer, unit or market is described.
+
+1.3 Registration Criteria rules
+The fictional operator reviews the registration criteria against the metering point in clause 1.3. No real issuer, unit or market is described.
+
+1.4 Penalty Notice rules
+The fictional operator reviews the penalty notice against the pricing error in clause 1.4. No real issuer, unit or market is described.
+
+SECTION 2 AUDIT FINDING
+2.1 Audit Finding rules
+The fictional operator reviews the audit finding against the billing statement in clause 2.1. No real issuer, unit or market is described.
+
+2.2 Dispatch Schedule rules
+The fictional operator reviews the dispatch schedule against the price cap in clause 2.2. No real issuer, unit or market is described.
+
+2.3 Reserve Offer rules
+The fictional operator reviews the reserve offer against the trading interval in clause 2.3. No real issuer, unit or market is described.
+
+2.4 Unit Outage rules
+The fictional operator reviews the unit outage against the spot price in clause 2.4. No real issuer, unit or market is described.
+

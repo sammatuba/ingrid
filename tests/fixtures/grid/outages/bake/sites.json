@@ -1,0 +1,47 @@
+[
+ {
+  "s": "04SYNA",
+  "k": "G",
+  "g": "CVIS",
+  "cap": 100,
+  "lon": null,
+  "lat": null,
+  "p": "placeholder"
+ },
+ {
+  "s": "04SYNB",
+  "k": "G",
+  "g": "CVIS",
+  "cap": 80,
+  "lon": null,
+  "lat": null,
+  "p": "placeholder"
+ },
+ {
+  "s": "01SYNC",
+  "k": "G",
+  "g": "CLUZ",
+  "cap": 300,
+  "lon": null,
+  "lat": null,
+  "p": "placeholder"
+ },
+ {
+  "s": "10SYND",
+  "k": "G",
+  "g": "CMIN",
+  "cap": 50,
+  "lon": null,
+  "lat": null,
+  "p": "placeholder"
+ },
+ {
+  "s": "04SYNLOAD",
+  "k": "NL",
+  "g": "CVIS",
+  "cap": null,
+  "lon": null,
+  "lat": null,
+  "p": "placeholder"
+ }
+]

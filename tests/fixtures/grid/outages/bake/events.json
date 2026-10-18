@@ -1,0 +1,10 @@
+[
+ {
+  "id": "syn-synd-trip",
+  "t": "2026-09-21T14:00:00",
+  "advisory": "M140000",
+  "site": "10SYND",
+  "title": "SYNTHETIC SYND trip",
+  "assumption": "SYNTHETIC"
+ }
+]

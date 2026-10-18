@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- __NOWCAST_STAMP__ is the build stamp the server writes in: it names this build's assets
+     and replay files, so they can be cached for a year while this page revalidates. -->
+<meta charset="utf-8">
+<meta id="nowcast-build" name="nowcast-build" content="__NOWCAST_STAMP__">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>InGRID · Synthetic book</title>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0b1018" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f6fa" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/grid.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/book.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ask.css">
+<script src="/grid/__NOWCAST_STAMP__/book.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/ask.js" defer></script>
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ui.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/shell.css">
+<script src="/grid/__NOWCAST_STAMP__/shell.js"></script>
+</head>
+<body class="book-page">
+<!-- BOOK-3: the page header is the shared bar and the synthetic label line under it, held
+     together in one sticky block, so the label stays in view on every screen at any width. -->
+<div class="bk-top">
+<header class="bar">
+  <a class="brand" href="/" aria-label="InGRID home">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 15 8 6l4 6 2-3 3 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+    <span>InGRID</span>
+  </a>
+  <!-- The same section block every page of the site family carries. DOCK-5 adds the Book entry
+       here, marked current, and on the pages no pending task owns. -->
+  <nav class="sites" aria-label="Sections">
+    <a href="/">Grid</a>
+    <a href="/data">Data</a>
+    <a href="/plants">Plants</a>
+    <a href="/explain">Explain</a>
+    <a href="/outlooks">Outlooks</a>
+    <a href="/paper">Paper</a>
+    <a href="/models">Models</a>
+    <a href="/work">Work</a>
+    <a href="/map">Map</a>
+    <a href="/alerts">Alerts</a>
+    <a href="/book" aria-current="page">Book</a>
+  </nav>
+</header>
+<!-- The synthetic label line. book.js writes the book record's own label into it. -->
+<p class="bk-flag" id="bk-flag" role="note">Synthetic book, a method demonstration: no account, contract, node or volume in it is real.</p>
+</div>
+
+<!-- The desk assistant's mount point. The command bar holds it in its sheet. -->
+<section id="ask" data-context="book" aria-label="Ask Ingrid"></section>
+
+<main class="gn-page book">
+  <header class="gn-page-head">
+    <div class="gn-page-title">
+      <h1>Synthetic book</h1>
+      <!-- The summary sentence. book.js composes it from the two baked files. -->
+      <p class="gn-page-sub bk-say" id="bk-summary"></p>
+    </div>
+    <div class="gn-page-meta"><span class="gn-badge gn-badge--info">Synthetic</span><span class="gn-meta" id="bk-cutoff"></span></div>
+  </header>
+
+  <!-- The absence state, shown when the build has no book files. -->
+  <div class="gn-empty" id="bk-none" role="status" hidden>
+    <p class="gn-empty-title">No book in this build</p>
+    <p class="gn-empty-body bk-say" id="bk-empty" hidden></p>
+    <div class="gn-empty-actions"><a class="gn-btn" href="/register">Open the register</a><a class="gn-btn gn-btn--ghost" href="/explain#ch-2">How impact works</a></div>
+  </div>
+
+  <!-- The anchor: what the book leaves uncovered on the window day, and the middle impact per
+       region under its chosen vintage. Every figure is a field of the baked files. -->
+  <div class="gn-stats bk-anchor" id="bk-stats" aria-label="Exposure"></div>
+
+  <!-- Three views of one book: its exposure, the impact band, and the records it is made of. -->
+  <div class="gn-tabs" role="tablist" aria-label="Book views" data-tabs="book" id="bk-tabs" hidden>
+    <button type="button" role="tab" id="bk-tab-exposure" data-tab="exposure" aria-controls="exposure" aria-selected="true">Exposure</button>
+    <button type="button" role="tab" id="bk-tab-impact" data-tab="impact" aria-controls="impact" aria-selected="false" tabindex="-1">Impact band</button>
+    <button type="button" role="tab" id="bk-tab-records" data-tab="records" aria-controls="records" aria-selected="false" tabindex="-1">Accounts and contracts</button>
+  </div>
+  <div role="tabpanel" id="exposure" aria-labelledby="bk-tab-exposure" class="bk-panel"></div>
+  <div role="tabpanel" id="impact" aria-labelledby="bk-tab-impact" class="bk-panel" hidden></div>
+  <div role="tabpanel" id="records" aria-labelledby="bk-tab-records" class="bk-panel" hidden></div>
+
+  <div class="gn-sources">
+    <details>
+      <summary>Sources and method</summary>
+      <footer class="caption" id="caption">Source: the synthetic book and its outlook vintages, read as records. Clock hours are Manila time, and instants are UTC.</footer>
+    </details>
+  </div>
+</main>
+</body>
+</html>

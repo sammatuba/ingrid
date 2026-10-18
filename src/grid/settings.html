@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- __NOWCAST_STAMP__ is the build stamp the server writes in: it names this build's assets,
+     so they can be cached for a year while this page revalidates. This page is served with the
+     sign-in content security policy (src/api SIGN_IN_POLICY): Google sign-in through Firebase
+     Auth needs Google's sign-in hosts, and no other page admits them. -->
+<meta charset="utf-8">
+<meta id="nowcast-build" name="nowcast-build" content="__NOWCAST_STAMP__">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>InGRID · Settings</title>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0b1018" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f6fa" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/grid.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/settings.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ask.css">
+<!-- Firebase JS SDK 10.12.2 (compat), vendored byte for byte from the npm package `firebase`
+     (Apache-2.0): the content security policy admits no script host but this one. -->
+<script src="/grid/__NOWCAST_STAMP__/firebase-app-compat.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/firebase-auth-compat.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/alerts.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/ask.js" defer></script>
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ui.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/shell.css">
+<script src="/grid/__NOWCAST_STAMP__/shell.js"></script>
+</head>
+<body class="settings-body">
+<header class="bar">
+  <a class="brand" href="/" aria-label="InGRID home">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 15 8 6l4 6 2-3 3 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+    <span>InGRID</span>
+  </a>
+  <!-- The no-script fallback navigation; shell.js rebuilds it into the shared top bar. -->
+  <nav class="sites" aria-label="Sections">
+    <a href="/">Grid</a>
+    <a href="/data">Data</a>
+    <a href="/plants">Plants</a>
+    <a href="/explain">Explain</a>
+    <a href="/outlooks">Outlooks</a>
+    <a href="/paper">Paper</a>
+    <a href="/models">Models</a>
+    <a href="/work">Work</a>
+    <a href="/map">Map</a>
+    <a href="/alerts">Alerts</a>
+  </nav>
+  <div class="account" id="account">
+    <span class="who mono" id="who"></span>
+    <button type="button" class="gn-btn gn-btn--ghost gn-btn--sm" id="sign-out" hidden>Sign out</button>
+  </div>
+</header>
+
+<!-- ROUTES-1: the desk assistant's mount point. The command bar holds it in its sheet. -->
+<section id="ask" data-context="alerts" aria-label="Ask Ingrid"></section>
+
+<!-- ericka-desk, platform polish PP-B1: the alert settings, on their own page (the shell's Settings
+     link). The rules form (the shared rule, the levels by region and the recipients) is the main
+     column, a one-off check sits in the side column, and the recent alerts run below. Signed out,
+     one banner says the page is read only and offers the one sign-in action. alerts.js drives
+     both this page and /alerts and draws only what is here. -->
+<main class="gn-page st-page" aria-labelledby="settings-title">
+  <header class="gn-page-head">
+    <nav class="gn-crumbs" aria-label="Breadcrumb"><a href="/alerts">Alerts</a><span aria-current="page">Settings</span></nav>
+    <div class="gn-page-title">
+      <h1 id="settings-title">Alert settings</h1>
+      <p class="gn-page-sub">Who is emailed, at which price levels, and what was sent.</p>
+    </div>
+    <div class="gn-page-actions"><a class="gn-btn" href="/alerts">Back to alerts</a></div>
+    <div class="gn-page-meta"><span class="gn-meta" id="rules-current"></span></div>
+  </header>
+
+  <!-- Signed out: one banner, one sign-in action. alerts.js shows it, fills the line and decides
+       whether the action can work here. -->
+  <section class="gn-card st-banner" id="signin-card" aria-labelledby="signin-title" hidden>
+    <span class="gn-badge gn-badge--info st-banner-badge">Read only</span>
+    <div class="st-banner-text">
+      <h2 id="signin-title">Sign in to change these settings</h2>
+      <p class="gn-meta" id="signin-line">Signed out, the rules show without recipients. Checks and saving need an account.</p>
+    </div>
+    <div class="st-banner-actions">
+      <button type="button" class="gn-btn gn-btn--primary" id="signin-open" aria-expanded="false" aria-controls="pw-form">Sign in</button>
+    </div>
+    <form id="pw-form" class="st-signin-form" novalidate hidden>
+      <label class="st-field"><span class="gn-label">Email</span><input class="gn-input" id="pw-email" type="email" autocomplete="username" required></label>
+      <label class="st-field"><span class="gn-label">Password</span><input class="gn-input" id="pw-password" type="password" autocomplete="current-password" required></label>
+      <button type="submit" class="gn-btn gn-btn--primary" id="pw-submit">Sign in</button>
+      <p class="st-error" id="pw-error" role="alert"></p>
+    </form>
+  </section>
+
+  <p class="notice" id="notice" role="status" aria-live="polite"></p>
+
+  <div class="gn-grid gn-grid--main-side st-grid">
+    <section class="gn-card st-rules" id="rules-card" aria-labelledby="rules-title">
+      <header class="gn-card-head"><h2 id="rules-title">Notification rules</h2><span class="gn-meta">One rule set for every recipient. Saved as a new version.</span></header>
+      <form id="rules-form" novalidate>
+        <fieldset id="rules-fields" class="st-fields">
+          <legend class="sr-only">Notification rules</legend>
+          <div class="st-row">
+            <span class="gn-label st-row-label">Emails</span>
+            <div class="st-row-body">
+              <label class="st-check"><input id="rl-enabled" type="checkbox" checked> Send alert emails</label>
+            </div>
+          </div>
+          <div class="st-row">
+            <span class="gn-label st-row-label" id="rl-mode-l">Alert when</span>
+            <div class="st-row-body" role="radiogroup" aria-labelledby="rl-mode-l">
+              <label class="st-check"><input type="radio" name="rl-mode" value="absolute" checked> Price at or above a level</label>
+              <label class="st-check"><input type="radio" name="rl-mode" value="ratio_to_baseline"> Price at or above a multiple of usual</label>
+              <p class="gn-meta">Usual is the 28-day same-hour median.</p>
+            </div>
+          </div>
+          <div class="st-row">
+            <label class="gn-label st-row-label" for="rl-value">Level</label>
+            <div class="st-row-body st-inline">
+              <input class="gn-input st-num" id="rl-value" type="number" min="0" step="any" inputmode="decimal" value="15000">
+              <span class="gn-meta">PHP/MWh, or the multiple of usual</span>
+            </div>
+          </div>
+          <div class="st-row">
+            <span class="gn-label st-row-label">Regions</span>
+            <div class="st-row-body"><div class="checks" id="rl-regions"></div></div>
+          </div>
+          <div class="st-row">
+            <label class="gn-label st-row-label" for="rl-severity">Lowest level</label>
+            <div class="st-row-body st-inline">
+              <select class="gn-select" id="rl-severity"><option value="low">Low</option><option value="medium">Medium</option><option value="high" selected>High</option><option value="extreme">Extreme</option></select>
+              <span class="gn-meta">Alerts below this are not emailed.</span>
+            </div>
+          </div>
+
+          <section class="st-sub" aria-labelledby="levels-title">
+            <header class="st-sub-head"><h3 id="levels-title">Levels by region</h3>
+              <span class="gn-meta">Shared uses the level above. A collapse level is off until set.</span></header>
+            <div class="gn-table-wrap"><table class="gn-table gn-table--compact st-edit" id="rl-levels">
+              <colgroup><col class="st-c-region"><col><col class="st-c-val"><col><col class="st-c-val"></colgroup>
+              <thead><tr><th scope="col">Region</th><th scope="col">Spike</th><th scope="col" class="num">Spike value</th><th scope="col">Collapse</th><th scope="col" class="num">Collapse value</th></tr></thead>
+              <tbody></tbody>
+            </table></div>
+          </section>
+
+          <section class="st-sub" aria-labelledby="recipients-title">
+            <header class="st-sub-head"><h3 id="recipients-title">Recipients</h3>
+              <span class="gn-meta">Each one picks regions and the lowest level they want.</span>
+              <button type="button" class="gn-btn gn-btn--sm st-sub-action" id="rl-add-recipient">Add recipient</button></header>
+            <div class="gn-table-wrap"><table class="gn-table gn-table--compact st-edit" id="rl-recipients">
+              <colgroup><col><col class="st-c-regions"><col class="st-c-sev"><col class="st-c-x"></colgroup>
+              <thead><tr><th scope="col">Email</th><th scope="col">Regions</th><th scope="col">Lowest level</th><th scope="col"><span class="sr-only">Remove</span></th></tr></thead>
+              <tbody></tbody>
+            </table></div>
+          </section>
+
+          <ul class="errors" id="rl-errors" aria-live="polite"></ul>
+          <div class="st-actions">
+            <button type="submit" class="gn-btn gn-btn--primary" id="rl-save">Save rules</button>
+            <button type="button" class="gn-btn" id="rl-test">Send test email</button>
+          </div>
+        </fieldset>
+      </form>
+    </section>
+
+    <section class="gn-card st-check-card" id="check-card" aria-labelledby="check-title">
+      <header class="gn-card-head"><h2 id="check-title">Run a check</h2><span class="gn-meta">One five-minute interval against the rules</span></header>
+      <form id="check-form" class="st-check-form" novalidate>
+        <label class="st-field"><span class="gn-label">Region</span>
+          <select class="gn-select" id="check-region" name="region">
+            <option value="CLUZ">Luzon</option>
+            <option value="CVIS" selected>Visayas</option>
+            <option value="CMIN">Mindanao</option>
+          </select>
+        </label>
+        <label class="st-field"><span class="gn-label">Interval, Manila time</span>
+          <input class="gn-input" id="check-interval" name="interval" type="datetime-local" step="300" value="2026-09-21T13:40">
+        </label>
+        <label class="st-check"><input id="check-send" type="checkbox"> Email the recipients</label>
+        <button type="submit" class="gn-btn gn-btn--primary" id="check-run">Run check</button>
+      </form>
+      <p class="gn-meta st-help">It starts at the PEDC Unit 2 trip, 21 Sep 13:40, Visayas. A link like <span class="mono">/settings#t=13:40&amp;g=CVIS</span> starts at that time and grid.</p>
+      <ul class="errors" id="check-errors" aria-live="polite"></ul>
+      <div id="check-result" class="results" aria-live="polite"></div>
+    </section>
+  </div>
+
+  <section class="gn-section" id="history-card" aria-labelledby="history-title">
+    <header class="gn-section-head"><h2 id="history-title">Recent alerts and emails</h2>
+      <span class="gn-section-meta">The last 50, from checks and the replay</span>
+      <span class="gn-section-meta st-history-note" id="history-note" role="status"></span></header>
+    <div class="gn-card gn-card--flush">
+      <div class="gn-table-wrap"><table class="gn-table" id="history">
+        <colgroup><col class="st-c-when"><col class="st-c-region"><col class="st-c-num"><col class="st-c-sev"><col><col class="st-c-num"><col class="st-c-src"></colgroup>
+        <thead><tr><th scope="col">Interval, Manila</th><th scope="col">Region</th><th scope="col" class="num">Price ₱/MWh</th><th scope="col">Level</th><th scope="col">Top driver</th><th scope="col" class="num">Emailed</th><th scope="col">Source</th></tr></thead>
+        <tbody></tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <footer class="gn-sources">
+    <details>
+      <summary>Sources and method</summary>
+      <ul class="st-method">
+        <li>Likely drivers are evidence, not proof. Each is ranked by how unusual it was against the 28-day same-hour baseline.</li>
+        <li>Uncertain plant matches are flagged and not counted.</li>
+        <li>A check reads one interval from BigQuery and takes 30 to 60 seconds.</li>
+        <li>Nothing here is trading advice.</li>
+      </ul>
+    </details>
+  </footer>
+</main>
+</body>
+</html>

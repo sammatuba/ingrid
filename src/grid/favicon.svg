@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <!-- InGRID favicon: the small-size master of the mark (grid pitch 8, so every stroke lands on
+       whole pixels at 16px) on the accent tile. Light: accent #2563eb, ink #ffffff (the light
+       theme's accent and on-accent tokens). Dark: accent #7cc4ff, ink #0b1018. Rasters come
+       from scripts/brand/build_icons.py. -->
+  <style>
+    .tile { fill: #2563eb; }
+    .ink { fill: #ffffff; color: #ffffff; }
+    @media (prefers-color-scheme: dark) {
+      .tile { fill: #7cc4ff; }
+      .ink { fill: #0b1018; color: #0b1018; }
+    }
+  </style>
+  <rect class="tile" width="32" height="32" rx="7"/>
+  <g class="ink">
+    <path d="M8 8H16V24H24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="8" cy="8" r="3.25"/>
+    <circle cx="24" cy="24" r="4.25"/>
+    <circle cx="24" cy="8" r="2.25"/>
+    <circle cx="8" cy="24" r="2.25"/>
+  </g>
+</svg>

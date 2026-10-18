@@ -1,0 +1,179 @@
+{
+ "schema_version": 1,
+ "status": "not_submitted",
+ "theme": "Future of Work & Enterprise Productivity",
+ "review_date": "2026-10-18",
+ "working_repository": "sammatuba/grid-nowcast",
+ "inspected_base_commit": "c140f7ec",
+ "inspected_base_note": "RELEASE-25 records (2026-10-19, orchestrator seat) read main c140f7ec, the tree deployed as batch release 25 (the live trace stream task/STREAM-1 9d5fcfaf and the desk fixes task/DESKFIX-1 7652d926 merged on integ/pp; release 24 270e8980 was the waiting indicator; source: the release 25 deploy log, .local/wt/INTEG-PP/.local-deploy25.log, on the owner's machine; PROGRESS row 'Batch release 25' (2026-10-19)). History: RELEASE-23 records (2026-10-18, orchestrator seat) read main ac3b96b7, the tree deployed as batch release 23 (the platform-polish batch PR #104 integrated on integ/pp with PR #103 merged on main first, the InGRID rename 809840e3, the review rework 061078f3; source: the release 23 deploy log, .local/wt/INTEG-PP/.local-deploy23.log, on the owner's machine; PROGRESS row 'Batch release 23' (2026-10-18)). History: RELEASE-22 records (task/POLISH-2, 2026-10-18) read main e05ee6d9, the tree deployed as batch release 22 (the UI refinement PR #102 integrated on main 50cdd44c, POLISH-2 merged, the alerts wording commit 8e1a8222; source: the release 22 deploy log, .local/deploy22.log, on the owner's machine; PROGRESS row 'Batch release 22' (2026-10-18)). History: POLISH-2 (2026-10-18) read main 49ec2958 (batch release 21 merged; that deployed tree was main 0d658ea8, PROGRESS row 'Batch release 21' (2026-10-18)); compiled at REL-4 against feat/entry-framing a95db82 (main b5d2a36 merged: the price records regenerated after the data refresh); the branch was rebased onto it by the orchestrator on 2026-10-17 after the runner's wave; earlier compilations against d50ee94 and 7605484 are superseded",
+ "registration_receipt": null,
+ "eligibility_attested_by": null,
+ "rights_approved_by": null,
+ "public_data_manifest": null,
+ "source_release_commit": null,
+ "public_repository_url": "https://github.com/sammatuba/ingrid",
+ "deployed_url": "https://ingrid-desk.web.app",
+ "cloud_run_url": "https://grid-nowcast-adcri4pd6q-as.a.run.app",
+ "cloud_run_revision": "grid-nowcast-00047-lnt",
+ "image_digest": "sha256:a7f8809365e81c3b7078c51690ccbb0c3139e861fa94e6dd6fb63bd58110111f",
+ "image_digest_note": "Platform (linux/amd64) digest of the Cloud Run revision grid-nowcast-00047-lnt, read in full from the release 25 deploy log, .local/wt/INTEG-PP/.local-deploy25.log, on the owner's machine (ignored path, written 2026-10-19); release 24's revision grid-nowcast-00046-vl5 (sha256:768a1df18669a1cff01ccee3d1f10de013b54947aec8f0486be2dfea601fd458) is the rollback; REL-5 re-reads the platform digest from the serving revision with gcloud run revisions describe grid-nowcast-00047-lnt --region asia-southeast1 --format='value(status.imageDigest)'. History: Platform (linux/amd64) digest of the Cloud Run revision grid-nowcast-00045-vg8, read in full from the release 23 deploy log, .local/wt/INTEG-PP/.local-deploy23.log, on the owner's machine (ignored path, written 2026-10-18); release 22's revision grid-nowcast-00044-fpr (sha256:26bdd6d28e74d26cf69ab220bd27bd1f27086daf9fb0be78c1fa40e75a91674e) is the rollback; the pushed image is asia-southeast1-docker.pkg.dev/grid-nowcast/grid-nowcast/grid-nowcast@sha256:3e023c5796f3847f50f234e334a8a28ba35890e32d6c0370548c1bf4cfb06a31; REL-5 re-reads the platform digest from the serving revision with gcloud run revisions describe grid-nowcast-00044-fpr --region asia-southeast1 --format='value(status.imageDigest)'; Hosting, the first screen and Cloud Run /health report the live build stamp 8e48b553cd692e60. History: release 21 (2026-10-18) served grid-nowcast-00043-dj4 with platform digest sha256:04ae582f9f9c5be30cefcbb91e5c06860e14dd641b8a861571df3fd55afade01 (the gcloud SDK log .local/gcloud/logs/2026.10.18/18.21.51.862725.log on the owner's machine) and build stamp 658d375c9d1b5d8c; release 4 (2026-10-16) served grid-nowcast-00014-pzz with linux/amd64 image sha256:30374d3b…cc481f; both superseded by release 22.",
+ "google_model_run_refs": [
+  {
+   "record": "docs/work/grid-desk/live-run-2026-10-14.md",
+   "case": "pedc-u2-2026-09-21 (real case, permission perm:wesm-company-copy:2026-10-13 version 2)",
+   "model": "gemini-3.8-flash (Vertex AI, location global, project grid-nowcast)",
+   "date": "2026-10-14",
+   "runs": [
+    "trip/t1, request digest 512a7faa6554…, artifact probe:e575d3c9e91a6e96…, composed challenges",
+    "return/t1, request digest 1ff0b7856a2b…, artifact probe:6e4f9a819e8a1149…, composed challenges"
+   ],
+   "note": "Two live calls, one attempt each; the saved artifacts stay in the ignored run directory and a copy of the trip artifact is seeded into each judge's case."
+  },
+  {
+   "record": "docs/work/m3-live-gemini/implementation.md",
+   "case": "labelled synthetic fixture",
+   "model": "gemini-3.8-flash (Vertex AI, location global)",
+   "date": "2026-10-11",
+   "runs": [
+    "core6-cited-002, saved proposed judgment, label challenges, one citation identical to the immutable passage"
+   ],
+   "note": "The first live cited receipt; CORE-6 designated accept in docs/work/reviews/CORE-6.md."
+  },
+  {
+   "record": "docs/work/reviews/NUM-1.md",
+   "model": "TimesFM 3.0 via BigQuery AI.FORECAST",
+   "status": "built, never run",
+   "note": "The numerical statement pair and its parser are tested offline through an injected transport; no BigQuery query has run."
+  }
+ ],
+ "numerical_evaluation_refs": [
+  {
+   "record": "docs/work/probe-bundle/evaluation.md",
+   "report": ".local/eval/report.json, SHA-256 20b775da664f9ff9210c1ee2f600c1786b7c2ab4033a1e0fa591bf697dd0e496 (ignored path; regenerated by the SYNC-1 v5 refresh)",
+   "what": "EVAL-3 ablation A1 to A3 over 25 project-authored pairs / 28 compiles: bundle 22/28 against single_render 22/28, a tie; selective accuracy 21/24 against 22/28; the A2 gate's only effect is one calibration-split compile; A3 not identified, every flip rate 0",
+   "label": "synthetic_fixture, scripted backend, live_calls 0; not analyst validation and not model accuracy"
+  }
+ ],
+ "s1_evaluation_refs": [
+  {
+   "record": "docs/work/probe-bundle/evaluation.md",
+   "what": "The bundle is a second renderer over the System One answers; A1 reads the single-render baseline from canonical q8_direction_f0 and the bundle from the frozen composition. Thresholds fixed on the calibration split, tuned false.",
+   "identity": "bundle version probe-bundle.v5; the composition table frozen at 7bf1c3d as revised by docs/work/bundle-v5/intent.md"
+  },
+  {
+   "record": "docs/work/probe-bundle/baseline-protocol.md",
+   "what": "EVAL-6 manual-versus-assisted protocol, metrics M1 to M5",
+   "status": "freeze attested; no analyst session has run (EVAL-7 cut, GATE-7 closed)"
+  }
+ ],
+ "real_case_refs": [
+  {
+   "record": "docs/cases/pedc-u2-2026-09-21/packet.md",
+   "what": "The real case of 21 September 2026: 14 input records built by the DATA-1 readers, two cutoff pairs, the recorded compiles and labels; 23 records in the replay; no analyst disposition committed"
+  },
+  {
+   "record": "docs/work/grid-desk/live-run-2026-10-14.md",
+   "what": "The two live judgments on the real case and the recorded return-cutoff disagreement (open finding, EVAL-8)"
+  },
+  {
+   "record": "docs/work/grid-desk/event.md",
+   "what": "The deployed event page /event/pedc-u2-2026-09-21 and the judge's own copy of the case, decision receipt event:pedc-u2-2026-09-21:retain:1 and history read-back"
+  },
+  {
+   "record": "docs/work/permissions/2026-10-13-wesm-company-copy.md",
+   "what": "Signed permission perm:wesm-company-copy:2026-10-13, version 2; the permission record stays outside the public export"
+  }
+ ],
+ "fixture_set_refs": [
+  {
+   "record": "tests/fixtures/probe-bundle/manifest.json",
+   "pairs": 25,
+   "compiles": 28,
+   "pair_ids": [
+    "pb-cc-1",
+    "pb-cc-2",
+    "pb-cc-3",
+    "pb-cl-1",
+    "pb-cl-2",
+    "pb-cl-3",
+    "pb-er-1",
+    "pb-er-2",
+    "pb-er-3",
+    "pb-er-4",
+    "pb-lc-1",
+    "pb-lc-2",
+    "pb-lc-3",
+    "pb-na-1",
+    "pb-na-2",
+    "pb-na-3",
+    "pb-ng-1",
+    "pb-ng-2",
+    "pb-ng-3",
+    "pb-po-1",
+    "pb-po-2",
+    "pb-po-3",
+    "pb-tc-1",
+    "pb-tc-2",
+    "pb-tc-3"
+   ],
+   "fixture_digest": "ce6cddf08046769748c0babefcdd70be93eba9ac8d8bac4d7e013d42a979a996",
+   "annotation_policy": {
+    "id": "probe-bundle-annotation.v2",
+    "digest": "0c2f32eaa581a4db46cab14e7833ddc92dea5d11a2675634acfa41771fb5483c"
+   },
+   "label": "Fictional synthetic probe-bundle fixture; no real unit, operator, document or event"
+  },
+  {
+   "record": "tests/fixtures/pedc-u2-2026-09-21/case.json",
+   "what": "The real-case fixture, rebuilt and checked by its own build.py",
+   "fixture_digest": "26ba43bfa09b93c14d7981a2ccaa4715a7e3efee48bcdf3bb4660a6e10dbe72e"
+  }
+ ],
+ "test_report": {
+  "command": "/usr/bin/python3 -m unittest discover -s tests",
+  "result": "Ran 3760 tests in 610.885s - OK (skipped=69) on main c140f7ec (full suite with the browser), batch release 25 (2026-10-19). History: Ran 3741 tests on the polish tree db5cb5cf (full suite with the browser, 504.035s, one journal test then fixed at the root 9daf0d8d, event/page/shell modules 264 OK after the review rework 061078f3), batch release 23; before it Ran 3649 tests - OK (skipped=75) on main e05ee6d9, batch release 22 (Ran 3649 tests in 408.732s, browser checks on; the release 22 suite log, .local/suite-release22.log, on the owner's machine; docs/work/PROGRESS.md row 'Batch release 22' (2026-10-18))",
+  "environment_note": "Release 22 build (the release 22 deploy log): build_all.py --snapshot .local/grid-snapshot-year --views .local/grid-snapshot-year/views --outage-source bigquery --force; 6742 files, 361 days (2025-10-18 to 2026-10-14), no missing input, no violation, 3394 outages from BigQuery (the bake manifest), saved alert material baked in (5656 alerts, 39 cards), --verify-manifest clean; live build stamp 8e48b553cd692e60 on Hosting, the first screen and Cloud Run /health; /health reports replay first 2025-10-18T00:00, last 2026-10-14T23:55, 361 days. History: release 21 build: 361 days, 3394 outages from BigQuery, manifest stamp 658d375c9d1b5d8c, --verify-manifest clean (PROGRESS row 'Batch release 21' (2026-10-18)); the REL-4 run was Ran 1932 tests - OK (skipped=47) on task/REL-4 rebased onto feat/entry-framing a95db82, interpreter /usr/bin/python3 (Python 3.14.4); the RED runs of 2026-10-17 morning failed only on tests that read the ignored shared export under .local/price while it was being refreshed, regenerated on main b5d2a36.",
+  "interpreter": "/usr/bin/python3 (the release 22 suite log)",
+  "tree": "main c140f7ec, deployed as batch release 25 on 2026-10-19 (Cloud Run grid-nowcast-00047-lnt; rollback: bash scripts/deploy/deploy.sh --rollback grid-nowcast-00046-vl5, the previous release, the waiting indicator on main 270e8980 deployed as batch release 24); before it main ac3b96b7, deployed as batch release 23 on 2026-10-18 (Cloud Run grid-nowcast-00045-vg8; rollback: bash scripts/deploy/deploy.sh --rollback grid-nowcast-00044-fpr, the previous release); before it main e05ee6d9, deployed as batch release 22 on 2026-10-18 (Cloud Run grid-nowcast-00044-fpr; rollback: bash scripts/deploy/deploy.sh --rollback grid-nowcast-00043-dj4, the previous revision)",
+  "earlier_green_run": "History: Ran 3570 tests - OK (skipped=67) on main 0d658ea8 (batch release 21, 2026-10-18); Ran 1932 tests - OK (skipped=47) on task/REL-4 rework round 2 (a95db82 base, 2026-10-17) and Ran 1915 tests - OK (skipped=47) on 6d6ad19; all superseded by the release 22 result above.",
+  "verify_command": "/usr/bin/python3 -c \"import json;json.load(open('docs/competition/ai-builder-cup-2026/release-manifest.json'))\" && /usr/bin/python3 scripts/repo.py check && /usr/bin/python3 -m unittest tests.test_release_audit",
+  "verify_result": "RELEASE-22 records (task/POLISH-2, 2026-10-18): manifest loads; repo.py check PASS (657 Markdown files, 4112 local links, 5 skills, bootstrap 1399 words); plan.py check OK (150 tasks, 9 gates); tests.test_release_audit tests.test_repo tests.test_grid_models_page tests.test_plan Ran 84 tests OK. History: POLISH-2 item 10 (task/POLISH-2-E, 2026-10-18): manifest loads; tests.test_release_audit Ran 32 tests OK; repo.py check PASS. History: exit 0 on the REL-4 rework round 2 tree (cc63e4a): repo.py check PASS (485 Markdown files, 3299 local links, 5 skills, bootstrap 1399 words); tests.test_release_audit Ran 32 tests OK; plan.py scope REL-4 feat/entry-framing OK."
+ },
+ "deck_pdf_sha256": null,
+ "video_url": null,
+ "video_duration_seconds": null,
+ "deadline_clock_and_timezone": null,
+ "submission_receipt": null,
+ "release_reviewer": null,
+ "release_reviewer_note": "The independent review of task/REL-4 names the reviewer and the commit in docs/work/reviews/REL-4.md; the manifest carries it after that review, and the freeze review follows at REL-5. The first review attempt on 2026-10-17 produced no record (workspace credits outage; see the task record's Rework section), so the field stays null and the review is re-requested.",
+ "issue_reconciliation_ref": "docs/competition/ai-builder-cup-2026/submission-checklist.md, section \"GitHub milestone issues #37 to #47\"",
+ "sources": {
+  "deployed_url": "docs/status.md; docs/work/PROGRESS.md, row 'Batch release 23' (2026-10-18); row 'Batch release 22' (2026-10-18); earlier rows 'Batch release 21' (2026-10-18) and 'Batch release 4' (2026-10-16)",
+  "cloud_run_revision": "the release 23 deploy log, .local/wt/INTEG-PP/.local-deploy23.log, on the owner's machine (ignored path, 2026-10-18); docs/work/PROGRESS.md, row 'Batch release 23' (2026-10-18); row 'Batch release 22' (2026-10-18); docs/work/coordination/board.md, row R12",
+  "image_digest": "the release 23 deploy log, .local/wt/INTEG-PP/.local-deploy23.log, on the owner's machine (ignored path, 2026-10-18; full form); docs/work/PROGRESS.md, row 'Batch release 23' (2026-10-18); row 'Batch release 22' (2026-10-18); REL-5 re-reads it with gcloud run revisions describe grid-nowcast-00044-fpr --region asia-southeast1 --format='value(status.imageDigest)'",
+  "google_model_run_refs": "docs/work/grid-desk/live-run-2026-10-14.md; docs/work/m3-live-gemini/implementation.md; docs/work/reviews/CORE-6.md",
+  "numerical_evaluation_refs": "docs/work/probe-bundle/evaluation.md",
+  "s1_evaluation_refs": "docs/work/probe-bundle/evaluation.md; docs/work/probe-bundle/baseline-protocol.md",
+  "real_case_refs": "docs/cases/pedc-u2-2026-09-21/packet.md; docs/work/grid-desk/event.md; docs/work/permissions/2026-10-13-wesm-company-copy.md",
+  "fixture_set_refs": "tests/fixtures/probe-bundle/manifest.json; docs/work/probe-bundle/fixtures.md; docs/cases/pedc-u2-2026-09-21/packet.md",
+  "deadline": "docs/competition/ai-builder-cup-2026/requirements.md row E10 (submit by October 18, 2026; the portal clock and time zone are not confirmed)",
+  "test_report": "the release 23 suite log, .local/wt/INTEG-PP/.local-suite-pp.log, on the owner's machine (ignored path, 2026-10-18); docs/work/PROGRESS.md, row 'Batch release 23' (2026-10-18); the release 22 suite log, .local/suite-release22.log, row 'Batch release 22' (2026-10-18): the full suite on the deployed tree",
+  "inspected_base_commit": "docs/work/platform-polish-2026-10-18/handoff.md (section 'Local session'); docs/work/PROGRESS.md, row 'Batch release 23' (2026-10-18); docs/work/polish-2026-10-18/phase-2-record.md (section 'Release 22 (2026-10-18)')"
+ },
+ "pending_receipts": {
+  "registration_receipt": "Human. Owner (GATE-1): the registration is confirmed in session 2026-10-11; the portal receipt is due at REL-7.",
+  "eligibility_attested_by": "Human. Owner: requirement E1 is outstanding (docs/competition/ai-builder-cup-2026/requirements.md).",
+  "rights_approved_by": "Human. Owner (GATE-5, open): rights, IP and publication approval for the public export; REL-5 waits on it.",
+  "public_data_manifest": "Later task. REL-5 produces the public export and its data manifest after the GATE-5 approval.",
+  "source_release_commit": "Later task. The release commit is frozen at REL-5; this manifest records the branch base it was compiled from.",
+  "public_repository_url": "Public export of the audited revision, pushed by the owner as sammatuba/ingrid on 2026-10-19; the LICENSE is proprietary (competition evaluation only).",
+  "deck_pdf_sha256": "Later step, release owner. The PDF is built from the frozen revision by the steps in deck.md Appendix C; no PDF exists yet, and none was built by this task.",
+  "video_url": "Human. Owner records the video (REL-6); the shot list and narration are REL-3.",
+  "video_duration_seconds": "Human. REL-6 measures the encoded duration and records it here.",
+  "deadline_clock_and_timezone": "Human. Owner (GitHub issue #47): the portal clock and time zone are not confirmed (requirements.md, E10).",
+  "submission_receipt": "Human. Owner submits on the portal (REL-7).",
+  "release_reviewer": "Pending review. The independent review record docs/work/reviews/REL-4.md names the reviewer and the reviewed commit; the value is copied here after that review. The first attempt on 2026-10-17 ended in a workspace credits outage and wrote no record (task record, Rework section)."
+ },
+ "deployed_url_alias": "https://grid-nowcast.web.app",
+ "deployed_url_alias_note": "Second Firebase Hosting site in the same project, published by the owner on 2026-10-19 with the release 25 build (stamp 10c1942669d71a9b read back on /health and the first screen); grid-nowcast.web.app serves the same build. The site id ingrid is reserved by another project."
+}

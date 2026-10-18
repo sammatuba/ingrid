@@ -1,0 +1,5 @@
+site_code,plant_name,operator,municipality,province,lat,lon,precision,source_url,retrieved_at,public_capacity_mw
+08PEDC,Sample Geothermal B,Cebu Sample Power Corp,Balamban,Cebu,10.4,123.8,plant,https://example.test/sample-geo-b,2026-10-14,300
+08SAMPLE,Sample Solar,Cebu Sample Power Corp,Calaca,Batangas,13.9,120.8,municipality,https://example.test/sample-solar,2026-10-14,50
+04GEN,Sample Diesel,Panay Sample Energy,Iloilo City,Iloilo,10.7,122.5,municipality,https://example.test/sample-diesel,2026-10-14,100
+08PLACE,Sample Load Substation,Visayas Sample Grid,Balamban,Cebu,,,placeholder,https://example.test/sample-load,2026-10-14,0

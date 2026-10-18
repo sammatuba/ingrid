@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- __NOWCAST_STAMP__ is the build stamp the server writes in: it names this build's assets,
+     so they can be cached for a year while this page revalidates. -->
+<meta charset="utf-8">
+<meta id="nowcast-build" name="nowcast-build" content="__NOWCAST_STAMP__">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>InGRID · Ask Ingrid</title>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0b1018" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f6fa" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/grid.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ask.css">
+<script src="/grid/__NOWCAST_STAMP__/ask.js" defer></script>
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ui.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/shell.css">
+<script src="/grid/__NOWCAST_STAMP__/shell.js"></script>
+</head>
+<body class="ask-page">
+<header class="bar">
+  <a class="brand" href="/" aria-label="InGRID home">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 15 8 6l4 6 2-3 3 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+    <span>InGRID</span>
+  </a>
+  <!-- ATG-8: the site's own sections, the same block on every page. The ask panel has no section
+       entry of its own, so none is marked current here; the event page links it when its view
+       carries 'ask': true. ROUTES-1 adds Models, Work and Map after Paper. -->
+  <nav class="sites" aria-label="Sections">
+    <a href="/">Grid</a>
+    <a href="/data">Data</a>
+    <a href="/plants">Plants</a>
+    <a href="/explain">Explain</a>
+    <a href="/outlooks">Outlooks</a>
+    <a href="/paper">Paper</a>
+    <a href="/models">Models</a>
+    <a href="/work">Work</a>
+    <a href="/map">Map</a>
+    <a href="/alerts">Alerts</a>
+  </nav>
+</header>
+
+<!-- Platform polish: /ask is a full-page conversational workspace. The left rail holds ask.js's
+     panel (sign-in, open cases, the queue and the threads); the centre holds the command bar's
+     conversation (the command bar, which the shell loads), with the composer at its foot and suggested
+     questions while it is empty. Until that loads, and if it never does, the rail's own panel
+     carries the ask box. -->
+<main class="ask ask-ws" id="main">
+  <aside class="ask-rail" aria-label="Cases, queue and threads">
+    <section class="ak-head">
+      <h1>Ask Ingrid</h1>
+      <!-- VIEW-1, DOCK-2: the full-screen form of the dock every page carries: the sign-in
+           state, the open cases, the queue, the threads, the suggested questions and the ask
+           box. The recorded questions are the bake's own plan set for this page. -->
+      <p class="asof">Every answer shows its steps and cites its records. Anonymous visitors see recorded answers. Signed-in users ask live.</p>
+    </section>
+    <!-- ROUTES-1: the same desk-assistant mount point the other pages carry, full screen here.
+         VIEW-1 renders the panel into it and DOCK-2 the dock; ask.js reads views/ask.json for
+         this page, and /ask?event=<id> opens that event's case thread. -->
+    <section id="ask" data-context="ask" aria-label="Ask Ingrid"></section>
+  </aside>
+  <section class="ask-main" id="ask-main" aria-label="Conversation"></section>
+</main>
+</body>
+</html>

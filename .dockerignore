@@ -1,0 +1,61 @@
+# Build context exclusions: no version control, local state, tooling, downloads or secrets.
+# The image copies only requirements/h1.lock, src/, the baked grid snapshot and the signed
+# permission registry under docs/work/permissions/; this file keeps everything else out of the
+# context so nothing credential-shaped can leak in through a later COPY or ADD.
+#
+# build/grid-data/ is deliberately NOT listed: the Dockerfile copies the grid replay snapshot
+# GRID-1 bakes with scripts/grid/build_data.py from the context into the image. That data is
+# company WESM data — it is excluded from the public export by scripts/release/allowlist.json
+# and never committed, and it ships inside the deployed image only. ATG-8: the one COPY line
+# carries the whole directory, so ATG-4's `catalog.json`, ATG-5's `briefs.json` and
+# `findings.json` and ATG-7's `assets/` profiles travel with the seven GRID-1 files and need
+# no line of their own — listing any of them here would keep a served file out of the image.
+#
+# build/hosting/ (PERF-5) IS listed: it is the stage scripts/deploy/stage_hosting.py assembles
+# for Firebase Hosting out of build/grid-data and src/grid. It is a second copy of the same
+# files, published from the repository tree, and no Dockerfile line reads it. build/firebase.json
+# is the generated Hosting config the stager writes beside that stage — a deploy artifact the
+# image never reads either.
+build/hosting
+build/firebase.json
+.git
+.gitignore
+.gitattributes
+.local
+.github
+.codex
+.claude
+.meos
+.agents
+**/node_modules
+node_modules
+__pycache__
+**/__pycache__
+**/*.py[cod]
+.venv
+venv
+*.egg-info
+.pytest_cache
+.mypy_cache
+.ruff_cache
+docs
+# …except the signed permission records the image copies (Dockerfile): a real record must cite a
+# permission the registry holds, and without this line the COPY source is outside the context.
+!docs/work/permissions
+tests
+experiments
+archive
+ideas
+poc
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.log
+*.pem
+*.key
+*.p12
+*.pfx
+.env
+.env.*
+**/.DS_Store

@@ -1,0 +1,366 @@
+{
+  "schema": "probe-bundle-fixture.v1",
+  "pair_id": "pb-er-3",
+  "edge_class": "earlier_observed_return",
+  "fixture_label": "Fictional synthetic probe-bundle fixture; no real unit, operator, document or event",
+  "assumption_kind": "assumed_available_capacity",
+  "annotation_policy": {
+    "policy_id": "probe-bundle-annotation.v2",
+    "digest": "0c2f32eaa581a4db46cab14e7833ddc92dea5d11a2675634acfa41771fb5483c"
+  },
+  "bundle_version_at_freeze": "probe-bundle.v5",
+  "model_id": "fixture-systemone",
+  "tenant_id": "synthetic-tenant",
+  "case_id": "synthetic-case",
+  "actor_id": "synthetic-analyst",
+  "access_policy_refs": [
+    "synthetic-public"
+  ],
+  "records": [
+    {
+      "case_id": "synthetic-case",
+      "content_digest": "06393a4075501c2954a41e4823e7c9cdde9aedb68fc4326ed1486a2a249fae7c",
+      "payload": {
+        "entities": [
+          {
+            "entity_id": "fictional-unit-a",
+            "entity_type": "GeneratingUnit"
+          },
+          {
+            "entity_id": "fictional-unit-a2",
+            "entity_type": "GeneratingUnit"
+          }
+        ],
+        "permission_ref": null,
+        "permitted_actors": [
+          "synthetic-analyst",
+          "synthetic-other"
+        ],
+        "representations": [
+          {
+            "input_fields": {
+              "assumed_available_capacity": {
+                "quantity_kind": "assumed_available_capacity",
+                "unit": "MW"
+              },
+              "commercial_availability_from": {
+                "quantity_kind": "commercial_availability_from",
+                "unit": "MW"
+              }
+            },
+            "model_version": "synthetic-model.v1",
+            "representation_id": "fictional-model-unit-a",
+            "target_type": "GeneratingUnit"
+          }
+        ],
+        "synthetic": true
+      },
+      "record_id": "synthetic-case",
+      "record_kind": "Case",
+      "recorded_at": "2026-10-01T01:00:00Z",
+      "revision_id": "1",
+      "schema_version": "h0.v2",
+      "tenant_id": "synthetic-tenant",
+      "time_metadata": {
+        "/recorded_at": {
+          "offset": "+08:00",
+          "precision": "second",
+          "supplied": "2026-10-01T09:00:00+08:00"
+        }
+      }
+    },
+    {
+      "case_id": "synthetic-case",
+      "content_digest": "1e669afdf355e8e4c3f2ca8bbb22a04a5080efb0470ed4c9cc66b3529fb9e3e5",
+      "payload": {
+        "access_policy_ref": "synthetic-public",
+        "availability_basis": {
+          "basis_kind": "attested",
+          "basis_ref": "synthetic fixture author, task/CORE-8",
+          "note": "Fictional synthetic source; first availability asserted by the fixture"
+        },
+        "copied_from": null,
+        "known_at": "2026-10-01T01:00:00Z",
+        "lineage_id": "fictional-case-note",
+        "original_text": "Fictional synthetic case note: Fictional Unit A is a GeneratingUnit of the fictional plant and the reviewed mapping to fictional-model-unit-a is one-to-one for the declared period.",
+        "permission_ref": null,
+        "published_at": "2026-10-01",
+        "publisher": "Fictional case registry",
+        "source_byte_digest": "48ddf13af7554bb782465bd3951f148220c1e72e070a1f6e10f5f0d0c1f28731",
+        "source_id": "fictional-case-note",
+        "source_version": "1",
+        "synthetic": true,
+        "unknown_reason": null
+      },
+      "record_id": "fictional-case-note",
+      "record_kind": "SourceVersion",
+      "recorded_at": "2026-10-01T01:00:00Z",
+      "revision_id": "1",
+      "schema_version": "h0.v2",
+      "tenant_id": "synthetic-tenant",
+      "time_metadata": {
+        "/payload/known_at": {
+          "offset": "+08:00",
+          "precision": "second",
+          "supplied": "2026-10-01T09:00:00+08:00"
+        },
+        "/payload/published_at": {
+          "offset": null,
+          "precision": "date",
+          "supplied": "2026-10-01"
+        },
+        "/recorded_at": {
+          "offset": "+08:00",
+          "precision": "second",
+          "supplied": "2026-10-01T09:00:00+08:00"
+        }
+      }
+    },
+    {
+      "case_id": "synthetic-case",
+      "content_digest": "5ad5451bbcd06d229f19c28d95693670c157dd597ccf688ecb8be8e2deffbe16",
+      "payload": {
+        "access_policy_ref": "synthetic-public",
+        "availability_basis": {
+          "basis_kind": "attested",
+          "basis_ref": "synthetic fixture author, task/CORE-8",
+          "note": "Fictional synthetic source; first availability asserted by the fixture"
+        },
+        "copied_from": null,
+        "known_at": "2026-10-05T01:00:00Z",
+        "lineage_id": "fictional-capacity-report",
+        "original_text": "Fictional synthetic bulletin. Fictional Unit A entered commercial operation at 08:00 on 2026-10-05 at 120 MW.",
+        "permission_ref": null,
+        "published_at": "2026-10-05",
+        "publisher": "Fictional newsletter",
+        "source_byte_digest": "c276e76750296eff8c3f114b6bb01b326911afd2feb3ec2bf128b2e58d15a332",
+        "source_id": "fictional-capacity-report",
+        "source_version": "1",
+        "synthetic": true,
+        "unknown_reason": null
+      },
+      "record_id": "fictional-capacity-report",
+      "record_kind": "SourceVersion",
+      "recorded_at": "2026-10-01T01:00:00Z",
+      "revision_id": "1",
+      "schema_version": "h0.v2",
+      "tenant_id": "synthetic-tenant",
+      "time_metadata": {
+        "/payload/known_at": {
+          "offset": "+08:00",
+          "precision": "second",
+          "supplied": "2026-10-05T09:00:00+08:00"
+        },
+        "/payload/published_at": {
+          "offset": null,
+          "precision": "date",
+          "supplied": "2026-10-05"
+        },
+        "/recorded_at": {
+          "offset": "+08:00",
+          "precision": "second",
+          "supplied": "2026-10-01T09:00:00+08:00"
+        }
+      }
+    },
+    {
+      "case_id": "synthetic-case",
+      "content_digest": "9bd59da2ffb158110e813f6b37f79765aeec709e037c99215f3593670593c0b6",
+      "payload": {
+        "end": 109,
+        "permission_ref": null,
+        "quote": "Fictional Unit A entered commercial operation at 08:00 on 2026-10-05 at 120 MW.",
+        "quote_digest": "69fdb6205ce6bbd6c883a7b12ebd855706324a0b20b567561c5061d1643b5984",
+        "source_byte_digest": "c276e76750296eff8c3f114b6bb01b326911afd2feb3ec2bf128b2e58d15a332",
+        "source_id": "fictional-capacity-report",
+        "source_ref": {
+          "content_digest": "5ad5451bbcd06d229f19c28d95693670c157dd597ccf688ecb8be8e2deffbe16",
+          "record_id": "fictional-capacity-report",
+          "record_kind": "SourceVersion",
+          "revision_id": "1"
+        },
+        "source_version": "1",
+        "start": 30,
+        "synthetic": true
+      },
+      "record_id": "passage:fictional-capacity-report",
+      "record_kind": "Passage",
+      "recorded_at": "2026-10-01T01:00:00Z",
+      "revision_id": "1",
+      "schema_version": "h0.v2",
+      "tenant_id": "synthetic-tenant",
+      "time_metadata": {
+        "/recorded_at": {
+          "offset": "+08:00",
+          "precision": "second",
+          "supplied": "2026-10-01T09:00:00+08:00"
+        }
+      }
+    },
+    {
+      "case_id": "synthetic-case",
+      "content_digest": "39898761fa11839b4bdf1a2d9e3d3e3ffb22208dbe42fcde953f760a8011d9eb",
+      "payload": {
+        "cardinality": "one_to_one",
+        "entities": [
+          {
+            "entity_id": "fictional-unit-a",
+            "entity_type": "GeneratingUnit"
+          }
+        ],
+        "input_field": "assumed_available_capacity",
+        "permission_ref": null,
+        "representation_id": "fictional-model-unit-a",
+        "reviewed_at": "2026-10-01T01:00:00Z",
+        "reviewer": "synthetic-analyst",
+        "source_refs": [
+          {
+            "content_digest": "1e669afdf355e8e4c3f2ca8bbb22a04a5080efb0470ed4c9cc66b3529fb9e3e5",
+            "record_id": "fictional-case-note",
+            "record_kind": "SourceVersion",
+            "revision_id": "1"
+          }
+        ],
+        "status": "reviewed",
+        "synthetic": true,
+        "valid_period": {
+          "end": "2026-10-07",
+          "start": "2026-10-06"
+        }
+      },
+      "record_id": "mapping-capacity",
+      "record_kind": "MappingRevision",
+      "recorded_at": "2026-10-01T01:00:00Z",
+      "revision_id": "1",
+      "schema_version": "h0.v2",
+      "tenant_id": "synthetic-tenant",
+      "time_metadata": {
+        "/payload/reviewed_at": {
+          "offset": "+08:00",
+          "precision": "second",
+          "supplied": "2026-10-01T09:00:00+08:00"
+        },
+        "/payload/valid_period/end": {
+          "offset": null,
+          "precision": "date",
+          "supplied": "2026-10-07"
+        },
+        "/payload/valid_period/start": {
+          "offset": null,
+          "precision": "date",
+          "supplied": "2026-10-06"
+        },
+        "/recorded_at": {
+          "offset": "+08:00",
+          "precision": "second",
+          "supplied": "2026-10-01T09:00:00+08:00"
+        }
+      }
+    }
+  ],
+  "assumption_seed": {
+    "record_id": "assumption-capacity",
+    "revision_id": "1",
+    "recorded_at": "2026-10-01T09:00:00+08:00",
+    "rationale": "Explicit fictional synthetic initial state for pb-er-3",
+    "payload": {
+      "case_id": "synthetic-case",
+      "entity": {
+        "entity_id": "fictional-unit-a",
+        "entity_type": "GeneratingUnit"
+      },
+      "proposition": "Fictional Unit A is assumed available at 120 MW for the declared day",
+      "value": {
+        "value": "120.00",
+        "quantity_kind": "assumed_available_capacity",
+        "unit": "MW"
+      },
+      "valid_period": {
+        "start": "2026-10-06",
+        "end": "2026-10-07"
+      },
+      "representation_id": "fictional-model-unit-a",
+      "input_field": "assumed_available_capacity",
+      "mapping_ref": {
+        "record_kind": "MappingRevision",
+        "record_id": "mapping-capacity",
+        "revision_id": "1",
+        "content_digest": "39898761fa11839b4bdf1a2d9e3d3e3ffb22208dbe42fcde953f760a8011d9eb"
+      }
+    }
+  },
+  "expected_assumption_ref": {
+    "record_kind": "AssumptionRevision",
+    "record_id": "assumption-capacity",
+    "revision_id": "1",
+    "content_digest": "f26cf17d31c2d6968153a94b50eab76e6145bf23a4064481ec393d5e0f4077a1"
+  },
+  "cutoffs": {
+    "t0": "2026-10-05T10:00:00+08:00",
+    "t1": "2026-10-05T10:00:00+08:00"
+  },
+  "snapshot": {
+    "audit_cutoff": "2026-10-05T10:00:00+08:00",
+    "recorded_at": "2026-10-05T10:00:00+08:00",
+    "ref": {
+      "record_kind": "BeliefSnapshot",
+      "record_id": "snapshot:a0e7cee91ba45135b6ffeaa623ddda69402a5c159b44a1c351153231143b9ac5",
+      "revision_id": "1",
+      "content_digest": "47d20afd39a5d8a5c84e198fa3b46727c3c43cf713fc2579074435a03c900a92"
+    }
+  },
+  "compiles": [
+    {
+      "at": "t1",
+      "information_cutoff": "2026-10-05T10:00:00+08:00",
+      "audit_cutoff": "2026-10-05T10:00:00+08:00",
+      "recorded_at": "2026-10-05T10:05:00+08:00",
+      "expected_snapshot_ref": {
+        "record_kind": "BeliefSnapshot",
+        "record_id": "snapshot:a0e7cee91ba45135b6ffeaa623ddda69402a5c159b44a1c351153231143b9ac5",
+        "revision_id": "1",
+        "content_digest": "47d20afd39a5d8a5c84e198fa3b46727c3c43cf713fc2579074435a03c900a92"
+      },
+      "expected_status": "compiled",
+      "expected_block_reasons": [],
+      "expected_omissions": [],
+      "expected_context_passages": [
+        "passage:fictional-capacity-report"
+      ],
+      "expected_task_ref": {
+        "record_kind": "CompiledTask",
+        "record_id": "task:79498f79ffd63f10922e6f6aed1c7a06a584c604de8664f4ab34c88ad94593b3",
+        "revision_id": "7b51e616bbbf81a15996119354e1b1bd229efed861448fd98f3987264fa30360",
+        "content_digest": "7fcda69dbf9432dd5e10983b294835254c30ee9d447dec8d01ad43f0e155c47d"
+      },
+      "expected_task_digest": "79498f79ffd63f10922e6f6aed1c7a06a584c604de8664f4ab34c88ad94593b3",
+      "expected_render": {
+        "status": "rendered",
+        "bundle_version": "probe-bundle.v5",
+        "questions": 32,
+        "request_digest": "042559076cfe7def6ba0a2d4b1f1d12fc2f595e2523ab4f469379cc5fec38aef"
+      },
+      "expected_atomic_answers": {
+        "q1": "fictional-unit-a",
+        "q2": "commercial_operation",
+        "q3": "before",
+        "q4": "no",
+        "q5": "no",
+        "q6": "yes",
+        "q7": "yes",
+        "q8": "supports"
+      },
+      "frozen_label": "supports",
+      "rationale": "An observed return before the assumed period for a supply-outlook assumption. Under the earlier-return rule an earlier observation supports a supply outlook, and the composition's earlier_observation row agrees: this is the kind-A half of the contestable row, where the table and the annotation agree.",
+      "expected_composition": {
+        "bundle_version": "probe-bundle.v5",
+        "fired_rule": "earlier_observation: Q3=before and Q6=yes",
+        "label": "supports",
+        "reason": null,
+        "unstable": false,
+        "unstable_questions": [],
+        "agrees_with_frozen_label": true
+      }
+    }
+  ]
+}

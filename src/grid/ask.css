@@ -1,0 +1,174 @@
+/* Desk assistant. Design file: the governed generative view as a native panel (VIEW-1).
+   The panel wears the site's own conventions — the grid page's tokens, a hairline card, the
+   mono face for record fields and digests, colour only for the synthetic-label line. No new
+   font, no gradient, no badge. The empty mount stays out of its page's layout before the
+   script runs: the home page's main is a fixed grid whose rows are tuned to the viewport, and
+   an empty item would add a row. Every page that loads this file also loads a stylesheet
+   that defines the tokens (grid.css or catalog.css). */
+#ask:empty { display: none; }
+
+/* The two grid pages place the panel across the full width in its own row. Every other page
+   has a block flow and needs no placement rule. */
+.desk > #ask, .ev > #ask { grid-column: 1 / -1; }
+
+.ak-panel { background: var(--panel); border: 1px solid var(--rule); border-radius: var(--radius); padding: 14px 16px; }
+.ak-panel h2 { margin: 0; font-size: 15px; font-weight: 600; }
+.ak-status { margin: 4px 0 10px; color: var(--faint); font-size: 11.5px; }
+
+.ak-questions { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 10px; padding: 0; }
+.ak-q { border: 1px solid var(--rule-strong); background: var(--panel-2); color: var(--text-2); border-radius: 5px; padding: 5px 10px; font-size: 12.5px; cursor: pointer; text-align: left; }
+.ak-q:hover { color: var(--text); border-color: var(--accent); }
+.ak-q[aria-pressed="true"] { color: var(--text); border-color: var(--accent); box-shadow: inset 0 -2px 0 var(--accent); }
+
+.ak-form { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 6px; }
+.ak-form label { color: var(--muted); font-size: 12px; }
+.ak-form input { flex: 1 1 260px; min-width: 0; background: var(--bg); color: var(--text); border: 1px solid var(--rule-strong); border-radius: 5px; padding: 6px 9px; font: inherit; font-size: 12.5px; }
+.ak-form input:focus { outline: none; border-color: var(--accent); }
+.ak-submit { border: 1px solid var(--rule-strong); background: var(--panel-2); color: var(--text); border-radius: 5px; padding: 6px 12px; font-size: 12.5px; cursor: pointer; }
+.ak-submit:hover { border-color: var(--accent); }
+
+.ak-answer { margin: 6px 0 0; color: var(--warn); font-size: 12.5px; }
+.ak-answer:empty { display: none; }
+.ak-empty { margin: 0; color: var(--faint); font-size: 12px; }
+
+.ak-view:not(:empty) { margin-top: 10px; border-top: 1px solid var(--rule); padding-top: 10px; }
+.ak-q-head { margin: 0 0 4px; font-size: 13.5px; font-weight: 600; color: var(--text); }
+.ak-cutoff { margin: 0 0 6px; color: var(--muted); font-size: 11.5px; }
+.ak-text { margin: 0 0 10px; color: var(--text); font-size: 13px; line-height: 1.55; }
+.ak-insufficient { margin: 4px 0 8px; color: var(--warn); font-size: 13px; }
+
+.ak-part { border-top: 1px solid var(--rule); padding: 9px 0 2px; }
+.ak-part h3 { margin: 0 0 6px; }
+.ak-part p { margin: 4px 0; color: var(--text-2); font-size: 12.5px; line-height: 1.5; }
+.ak-part .ak-figure { display: flex; align-items: baseline; gap: 6px; margin: 2px 0 4px; }
+.ak-part .ak-figure .mono { font-size: 22px; color: var(--text); }
+.ak-part .ak-unit { color: var(--muted); font-size: 12px; }
+.ak-part .ak-k { color: var(--faint); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
+.ak-asof { color: var(--faint) !important; font-size: 11px !important; overflow-wrap: anywhere; }
+.ak-label { color: var(--muted) !important; font-size: 11.5px !important; }
+
+.ak-kv { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 10px; margin: 4px 0 0; font-size: 12px; }
+.ak-kv dt { color: var(--faint); }
+.ak-kv dd { margin: 0; color: var(--text-2); }
+
+.ak-timeline { list-style: none; margin: 4px 0 0; padding: 0; }
+.ak-timeline li { padding: 3px 0; color: var(--text-2); font-size: 12.5px; }
+.ak-timeline .mono { color: var(--muted); margin-right: 6px; }
+.ak-src { color: var(--faint); font-size: 11px; }
+
+.ak-vintages { list-style: none; margin: 2px 0 0; padding: 0; }
+.ak-vintages li { padding: 3px 0; color: var(--text-2); font-size: 12.5px; }
+.ak-vintages .mono { color: var(--muted); }
+
+.ak-probes { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 4px; }
+.ak-probes th { text-align: left; color: var(--faint); font-weight: 500; font-size: 10.5px; padding: 0 0 5px; border-bottom: 1px solid var(--rule); }
+.ak-probes td { padding: 5px 0; border-bottom: 1px solid var(--rule); color: var(--text-2); }
+.ak-probes tr:last-child td { border-bottom: 0; }
+.ak-unstable { color: var(--warn) !important; }
+
+.ak-history { list-style: none; margin: 4px 0 0; padding: 0; }
+.ak-history li { padding: 3px 0; color: var(--text-2); font-size: 12.5px; }
+.ak-history .mono { color: var(--muted); margin-right: 6px; }
+
+.ak-not-shown, .ak-receipt { margin: 10px 0 0; border-top: 1px solid var(--rule); padding-top: 8px; }
+.ak-not-shown summary, .ak-receipt summary { cursor: pointer; color: var(--muted); font-size: 11.5px; }
+.ak-not-shown ul { margin: 6px 0 0; padding-left: 18px; color: var(--text-2); font-size: 12px; }
+.ak-not-shown li { margin: 3px 0; }
+.ak-receipt-line { margin: 4px 0 0; color: var(--muted); font-size: 11px; overflow-wrap: anywhere; }
+.ak-receipt-line .mono { color: var(--text-2); }
+
+.ak-stability { margin: 8px 0 0; color: var(--muted); font-size: 11.5px; }
+.ak-labels { margin: 8px 0 0; color: var(--faint); font-size: 11px; overflow-wrap: anywhere; }
+
+/* The full-screen form of the panel on /ask: the same component, wider. */
+.ask .ak-panel { padding: 18px 20px; }
+.ask .ak-q-head { font-size: 15px; }
+
+/* DOCK-2: the dock. The panel's header carries the sign-in state; the open cases, the queue
+   and the threads sit in one row of three on a wide screen and stack on a narrow one. Action
+   and confirmation cards wear the same hairline card as the components. */
+.ak-dock-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; }
+.ak-who { margin: 0; color: var(--text-2); font-size: 12px; overflow-wrap: anywhere; }
+.ak-who b { color: var(--text); font-weight: 600; }
+.ak-signin { color: var(--accent); }
+.ak-hint { margin: 2px 0; color: var(--faint); font-size: 11.5px; overflow-wrap: anywhere; }
+
+.ak-dock-lists { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 10px 14px; margin: 0 0 10px; }
+.ak-dock-lists > section { min-width: 0; border-top: 1px solid var(--rule); padding-top: 6px; }
+.ak-dock-lists h3, .ak-suggested, .ak-actions h3 { margin: 0 0 4px; color: var(--muted); font-size: 11.5px; font-weight: 600; }
+.ak-list, .ak-switch, .ak-turns { list-style: none; margin: 0; padding: 0; font-size: 12px; color: var(--text-2); }
+.ak-list li, .ak-turns li { padding: 2px 0; overflow-wrap: anywhere; }
+.ak-switch { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 4px; }
+.ak-thread { border: 1px solid var(--rule-strong); background: var(--panel-2); color: var(--text-2); border-radius: 5px; padding: 3px 8px; font-size: 11.5px; cursor: pointer; }
+.ak-thread[aria-pressed="true"] { color: var(--text); border-color: var(--accent); }
+
+.ak-offer { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
+.ak-offer-q { border: 1px solid var(--rule-strong); background: var(--panel-2); color: var(--text); border-radius: 5px; padding: 3px 8px; font-size: 12px; cursor: pointer; text-align: left; }
+
+.ak-skeleton { margin: 0 0 8px; padding: 6px 0; border-bottom: 1px solid var(--rule); }
+.ak-skel-shown, .ak-skel-left { margin: 2px 0; color: var(--muted); font-size: 12px; }
+.ak-skeleton .ak-not-shown { margin-top: 4px; border-top: 0; padding-top: 0; }
+
+.ak-asked { margin: 0 0 6px; color: var(--text); font-size: 13px; }
+.ak-actions { margin: 0 0 10px; }
+.ak-action, .ak-confirm { border: 1px solid var(--rule); border-radius: var(--radius); padding: 7px 10px; margin: 6px 0 0; background: var(--panel-2); }
+.ak-action-name { margin: 0; color: var(--text); font-size: 12.5px; overflow-wrap: anywhere; }
+.ak-action-why { margin: 2px 0 0; color: var(--muted); font-size: 11.5px; }
+.ak-action-receipt { margin: 3px 0 0; color: var(--faint); font-size: 11px; overflow-wrap: anywhere; }
+.ak-confirm { border-color: var(--warn); }
+.ak-confirm h4 { margin: 0 0 4px; color: var(--warn); font-size: 12px; font-weight: 600; }
+.ak-confirm p { margin: 3px 0; color: var(--text-2); font-size: 12px; overflow-wrap: anywhere; }
+.ak-confirm-row button { border: 1px solid var(--rule-strong); background: var(--panel); color: var(--text); border-radius: 5px; padding: 4px 12px; font-size: 12px; cursor: pointer; }
+.ak-confirm-row .ak-yes { border-color: var(--accent); }
+.ak-proposed { margin: 8px 0 0; }
+.ak-proposed ul { margin: 4px 0 0; padding-left: 18px; color: var(--text-2); font-size: 12px; }
+.ak-budget { margin: 10px 0 0; border-top: 1px solid var(--rule); padding-top: 6px; color: var(--faint); font-size: 11px; }
+
+/* The full-screen dock on /ask: the lists take the wider row. */
+.ask .ak-dock-lists { grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+
+/* ---------- the mount under the command bar (UX-1) ----------
+   The side dock is gone. On every page but /ask, command.js moves this mount into its sheet's
+   "Cases and threads" panel (`.gc-held`). Until then, and if the bar never loads, the mount stays
+   out of the page: the full page at /ask carries the same panel. Inside the sheet the panel is the
+   panel: no second card, and the bar asks the questions, so the panel's own ask box, suggestions and
+   answer stay with the bar's thread. */
+:root.gn-shell body:not(.ask-page) #ask:not(.gc-held) { display: none; }
+.gc-desk #ask { display: block; margin: 0; }
+.gc-desk .ak-panel { border: 0; border-radius: 0; background: transparent; box-shadow: none; padding: 4px 16px 16px; }
+.gc-desk .ak-dock-head h2, .gc-desk .ak-suggested, .gc-desk .ak-questions, .gc-desk .ak-empty,
+.gc-desk .ak-form, .gc-desk .ak-answer, .gc-desk .ak-offer, .gc-desk .ak-view { display: none; }
+.gc-desk .ak-dock-lists { grid-template-columns: 1fr; }
+
+/* ask.js's answers inside the bar's thread: a recorded plan or an agent turn, in the sheet's type. */
+.gc-plan .ak-q-head { display: none; }
+.gc-plan .ak-part { padding-top: 8px; }
+@media print { .gc-desk #ask { display: none !important; } }
+
+/* ---------- /ask as a workspace (platform polish) ----------
+   The rail at the left holds ask.js's panel (who is signed in, the open cases, the queue and the
+   threads); the conversation fills the centre. Once command.js runs (`.is-live`), the rail's own
+   ask box, suggestions and answer step aside: the centre asks the questions. Without it, the rail
+   keeps the whole panel, as before. */
+.ask-ws { display: grid; grid-template-columns: minmax(0, 1fr); width: 100%; max-width: none; margin: 0; padding: 0; flex: 1 1 auto; }
+.ask-ws.is-live { grid-template-columns: 300px minmax(0, 1fr); height: calc(100vh - var(--bar-h, 93px)); height: calc(100dvh - var(--bar-h, 93px)); min-height: 480px; }
+.ask-rail { min-width: 0; padding: 20px 20px 24px var(--gutter, 24px); overflow-y: auto; overscroll-behavior: contain; }
+.ask-ws.is-live .ask-rail { border-right: 1px solid var(--rule); background: var(--bg); }
+.ask-rail .ak-head { margin: 0 0 14px; }
+.ask-rail .ak-head h1 { margin: 0; font: 600 18px/1.3 var(--sans); color: var(--text); letter-spacing: -.01em; }
+.ask-rail .ak-head .asof { margin: 6px 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
+.ask-main { min-width: 0; min-height: 0; display: flex; flex-direction: column; padding: 0 var(--gutter, 24px); }
+.ask-ws:not(.is-live) .ask-main { display: none; }
+.ask-ws.is-live #ask .ak-panel { border: 0; border-radius: 0; background: transparent; padding: 0; }
+.ask-ws.is-live #ask .ak-dock-head h2, .ask-ws.is-live #ask .ak-suggested, .ask-ws.is-live #ask .ak-questions, .ask-ws.is-live #ask .ak-empty,
+.ask-ws.is-live #ask .ak-form, .ask-ws.is-live #ask .ak-answer, .ask-ws.is-live #ask .ak-offer, .ask-ws.is-live #ask .ak-view { display: none; }
+.ask-ws.is-live #ask .ak-dock-lists { grid-template-columns: minmax(0, 1fr); gap: 0; margin: 0; }
+.ask-ws.is-live #ask .ak-dock-lists > section { padding: 12px 0; }
+.ask-ws.is-live #ask .ak-dock-lists h3 { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.ask-ws.is-live #ask .ak-list li, .ask-ws.is-live #ask .ak-turns li { padding: 4px 0; font-size: 12.5px; }
+.ask-ws.is-live #ask .ak-budget { margin-top: 12px; }
+@media (max-width: 900px) {
+  .ask-ws.is-live { grid-template-columns: minmax(0, 1fr); height: auto; min-height: 0; }
+  .ask-ws.is-live .ask-main { order: -1; height: calc(100svh - var(--bar-h, 129px)); min-height: 420px; padding: 0 16px; }
+  .ask-ws.is-live .ask-rail { border-right: 0; border-top: 1px solid var(--rule); padding: 16px 16px 32px; }
+}

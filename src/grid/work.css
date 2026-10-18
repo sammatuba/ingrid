@@ -1,0 +1,80 @@
+/* Work page (WORK-1, platform polish PP-B4). The reading frame, the cards, the table, the filter
+   segments and the badges are the design system's (`ui.css`); this file holds only the case's
+   own pieces: the blocks that widen past the reading measure, the step table's columns and the
+   claim. Hairline rules and muted text: nothing here is a market state. No gradients, no glow,
+   no new face. The worker filter is the page's one behaviour (work.js); without the script
+   every row stays visible. */
+.work-page .work { flex: 1; }
+
+/* Every block widens past the reading measure, centred on it, so the head, the three levels,
+   the step table and the workers share one left edge; prose inside keeps the measure. */
+.work .wk-wide {
+  --wk-w: max(100%, min(1120px, calc(100vw - 2 * var(--gutter, 24px) - 16px)));
+  width: var(--wk-w);
+  margin-left: calc((100% - var(--wk-w)) / 2);
+}
+
+.wk-head .gn-page-meta .asof { margin: 0; }
+.work .gn-section { margin-top: var(--s-6, 32px); }
+/* A section's record line sits under its heading, not beside it. */
+.work .gn-section-head { flex-direction: column; align-items: flex-start; gap: 2px; }
+.work .gn-section-head .asof { margin: 0; max-width: 92ch; }
+
+/* The three levels and the workers: the same card, its words at reading size. */
+.wk-grid-three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.wk-grid-two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.work .wk-level h3, .work .wk-worker h3 {
+  margin: 0 0 var(--s-2, 8px); color: var(--muted); font-size: var(--t-meta, 11px); font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase;
+}
+.work .wk-worker h3 { color: var(--text); font-size: var(--t-h3, 13px); letter-spacing: 0; text-transform: none; }
+.work .wk-level p, .work .wk-worker p { margin: 0 0 var(--s-2, 8px); color: var(--text-2); font-size: var(--t-body, 13px); line-height: 1.6; }
+.work .wk-level p:first-of-type { color: var(--text); font-size: var(--t-lead, 14px); }
+.work .wk-level .wk-grade { margin: var(--s-3, 12px) 0 0; padding-top: var(--s-2, 8px); border-top: 1px solid var(--rule); color: var(--muted); font-size: var(--t-small, 12px); }
+.wk-worker b { color: var(--text); font-weight: 600; }
+.work .wk-worker .asof { margin: var(--s-3, 12px) 0 0; padding-top: var(--s-2, 8px); border-top: 1px solid var(--rule); }
+
+/* The step table: prose cells wrap; the record column is small print. */
+.wk-steps col.wk-c-step { width: 148px; }
+.wk-steps col.wk-c-worker { width: 96px; }
+.wk-steps col.wk-c-status { width: 172px; }
+.wk-steps col.wk-c-record { width: 30%; }
+.wk-steps th, .wk-steps td { white-space: normal; vertical-align: top; line-height: 1.5; padding-top: 9px; padding-bottom: 9px; }
+.wk-steps tbody th { color: var(--text); font-weight: 500; text-align: left; }
+.wk-steps td { color: var(--text-2); }
+.wk-steps .wk-record { color: var(--muted); font-size: var(--t-small, 12px); }
+.wk-steps .mono { color: var(--text-2); font-size: 11px; overflow-wrap: anywhere; }
+.wk-steps .gn-badge { white-space: nowrap; }
+.work .wk-share { margin: var(--s-3, 12px) 0 0; color: var(--muted); font-size: var(--t-small, 12px); }
+
+/* The honest line. */
+.work .wk-claim {
+  max-width: 64ch;
+  margin: 0 0 var(--s-4, 16px);
+  padding: var(--s-1, 4px) 0 var(--s-1, 4px) var(--s-4, 16px);
+  border-left: 2px solid var(--rule-strong);
+  color: var(--text);
+  font-size: 17px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.work .wk-productivity p { max-width: 72ch; margin: 0 0 var(--s-3, 12px); color: var(--text-2); font-size: var(--t-lead, 14px); line-height: 1.7; }
+.work .wk-productivity p.asof { font-size: var(--t-meta, 11px); color: var(--faint); }
+
+@media (max-width: 900px) {
+  .wk-grid-three, .wk-grid-two { grid-template-columns: minmax(0, 1fr); }
+}
+/* On a phone each step stacks into one block: the step, what the record says, the worker and
+   the status side by side, then the record. Nothing scrolls sideways. */
+@media (max-width: 720px) {
+  .work .wk-steps { --gn-table-min: 0px; }
+  .work .wk-steps, .work .wk-steps tbody, .work .wk-steps tr, .work .wk-steps tbody th, .work .wk-steps td { display: block; width: auto; }
+  .work .wk-steps colgroup, .work .wk-steps thead { display: none; }
+  .work .wk-steps tbody tr { padding: var(--s-3, 12px) var(--s-4, 16px); border-bottom: 1px solid var(--rule); }
+  .work .wk-steps tbody tr:last-child { border-bottom: 0; }
+  .work .wk-steps tbody th, .work .wk-steps td { height: auto; padding: 0; border: 0; background: none; }
+  .work .wk-steps tbody th { margin-bottom: 4px; font-size: var(--t-lead, 14px); font-weight: 600; }
+  .work .wk-steps td:nth-child(3), .work .wk-steps td:nth-child(4) { display: inline-flex; align-items: center; margin: 8px 8px 0 0; vertical-align: middle; }
+  .work .wk-steps td:nth-child(3) { color: var(--muted); font-size: var(--t-small, 12px); }
+  .work .wk-steps .wk-record { margin-top: 6px; }
+}

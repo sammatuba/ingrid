@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- __NOWCAST_STAMP__ is the build stamp the server writes in: it names this build's assets
+     and the profile data, so they can be cached for a year while this page revalidates. -->
+<meta charset="utf-8">
+<meta id="nowcast-build" name="nowcast-build" content="__NOWCAST_STAMP__">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>InGRID · Asset</title>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0b1018" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f6fa" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/grid.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/asset.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ask.css">
+<script src="/grid/__NOWCAST_STAMP__/asset.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/ask.js" defer></script>
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ui.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/shell.css">
+<script src="/grid/__NOWCAST_STAMP__/shell.js"></script>
+</head>
+<body class="asset-page">
+<header class="bar">
+  <a class="brand" href="/" aria-label="InGRID home">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 15 8 6l4 6 2-3 3 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+    <span>InGRID</span>
+  </a>
+  <!-- ATG-8: the site's own sections, the same block on every page; a profile is part of the
+       Plants section, so that is the link marked current. Each target is a route the application
+       serves. ROUTES-1 adds Models, Work and Map after Paper; the ask panel has no entry of its
+       own. -->
+  <nav class="sites" aria-label="Sections">
+    <a href="/">Grid</a>
+    <a href="/data">Data</a>
+    <a href="/plants" aria-current="page">Plants</a>
+    <a href="/explain">Explain</a>
+    <a href="/outlooks">Outlooks</a>
+    <a href="/paper">Paper</a>
+    <a href="/models">Models</a>
+    <a href="/work">Work</a>
+    <a href="/map">Map</a>
+    <a href="/alerts">Alerts</a>
+    <a href="/book">Book</a>
+  </nav>
+</header>
+
+<!-- ROUTES-1: the desk assistant's mount point. The command bar holds it in its sheet. -->
+<section id="ask" data-context="asset" aria-label="Ask Ingrid"></section>
+
+<main class="gn-page a-profile" id="profile">
+  <header class="gn-page-head">
+    <nav class="gn-crumbs" aria-label="Breadcrumb"><a id="back" href="/plants">Plants</a><span aria-current="page" id="crumb">Plant</span></nav>
+    <div class="gn-page-title">
+      <h1 id="name">Plant</h1>
+      <p class="gn-page-sub" id="meta"></p>
+    </div>
+    <div class="gn-page-actions"><a class="gn-btn" id="journal" href="/journal">Journal</a></div>
+  </header>
+
+  <!-- ericka-desk slice 6 (E8, E18): the anchor is the plant's status at the shared "as of"
+       clock and the latest notice that set it, with the counts behind it. Rule-based only: no
+       forecast, nothing the records do not state. -->
+  <section class="gn-card pl-anchor pl-activity" id="activity" aria-labelledby="activity-title">
+    <h2 class="sr-only" id="activity-title">Status at the replay clock</h2>
+    <div class="pl-status" id="activity-status"></div>
+    <div class="pl-latest" id="activity-latest"></div>
+    <dl class="pl-facts" id="activity-facts"></dl>
+    <p class="pl-at gn-meta">Up to <span class="mono" id="activity-at"></span></p>
+  </section>
+
+  <div class="gn-stats" id="figures" aria-label="Figures"></div>
+
+  <div class="gn-grid gn-grid--main-side a-matrix">
+    <section class="gn-card a-charts" aria-labelledby="chart-title">
+      <header class="gn-card-head">
+        <h2 id="chart-title">Price and schedule</h2>
+        <span class="gn-section-meta" id="chart-asof"></span>
+      </header>
+      <p class="a-readout mono" id="readout" aria-live="polite"></p>
+      <svg id="price" role="img" aria-labelledby="chart-title chart-asof"></svg>
+      <svg id="mw" role="img" aria-labelledby="chart-title chart-asof"></svg>
+      <p class="a-legend gn-meta" id="chart-legend"></p>
+    </section>
+
+    <aside class="a-side" aria-label="Plant context">
+      <section class="gn-card a-watch" aria-labelledby="watch-title">
+        <h2 id="watch-title">What to watch</h2>
+        <ul class="pl-list" id="watch"></ul>
+        <h2>Next steps</h2>
+        <ul class="pl-list pl-next" id="next"></ul>
+        <div id="activity-unclear"></div>
+      </section>
+      <section class="gn-card a-register" aria-labelledby="register-title">
+        <h2 id="register-title">Register</h2>
+        <div id="register"></div>
+        <h2>Location</h2>
+        <div id="location"></div>
+      </section>
+    </aside>
+  </div>
+
+  <section class="gn-section a-messages" aria-labelledby="messages-title">
+    <header class="gn-section-head">
+      <h2 id="messages-title">Notices naming it</h2>
+      <span class="gn-section-meta" id="messages-meta"></span>
+      <div class="gn-section-actions" id="messages-filter"></div>
+    </header>
+    <div id="messages"></div>
+  </section>
+
+  <div class="gn-sources">
+    <details>
+      <summary>Sources and method</summary>
+      <p id="activity-src"></p>
+      <p id="chart-src"></p>
+      <p id="position-src" hidden></p>
+      <h3>Events</h3>
+      <div id="events"></div>
+      <h3>Catalog datasets</h3>
+      <div id="catalog"></div>
+      <h3>Not known</h3>
+      <ul id="not-known"></ul>
+      <footer class="caption" id="caption">Source: WESM five-minute market data and IEMOP registered capacity (company copy) · perm:wesm-company-copy:2026-10-13 · replay 21–29 September 2026, Manila time · every figure names its record</footer>
+    </details>
+  </div>
+</main>
+</body>
+</html>

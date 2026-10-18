@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- __NOWCAST_STAMP__ is the build stamp the server writes in: it names this build's assets
+     and replay files, so they can be cached for a year while this page revalidates. -->
+<meta charset="utf-8">
+<meta id="nowcast-build" name="nowcast-build" content="__NOWCAST_STAMP__">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>InGRID · Assumption register</title>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0b1018" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f6fa" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/grid.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/register.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ask.css">
+<script src="/grid/__NOWCAST_STAMP__/register.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/ask.js" defer></script>
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ui.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/shell.css">
+<script src="/grid/__NOWCAST_STAMP__/shell.js"></script>
+</head>
+<body class="register-page">
+<header class="bar">
+  <a class="brand" href="/" aria-label="InGRID home">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 15 8 6l4 6 2-3 3 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+    <span>InGRID</span>
+  </a>
+  <!-- The same section block every page of the site family carries. The register marks no
+       entry current, because it is not one of the sections; ROUTES-1 adds Models, Work and Map
+       after Paper, and the ask panel has no entry of its own. -->
+  <nav class="sites" aria-label="Sections">
+    <a href="/">Grid</a>
+    <a href="/data">Data</a>
+    <a href="/plants">Plants</a>
+    <a href="/explain">Explain</a>
+    <a href="/outlooks">Outlooks</a>
+    <a href="/paper">Paper</a>
+    <a href="/models">Models</a>
+    <a href="/work">Work</a>
+    <a href="/map">Map</a>
+    <a href="/alerts">Alerts</a>
+  </nav>
+</header>
+
+<!-- ROUTES-1: the desk assistant's mount point. The command bar holds it in its sheet. -->
+<section id="ask" data-context="register" aria-label="Ask Ingrid"></section>
+
+<main class="gn-page register">
+  <header class="gn-page-head">
+    <div class="gn-page-title">
+      <h1>Assumption register</h1>
+      <!-- DESK-5: the summary line, composed by register.js from the baked index. -->
+      <p class="gn-page-sub" id="rg-summary"></p>
+    </div>
+    <div class="gn-page-actions"><a class="gn-btn" href="/outlooks">Outlooks</a><a class="gn-btn" href="/book">Book exposure</a></div>
+  </header>
+
+  <!-- The register's known gaps, counted from the audit's own answers, with a filter shortcut
+       for each. Composed by register.js; nothing is written here by hand. -->
+  <div class="rg-gaps" id="rg-gaps-box" role="note" hidden>
+    <span class="gn-badge gn-badge--warning">Known gaps</span>
+    <p class="rg-gaps-text" id="rg-gaps"></p>
+    <div class="rg-gaps-actions" id="rg-gap-actions"></div>
+  </div>
+
+  <!-- The absence state. -->
+  <div class="gn-empty" id="rg-none" role="status" hidden>
+    <p class="gn-empty-title">No assumption in this build</p>
+    <p class="gn-empty-body" id="rg-empty" hidden></p>
+    <div class="gn-empty-actions"><a class="gn-btn" href="/explain#ch-1">What an assumption is</a></div>
+  </div>
+
+  <!-- One filter bar over the register's own family, layer and state words, kept in the address.
+       It stays off the page until the file says there is a row to filter. -->
+  <div class="gn-filters" role="toolbar" aria-label="Filter assumptions" id="rg-filters" hidden>
+    <div class="gn-seg" role="group" aria-label="Family" id="rg-family" data-filter="family"></div>
+    <div class="gn-seg" role="group" aria-label="State" id="rg-state" data-filter="state"></div>
+    <details class="gn-more-filters">
+      <summary>More filters</summary>
+      <div class="gn-seg" role="group" aria-label="Layer" id="rg-layer" data-filter="layer"></div>
+      <div class="gn-seg" role="group" aria-label="Known gap" id="rg-gap" data-filter="gap"></div>
+    </details>
+    <label class="gn-search"><span class="sr-only">Search assumptions</span><input id="rg-search" type="search" placeholder="Search id or statement" autocomplete="off" data-filter="q"></label>
+    <span class="gn-filters-count" id="rg-shown" aria-live="polite"></span>
+    <button type="button" class="gn-clear" id="rg-clear" hidden>Clear</button>
+  </div>
+
+  <!-- One dense table, one row per assumption, drawn from the baked index only. Each row opens
+       its statement in the register's own words, its evidence refs, the marks on it and the
+       issued outlooks that rest on it. -->
+  <div id="rg-table"></div>
+
+  <div class="gn-sources">
+    <details>
+      <summary>Sources and method</summary>
+      <p id="rg-method"></p>
+      <footer class="caption" id="caption">Source: the committed assumption register, read as a record</footer>
+    </details>
+  </div>
+</main>
+</body>
+</html>

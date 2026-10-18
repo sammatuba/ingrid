@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- __NOWCAST_STAMP__ is the build stamp the server writes in: it names this build's assets
+     and data, so they can be cached for a year while this page revalidates. -->
+<meta charset="utf-8">
+<meta id="nowcast-build" name="nowcast-build" content="__NOWCAST_STAMP__">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Journal · Decisions · InGRID</title>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0b1018" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f6fa" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/grid.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/journal.css">
+<!-- Platform polish: the shared component layer (ui.css) comes just before the shell's tokens. -->
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ui.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/shell.css">
+<script src="/grid/__NOWCAST_STAMP__/shell.js"></script>
+<script src="/grid/__NOWCAST_STAMP__/journal-box.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/journal.js" defer></script>
+</head>
+<body class="journal-page">
+<header class="bar">
+  <a class="brand" href="/" aria-label="InGRID home">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 15 8 6l4 6 2-3 3 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+    <span>InGRID</span>
+  </a>
+  <!-- The no-script fallback navigation; shell.js rebuilds it into the shared top bar. -->
+  <nav class="sites" aria-label="Sections">
+    <a href="/">Grid</a>
+    <a href="/journal" aria-current="page">Journal</a>
+    <a href="/plants">Plants</a>
+    <a href="/alerts">Alerts</a>
+    <a href="/data">Data</a>
+    <a href="/explain">Explain</a>
+  </nav>
+</header>
+
+<!-- Platform polish (PP-B2): the journal holds a person's decisions, each with what they knew
+     then and what happened after. Signed out it explains that and offers one sign-in. Signed in
+     it is a dense, filterable table with the chosen entry open beside it. -->
+<main class="gn-page j-page">
+  <header class="gn-page-head">
+    <div class="gn-page-title">
+      <h1>Trader's journal</h1>
+      <p class="gn-page-sub">Your decisions, what you knew when you made them, and what happened after.</p>
+    </div>
+    <div class="gn-page-actions">
+      <a class="gn-btn" href="/alerts">Open alerts</a>
+      <button type="button" class="gn-btn gn-btn--primary" id="j-new-btn" hidden>New entry</button>
+    </div>
+    <div class="gn-page-meta"><span class="gn-meta" id="j-clock"></span></div>
+  </header>
+
+  <!-- Signed out, or sign-in not set up: what the journal holds, one sign-in action and an example. -->
+  <section class="gn-card j-signin" id="j-signin" aria-labelledby="j-signin-title" hidden>
+    <div class="gn-empty" role="status">
+      <svg class="gn-empty-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h9l3 3V20.5H6z M15 3.5v3h3 M9 11h6 M9 14.5h6 M9 18h3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg>
+      <h2 class="gn-empty-title" id="j-signin-title">Your journal keeps the decisions you answer for</h2>
+      <p class="gn-empty-body" id="j-signin-text">Each entry is a decision you made on an event or a plant. Entries are private unless you share them with the desk.</p>
+      <ul class="j-anatomy" aria-label="What each entry holds">
+        <li><span class="gn-label">Decision</span><span>Retain or change, with your reason.</span></li>
+        <li><span class="gn-label">Known then</span><span>The price, the latest notice and the facts at the replay clock, saved with it.</span></li>
+        <li><span class="gn-label">What happened after</span><span>The operator notices that followed, read from the replay.</span></li>
+      </ul>
+      <div class="gn-empty-actions">
+        <button type="button" class="gn-btn gn-btn--primary" id="j-signin-btn">Sign in</button>
+        <a class="gn-btn" id="j-example" href="/alerts">See an example</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Signed in: the filters, the table and the chosen entry. -->
+  <div class="j-signed" id="j-signed" hidden>
+    <form class="gn-filters j-filters" id="j-filter-form" role="toolbar" aria-label="Filter journal entries" autocomplete="off">
+      <div class="gn-seg" role="group" aria-label="Whose" id="f-scope">
+        <button type="button" data-value="mine" aria-pressed="true">Mine</button>
+        <button type="button" data-value="desk" aria-pressed="false">Shared</button>
+      </div>
+      <div class="gn-seg" role="group" aria-label="Decision" id="f-decision">
+        <button type="button" data-value="" aria-pressed="true">All</button>
+        <button type="button" data-value="retain" aria-pressed="false">Retain</button>
+        <button type="button" data-value="change" aria-pressed="false">Change</button>
+        <button type="button" data-value="note" aria-pressed="false">Notes</button>
+      </div>
+      <label class="gn-search"><span class="sr-only">Search</span><input class="gn-input" id="f-q" type="search" maxlength="200" placeholder="Search notes, notices, facts"></label>
+      <details class="gn-more-filters" id="f-more">
+        <summary>More filters</summary>
+        <div class="j-more">
+          <label>Plant <input class="gn-input mono" id="f-plant" maxlength="80" placeholder="Any"></label>
+          <label>Region
+            <select class="gn-select" id="f-region">
+              <option value="">All regions</option>
+              <option value="CLUZ">Luzon</option>
+              <option value="CVIS">Visayas</option>
+              <option value="CMIN">Mindanao</option>
+            </select>
+          </label>
+          <label>From <input class="gn-input mono" id="f-since" type="datetime-local" step="300"></label>
+          <label>To <input class="gn-input mono" id="f-until" type="datetime-local" step="300"></label>
+          <label>Order
+            <select class="gn-select" id="f-sort">
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+            </select>
+          </label>
+        </div>
+      </details>
+      <span class="j-event-filter" id="f-event-row" hidden><span class="gn-badge" id="f-event"></span><button type="button" class="gn-icon-btn" id="f-event-clear" aria-label="Show every event">×</button></span>
+      <span class="gn-filters-count" id="j-count"></span>
+      <button type="button" class="gn-clear" id="f-reset" hidden>Clear</button>
+    </form>
+
+    <div class="gn-grid gn-grid--main-side j-cols">
+      <section class="j-main" aria-labelledby="j-history-title">
+        <h2 class="sr-only" id="j-history-title">Entries</h2>
+        <p class="j-status" id="j-status" role="status"></p>
+        <div class="gn-table-wrap" id="j-table-wrap" hidden>
+          <table class="gn-table j-table" id="j-table" data-sortable>
+            <colgroup><col class="j-w-time"><col class="j-w-about"><col class="j-w-dec"><col><col class="j-w-num"><col class="j-w-after"></colgroup>
+            <thead><tr>
+              <th scope="col" data-sort="time">As of</th>
+              <th scope="col" data-sort="text">About</th>
+              <th scope="col" data-sort="text">Decision</th>
+              <th scope="col">Reason</th>
+              <th scope="col" class="num" data-sort="num">Price ₱/MWh</th>
+              <th scope="col" data-sort="num">After</th>
+            </tr></thead>
+            <tbody id="j-list"></tbody>
+          </table>
+        </div>
+        <div id="j-empty"></div>
+      </section>
+
+      <aside class="j-side" aria-label="Entry and new entry">
+        <section class="gn-card j-detail" id="j-detail" aria-labelledby="j-detail-title" hidden>
+          <header class="gn-card-head"><h2 id="j-detail-title">Entry</h2><div class="gn-section-actions" id="j-detail-actions"></div></header>
+          <div id="j-detail-body"></div>
+        </section>
+
+        <section class="gn-card j-new" id="j-new" aria-labelledby="j-new-title">
+          <header class="gn-card-head"><h2 id="j-new-title">New entry</h2></header>
+          <p class="gn-meta" id="j-new-hint">Write on an event or a plant. Event and alert pages carry the same box.</p>
+          <form class="j-pick" id="j-pick" autocomplete="off">
+            <label>About
+              <select class="gn-select" id="j-pick-kind">
+                <option value="event">Event</option>
+                <option value="plant">Plant</option>
+              </select>
+            </label>
+            <label class="j-pick-id">Event id or plant code
+              <input class="gn-input mono" id="j-pick-id" list="j-pick-list" maxlength="80" placeholder="pedc-u2-2026-09-21">
+            </label>
+            <datalist id="j-pick-list"></datalist>
+            <button type="submit" class="gn-btn">Start</button>
+            <p class="j-error" id="j-pick-error" role="alert"></p>
+          </form>
+          <div id="j-box"></div>
+        </section>
+      </aside>
+    </div>
+  </div>
+
+  <footer class="gn-sources"><details><summary>Sources and method</summary>
+    <p>Journal entries are written by signed-in traders and stay private unless shared with the desk.</p>
+    <p>"Known then" is the snapshot saved with the entry at the replay clock. It never changes after the save.</p>
+    <p>"What happened after" reads the system operator's notices in the replay, from the entry's time up to the clock, in Manila time.</p>
+  </details></footer>
+</main>
+</body>
+</html>

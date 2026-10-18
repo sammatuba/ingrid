@@ -1,0 +1,43 @@
+FICTIONAL SYNTHETIC BETA MANUAL
+Synthetic fixture issue 1.0
+Every word here is fictional.
+
+SECTION 1 SETTLEMENT AMOUNT
+1.1 Settlement Amount rules
+The fictional operator reviews the settlement amount against the contingency reserve in clause 1.1. No real issuer, unit or market is described.
+
+1.2 Load Forecast rules
+The fictional operator reviews the load forecast against the reserve offer in clause 1.2. No real issuer, unit or market is described.
+
+1.3 Network Constraint rules
+The fictional operator reviews the network constraint against the ramp rate in clause 1.3. No real issuer, unit or market is described.
+
+1.4 Ramp Rate rules
+The fictional operator reviews the ramp rate against the frequency regulation in clause 1.4. No real issuer, unit or market is described.
+
+SECTION 2 MUST RUN UNIT
+2.1 Must Run Unit rules
+The fictional operator reviews the must run unit against the dispatch schedule in clause 2.1. No real issuer, unit or market is described.
+
+2.2 Trading Interval rules
+The fictional operator reviews the trading interval against the network constraint in clause 2.2. No real issuer, unit or market is described.
+
+2.3 Pricing Error rules
+The fictional operator reviews the pricing error against the interconnection line in clause 2.3. No real issuer, unit or market is described.
+
+2.4 Market Suspension rules
+The fictional operator reviews the market suspension against the audit finding in clause 2.4. No real issuer, unit or market is described.
+
+SECTION 3 BILATERAL CONTRACT
+3.1 Bilateral Contract rules
+The fictional operator reviews the bilateral contract against the load forecast in clause 3.1. No real issuer, unit or market is described.
+
+3.2 Interconnection Line rules
+The fictional operator reviews the interconnection line against the bilateral contract in clause 3.2. No real issuer, unit or market is described.
+
+3.3 Frequency Regulation rules
+The fictional operator reviews the frequency regulation against the penalty notice in clause 3.3. No real issuer, unit or market is described.
+
+3.4 Contingency Reserve rules
+The fictional operator reviews the contingency reserve against the settlement amount in clause 3.4. No real issuer, unit or market is described.
+

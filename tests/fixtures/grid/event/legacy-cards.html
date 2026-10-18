@@ -1,0 +1,181 @@
+<!-- The event page's earlier cards, kept as a test fixture only. Ericka asked to "remove the old
+     data in events page": the live page (src/grid/event.html) no longer carries the desk line,
+     the review rail, the advisory and timeline card, the market card, the rules card, the
+     assumption, the price outlook, the impact card, the judgment, the decision form, the history
+     or the old likely-drivers card (now the "What stood out, ranked" rows). src/grid/event.js still draws them wherever their elements exist, so
+     tests/fixtures/grid/event/render.mjs appends this markup (verbatim from the page before the
+     removal) when it is run with --legacy-cards, and the DESK-1, DESK-4, DESK-7, CORP-5 and O5
+     renderer tests keep exercising that code. Never served. -->
+<section class="legacy-cards">
+    <!-- DESK-7: the desk line. Under the title and before the four tabs, the recorded AI
+         worker's proposal stands beside the person's decision. Both cards are composed by
+         src/grid/event.js from the baked view's own fields; every record behind them stays on
+         the page, one disclosure away. -->
+    <section class="desk-line" aria-label="The desk">
+      <article class="card desk-ai" id="desk-ai">
+        <h3>The AI reader <span class="by" id="dl-by"></span></h3>
+        <p class="dl-line" id="dl-run"></p>
+        <p class="dl-line" id="dl-what"></p>
+        <p class="dl-line" id="dl-label"></p>
+        <details class="rule-records" id="dl-rule-fold"><summary>Show the rule that fired</summary><p class="dl-rule" id="dl-rule"></p></details>
+        <p class="dl-proposal" id="dl-proposal"></p>
+        <p class="dl-line dl-readings" id="dl-readings"></p>
+        <details class="readings-records" id="dl-readings-fold" hidden><summary>Show the two readings' records</summary><ul class="mono" id="dl-readings-list"></ul></details>
+        <p class="dl-you" id="dl-you"></p>
+        <p class="dl-ask" id="dl-ask"></p>
+      </article>
+      <article class="card desk-person" id="desk-person">
+        <h3>The person</h3>
+        <p class="dl-line" id="dp-line"></p>
+        <p class="asof mono" id="dp-receipt"></p>
+      </article>
+    </section>
+    <ol class="rail" id="rail" aria-label="Review steps">
+      <li data-step="advisory"><span class="n">1</span>Advisory</li>
+      <li data-step="assumption"><span class="n">2</span>Assumption</li>
+      <li data-step="judgment"><span class="n">3</span>Judgment</li>
+      <li data-step="decision"><span class="n">4</span>Decision</li>
+    </ol>
+    <article class="card ev-advisory">
+      <h3>Advisory</h3>
+      <blockquote id="adv-quote"></blockquote>
+      <p class="asof" id="adv-asof"></p>
+      <h3 class="sub">What followed on the grid</h3>
+      <ol class="timeline" id="timeline"></ol>
+      <div class="cutoff" id="cutoff" hidden aria-live="polite"></div>
+    </article>
+
+    <article class="card ev-market" id="mk-card">
+      <div class="chart-head"><h3 id="mk-title">Visayas around the event</h3><p class="asof" id="mk-sub"></p></div>
+      <svg id="mk-chart" role="img" aria-labelledby="mk-title"></svg>
+      <div class="mk-figs" id="mk-figs"></div>
+    </article>
+    <article class="card ev-rules" id="rules" hidden>
+      <h3>Rules in force <span class="by" id="ru-by"></span></h3>
+      <p class="asof" id="ru-note"></p>
+      <p class="ru-governs" id="ru-governs"></p>
+      <div class="ru-tabs" id="ru-tabs" role="tablist" aria-label="Cutoff"></div>
+      <div id="ru-state"></div>
+    </article>
+    <article class="card ev-assumption">
+      <h3>Outlook assumption</h3>
+      <div class="big" id="as-big"><span class="mono" id="as-value">—</span><span class="unit" id="as-unit"></span></div>
+      <p class="as-prop" id="as-prop"></p>
+      <dl class="kv" id="as-kv"></dl>
+    </article>
+
+    <!-- DESK-1: the assumption's own words, looked up in the committed register, and the
+         issued price outlooks of the archive with the register rows each rests on. Drawn only
+         from the baked file `outlook/<id>.json`; with no archive the card stays off the page
+         (copy rule 4, a feature that is not connected is not shown). -->
+    <article class="card ev-outlook" id="price-outlook" hidden>
+      <h3>Register and price outlook</h3>
+      <!-- DESK-7: the card opens on one plain sentence — the outlook's month, its information
+           cutoff, and whether it rests on this assumption. The register rows, record ids and
+           input digests stay on the page, folded under "Show the records". -->
+      <p class="po-plain" id="po-plain"></p>
+      <details class="records">
+        <summary>Show the records</summary>
+        <p class="asof" id="po-summary"></p>
+        <ul class="po-list" id="po-list"></ul>
+        <p class="asof" id="po-chain"></p>
+      </details>
+      <!-- DESK-3: the card ends with the archive's own page. Off the page until the card is
+           drawn, so a bake with no archive shows no link to an empty surface either. -->
+      <p class="po-more" id="po-more" hidden><a href="/outlooks">every issued outlook</a></p>
+    </article>
+
+    <!-- DESK-4: the portfolio impact record, under the price-outlook card. The materiality
+         line is stated first, then the counts, the record's own synthetic label and whether
+         this event's unit is one of the record's portfolio nodes. Drawn only from the baked
+         view's own `impact` fields, every sentence citing the record's content digest; with
+         no impact record in the bake the card stays off the page (copy rule 4). -->
+    <article class="card ev-impact" id="impact" hidden>
+      <h3>Portfolio impact</h3>
+      <!-- DESK-7: the card opens on the materiality rule in one sentence, with the record's own
+           label — a method demonstration on a synthetic portfolio. The counts, the record's
+           label in full, the unit answer and every digest stay on the page, folded. -->
+      <p class="im-plain" id="im-plain"></p>
+      <details class="records">
+        <summary>Show the records</summary>
+        <p class="asof" id="im-line"></p>
+        <p class="asof" id="im-counts"></p>
+        <p class="asof" id="im-label"></p>
+        <p class="asof" id="im-unit"></p>
+      </details>
+    </article>
+
+    <article class="card ev-judgment">
+      <h3>Judgment <span class="by" id="jd-by"></span></h3>
+      <div class="verdict" id="jd-verdict" hidden>
+        <span class="label" id="jd-label"></span>
+        <span class="rule mono" id="jd-rule"></span>
+      </div>
+      <p class="jd-pending" id="jd-pending" hidden></p>
+      <table class="probes" id="jd-table" hidden>
+        <thead><tr><th scope="col">Question</th><th scope="col" class="forms">4 phrasings</th><th scope="col">Answer</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <!-- DESK-7: the receipt line folds under the same disclosure, so the judgment card reads
+           as a proposal first and its run record stays one click away. -->
+      <details class="records">
+        <summary>Show the records</summary>
+        <p class="asof mono" id="jd-receipt"></p>
+      </details>
+    </article>
+
+    <article class="card ev-decision" id="decision">
+      <h3>Decision</h3>
+      <form id="dc-form">
+        <div class="choices" role="radiogroup" aria-label="Decision">
+          <label><input type="radio" name="d" value="retain"><span><b>Retain</b>Keep the accepted value</span></label>
+          <label><input type="radio" name="d" value="revise"><span><b>Revise</b>Change the value</span></label>
+          <label><input type="radio" name="d" value="investigate"><span><b>Investigate</b>Leave open</span></label>
+        </div>
+        <label class="field" id="dc-value-wrap" hidden>New value <span class="unit">MW</span><input id="dc-value" class="mono" inputmode="decimal" autocomplete="off"></label>
+        <label class="field">Reason<textarea id="dc-reason" rows="3" required></textarea></label>
+        <button type="submit" class="primary" id="dc-submit" disabled>Record decision</button>
+        <p class="asof" id="dc-status" role="status"></p>
+      </form>
+      <p class="asof" id="dc-note" hidden></p>
+    </article>
+
+    <article class="card ev-history" id="history" hidden>
+      <!-- DESK-7: after a save this card is the visitor's own copy of the case, and its heading
+           says so. -->
+      <h3 id="hist-title">History</h3>
+      <ol id="hist-list"></ol>
+    </article>
+    <!-- O5 (ontology): the likely drivers of the price at the event, ranked by how unusual each
+         was against the last 28 days at the same hour, with the alert summary. Drawn only from
+         the baked file `ontology/<id>.json`; without it the card stays off the page. -->
+    <article class="card ev-drivers" id="drivers" hidden>
+      <h2 class="ed-h">What stood out, ranked <span class="by">evidence, not proof</span></h2>
+      <p class="ed-sub">Ranked by how far each was from the same hour over the last 28 days. These were present; they are not proven causes. A family the record does not carry shows No data.</p>
+      <p class="asof" id="dv-heading"></p>
+      <div class="dv-tabs" id="dv-tabs" role="group" aria-label="What was known"></div>
+      <details class="dv-help">
+        <summary>How to read this</summary>
+        <ul>
+          <li><b>Percent.</b> Each family is compared with the five-minute intervals of the same clock hour on the
+            last 28 days. "Higher than 78%" means the value was above 78% of those intervals; about 50% is normal.
+            Fuel is compared with its own monthly history instead.</li>
+          <li><b>Rank.</b> Families are ordered by that percent, most unusual first. Fuel is placed after the others
+            whenever another family is above 80%. A rank says what was unusual, not what set the price: evidence, not proof.</li>
+          <li><b>Context, not ranked.</b> The price itself is shown for reference and never ranked.</li>
+          <li><b>Rules flags.</b> Pricing flags at the interval (such as the price cap) are listed as set or not set and never
+            scored. Congested elements at stations with no known region are counted apart and never linked.</li>
+          <li><b>Withheld facts.</b> Facts a tab cannot use at the cutoff (5 minutes after the interval starts) are left
+            out and counted: those known only later, and in Strict also those without evidence of when they were known.</li>
+          <li><b>Tabs.</b> As known at the time: each market run is assumed available at the end of its interval.
+            Strict: only facts with evidence of when they were known. Hindsight: everything, including facts recorded later.</li>
+        </ul>
+      </details>
+      <div id="dv-state"></div>
+      <h4 class="dv-h">Alert summary <span class="by">as known at the time</span></h4>
+      <dl class="dv-summary" id="dv-summary"></dl>
+      <p class="dv-para" id="dv-para"></p>
+      <p class="asof" id="dv-source"></p>
+    </article>
+
+</section>

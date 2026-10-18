@@ -1,0 +1,1257 @@
+{
+  "assumptions": [
+    {
+      "affected_code": [
+        "scripts/data/sql/04_interval_pricing.sql",
+        "scripts/data/sql/05_labels_price.sql"
+      ],
+      "assumption_id": "threshold:price_cap_php_mwh",
+      "falsifier": "A month whose uncapped clearing prices settle below the bound, or a published WESM offer cap that differs from 32,000 PHP/MWh.",
+      "family": "threshold",
+      "last_checked_revision": null,
+      "layer": "analytical",
+      "owner": "unassigned",
+      "proposition": "The upper bound of rtd_market_clearing_price energy prices is 32,000 PHP/MWh, the observed 2026-09 maximum (32,000.02), and interval pricing clamps above it.",
+      "source_locator": [
+        {
+          "line": 13,
+          "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+          "quote": "STRUCT('price_cap_php_mwh' AS name, 32000.0 AS value, 'v1' AS version,"
+        },
+        {
+          "line": 114,
+          "path": "docs/work/data-foundation/folder-decisions.md",
+          "quote": "price band -10,000 to 32,000 PHP/MWh, observed in the clearing-price table"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "scripts/data/sql/04_interval_pricing.sql"
+      ],
+      "assumption_id": "threshold:price_floor_php_mwh",
+      "falsifier": "A month whose uncapped clearing prices settle below the floor.",
+      "family": "threshold",
+      "last_checked_revision": null,
+      "layer": "analytical",
+      "owner": "unassigned",
+      "proposition": "The lower bound of rtd_market_clearing_price energy prices is -10,000 PHP/MWh, the observed 2026-09 minimum, and interval pricing clamps below it.",
+      "source_locator": [
+        {
+          "line": 15,
+          "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+          "quote": "STRUCT('price_floor_php_mwh', -10000.0, 'v1',"
+        },
+        {
+          "line": 114,
+          "path": "docs/work/data-foundation/folder-decisions.md",
+          "quote": "price band -10,000 to 32,000 PHP/MWh, observed in the clearing-price table"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "scripts/data/sql/05_labels_price.sql"
+      ],
+      "assumption_id": "threshold:price_low_max",
+      "falsifier": "A later distribution in which the cut no longer separates the population; the source says revisit with more months.",
+      "family": "threshold",
+      "last_checked_revision": null,
+      "layer": "analytical",
+      "owner": "unassigned",
+      "proposition": "A capped median interval price from 0 up to below 3,000 PHP/MWh is low; the low band starts at 0, so a median below 0 is very_low, not low. The cut sits near Luzon 2026-09 p25 (about 2,900).",
+      "source_locator": [
+        {
+          "line": 17,
+          "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+          "quote": "STRUCT('price_low_max', 3000.0, 'v1', 'v1 cut chosen from the 2026-09 capped-median distribution (Luzon p25 about 2,900); revisit with more months'),"
+        },
+        {
+          "line": 130,
+          "path": "docs/work/data-foundation/folder-decisions.md",
+          "quote": "chosen from the 2026-09 distribution only; revisit when more months are loaded"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "scripts/data/sql/05_labels_price.sql"
+      ],
+      "assumption_id": "threshold:price_normal_max",
+      "falsifier": "A later distribution in which the cut no longer separates the population; the source says revisit with more months.",
+      "family": "threshold",
+      "last_checked_revision": null,
+      "layer": "analytical",
+      "owner": "unassigned",
+      "proposition": "A capped median interval price from 3,000 up to below 8,000 PHP/MWh is normal; 3,000, this cut's lower bound, is the top of the low band below it. The cut sits near Luzon 2026-09 p90 (about 7,950).",
+      "source_locator": [
+        {
+          "line": 18,
+          "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+          "quote": "STRUCT('price_normal_max', 8000.0, 'v1', 'v1 cut chosen from the 2026-09 distribution (Luzon p90 about 7,950); revisit with more months'),"
+        },
+        {
+          "line": 130,
+          "path": "docs/work/data-foundation/folder-decisions.md",
+          "quote": "chosen from the 2026-09 distribution only; revisit when more months are loaded"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "scripts/data/sql/05_labels_price.sql"
+      ],
+      "assumption_id": "threshold:price_high_max",
+      "falsifier": "A later distribution in which the cut no longer separates the population; the source says revisit with more months.",
+      "family": "threshold",
+      "last_checked_revision": null,
+      "layer": "analytical",
+      "owner": "unassigned",
+      "proposition": "A capped median interval price from 8,000 up to below 20,000 PHP/MWh is high; 8,000, this cut's lower bound, is the top of the normal band below it. The cut sits near Luzon 2026-09 p99 (about 21,000).",
+      "source_locator": [
+        {
+          "line": 19,
+          "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+          "quote": "STRUCT('price_high_max', 20000.0, 'v1', 'v1 cut chosen from the 2026-09 distribution (Luzon p99 about 21,000); revisit with more months'),"
+        },
+        {
+          "line": 130,
+          "path": "docs/work/data-foundation/folder-decisions.md",
+          "quote": "chosen from the 2026-09 distribution only; revisit when more months are loaded"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "scripts/data/sql/05_labels_price.sql"
+      ],
+      "assumption_id": "threshold:admin_priced_min_nodes",
+      "falsifier": "IEMOP documentation that defines the AP flag as something other than administered pricing.",
+      "family": "threshold",
+      "last_checked_revision": null,
+      "layer": "inferred",
+      "owner": "unassigned",
+      "proposition": "An interval with at least one AP-flagged node is administered pricing.",
+      "source_locator": [
+        {
+          "line": 20,
+          "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+          "quote": "STRUCT('admin_priced_min_nodes', 1.0, 'v1', 'intervals with at least this many AP-flagged nodes; flag meaning unconfirmed'),"
+        },
+        {
+          "line": 101,
+          "path": "docs/work/data-foundation/folder-decisions.md",
+          "quote": "their meaning is **not confirmed** from IEMOP documentation"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "scripts/data/sql/05_labels_price.sql"
+      ],
+      "assumption_id": "threshold:secondary_cap_min_nodes",
+      "falsifier": "IEMOP documentation that defines the SEC flag as something other than the secondary cap.",
+      "family": "threshold",
+      "last_checked_revision": null,
+      "layer": "inferred",
+      "owner": "unassigned",
+      "proposition": "An interval with at least one SEC-flagged node is secondary-cap priced.",
+      "source_locator": [
+        {
+          "line": 21,
+          "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+          "quote": "STRUCT('secondary_cap_min_nodes', 1.0, 'v1', 'intervals with at least this many SEC-flagged nodes; flag meaning unconfirmed'),"
+        },
+        {
+          "line": 101,
+          "path": "docs/work/data-foundation/folder-decisions.md",
+          "quote": "their meaning is **not confirmed** from IEMOP documentation"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "scripts/data/sql/05_labels_price.sql"
+      ],
+      "assumption_id": "threshold:price_substituted_min_nodes",
+      "falsifier": "IEMOP documentation that defines the PSM flag as something other than price substitution.",
+      "family": "threshold",
+      "last_checked_revision": null,
+      "layer": "inferred",
+      "owner": "unassigned",
+      "proposition": "An interval with at least one PSM-flagged node is price-substituted.",
+      "source_locator": [
+        {
+          "line": 22,
+          "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+          "quote": "STRUCT('price_substituted_min_nodes', 1.0, 'v1', 'intervals with at least this many PSM-flagged nodes; flag meaning unconfirmed'),"
+        },
+        {
+          "line": 101,
+          "path": "docs/work/data-foundation/folder-decisions.md",
+          "quote": "their meaning is **not confirmed** from IEMOP documentation"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "scripts/data/analysis/10_baselines.sql",
+        "scripts/data/analysis/40_semantic_state.sql",
+        "scripts/data/sql/08_labels_reserve.sql"
+      ],
+      "assumption_id": "threshold:reserve_short_min_pct",
+      "falsifier": "An operator alert set the 1% rule does not track; the record already finds Dr short in 21% of non-alert Visayas intervals.",
+      "family": "threshold",
+      "last_checked_revision": null,
+      "layer": "inferred",
+      "owner": "unassigned",
+      "proposition": "Scheduled reserve below requirement by more than 1% is materially short.",
+      "source_locator": [
+        {
+          "line": 23,
+          "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+          "quote": "STRUCT('reserve_short_min_pct', 0.01, 'v1', 'a reserve is materially short when scheduled is below requirement by more than this share (rule from the strategy docs, 1%)'),"
+        },
+        {
+          "line": 216,
+          "path": "docs/work/data-foundation/folder-decisions.md",
+          "quote": "label rule inherited from the strategy docs (1%, 2 intervals) rather than tuned"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "scripts/data/sql/08_labels_reserve.sql"
+      ],
+      "assumption_id": "threshold:reserve_deficient_min_consecutive",
+      "falsifier": "A measured alert recall the two-interval rule fails where the severe variant (Dr and Fr together) succeeds.",
+      "family": "threshold",
+      "last_checked_revision": null,
+      "layer": "inferred",
+      "owner": "unassigned",
+      "proposition": "Two or more consecutive materially-short Dr/Fr intervals are a reserve_deficient condition.",
+      "source_locator": [
+        {
+          "line": 24,
+          "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+          "quote": "STRUCT('reserve_deficient_min_consecutive', 2.0, 'v1', 'Dr or Fr materially short for at least this many consecutive intervals = deficient (strategy docs, 2)'),"
+        },
+        {
+          "line": 207,
+          "path": "docs/work/data-foundation/folder-decisions.md",
+          "quote": "reserve_deficient_min_consecutive` 2"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "scripts/data/sql/08_labels_reserve.sql"
+      ],
+      "assumption_id": "threshold:reserve_labels_from_yyyymmdd",
+      "falsifier": "An account of the 2024 regime and a period-specific baseline that makes 2024 reserve labels comparable.",
+      "family": "threshold",
+      "last_checked_revision": null,
+      "layer": "analytical",
+      "owner": "unassigned",
+      "proposition": "Reserve labels are computed from 2026-03-01 only, because 2024 reserve scheduling behaves differently (requirement often not fully scheduled without alerts).",
+      "source_locator": [
+        {
+          "line": 25,
+          "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+          "quote": "STRUCT('reserve_labels_from_yyyymmdd', 20260301.0, 'v1', 'reserve labels start here: in 2024 the requirement is often not fully scheduled even without alerts, so shortfall is not comparable'),"
+        },
+        {
+          "line": 198,
+          "path": "docs/work/data-foundation/folder-decisions.md",
+          "quote": "2024 is a different regime for reserves"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "scripts/data/sql/09_features.sql"
+      ],
+      "assumption_id": "threshold:split_valid_from_yyyymmdd",
+      "falsifier": "A rolling-origin evaluation that replaces the single chronological split.",
+      "family": "threshold",
+      "last_checked_revision": null,
+      "layer": "exploratory",
+      "owner": "unassigned",
+      "proposition": "The time-ordered split validates on 2026-08, after training on 2026-03-26 to 2026-07-31.",
+      "source_locator": [
+        {
+          "line": 26,
+          "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+          "quote": "STRUCT('split_valid_from_yyyymmdd', 20260801.0, 'v1', 'time-ordered split: train before this date, validation from here (2026-08)'),"
+        },
+        {
+          "line": 226,
+          "path": "docs/work/data-foundation/folder-decisions.md",
+          "quote": "**Split (time-ordered, thresholds in `grid_ref.thresholds`):**"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "scripts/data/sql/09_features.sql"
+      ],
+      "assumption_id": "threshold:split_test_from_yyyymmdd",
+      "falsifier": "A region whose test split holds no positive rows (Luzon has 12 September onset rows) is scored as if the split were even.",
+      "family": "threshold",
+      "last_checked_revision": null,
+      "layer": "exploratory",
+      "owner": "unassigned",
+      "proposition": "The time-ordered split tests on 2026-09.",
+      "source_locator": [
+        {
+          "line": 27,
+          "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+          "quote": "STRUCT('split_test_from_yyyymmdd', 20260901.0, 'v1', 'time-ordered split: test from here (2026-09)'),"
+        },
+        {
+          "line": 231,
+          "path": "docs/work/data-foundation/folder-decisions.md",
+          "quote": "consider rolling-origin evaluation"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "scripts/data/sql/09_features.sql"
+      ],
+      "assumption_id": "threshold:target_embargo_hours",
+      "falsifier": "A target whose forward reach exceeds three hours is added while the embargo is not widened.",
+      "family": "threshold",
+      "last_checked_revision": null,
+      "layer": "exploratory",
+      "owner": "unassigned",
+      "proposition": "Rows within three hours before a split boundary are marked embargo, because their forward targets reach into the next period.",
+      "source_locator": [
+        {
+          "line": 28,
+          "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+          "quote": "STRUCT('target_embargo_hours', 3.0, 'v1', 'rows within this many hours before a split boundary are marked embargo, because their forward targets reach into the next period'),"
+        },
+        {
+          "line": 411,
+          "path": "docs/work/data-foundation/HANDOFF.md",
+          "quote": "**Time-ordered splits with a 3-hour embargo**"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "scripts/data/analysis/40_semantic_state.sql"
+      ],
+      "assumption_id": "threshold:import_mild_min",
+      "falsifier": "A later distribution in which the cut stops separating the regions.",
+      "family": "threshold",
+      "last_checked_revision": null,
+      "layer": "analytical",
+      "owner": "unassigned",
+      "proposition": "An import share of at least 2% of requirement is mildly_dependent; Visayas 2026 median is 0.20 and Luzon and Mindanao are near 0.",
+      "source_locator": [
+        {
+          "line": 29,
+          "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+          "quote": "STRUCT('import_mild_min', 0.02, 'v1', 'semantic_state: import share of requirement from this value = mildly_dependent (Visayas 2026 median 0.20; Luzon and Mindanao near 0)'),"
+        },
+        {
+          "line": 281,
+          "path": "docs/work/data-foundation/folder-decisions.md",
+          "quote": "coarse onset bands from out-of-sample scores"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "scripts/data/analysis/40_semantic_state.sql"
+      ],
+      "assumption_id": "threshold:import_dependent_min",
+      "falsifier": "A later distribution in which the cut stops separating the regions.",
+      "family": "threshold",
+      "last_checked_revision": null,
+      "layer": "analytical",
+      "owner": "unassigned",
+      "proposition": "An import share of at least 10% of requirement is dependent.",
+      "source_locator": [
+        {
+          "line": 30,
+          "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+          "quote": "STRUCT('import_dependent_min', 0.10, 'v1', 'semantic_state: import share from this value = dependent'),"
+        },
+        {
+          "line": 281,
+          "path": "docs/work/data-foundation/folder-decisions.md",
+          "quote": "coarse onset bands from out-of-sample scores"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "scripts/data/analysis/40_semantic_state.sql"
+      ],
+      "assumption_id": "threshold:import_critical_min",
+      "falsifier": "A later distribution in which the cut stops separating the regions.",
+      "family": "threshold",
+      "last_checked_revision": null,
+      "layer": "analytical",
+      "owner": "unassigned",
+      "proposition": "An import share of at least 25% of requirement is critically_dependent; the Visayas 2026 p95 is 0.275.",
+      "source_locator": [
+        {
+          "line": 31,
+          "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+          "quote": "STRUCT('import_critical_min', 0.25, 'v1', 'semantic_state: import share from this value = critically_dependent (Visayas 2026 p95 0.275)'),"
+        },
+        {
+          "line": 281,
+          "path": "docs/work/data-foundation/folder-decisions.md",
+          "quote": "coarse onset bands from out-of-sample scores"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "scripts/data/analysis/40_semantic_state.sql"
+      ],
+      "assumption_id": "threshold:shortfall_serious_min",
+      "falsifier": "A later month whose shortfall distribution moves across the cut.",
+      "family": "threshold",
+      "last_checked_revision": null,
+      "layer": "analytical",
+      "owner": "unassigned",
+      "proposition": "A largest Dr/Fr shortfall of at least 25% of requirement is serious; the median shortfall when short is 0.58 to 0.84.",
+      "source_locator": [
+        {
+          "line": 32,
+          "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+          "quote": "STRUCT('shortfall_serious_min', 0.25, 'v1', 'semantic_state: largest Dr/Fr shortfall as a share of requirement from this value = serious (median shortfall when short is 0.58-0.84)'),"
+        },
+        {
+          "line": 150,
+          "path": "docs/work/data-foundation/folder-decisions.md",
+          "quote": "with the missing share averaging 33-83% of the requirement"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "scripts/data/analysis/40_semantic_state.sql"
+      ],
+      "assumption_id": "threshold:shortfall_severe_min",
+      "falsifier": "A later month whose shortfall distribution moves across the cut.",
+      "family": "threshold",
+      "last_checked_revision": null,
+      "layer": "analytical",
+      "owner": "unassigned",
+      "proposition": "A largest Dr/Fr shortfall of at least 60% of requirement is severe.",
+      "source_locator": [
+        {
+          "line": 33,
+          "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+          "quote": "STRUCT('shortfall_severe_min', 0.60, 'v1', 'semantic_state: largest Dr/Fr shortfall share from this value = severe'),"
+        },
+        {
+          "line": 150,
+          "path": "docs/work/data-foundation/folder-decisions.md",
+          "quote": "with the missing share averaging 33-83% of the requirement"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "scripts/data/analysis/40_semantic_state.sql"
+      ],
+      "assumption_id": "threshold:trend_min_change",
+      "falsifier": "The worsening/improving label stops matching the alert windows it is read against.",
+      "family": "threshold",
+      "last_checked_revision": null,
+      "layer": "exploratory",
+      "owner": "unassigned",
+      "proposition": "A Dr shortfall share moving by more than +-0.10 against one hour earlier is worsening or improving.",
+      "source_locator": [
+        {
+          "line": 34,
+          "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+          "quote": "STRUCT('trend_min_change', 0.10, 'v1', 'semantic_state: Dr shortfall share change versus one hour earlier beyond +-this value = worsening / improving'),"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "scripts/data/analysis/40_semantic_state.sql"
+      ],
+      "assumption_id": "threshold:onset_band_moderate_min",
+      "falsifier": "A recalibration that moves the reliable band boundaries; the record recommends periodic re-fitting.",
+      "family": "threshold",
+      "last_checked_revision": null,
+      "layer": "analytical",
+      "owner": "unassigned",
+      "proposition": "An onset probability of at least 0.10 is the moderate band.",
+      "source_locator": [
+        {
+          "line": 35,
+          "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+          "quote": "STRUCT('onset_band_moderate_min', 0.10, 'v1', 'semantic_state: onset probability bands from calibration.md (coarse, never decimals): moderate from 0.10'),"
+        },
+        {
+          "line": 56,
+          "path": "docs/work/data-foundation/calibration.md",
+          "quote": "so display bands (for example under 10%, 10-30%, 30-60%, above 60%), not decimals"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "scripts/data/analysis/40_semantic_state.sql"
+      ],
+      "assumption_id": "threshold:onset_band_high_min",
+      "falsifier": "A recalibration that moves the reliable band boundaries; the record recommends periodic re-fitting.",
+      "family": "threshold",
+      "last_checked_revision": null,
+      "layer": "analytical",
+      "owner": "unassigned",
+      "proposition": "An onset probability of at least 0.30 is the high band.",
+      "source_locator": [
+        {
+          "line": 36,
+          "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+          "quote": "STRUCT('onset_band_high_min', 0.30, 'v1', 'semantic_state: high from 0.30'),"
+        },
+        {
+          "line": 56,
+          "path": "docs/work/data-foundation/calibration.md",
+          "quote": "so display bands (for example under 10%, 10-30%, 30-60%, above 60%), not decimals"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "scripts/data/analysis/40_semantic_state.sql"
+      ],
+      "assumption_id": "threshold:onset_band_very_high_min",
+      "falsifier": "A recalibration that moves the reliable band boundaries; the record recommends periodic re-fitting.",
+      "family": "threshold",
+      "last_checked_revision": null,
+      "layer": "analytical",
+      "owner": "unassigned",
+      "proposition": "An onset probability of at least 0.60 is the very_high band; hardly any September rows are reliably above it.",
+      "source_locator": [
+        {
+          "line": 37,
+          "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+          "quote": "STRUCT('onset_band_very_high_min', 0.60, 'v1', 'semantic_state: very_high from 0.60 (hardly any September rows are reliably above this)')"
+        },
+        {
+          "line": 56,
+          "path": "docs/work/data-foundation/calibration.md",
+          "quote": "so display bands (for example under 10%, 10-30%, 30-60%, above 60%), not decimals"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "src/grid/explain.js",
+        "src/judgment/bundle.py",
+        "src/judgment/systemone.py",
+        "src/review/records.py"
+      ],
+      "assumption_id": "composer:unstable",
+      "falsifier": "A re-asked bundle that keeps its label although the receipt showed a flip rate inside the untuned limits.",
+      "family": "composer",
+      "last_checked_revision": null,
+      "layer": "exploratory",
+      "owner": "unassigned",
+      "proposition": "A bundle whose form votes drift above tau_flip or whose polarity gap exceeds tau_pol is insufficient before any row reads it.",
+      "source_locator": [
+        {
+          "line": 448,
+          "path": "src/judgment/bundle.py",
+          "quote": "return _result('insufficient', 'unstable: ' + ','.join(unstable) + ' above tau_flip or tau_pol',"
+        },
+        {
+          "line": 210,
+          "path": "docs/product/working-paper-2026-10-11.md",
+          "quote": "| Bundle unstable per 5.3, or Q7 < `tau_suff`, or Q1 = `cannot_tell` | `insufficient` |"
+        }
+      ],
+      "state": "test_fixture",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "src/grid/explain.js",
+        "src/judgment/bundle.py",
+        "src/judgment/systemone.py",
+        "src/review/records.py"
+      ],
+      "assumption_id": "composer:sufficiency_gate",
+      "falsifier": "A pair an analyst can decide from the passages while Q7 modal top is no.",
+      "family": "composer",
+      "last_checked_revision": null,
+      "layer": "exploratory",
+      "owner": "unassigned",
+      "proposition": "A modal no on Q7, below tau_suff, refuses composition with LOW_SUFFICIENCY.",
+      "source_locator": [
+        {
+          "line": 451,
+          "path": "src/judgment/bundle.py",
+          "quote": "return _result('insufficient', 'sufficiency_gate: Q7=' + atomic['q7'] + ' below tau_suff',"
+        },
+        {
+          "line": 210,
+          "path": "docs/product/working-paper-2026-10-11.md",
+          "quote": "| Bundle unstable per 5.3, or Q7 < `tau_suff`, or Q1 = `cannot_tell` | `insufficient` |"
+        }
+      ],
+      "state": "test_fixture",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "src/grid/explain.js",
+        "src/judgment/bundle.py",
+        "src/judgment/systemone.py",
+        "src/review/records.py"
+      ],
+      "assumption_id": "composer:identity_unknown",
+      "falsifier": "A case where the passages name no candidate yet the assumption entity is decided by context alone.",
+      "family": "composer",
+      "last_checked_revision": null,
+      "layer": "official",
+      "owner": "unassigned",
+      "proposition": "Q1 cannot_tell composes insufficient rather than pick an entity.",
+      "source_locator": [
+        {
+          "line": 454,
+          "path": "src/judgment/bundle.py",
+          "quote": "return _result('insufficient', 'identity_unknown: Q1=cannot_tell', 'IDENTITY_UNKNOWN', limits, atomic)"
+        },
+        {
+          "line": 210,
+          "path": "docs/product/working-paper-2026-10-11.md",
+          "quote": "| Bundle unstable per 5.3, or Q7 < `tau_suff`, or Q1 = `cannot_tell` | `insufficient` |"
+        }
+      ],
+      "state": "test_fixture",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "src/grid/explain.js",
+        "src/judgment/bundle.py",
+        "src/judgment/systemone.py",
+        "src/review/records.py"
+      ],
+      "assumption_id": "composer:unrelated_entity",
+      "falsifier": "A case where Q1 names another candidate that the passages nonetheless show to be the assumption entity.",
+      "family": "composer",
+      "last_checked_revision": null,
+      "layer": "official",
+      "owner": "unassigned",
+      "proposition": "Q1 naming a candidate other than the assumption mapped entity composes unrelated.",
+      "source_locator": [
+        {
+          "line": 457,
+          "path": "src/judgment/bundle.py",
+          "quote": "return _result('unrelated', 'unrelated_entity: Q1=' + atomic['q1'] + ' is not the mapped entity',"
+        },
+        {
+          "line": 211,
+          "path": "docs/product/working-paper-2026-10-11.md",
+          "quote": "| Q1 is not the assumption's mapped entity | `unrelated` |"
+        }
+      ],
+      "state": "test_fixture",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "src/grid/explain.js",
+        "src/judgment/bundle.py",
+        "src/judgment/systemone.py",
+        "src/review/records.py"
+      ],
+      "assumption_id": "composer:event_other",
+      "falsifier": "A grid alert that does name a unit assumption; the deferral is recorded in the bundle v5 intent.",
+      "family": "composer",
+      "last_checked_revision": null,
+      "layer": "official",
+      "owner": "unassigned",
+      "proposition": "Q2 other or grid_alert composes unrelated: a grid alert names no unit assumption.",
+      "source_locator": [
+        {
+          "line": 462,
+          "path": "src/judgment/bundle.py",
+          "quote": "return _result('unrelated', 'event_other: Q2=' + atomic['q2'], None, limits, atomic)"
+        },
+        {
+          "line": 212,
+          "path": "docs/product/working-paper-2026-10-11.md",
+          "quote": "| Q2 = `other` | `unrelated` |"
+        }
+      ],
+      "state": "test_fixture",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "src/grid/explain.js",
+        "src/judgment/bundle.py",
+        "src/judgment/systemone.py",
+        "src/review/records.py"
+      ],
+      "assumption_id": "composer:lineage_reuse",
+      "falsifier": "Two passages that read as a repeat while carrying new information.",
+      "family": "composer",
+      "last_checked_revision": null,
+      "layer": "exploratory",
+      "owner": "unassigned",
+      "proposition": "Q5 at or above tau_lineage reuses an earlier source label; with no earlier label the bundle is insufficient (LINEAGE_NO_PRIOR).",
+      "source_locator": [
+        {
+          "line": 465,
+          "path": "src/judgment/bundle.py",
+          "quote": "return _result('insufficient', 'lineage_reuse: Q5 above tau_lineage and no earlier bundle label',"
+        },
+        {
+          "line": 213,
+          "path": "docs/product/working-paper-2026-10-11.md",
+          "quote": "| Q5 ≥ `tau_lineage` (repeat of in-context source) | label of the earlier source's bundle; if none, `insufficient` |"
+        }
+      ],
+      "state": "test_fixture",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "src/grid/explain.js",
+        "src/judgment/bundle.py",
+        "src/judgment/systemone.py",
+        "src/review/records.py"
+      ],
+      "assumption_id": "composer:availability_confirmed",
+      "falsifier": "A confirmed return that the model representation does not carry as an availability kind.",
+      "family": "composer",
+      "last_checked_revision": null,
+      "layer": "exploratory",
+      "owner": "unassigned",
+      "proposition": "An availability-kind input field with Q2 commercial_operation or return_to_service, Q3 same and Q4 below tau_cond composes supports.",
+      "source_locator": [
+        {
+          "line": 473,
+          "path": "src/judgment/bundle.py",
+          "quote": "return _result('supports', 'availability_confirmed: Q2=' + atomic['q2'] + ', Q3=same, Q4 below tau_cond',"
+        },
+        {
+          "line": 214,
+          "path": "docs/product/working-paper-2026-10-11.md",
+          "quote": "| Q2 = `commercial_availability` and Q3 = `same` and Q4 < `tau_cond` | `supports` |"
+        }
+      ],
+      "state": "test_fixture",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "src/grid/explain.js",
+        "src/judgment/bundle.py",
+        "src/judgment/systemone.py",
+        "src/review/records.py"
+      ],
+      "assumption_id": "composer:milestone_mismatch",
+      "falsifier": "A testing statement that is consistent with an availability-kind input field.",
+      "family": "composer",
+      "last_checked_revision": null,
+      "layer": "official",
+      "owner": "unassigned",
+      "proposition": "Q2 testing on an availability-kind input field composes challenges.",
+      "source_locator": [
+        {
+          "line": 476,
+          "path": "src/judgment/bundle.py",
+          "quote": "return _result('challenges', 'milestone_mismatch: Q2=testing while the input field is availability kind',"
+        },
+        {
+          "line": 215,
+          "path": "docs/product/working-paper-2026-10-11.md",
+          "quote": "| Q2 ∈ {`testing`, `synchronisation`} and the assumption is commercial availability | `challenges` (milestone mismatch) |"
+        }
+      ],
+      "state": "test_fixture",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "src/grid/explain.js",
+        "src/judgment/bundle.py",
+        "src/judgment/systemone.py",
+        "src/review/records.py"
+      ],
+      "assumption_id": "composer:outage_or_later",
+      "falsifier": "An outage on an availability-kind field that leaves availability unchanged.",
+      "family": "composer",
+      "last_checked_revision": null,
+      "layer": "official",
+      "owner": "unassigned",
+      "proposition": "Q2 planned_outage, forced_outage or derating, or Q3 after, on an availability-kind input field composes challenges.",
+      "source_locator": [
+        {
+          "line": 479,
+          "path": "src/judgment/bundle.py",
+          "quote": "return _result('challenges', 'outage_or_later: Q2=' + atomic['q2'] + ', Q3=' + atomic['q3']"
+        },
+        {
+          "line": 216,
+          "path": "docs/product/working-paper-2026-10-11.md",
+          "quote": "| Q2 = `outage_or_extension` or Q3 = `after` | `challenges` |"
+        }
+      ],
+      "state": "test_fixture",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "src/grid/explain.js",
+        "src/judgment/bundle.py",
+        "src/judgment/systemone.py",
+        "src/review/records.py"
+      ],
+      "assumption_id": "composer:earlier_observation",
+      "falsifier": "An earlier observation that supports a supply outlook but contradicts a return-date assumption; the working paper calls the row deliberately contestable.",
+      "family": "composer",
+      "last_checked_revision": null,
+      "layer": "official",
+      "owner": "unassigned",
+      "proposition": "Q3 before with Q6 yes composes supports.",
+      "source_locator": [
+        {
+          "line": 483,
+          "path": "src/judgment/bundle.py",
+          "quote": "return _result('supports', 'earlier_observation: Q3=before and Q6=yes', None, limits, atomic)"
+        },
+        {
+          "line": 217,
+          "path": "docs/product/working-paper-2026-10-11.md",
+          "quote": "| Q3 = `before` and Q6 = yes | `supports` |"
+        }
+      ],
+      "state": "test_fixture",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "src/grid/explain.js",
+        "src/judgment/bundle.py",
+        "src/judgment/systemone.py",
+        "src/review/records.py"
+      ],
+      "assumption_id": "composer:direction_conflict",
+      "falsifier": "A pair where Q8 challenges should still compose supports because Q6 reports an observation; the one live run hangs on this reading and is unadjudicated.",
+      "family": "composer",
+      "last_checked_revision": null,
+      "layer": "official",
+      "owner": "unassigned",
+      "proposition": "Q3 before, Q6 yes and Q8 challenges composes mixed (owner decision, 2026-10-13).",
+      "source_locator": [
+        {
+          "line": 484,
+          "path": "src/judgment/bundle.py",
+          "quote": "return _result('mixed', 'direction_conflict: Q3=before and Q6=yes but Q8=challenges', None, limits, atomic)"
+        },
+        {
+          "line": 120,
+          "path": "src/judgment/bundle.py",
+          "quote": "``direction_conflict`` fires"
+        }
+      ],
+      "state": "test_fixture",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "src/grid/explain.js",
+        "src/judgment/bundle.py",
+        "src/judgment/systemone.py",
+        "src/review/records.py"
+      ],
+      "assumption_id": "composer:conditional_support",
+      "falsifier": "A conditional statement that should compose insufficient rather than mixed.",
+      "family": "composer",
+      "last_checked_revision": null,
+      "layer": "exploratory",
+      "owner": "unassigned",
+      "proposition": "Q4 at or above tau_cond with Q3 same or before composes mixed.",
+      "source_locator": [
+        {
+          "line": 486,
+          "path": "src/judgment/bundle.py",
+          "quote": "return _result('mixed', 'conditional_support: Q4 above tau_cond and Q3 in (same, before)',"
+        },
+        {
+          "line": 218,
+          "path": "docs/product/working-paper-2026-10-11.md",
+          "quote": "| Q4 ≥ `tau_cond` and Q3 ∈ {`same`, `before`} | `mixed` (conditional support) |"
+        }
+      ],
+      "state": "test_fixture",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "src/grid/explain.js",
+        "src/judgment/bundle.py",
+        "src/judgment/systemone.py",
+        "src/review/records.py"
+      ],
+      "assumption_id": "composer:time_not_stated",
+      "falsifier": "A direction-bearing pair with no stated time that should compose supports.",
+      "family": "composer",
+      "last_checked_revision": null,
+      "layer": "official",
+      "owner": "unassigned",
+      "proposition": "Q3 not_stated composes mixed when Q8 names a direction and insufficient when it is neither.",
+      "source_locator": [
+        {
+          "line": 490,
+          "path": "src/judgment/bundle.py",
+          "quote": "return _result('mixed', 'time_not_stated: Q3=not_stated and Q8=' + atomic['q8'], None, limits, atomic)"
+        },
+        {
+          "line": 219,
+          "path": "docs/product/working-paper-2026-10-11.md",
+          "quote": "| Q3 = `not_stated` | `mixed` if Q8 ≠ `neither`, else `insufficient` |"
+        }
+      ],
+      "state": "test_fixture",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "src/grid/explain.js",
+        "src/judgment/bundle.py",
+        "src/judgment/systemone.py",
+        "src/review/records.py"
+      ],
+      "assumption_id": "composer:fall_through",
+      "falsifier": "A case the frozen table should decide but names no condition for.",
+      "family": "composer",
+      "last_checked_revision": null,
+      "layer": "official",
+      "owner": "unassigned",
+      "proposition": "No row matched composes insufficient with reason FALL_THROUGH.",
+      "source_locator": [
+        {
+          "line": 493,
+          "path": "src/judgment/bundle.py",
+          "quote": "return _result('insufficient', 'fall_through: no row matched', 'FALL_THROUGH', limits, atomic)"
+        },
+        {
+          "line": 220,
+          "path": "docs/product/working-paper-2026-10-11.md",
+          "quote": "| otherwise | `insufficient` |"
+        }
+      ],
+      "state": "test_fixture",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "src/price/series.py",
+        "src/price/baselines.py",
+        "scripts/price/baselines.py"
+      ],
+      "assumption_id": "price:final_settlement_lmp",
+      "falsifier": "A settlement statement whose final nodal price is another column, or a published final statement that disagrees with the exported `lmp` beyond the recorded one-peso agreement.",
+      "family": "price",
+      "last_checked_revision": null,
+      "layer": "analytical",
+      "owner": "project owner",
+      "proposition": "The final settlement price of a market trading node is the `lmp` column of `grid_raw.ext_pmr_settlement_prices` (the owner's `fedp`), per node and five-minute interval; the real-time price is the known-then observation and never stands in for it.",
+      "source_locator": [
+        {
+          "line": 9,
+          "path": "docs/work/price-outlook/target-contract.md",
+          "quote": "the final settlement price (owner's `fedp`), per node and five-minute interval"
+        },
+        {
+          "line": 81,
+          "path": "docs/work/thesis-challenge-2026-10-16/price-basis.md",
+          "quote": "is the final settlement price (the owner's `fedp`)"
+        },
+        {
+          "line": 46,
+          "path": "docs/work/thesis-challenge-2026-10-16/coverage.md",
+          "quote": "Final is the target; real-time is a known-then observation."
+        }
+      ],
+      "state": "accepted",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "src/price/series.py",
+        "src/price/baselines.py"
+      ],
+      "assumption_id": "rules:billing_month_clock",
+      "falsifier": "A settlement statement whose `bmonth` label covers another date range, or an owner statement that revises the clock.",
+      "family": "rules",
+      "last_checked_revision": null,
+      "layer": "official",
+      "owner": "project owner",
+      "proposition": "A billing month runs from the 26th of the month before to the 25th; the outlook's horizons and the export's `bmonth` labels follow that clock.",
+      "source_locator": [
+        {
+          "line": 14,
+          "path": "docs/work/price-outlook/target-contract.md",
+          "quote": "billing month `bmonth` = 26th of the month before to the 25th"
+        },
+        {
+          "line": 46,
+          "path": "docs/work/thesis-challenge-2026-10-16/price-basis.md",
+          "quote": "Owner: a billing month runs from the 26th to the 25th"
+        },
+        {
+          "line": 5,
+          "path": "docs/work/thesis-challenge-2026-10-16/coverage.md",
+          "quote": "A billing month `YYYY-MM` runs from the 26th of"
+        }
+      ],
+      "state": "accepted",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "src/price/series.py",
+        "scripts/price/baselines.py"
+      ],
+      "assumption_id": "price:regional_reference_series",
+      "falsifier": "A first baseline scored on another series, or a record that makes the regional series unsuitable as the public reference.",
+      "family": "price",
+      "last_checked_revision": null,
+      "layer": "exploratory",
+      "owner": "unassigned",
+      "proposition": "The regional load-weighted final price `grid_raw.ext_pmr_lwap_final.lwap` (`CLUZ`, `CVIS`, `CMIN`, `SYSTEM`) is the public reference series and the first baseline target.",
+      "source_locator": [
+        {
+          "line": 43,
+          "path": "docs/work/thesis-challenge-2026-10-16/coverage.md",
+          "quote": "the regional load-weighted series is the public reference"
+        },
+        {
+          "line": 10,
+          "path": "docs/work/price-outlook/target-contract.md",
+          "quote": "Reference series (public, first baseline target)"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "src/price/series.py",
+        "src/price/scorecard.py"
+      ],
+      "assumption_id": "rules:marked_months_never_filled",
+      "falsifier": "A scorecard row that scores an origin whose window needs an absent or short month, or a filled hour in an exported series.",
+      "family": "rules",
+      "last_checked_revision": null,
+      "layer": "official",
+      "owner": "unassigned",
+      "proposition": "A billing month absent or short in the export, and any day whose hour rows are not complete, is marked and never filled; a window that needs one is excluded whole.",
+      "source_locator": [
+        {
+          "line": 19,
+          "path": "docs/work/price-outlook/target-contract.md",
+          "quote": "never filled, origins skipped"
+        },
+        {
+          "line": 42,
+          "path": "docs/work/thesis-challenge-2026-10-16/coverage.md",
+          "quote": "never fill them"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "src/price/baselines.py",
+        "src/price/scorecard.py"
+      ],
+      "assumption_id": "price:one_day_embargo",
+      "falsifier": "A record that first availability is sooner or later than the embargo assumes, or a scored origin that reads an hour inside the embargo.",
+      "family": "price",
+      "last_checked_revision": null,
+      "layer": "exploratory",
+      "owner": "unassigned",
+      "proposition": "A forecast at an origin may read only hours that ended at least 24 h before the origin; the embargo stands in for the unknown first availability of each billing month's final statement.",
+      "source_locator": [
+        {
+          "line": 23,
+          "path": "docs/work/price-outlook/target-contract.md",
+          "quote": "blocked rolling origin with a one-day embargo"
+        },
+        {
+          "line": 17,
+          "path": "docs/work/price-outlook/target-contract.md",
+          "quote": "first availability of each billing month's final statement is unknown for history"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "affected_code": [
+        "scripts/grid/build_data.py",
+        "src/grid/event-api.js",
+        "src/grid/event.js",
+        "src/grid/register.js"
+      ],
+      "assumption_id": "availability:pedc-u2-2026-09-21",
+      "falsifier": "The operator's trip notice for PEDC Unit 2 on 2026-09-21 (V133937, 'PEDC U2 Tripped at 1334H') shows the unit did not hold its registered maximum for the day; a record of unavailability inside the day falsifies the proposition.",
+      "family": "availability",
+      "last_checked_revision": null,
+      "layer": "analytical",
+      "owner": "orchestrator seat",
+      "proposition": "PEDC Unit 2 available capacity holds at the IEMOP register run's registered maximum of 83.7 MW for 2026-09-21 (participant PEDC, trading days 2026-02-05 to 2026-09-29).",
+      "source_locator": [
+        {
+          "line": 38,
+          "path": "docs/cases/pedc-u2-2026-09-21/brief.md",
+          "quote": "The registered maximum available capacity of `08PEDC_U02` holds for 2026-09-21"
+        },
+        {
+          "line": 39,
+          "path": "docs/cases/pedc-u2-2026-09-21/brief.md",
+          "quote": "83.7 MW (`quantity_kind: available_capacity`, unit MW) — **read from the register run**, never typed by hand"
+        },
+        {
+          "line": 42,
+          "path": "docs/cases/pedc-u2-2026-09-21/brief.md",
+          "quote": "from the register run (2026-02-05 to 2026-09-29, 83.7 MW, participant PEDC)"
+        },
+        {
+          "line": 1,
+          "path": "docs/cases/pedc-u2-2026-09-21/evidence-manifest.json",
+          "quote": "\"publisher\":\"IEMOP WESM market data copy\""
+        },
+        {
+          "line": 1,
+          "path": "docs/cases/pedc-u2-2026-09-21/evidence-manifest.json",
+          "quote": "PEDC U2 Tripped at 1334H (Unplanned Outage)"
+        },
+        {
+          "line": 15,
+          "path": "docs/cases/pedc-u2-2026-09-21/outlook-revision.md",
+          "quote": "83.7 MW for 2026-09-21"
+        }
+      ],
+      "state": "deployed",
+      "valid_from": "2026-09-21",
+      "valid_to": "2026-09-21"
+    }
+  ],
+  "register_version": "outlook-register.v1",
+  "sources": [
+    {
+      "family": "threshold",
+      "path": "scripts/data/sql/03_ref_regions_thresholds.sql",
+      "rows": 23
+    },
+    {
+      "family": "composer",
+      "path": "src/judgment/bundle.py",
+      "rows": 14
+    }
+  ]
+}

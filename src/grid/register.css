@@ -1,0 +1,51 @@
+/* Register page (`/register`). Platform polish, 2026-10-18.
+   The frame, filter bar, table, badges and empty state are the shared components in ui.css
+   (docs/work/platform-polish-2026-10-18/design-system.md). This file holds only what is unique to
+   the register: the known-gaps line, the table's column widths and the detail row's layout.
+   The layer, state and owner are the register's own words, never a traffic light, so the state
+   badge stays neutral. */
+
+/* The known gaps: one compact warning line with a filter shortcut per gap. */
+.rg-gaps {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2, 8px) var(--s-3, 12px);
+  padding: var(--s-2, 8px) var(--s-3, 12px);
+  border: 1px solid var(--rule); border-radius: var(--radius-sm, 8px); background: var(--panel);
+}
+.rg-gaps[hidden] { display: none; }
+.rg-gaps-text { margin: 0; flex: 1 1 320px; color: var(--text); font-size: var(--t-body, 13px); }
+.rg-gaps-actions { display: flex; flex-wrap: wrap; gap: var(--s-2, 8px); }
+.rg-gaps-actions [aria-pressed="true"] { background: var(--panel-2); border-color: var(--accent); color: var(--text); }
+
+/* The table: the id column is wide enough for the register's longest ids, the rest are fixed. */
+.rg-table .rg-c-id { width: auto; }
+.rg-table .rg-c-family { width: 100px; }
+.rg-table .rg-c-layer { width: 104px; }
+.rg-table .rg-c-state { width: 116px; }
+.rg-table .rg-c-owner { width: 112px; }
+.rg-table .rg-c-valid { width: 136px; }
+.rg-table .rg-c-checked { width: 100px; }
+.rg-table .rg-c-n { width: 112px; }
+.rg-table { --gn-table-min: 1100px; }
+.rg-id-cell { display: flex; align-items: center; gap: 4px; min-width: 0; }
+.rg-id-cell .mono { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rg-toggle { flex: none; }
+
+/* The detail row: the statement in the register's words, then the evidence and the outlooks. */
+.gn-table tbody tr.rg-detail > td { white-space: normal; background: var(--panel-2); height: auto; }
+.rg-detail-body { padding: var(--s-2, 8px) var(--s-2, 8px) var(--s-3, 12px) 32px; max-width: 1100px; }
+.rg-statement { margin: 0; color: var(--text); font-size: var(--t-lead, 14px); line-height: 1.5; }
+.rg-line { margin: 4px 0 0; }
+.rg-cols { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: var(--s-2, 8px) var(--s-5, 24px); margin-top: var(--s-3, 12px); }
+.rg-cols .gn-label { margin: 0 0 4px; }
+.rg-cols .gn-label ~ .gn-label { margin-top: var(--s-3, 12px); }
+.rg-list { list-style: none; margin: 0; padding: 0; }
+.rg-list li { padding: 3px 0; font-size: var(--t-small, 12px); color: var(--text-2); overflow-wrap: anywhere; }
+.rg-ref { font-family: var(--mono); font-size: 11.5px; color: var(--muted); background: none; padding: 0; }
+.rg-quote { display: block; color: var(--text-2); }
+.rg-mark .mono { color: var(--text); }
+
+@media (max-width: 760px) {
+  .rg-cols { grid-template-columns: minmax(0, 1fr); }
+  .rg-detail-body { padding-left: var(--s-2, 8px); }
+  .rg-table .rg-c-id { width: 220px; }
+}

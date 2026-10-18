@@ -1,0 +1,603 @@
+{
+  "contract": "integration-contract",
+  "ladder": [
+    "selected design",
+    "code implemented",
+    "tests executed",
+    "recorded run",
+    "deployed"
+  ],
+  "missing_status": "missing",
+  "answers": [
+    "asked",
+    "evidence_at_cutoff",
+    "assumption_affected",
+    "forecast_and_exposure",
+    "authority",
+    "afterwards"
+  ],
+  "questions": [
+    {
+      "id": "Q1",
+      "question": "Why is the price what it is at this time and place?",
+      "answers": [
+        {
+          "answer": "asked",
+          "finding": "The desk asks why the price is what it is at this time and place.",
+          "surface": {"record": "docs/work/product-shape-2026-10-17/strategy.md"},
+          "status": "selected design",
+          "record": "docs/work/product-shape-2026-10-17/strategy.md"
+        },
+        {
+          "answer": "evidence_at_cutoff",
+          "finding": "The warehouse driver card lists the conditions by family with the time each became known.",
+          "surface": {"record": "docs/work/ontology-2026-10-17/record.md"},
+          "status": "recorded run",
+          "record": "docs/work/ontology-2026-10-17/record.md"
+        },
+        {
+          "answer": "assumption_affected",
+          "finding": "The desk links no owned assumption to a price interval.",
+          "surface": {"missing": "The desk builds no interval-to-assumption link."},
+          "status": "missing",
+          "record": "docs/work/thesis-challenge-2026-10-16/evidence-ledger.md"
+        },
+        {
+          "answer": "forecast_and_exposure",
+          "finding": "No forecast version or exposure figure follows a price interval.",
+          "surface": {"missing": "The desk builds no forecast or exposure link for this kind."},
+          "status": "missing",
+          "record": "docs/work/thesis-challenge-2026-10-16/evidence-ledger.md"
+        },
+        {
+          "answer": "authority",
+          "finding": "No person authorised a decision on a price condition.",
+          "surface": {"missing": "No decision record exists for this kind."},
+          "status": "missing",
+          "record": "docs/work/thesis-challenge-2026-10-16/evidence-ledger.md"
+        },
+        {
+          "answer": "afterwards",
+          "finding": "No settled month has scored the question.",
+          "surface": {"missing": "No settled month exists."},
+          "status": "missing",
+          "record": "docs/work/outlook-archive/first-outlook.md"
+        }
+      ]
+    },
+    {
+      "id": "Q2",
+      "question": "Which units were out here, and since when did we know?",
+      "answers": [
+        {
+          "answer": "asked",
+          "finding": "The desk asks which units were out and since when it knew.",
+          "surface": {"record": "docs/work/product-shape-2026-10-17/strategy.md"},
+          "status": "selected design",
+          "record": "docs/work/product-shape-2026-10-17/strategy.md"
+        },
+        {
+          "answer": "evidence_at_cutoff",
+          "finding": "The warehouse records each outage with its known-at time and basis.",
+          "surface": {"record": "docs/work/ontology-2026-10-17/record.md"},
+          "status": "recorded run",
+          "record": "docs/work/ontology-2026-10-17/record.md"
+        },
+        {
+          "answer": "assumption_affected",
+          "finding": "The register holds one row for the PEDC availability assumption. The orchestrator seat owns it until a person takes it. No issued outlook rests on it.",
+          "surface": {"record": "docs/work/product-gap-2026-10-17/reg-2.md"},
+          "status": "recorded run",
+          "record": "docs/work/price-outlook/desk.md"
+        },
+        {
+          "answer": "forecast_and_exposure",
+          "finding": "No issued outlook rests on the outage assumption.",
+          "surface": {"record": "docs/work/price-outlook/desk.md"},
+          "status": "recorded run",
+          "record": "docs/work/price-outlook/desk.md"
+        },
+        {
+          "answer": "authority",
+          "finding": "No person authorised a decision on the outage.",
+          "surface": {"missing": "No decision record exists for this kind."},
+          "status": "missing",
+          "record": "docs/work/thesis-challenge-2026-10-16/evidence-ledger.md"
+        },
+        {
+          "answer": "afterwards",
+          "finding": "No settled month has scored the outage.",
+          "surface": {"missing": "No settled month exists."},
+          "status": "missing",
+          "record": "docs/work/outlook-archive/first-outlook.md"
+        }
+      ]
+    },
+    {
+      "id": "Q3",
+      "question": "What did the operator say, and how much earlier than the schedule?",
+      "answers": [
+        {
+          "answer": "asked",
+          "finding": "The desk asks what the operator said and how much earlier than the schedule.",
+          "surface": {"record": "docs/work/product-shape-2026-10-17/strategy.md"},
+          "status": "selected design",
+          "record": "docs/work/product-shape-2026-10-17/strategy.md"
+        },
+        {
+          "answer": "evidence_at_cutoff",
+          "finding": "The desk matches each operator notice to a schedule row and measures the lag.",
+          "surface": {"record": "docs/work/validation/outage-lag.md"},
+          "status": "recorded run",
+          "record": "docs/work/validation/outage-lag.md"
+        },
+        {
+          "answer": "assumption_affected",
+          "finding": "The notice touches an availability belief that is a register row. The trip notice is the row's recorded falsifier.",
+          "surface": {"record": "docs/work/product-gap-2026-10-17/reg-2.md"},
+          "status": "recorded run",
+          "record": "docs/work/price-outlook/desk.md"
+        },
+        {
+          "answer": "forecast_and_exposure",
+          "finding": "No issued outlook rests on the operator notice.",
+          "surface": {"record": "docs/work/price-outlook/desk.md"},
+          "status": "recorded run",
+          "record": "docs/work/price-outlook/desk.md"
+        },
+        {
+          "answer": "authority",
+          "finding": "No person authorised a decision on the operator notice.",
+          "surface": {"missing": "No decision record exists for this kind."},
+          "status": "missing",
+          "record": "docs/work/thesis-challenge-2026-10-16/evidence-ledger.md"
+        },
+        {
+          "answer": "afterwards",
+          "finding": "No settled month has scored the notice.",
+          "surface": {"missing": "No settled month exists."},
+          "status": "missing",
+          "record": "docs/work/outlook-archive/first-outlook.md"
+        }
+      ]
+    },
+    {
+      "id": "Q4",
+      "question": "Was the region importing, and was a link congested?",
+      "answers": [
+        {
+          "answer": "asked",
+          "finding": "The desk asks about the region's imports and about congestion on a link.",
+          "surface": {"record": "docs/work/product-shape-2026-10-17/strategy.md"},
+          "status": "selected design",
+          "record": "docs/work/product-shape-2026-10-17/strategy.md"
+        },
+        {
+          "answer": "evidence_at_cutoff",
+          "finding": "The warehouse records the flow and congestion flag on each inter-island link.",
+          "surface": {"record": "docs/work/ontology-2026-10-17/record.md"},
+          "status": "recorded run",
+          "record": "docs/work/ontology-2026-10-17/record.md"
+        },
+        {
+          "answer": "assumption_affected",
+          "finding": "The register holds no row for the inter-island transfer limit.",
+          "surface": {"record": "docs/work/outlook-archive/register.md"},
+          "status": "recorded run",
+          "record": "docs/work/outlook-archive/register.md"
+        },
+        {
+          "answer": "forecast_and_exposure",
+          "finding": "No forecast version or exposure figure follows a link condition.",
+          "surface": {"missing": "The desk builds no forecast or exposure link for this kind."},
+          "status": "missing",
+          "record": "docs/work/thesis-challenge-2026-10-16/evidence-ledger.md"
+        },
+        {
+          "answer": "authority",
+          "finding": "No person authorised a decision on a link condition.",
+          "surface": {"missing": "No decision record exists for this kind."},
+          "status": "missing",
+          "record": "docs/work/thesis-challenge-2026-10-16/evidence-ledger.md"
+        },
+        {
+          "answer": "afterwards",
+          "finding": "No settled month has scored the link condition.",
+          "surface": {"missing": "No settled month exists."},
+          "status": "missing",
+          "record": "docs/work/outlook-archive/first-outlook.md"
+        }
+      ]
+    },
+    {
+      "id": "Q5",
+      "question": "Was the price administered or mitigated, and which rules were in force?",
+      "answers": [
+        {
+          "answer": "asked",
+          "finding": "The desk asks about price administration or mitigation and about the rules in force.",
+          "surface": {"record": "docs/work/product-shape-2026-10-17/strategy.md"},
+          "status": "selected design",
+          "record": "docs/work/product-shape-2026-10-17/strategy.md"
+        },
+        {
+          "answer": "evidence_at_cutoff",
+          "finding": "The warehouse records the pricing flags and marks their meanings inferred.",
+          "surface": {"record": "docs/work/ontology-2026-10-17/record.md"},
+          "status": "recorded run",
+          "record": "docs/work/ontology-2026-10-17/record.md"
+        },
+        {
+          "answer": "assumption_affected",
+          "finding": "No rule clause sits at the cutoff, so no clause-to-belief link exists.",
+          "surface": {"record": "docs/work/corpus/case.md"},
+          "status": "recorded run",
+          "record": "docs/work/corpus/case.md"
+        },
+        {
+          "answer": "forecast_and_exposure",
+          "finding": "The issued outlook lists the assumptions it rests on.",
+          "surface": {"route": "/outlooks"},
+          "shows": "assumption",
+          "status": "deployed",
+          "record": "docs/work/PROGRESS.md"
+        },
+        {
+          "answer": "authority",
+          "finding": "No person authorised a decision on a rule flag.",
+          "surface": {"missing": "No decision record exists for this kind."},
+          "status": "missing",
+          "record": "docs/work/thesis-challenge-2026-10-16/evidence-ledger.md"
+        },
+        {
+          "answer": "afterwards",
+          "finding": "No settled month has scored the rule condition.",
+          "surface": {"missing": "No settled month exists."},
+          "status": "missing",
+          "record": "docs/work/outlook-archive/first-outlook.md"
+        }
+      ]
+    },
+    {
+      "id": "Q6",
+      "question": "Which fuel prices bear on the units at the margin?",
+      "answers": [
+        {
+          "answer": "asked",
+          "finding": "The desk asks which fuel prices bear on the units at the margin.",
+          "surface": {"record": "docs/work/product-shape-2026-10-17/strategy.md"},
+          "status": "selected design",
+          "record": "docs/work/product-shape-2026-10-17/strategy.md"
+        },
+        {
+          "answer": "evidence_at_cutoff",
+          "finding": "The data register records the coal and LNG driver series and the oil background series.",
+          "surface": {"record": "docs/work/data-register-2026-10-17/register.md"},
+          "status": "recorded run",
+          "record": "docs/work/data-register-2026-10-17/register.md"
+        },
+        {
+          "answer": "assumption_affected",
+          "finding": "The register holds no row for a fuel price belief.",
+          "surface": {"record": "docs/work/outlook-archive/register.md"},
+          "status": "recorded run",
+          "record": "docs/work/outlook-archive/register.md"
+        },
+        {
+          "answer": "forecast_and_exposure",
+          "finding": "The issued outlook lists no fuel assumption, and the public page withholds the fuel series.",
+          "surface": {"route": "/outlooks"},
+          "shows": "assumption",
+          "status": "deployed",
+          "record": "docs/work/PROGRESS.md"
+        },
+        {
+          "answer": "authority",
+          "finding": "No person authorised a decision on a fuel condition.",
+          "surface": {"missing": "No decision record exists for this kind."},
+          "status": "missing",
+          "record": "docs/work/thesis-challenge-2026-10-16/evidence-ledger.md"
+        },
+        {
+          "answer": "afterwards",
+          "finding": "No settled month has scored the fuel condition.",
+          "surface": {"missing": "No settled month exists."},
+          "status": "missing",
+          "record": "docs/work/outlook-archive/first-outlook.md"
+        }
+      ]
+    },
+    {
+      "id": "Q7",
+      "question": "What changes if I use only what was known then?",
+      "answers": [
+        {
+          "answer": "asked",
+          "finding": "The desk asks what changes with only the facts known at the time.",
+          "surface": {"record": "docs/work/product-shape-2026-10-17/strategy.md"},
+          "status": "selected design",
+          "record": "docs/work/product-shape-2026-10-17/strategy.md"
+        },
+        {
+          "answer": "evidence_at_cutoff",
+          "finding": "The same card answers in assumed and strict mode and counts the facts withheld.",
+          "surface": {"record": "docs/work/ontology-2026-10-17/record.md"},
+          "status": "recorded run",
+          "record": "docs/work/ontology-2026-10-17/record.md"
+        },
+        {
+          "answer": "assumption_affected",
+          "finding": "The card names the time assumptions behind each known-at time.",
+          "surface": {"record": "docs/work/ontology-2026-10-17/record.md"},
+          "status": "recorded run",
+          "record": "docs/work/ontology-2026-10-17/record.md"
+        },
+        {
+          "answer": "forecast_and_exposure",
+          "finding": "No forecast version or exposure figure follows the cutoff comparison.",
+          "surface": {"missing": "The desk builds no forecast or exposure link for this kind."},
+          "status": "missing",
+          "record": "docs/work/thesis-challenge-2026-10-16/evidence-ledger.md"
+        },
+        {
+          "answer": "authority",
+          "finding": "No person authorised a decision on the cutoff comparison.",
+          "surface": {"missing": "No decision record exists for this kind."},
+          "status": "missing",
+          "record": "docs/work/thesis-challenge-2026-10-16/evidence-ledger.md"
+        },
+        {
+          "answer": "afterwards",
+          "finding": "No settled month has scored the cutoff comparison.",
+          "surface": {"missing": "No settled month exists."},
+          "status": "missing",
+          "record": "docs/work/outlook-archive/first-outlook.md"
+        }
+      ]
+    },
+    {
+      "id": "Q8",
+      "question": "What is happening now?",
+      "answers": [
+        {
+          "answer": "asked",
+          "finding": "The desk asks what is happening now.",
+          "surface": {"record": "docs/work/product-shape-2026-10-17/strategy.md"},
+          "status": "selected design",
+          "record": "docs/work/product-shape-2026-10-17/strategy.md"
+        },
+        {
+          "answer": "evidence_at_cutoff",
+          "finding": "The replay page shows demand, price, flows, reserve, the operator feed and the clock.",
+          "surface": {"route": "/"},
+          "shows": "reserve",
+          "status": "deployed",
+          "record": "docs/work/PROGRESS.md"
+        },
+        {
+          "answer": "assumption_affected",
+          "finding": "This kind shows the situation and names no assumption.",
+          "surface": {"record": "docs/work/product-shape-2026-10-17/strategy.md"},
+          "status": "selected design",
+          "record": "docs/work/product-shape-2026-10-17/strategy.md"
+        },
+        {
+          "answer": "forecast_and_exposure",
+          "finding": "This kind needs no forecast or exposure.",
+          "surface": {"record": "docs/work/product-shape-2026-10-17/strategy.md"},
+          "status": "selected design",
+          "record": "docs/work/product-shape-2026-10-17/strategy.md"
+        },
+        {
+          "answer": "authority",
+          "finding": "This kind asks for no decision.",
+          "surface": {"record": "docs/work/product-shape-2026-10-17/strategy.md"},
+          "status": "selected design",
+          "record": "docs/work/product-shape-2026-10-17/strategy.md"
+        },
+        {
+          "answer": "afterwards",
+          "finding": "This kind has no outcome to settle.",
+          "surface": {"record": "docs/work/product-shape-2026-10-17/strategy.md"},
+          "status": "selected design",
+          "record": "docs/work/product-shape-2026-10-17/strategy.md"
+        }
+      ]
+    },
+    {
+      "id": "Q9",
+      "question": "Which assumption does this event touch, and what does the model say under the cutoff?",
+      "answers": [
+        {
+          "answer": "asked",
+          "finding": "The desk asks which assumption an event touches and what the model says under the cutoff.",
+          "surface": {"record": "docs/work/product-shape-2026-10-17/strategy.md"},
+          "status": "selected design",
+          "record": "docs/work/product-shape-2026-10-17/strategy.md"
+        },
+        {
+          "answer": "evidence_at_cutoff",
+          "finding": "The PEDC case records the advisory, its time and the compiled question set.",
+          "surface": {"record": "docs/cases/pedc-u2-2026-09-21/review.md"},
+          "status": "recorded run",
+          "record": "docs/work/grid-desk/live-run-2026-10-14.md"
+        },
+        {
+          "answer": "assumption_affected",
+          "finding": "The event page looks up the PEDC assumption and finds its register row. No issued outlook rests on it.",
+          "surface": {"record": "docs/work/product-gap-2026-10-17/reg-2.md"},
+          "status": "recorded run",
+          "record": "docs/work/price-outlook/desk.md"
+        },
+        {
+          "answer": "forecast_and_exposure",
+          "finding": "The issued outlook rests on the accepted price and rule beliefs, not on the PEDC assumption.",
+          "surface": {"record": "docs/work/price-outlook/desk.md"},
+          "status": "recorded run",
+          "record": "docs/work/price-outlook/desk.md"
+        },
+        {
+          "answer": "authority",
+          "finding": "No analyst recorded a disposition on the PEDC case.",
+          "surface": {"missing": "The case records no disposition."},
+          "status": "missing",
+          "record": "docs/cases/pedc-u2-2026-09-21/review.md"
+        },
+        {
+          "answer": "afterwards",
+          "finding": "No settled month has scored the PEDC decision.",
+          "surface": {"missing": "No settled month exists."},
+          "status": "missing",
+          "record": "docs/work/outlook-archive/first-outlook.md"
+        }
+      ]
+    },
+    {
+      "id": "Q10",
+      "question": "What is my exposure, and what is this price band worth against it?",
+      "answers": [
+        {
+          "answer": "asked",
+          "finding": "The dock asks for the exposure on every page and answers from the recorded plan sets.",
+          "surface": {"record": "src/grid/ask.js"},
+          "status": "tests executed",
+          "record": "tests/test_grid_ask_page.py"
+        },
+        {
+          "answer": "evidence_at_cutoff",
+          "finding": "The impact record carries the portfolio version, every synthetic label, the materiality line and the formula.",
+          "surface": {"record": "docs/work/price-outlook/impact.md"},
+          "status": "recorded run",
+          "record": "docs/work/price-outlook/impact.md"
+        },
+        {
+          "answer": "assumption_affected",
+          "finding": "The impact rests on forecast bands and names no owned belief.",
+          "surface": {"record": "docs/work/price-outlook/impact.md"},
+          "status": "recorded run",
+          "record": "docs/work/price-outlook/impact.md"
+        },
+        {
+          "answer": "forecast_and_exposure",
+          "finding": "The book page shows the uncovered volume and the price band value per account on the synthetic book. No customer or contract record exists: the book holds invented accounts, contracts and volumes only.",
+          "surface": {"record": "src/grid/book.html"},
+          "status": "tests executed",
+          "record": "tests/test_grid_book_page.py"
+        },
+        {
+          "answer": "authority",
+          "finding": "No person authorised a decision on the synthetic book.",
+          "surface": {"missing": "No decision record exists for this kind."},
+          "status": "missing",
+          "record": "docs/work/thesis-challenge-2026-10-16/evidence-ledger.md"
+        },
+        {
+          "answer": "afterwards",
+          "finding": "No settled month has scored the synthetic book.",
+          "surface": {"missing": "No settled month exists."},
+          "status": "missing",
+          "record": "docs/work/outlook-archive/first-outlook.md"
+        }
+      ]
+    },
+    {
+      "id": "Q11",
+      "question": "Why did this alert fire?",
+      "answers": [
+        {
+          "answer": "asked",
+          "finding": "The desk asks why an alert fired.",
+          "surface": {"record": "docs/work/product-shape-2026-10-17/strategy.md"},
+          "status": "selected design",
+          "record": "docs/work/product-shape-2026-10-17/strategy.md"
+        },
+        {
+          "answer": "evidence_at_cutoff",
+          "finding": "The alert summary carries the fields, the ranking, the trail and what to check.",
+          "surface": {"record": "docs/work/ontology-2026-10-17/record.md"},
+          "status": "recorded run",
+          "record": "docs/work/ontology-2026-10-17/record.md"
+        },
+        {
+          "answer": "assumption_affected",
+          "finding": "The alert names no owned belief.",
+          "surface": {"missing": "The desk builds no alert-to-belief link."},
+          "status": "missing",
+          "record": "docs/work/thesis-challenge-2026-10-16/evidence-ledger.md"
+        },
+        {
+          "answer": "forecast_and_exposure",
+          "finding": "The alert carries impact only with a user's own portfolio, and no user entered a portfolio.",
+          "surface": {"record": "docs/work/ontology-2026-10-17/record.md"},
+          "status": "recorded run",
+          "record": "docs/work/ontology-2026-10-17/record.md"
+        },
+        {
+          "answer": "authority",
+          "finding": "No person authorised a decision on the alert.",
+          "surface": {"missing": "No decision record exists for this kind."},
+          "status": "missing",
+          "record": "docs/work/thesis-challenge-2026-10-16/evidence-ledger.md"
+        },
+        {
+          "answer": "afterwards",
+          "finding": "No settled month has scored the alert.",
+          "surface": {"missing": "No settled month exists."},
+          "status": "missing",
+          "record": "docs/work/outlook-archive/first-outlook.md"
+        }
+      ]
+    },
+    {
+      "id": "Q12",
+      "question": "How did this outlook version do, and which of our assumptions moved it?",
+      "answers": [
+        {
+          "answer": "asked",
+          "finding": "The desk asks how an outlook version did and which assumptions moved it.",
+          "surface": {"record": "docs/work/product-shape-2026-10-17/strategy.md"},
+          "status": "selected design",
+          "record": "docs/work/product-shape-2026-10-17/strategy.md"
+        },
+        {
+          "answer": "evidence_at_cutoff",
+          "finding": "The outlooks page shows each version's cutoff, inputs, assumptions and record digest.",
+          "surface": {"route": "/outlooks"},
+          "shows": "cutoff",
+          "status": "deployed",
+          "record": "docs/work/PROGRESS.md"
+        },
+        {
+          "answer": "assumption_affected",
+          "finding": "Each version lists the assumptions it rests on.",
+          "surface": {"route": "/outlooks"},
+          "shows": "assumption",
+          "status": "deployed",
+          "record": "docs/work/PROGRESS.md"
+        },
+        {
+          "answer": "forecast_and_exposure",
+          "finding": "The issued versions carry their horizons, cutoffs and record digests.",
+          "surface": {"route": "/outlooks"},
+          "shows": "horizon",
+          "status": "deployed",
+          "record": "docs/work/PROGRESS.md"
+        },
+        {
+          "answer": "authority",
+          "finding": "The archive records no person who authorised the issue.",
+          "surface": {"missing": "The archive records no authorising person."},
+          "status": "missing",
+          "record": "docs/work/outlook-archive/first-outlook.md"
+        },
+        {
+          "answer": "afterwards",
+          "finding": "No settled month has scored either version.",
+          "surface": {"missing": "No settled month exists."},
+          "status": "missing",
+          "record": "docs/work/outlook-archive/first-outlook.md"
+        }
+      ]
+    }
+  ]
+}

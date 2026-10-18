@@ -1,0 +1,89 @@
+/* Models page (MODELS-1, platform polish PP-B4). The frame, the comparison table, the tabs, the
+   badges and the sources footers are the design system's (`ui.css`); this file holds only the
+   page's own pieces: the headline cell of the comparison, the model panel's two columns and the
+   aligned key-value tables (labels muted at the left, values mono at the right). Nothing here is
+   a market state, so nothing is coloured. No gradients, no glow, no new face. */
+.models-page .models { flex: 1; }
+.md-head .gn-page-meta .asof { margin: 0; }
+
+/* ---------- the comparison ---------- */
+.md-compare col.md-c-model { width: 156px; }
+.md-compare col.md-c-status { width: 132px; }
+.md-compare col.md-c-figure { width: 220px; }
+.md-compare col.md-c-asof { width: 112px; }
+.md-compare tbody th { font-weight: 500; text-align: left; }
+.md-compare tbody th a { color: var(--text); text-decoration: none; }
+.md-compare tbody th a:hover { color: var(--accent); }
+.md-compare td { color: var(--text-2); }
+.md-compare td, .md-compare th { white-space: normal; vertical-align: middle; }
+.md-compare tbody tr { height: 52px; }
+.md-hl { display: block; color: var(--text); font: 500 var(--t-figure-sm, 14px)/1.3 var(--mono); font-variant-numeric: tabular-nums; }
+.md-hl--none { color: var(--muted); font-family: var(--sans); font-weight: 400; }
+.md-hl-meta { display: block; margin-top: 2px; color: var(--faint); font: 400 var(--t-meta, 11px)/1.3 var(--sans); }
+.md-asof-cell { color: var(--muted); font-family: var(--mono); font-size: var(--t-small, 12px); white-space: nowrap; }
+
+/* ---------- one model's detail ---------- */
+.md-detail { scroll-margin-top: calc(var(--bar-h, var(--gn-bar-h, 0px)) + var(--s-4, 16px)); }
+.md-detail .gn-tabs { margin-bottom: var(--s-3, 12px); }
+.md-card {
+  background: var(--panel); border: 1px solid var(--rule); border-radius: var(--radius, 12px);
+  padding: var(--s-4, 16px);
+}
+.md-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.md-card-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; padding-bottom: var(--s-3, 12px); border-bottom: 1px solid var(--rule); }
+.models .md-card-head h2 { margin: 0; font-size: var(--t-h2, 15px); font-weight: 600; }
+.models .md-status { margin: 0; color: var(--muted); font-size: var(--t-body, 13px); }
+.md-status-word { color: var(--text); font-weight: 600; }
+
+.md-body {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--s-4, 16px) var(--s-6, 32px); padding-top: var(--s-4, 16px);
+}
+.md-prose { max-width: 68ch; }
+.models .md-line { margin: 0 0 var(--s-2, 8px); color: var(--text-2); font-size: var(--t-body, 13px); line-height: 1.6; overflow-wrap: anywhere; }
+.md-line .mono { color: var(--text); font-size: var(--t-small, 12px); }
+.md-line a { color: var(--link); }
+.md-figs { display: grid; gap: var(--s-4, 16px); align-content: start; min-width: 0; }
+
+/* The aligned key-value table and the region matrix. */
+.md-kv { width: 100%; border-collapse: collapse; font-size: var(--t-body, 13px); }
+/* The caption keeps the label's type but stays a table caption (the label class sets block). */
+.models .md-kv caption.gn-label { display: table-caption; caption-side: top; text-align: left; padding: 0 0 var(--s-1, 4px); }
+.md-kv th, .md-kv td { height: 32px; padding: 0 var(--s-2, 8px); border-bottom: 1px solid var(--rule); vertical-align: middle; }
+.md-kv th:first-child, .md-kv td:first-child { padding-left: 0; }
+.md-kv th:last-child, .md-kv td:last-child { padding-right: 0; }
+.md-kv tbody th, .md-kv tfoot th { text-align: left; font-weight: 400; }
+.md-kv td { text-align: right; white-space: nowrap; }
+.md-kv thead th { height: 28px; color: var(--muted); font-size: var(--t-meta, 11px); font-weight: 600; letter-spacing: .04em; text-align: left; }
+.models .md-kv thead th.num { text-align: right; font-family: var(--sans); }
+.md-kv tfoot th, .md-kv tfoot td { border-bottom: 0; border-top: 1px solid var(--rule-strong); }
+.md-fig-label { color: var(--muted); font-size: var(--t-small, 12px); }
+.md-kv thead .md-fig-label { font-size: inherit; color: inherit; }
+.md-kv b.num { color: var(--text); font: 500 var(--t-body, 13px) var(--mono); font-variant-numeric: tabular-nums; }
+.md-kv tfoot td { color: var(--muted); }
+
+.md-records summary { color: var(--muted); font-size: var(--t-small, 12px); }
+.md-records .md-kv { margin-top: var(--s-2, 8px); }
+
+.md-sources { margin-top: var(--s-4, 16px); }
+.models .md-asof { margin: 0; color: var(--faint); font-size: var(--t-meta, 11px); line-height: 1.5; overflow-wrap: anywhere; }
+.md-asof .mono { color: var(--muted); }
+
+/* ---------- baselines and challengers ---------- */
+.md-close-body { max-width: 72ch; }
+
+@media (max-width: 960px) {
+  .md-body { grid-template-columns: minmax(0, 1fr); }
+}
+/* On a phone the comparison keeps the model, its status and its headline figure, and fits the
+   screen; what each does and its date are in its tab below. */
+@media (max-width: 720px) {
+  .md-compare { --gn-table-min: 0px; }
+  .md-compare col.md-c-what, .md-compare .md-what, .md-compare col.md-c-asof, .md-compare .md-asof-cell, .md-compare .md-asof-h { display: none; }
+  .md-compare col.md-c-model { width: 30%; }
+  .md-compare col.md-c-status { width: 36%; }
+  .md-compare col.md-c-figure { width: 34%; }
+  .md-hl { white-space: nowrap; font-size: 13px; }
+  .md-compare th, .md-compare td { padding-left: 8px; padding-right: 8px; }
+  .md-kv td { white-space: normal; }
+}

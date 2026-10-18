@@ -1,0 +1,22 @@
+rules_version = '2';
+// DOCK-5: the Firestore rules the release ships (scripts/deploy/deploy.sh, through
+// scripts/deploy/firestore.json). Every read and write of this project's data goes through the
+// Cloud Run service with the Admin SDK, which security rules do not govern. No page reads or
+// writes Firestore from the browser: the vendored Firebase SDK is the app and auth parts only.
+// So no client may read or write any document.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Each namespace's collections: the H1 cases and memberships, the alerts' `alerts_*` and the
+    // desk agent's `agent_*` (threads, turns, drafts, confirmations, budget, receipts, evidence).
+    // The agent store is the trust boundary: a `pending` confirmation written straight into
+    // `agent_confirmations` would run when its owner confirms (DOCK-3's hand-back), so no client
+    // write reaches any of them.
+    match /h1_namespaces/{namespace}/{collection}/{document=**} {
+      allow read, write: if false;
+    }
+    // Everything else, the same.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

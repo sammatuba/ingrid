@@ -1,0 +1,207 @@
+/* InGRID data catalog (`/data`). The shared frame, tables, filters, stats, badges and
+   empty states are the design system's (`ui.css`, docs/work/platform-polish-2026-10-18/
+   design-system.md); this file holds only what is the catalog's own: the three-pane layout
+   (category rail, table, dataset panel), the coverage bar, the panel's key-value table and the
+   lineage tree. The grid page's tokens and faces stay below as the fallback palette; shell.css,
+   loaded last, sets the live ones for both themes. */
+@font-face { font-family: Inter; src: url(fonts/inter-latin-400-normal.woff2) format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: Inter; src: url(fonts/inter-latin-500-normal.woff2) format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: Inter; src: url(fonts/inter-latin-600-normal.woff2) format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: Plex; src: url(fonts/ibm-plex-mono-latin-400-normal.woff2) format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: Plex; src: url(fonts/ibm-plex-mono-latin-500-normal.woff2) format('woff2'); font-weight: 500; font-display: swap; }
+
+@font-face { font-family: Inter; src: url(fonts/inter-latin-ext-400-normal.woff2) format('woff2'); font-weight: 400; unicode-range: U+20B1; font-display: swap; }
+@font-face { font-family: Inter; src: url(fonts/inter-latin-ext-500-normal.woff2) format('woff2'); font-weight: 500; unicode-range: U+20B1; font-display: swap; }
+@font-face { font-family: Inter; src: url(fonts/inter-latin-ext-600-normal.woff2) format('woff2'); font-weight: 600; unicode-range: U+20B1; font-display: swap; }
+
+/* The grid page's own tokens, unchanged: one palette for both pages. */
+:root {
+  --bg: #0a0d12;
+  --panel: #10151c;
+  --panel-2: #141b24;
+  --sea: #0c1219;
+  --land: #161e28;
+  --land-edge: #263243;
+  --rule: #1e2732;
+  --rule-strong: #2b3644;
+  --text: #e6ebf1;
+  --text-2: #b4bfcc;
+  --muted: #7d8a99;
+  --faint: #556170;
+  --accent: #8fd3ff;
+  --ok: #3ccf8e;
+  --warn: #f2b134;
+  --bad: #ff5a5a;
+  --link: #c6e6ff;
+  --p0: #3b6fd9; --p1: #6fb0e8; --p2: #d9e2ea; --p3: #f2b134; --p4: #ff5a5a;
+  --radius: 6px;
+  --gap: 12px;
+  --sans: Inter, ui-sans-serif, system-ui, sans-serif;
+  --mono: Plex, Inter, ui-monospace, 'SFMono-Regular', Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; background: var(--bg); color: var(--text); }
+body { font: 400 var(--t-body, 13px)/1.5 var(--sans); -webkit-font-smoothing: antialiased; }
+button { font: inherit; color: inherit; }
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+/* ---------- the anchor row ---------- */
+.cat-stats { margin: 0 0 var(--s-5, 24px); max-width: 920px; }
+
+/* ---------- three panes: the category rail, the table, the dataset panel ---------- */
+.cat-layout {
+  display: grid;
+  grid-template-columns: 212px minmax(0, 1fr);
+  gap: var(--s-4, 16px) var(--s-5, 24px);
+  align-items: start;
+}
+.cat-layout.is-open { grid-template-columns: 212px minmax(0, 1fr) minmax(360px, 34%); }
+.cat-list { min-width: 0; }
+
+.cat-rail { position: sticky; top: calc(var(--bar-h, var(--gn-bar-h, 0px)) + var(--s-4, 16px)); min-width: 0; }
+.cat-rail-title { margin: 0 0 var(--s-2, 8px); padding: 0 10px; }
+.cat-rail-list { display: grid; gap: 1px; }
+.cat-cat {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s-2, 8px);
+  width: 100%; min-height: 30px; padding: 4px 10px; border: 0; border-radius: var(--radius-sm, 8px);
+  background: transparent; color: var(--text-2); font: 400 var(--t-body, 13px)/1.3 var(--sans); text-align: left; cursor: pointer;
+}
+.cat-cat:hover { background: var(--row-hover, var(--panel-2)); color: var(--text); }
+.cat-cat[aria-pressed="true"] { background: var(--panel-2); color: var(--text); font-weight: 500; box-shadow: inset 2px 0 0 var(--accent); }
+.cat-cat-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cat-cat-n { flex: none; color: var(--faint); font: 400 var(--t-small, 12px) var(--mono); font-variant-numeric: tabular-nums; }
+.cat-cat[aria-pressed="true"] .cat-cat-n { color: var(--text-2); }
+
+.cat-family-note { margin: calc(-1 * var(--s-1, 4px)) 0 var(--s-3, 12px); max-width: 72ch; }
+
+/* ---------- the table's own columns ---------- */
+.cat-table col.cat-c-pub { width: 24%; }
+.cat-table col.cat-c-cad { width: 128px; }
+.cat-table col.cat-c-cov { width: 176px; }
+.cat-table col.cat-c-rows { width: 104px; }
+/* With the panel open, the publisher and the cadence are in the panel, so the table gives
+   their room to the names. */
+.cat-layout.is-open .cat-table col.cat-c-pub, .cat-layout.is-open .cat-table .cat-pub,
+.cat-layout.is-open .cat-table col.cat-c-cad, .cat-layout.is-open .cat-table .cat-cad { display: none; }
+.cat-table .cat-name { color: var(--text); font-weight: 500; text-decoration: none; }
+.cat-table .cat-name:hover { color: var(--accent); }
+.cat-table td { color: var(--text-2); }
+.cat-unknown { color: var(--faint); font: 400 var(--t-small, 12px) var(--sans); }
+
+/* The coverage bar: the replay window's own extent, drawn to scale on one axis for every row. */
+.cat-cov { vertical-align: middle; }
+.span { position: relative; display: block; height: 4px; background: var(--rule); border-radius: 2px; overflow: hidden; }
+/* DATA-1: a bar's left and width are set by catalog.js through the CSSOM from the markup's
+   data-left and data-width: the policy (style-src 'self') refuses a style attribute in markup.
+   Until placed, a bar draws nothing rather than a wrong bar. */
+.span .fill { position: absolute; top: 0; bottom: 0; left: 0; width: 0; background: var(--accent); border-radius: 2px; opacity: .75; }
+.span-label { display: block; margin-top: 3px; color: var(--faint); font: 400 10.5px/1.2 var(--mono); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ---------- the dataset panel ---------- */
+.cat-detail {
+  position: sticky; top: calc(var(--bar-h, var(--gn-bar-h, 0px)) + var(--s-4, 16px));
+  max-height: calc(100vh - var(--bar-h, var(--gn-bar-h, 0px)) - var(--s-6, 32px));
+  overflow-y: auto; overscroll-behavior: contain; min-width: 0;
+  background: var(--panel); border: 1px solid var(--rule); border-radius: var(--radius, 12px);
+}
+.cat-d-head {
+  position: sticky; top: 0; z-index: 1; display: flex; align-items: flex-start; gap: var(--s-3, 12px);
+  padding: var(--s-4, 16px) var(--s-4, 16px) var(--s-3, 12px); background: var(--panel); border-bottom: 1px solid var(--rule);
+}
+.cat-d-title { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.cat-d-title h2 { margin: 0; font-size: var(--t-h2, 15px); font-weight: 600; line-height: 1.35; color: var(--text); }
+/* The heading takes focus when a dataset opens, so a screen reader lands on it; it is not a
+   control, so it draws no ring (the panel itself shows where the reader is). */
+.cat-d-title h2:focus { outline: none; }
+.cat-d-title .gn-crumbs { margin: 0 0 2px; }
+.cat-d-title .gn-meta { margin: 0; }
+.cat-d-head .gn-icon-btn { flex: none; }
+.cat-d-head .gn-icon-btn svg { width: 16px; height: 16px; display: block; }
+.cat-d-body { padding: var(--s-3, 12px) var(--s-4, 16px) var(--s-4, 16px); font-size: var(--t-body, 13px); color: var(--text-2); }
+.cat-d-def { margin: 0 0 var(--s-3, 12px); color: var(--text-2); line-height: 1.55; }
+.cat-d-sec { margin-top: var(--s-5, 24px); }
+.cat-d-sec > .gn-label { display: block; margin: 0 0 var(--s-2, 8px); }
+.cat-d-text { margin: 0 0 var(--s-2, 8px); line-height: 1.55; overflow-wrap: anywhere; }
+.cat-d-meta { margin: 0; color: var(--faint); font-size: var(--t-small, 12px); overflow-wrap: anywhere; }
+.cat-d-body code, .cat-licences code { font: 400 var(--t-small, 12px) var(--mono); color: var(--text-2); overflow-wrap: anywhere; }
+.cat-none { margin: 0; color: var(--faint); font-size: var(--t-small, 12px); line-height: 1.5; }
+
+/* The key-value table: labels muted at the left, values beside them. */
+.cat-kv { width: 100%; border-collapse: collapse; font-size: var(--t-body, 13px); }
+.cat-kv th, .cat-kv td { padding: 7px 0; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.cat-kv tr:last-child th, .cat-kv tr:last-child td { border-bottom: 0; }
+.cat-kv th { width: 104px; padding-right: var(--s-3, 12px); color: var(--muted); font-weight: 400; font-size: var(--t-small, 12px); }
+.cat-kv td { color: var(--text); overflow-wrap: anywhere; }
+.cat-kv .gn-num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.cat-d-sub { display: block; margin-top: 2px; color: var(--faint); font-size: var(--t-small, 12px); line-height: 1.45; }
+
+/* The schema in the panel: the field and what it means in one cell, the unit at the right. */
+.cat-schema { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.cat-schema col.cat-s-unit-col { width: 32%; }
+.cat-schema th { padding: 0 0 6px; border-bottom: 1px solid var(--rule-strong); color: var(--muted); font: 600 var(--t-meta, 11px)/1.2 var(--sans);
+  letter-spacing: .06em; text-transform: uppercase; text-align: left; }
+.cat-schema th:last-child, .cat-schema td.cat-s-unit { text-align: right; }
+.cat-schema td { padding: 8px 0; border-bottom: 1px solid var(--rule); vertical-align: top; overflow-wrap: anywhere; }
+.cat-schema tr:last-child td { border-bottom: 0; }
+.cat-s-field { display: block; color: var(--text); font: 500 var(--t-small, 12px)/1.4 var(--mono); }
+.cat-s-meaning { display: block; margin-top: 2px; color: var(--muted); font: 400 var(--t-small, 12px)/1.5 var(--sans); }
+td.cat-s-unit { padding-left: var(--s-3, 12px); color: var(--text-2); font: 400 var(--t-small, 12px)/1.4 var(--mono); }
+/* Tables inside the panel scroll with it: their heads do not stick under the page bar. */
+.cat-detail .gn-table thead th { position: static; }
+.cat-files col.cat-f-num { width: 72px; }
+.cat-files col.cat-f-sha { width: 104px; }
+
+/* The lineage as a small tree: the dataset at the root, what it is built from nested under it. */
+.cat-tree { font-size: var(--t-body, 13px); }
+.cat-tree-root { margin: 0; color: var(--text); font-weight: 500; }
+.cat-tree-cap { margin: var(--s-2, 8px) 0 2px; color: var(--faint); font-size: var(--t-meta, 11px); }
+.cat-tree ul { list-style: none; margin: 0; padding: 0 0 0 14px; }
+.cat-tree > ul { padding-left: 2px; }
+.cat-tree li { position: relative; padding: 3px 0 3px 14px; }
+.cat-tree li::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; border-left: 1px solid var(--rule-strong); }
+.cat-tree li:last-child::before { bottom: auto; height: 13px; }
+.cat-tree li::after { content: ''; position: absolute; left: 0; top: 13px; width: 9px; border-top: 1px solid var(--rule-strong); }
+.cat-tree a, .cat-pages a { color: var(--text); text-decoration: underline; text-decoration-color: var(--rule-strong); text-underline-offset: 3px; }
+.cat-tree a:hover, .cat-pages a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+.cat-pages { list-style: none; margin: 0 0 var(--s-2, 8px); padding: 0; display: flex; flex-wrap: wrap; gap: 4px 16px; }
+.cat-paths { list-style: none; margin: var(--s-2, 8px) 0 0; padding: 0; display: grid; gap: 2px; }
+.cat-sample {
+  margin: var(--s-1, 4px) 0 0; max-height: 280px; overflow: auto; padding: var(--s-2, 8px) var(--s-3, 12px);
+  background: var(--panel-2); border: 1px solid var(--rule); border-radius: var(--radius-sm, 8px);
+  font: 400 11px/1.5 var(--mono); color: var(--text-2); white-space: pre;
+}
+.cat-d-body .src { margin: 0; color: var(--faint); font: 400 var(--t-small, 12px) var(--mono); overflow-wrap: anywhere; }
+
+.cat-licences { margin: var(--s-2, 8px) 0 0; padding-left: 1.1em; display: grid; gap: 4px; }
+
+/* ---------- narrower screens ---------- */
+@media (max-width: 1099px) {
+  .cat-layout, .cat-layout.is-open { grid-template-columns: minmax(0, 1fr); }
+  /* The rail becomes one row of categories that scrolls inside itself. */
+  .cat-rail { position: static; }
+  .cat-rail .cat-rail-title { display: none; }
+  .cat-rail-list { display: flex; gap: 4px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
+  .cat-cat { flex: none; width: auto; border: 1px solid var(--rule); }
+  .cat-cat[aria-pressed="true"] { box-shadow: none; border-color: var(--rule-strong); }
+  /* The panel opens over the page from the right, under the bar. */
+  .cat-detail {
+    position: fixed; z-index: 44; top: var(--bar-h, var(--gn-bar-h, 0px)); right: 0; bottom: 0;
+    width: min(480px, 100vw); max-height: none; border-radius: 0; border-width: 0 0 0 1px;
+    box-shadow: var(--shadow);
+  }
+  .cat-layout.is-open .cat-table col.cat-c-pub, .cat-layout.is-open .cat-table .cat-pub,
+  .cat-layout.is-open .cat-table col.cat-c-cad, .cat-layout.is-open .cat-table .cat-cad { display: revert; }
+}
+/* On a phone the table keeps the name, the coverage and the rows, and fits the screen; the
+   publisher and the cadence are one tap away in the panel. */
+@media (max-width: 720px) {
+  .cat-table { --gn-table-min: 0px; }
+  .cat-table col.cat-c-pub, .cat-table .cat-pub, .cat-table col.cat-c-cad, .cat-table .cat-cad,
+  .cat-layout.is-open .cat-table col.cat-c-pub, .cat-layout.is-open .cat-table .cat-pub { display: none; }
+  .cat-table col.cat-c-cov { width: 112px; }
+  .cat-table col.cat-c-rows { width: 80px; }
+  .cat-table th, .cat-table td { padding-left: 8px; padding-right: 8px; }
+  .cat-table tbody td:first-child { white-space: normal; padding-top: 6px; padding-bottom: 6px; line-height: 1.35; }
+}

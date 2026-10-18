@@ -1,0 +1,128 @@
+/* InGRID alert settings (`/settings`). The frame, cards, tables, badges, buttons and inputs
+   are the shared components (ui.css, docs/work/platform-polish-2026-10-18/design-system.md). This
+   file holds only what is unique to the settings: the signed-out banner, the label and field
+   grid of the rules form, the editable tables' widths, a check's result card and the marks a
+   refused field or a linked alert gets. No inline style: the page policy forbids it. */
+
+/* The static bar's account slot (the no-script fallback; shell.js rebuilds the bar). */
+.account { margin-left: auto; display: flex; align-items: center; gap: 8px; min-width: 0; }
+.who { color: var(--text-2); font-size: 11.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 220px; }
+.st-page .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.st-page [hidden] { display: none !important; }
+/* A visually hidden header is positioned: keep it inside the table's own scroller. */
+.st-page .gn-table-wrap { position: relative; }
+.st-page h3 { text-transform: none; letter-spacing: 0; }
+.st-page .notice { margin: 0; font-size: var(--t-small, 12px); color: var(--text-2); }
+.st-page .notice:empty { display: none; }
+.st-page .notice.ok { color: var(--ok); }
+.st-page .notice.warn { color: var(--warn); }
+.st-page .notice.bad { color: var(--bad); }
+
+/* ---- signed out: one banner, one action ---- */
+.st-page .st-banner { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 4px 16px; padding: 12px 16px; border-color: var(--rule-strong); }
+.st-page .st-banner-text h2 { margin: 0; font-size: var(--t-lead, 14px); font-weight: 600; color: var(--text); }
+.st-page .st-banner-text p { margin: 2px 0 0; }
+.st-page .st-banner-actions { display: flex; gap: 8px; }
+.st-page .st-signin-form { grid-column: 2 / -1; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px 12px; padding-top: 8px; margin-top: 4px; border-top: 1px solid var(--rule); }
+.st-page .st-signin-form .st-field { flex: 0 1 240px; }
+.st-page .st-error { flex-basis: 100%; margin: 0; color: var(--bad); font-size: var(--t-small, 12px); }
+.st-page .st-error:empty { display: none; }
+
+/* ---- fields: label column and value column, aligned on one grid ---- */
+.st-page .st-fields { border: 0; margin: 0; padding: 0; min-width: 0; display: grid; gap: 0; }
+.st-page .st-fields:disabled { opacity: 1; }
+.st-page .st-row { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; align-items: baseline; padding: 10px 0; border-top: 1px solid var(--rule); }
+.st-page .st-row:first-of-type { border-top: 0; padding-top: 0; }
+.st-page .st-row-label { padding-top: 2px; }
+.st-page .st-row-body { display: grid; gap: 6px; min-width: 0; }
+.st-page .st-row-body .gn-meta { margin: 0; }
+.st-page .st-inline { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.st-page .st-check { display: inline-flex; align-items: center; gap: 8px; font-size: var(--t-body, 13px); color: var(--text-2); cursor: pointer; }
+.st-page .st-check input { accent-color: var(--accent); margin: 0; width: 15px; height: 15px; }
+.st-page .checks { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+.st-page .st-num { width: 120px; text-align: right; font-family: var(--mono); }
+.st-page .st-field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.st-page fieldset:disabled .st-check { cursor: default; color: var(--muted); }
+
+/* ---- sub-sections of the rules form: levels and recipients ---- */
+.st-page .st-sub { display: grid; gap: 8px; padding-top: 14px; margin-top: 4px; border-top: 1px solid var(--rule); }
+.st-page .st-sub-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.st-page .st-sub-head h3 { margin: 0; font-size: var(--t-h3, 13px); font-weight: 600; color: var(--text); }
+.st-page .st-sub-action { margin-left: auto; }
+.st-page .st-edit { min-width: 520px; }
+.st-page .st-edit td { overflow: visible; }
+.st-page .st-edit col.st-c-region { width: 96px; }
+.st-page .st-edit col.st-c-val { width: 132px; }
+.st-page .st-edit col.st-c-regions { width: 280px; }
+.st-page .st-edit col.st-c-sev { width: 132px; }
+.st-page .st-edit col.st-c-x { width: 48px; }
+.st-page .st-edit .gn-select, .st-page .st-edit .gn-input { height: 28px; width: 100%; box-sizing: border-box; padding: 0 8px; font-size: var(--t-small, 12px); line-height: 26px; }
+.st-page .gn-select, .st-page .gn-input { padding-top: 0; padding-bottom: 0; }
+.st-page .st-edit .st-num { width: 100%; }
+.st-page .st-edit th[scope="row"] { font: 500 var(--t-body, 13px) var(--sans); text-transform: none; letter-spacing: 0; color: var(--text); text-align: left; position: static; }
+.st-page .st-remove { width: 28px; height: 28px; font-size: 16px; line-height: 1; }
+.st-page .st-empty-cell { color: var(--muted); font-size: var(--t-small, 12px); white-space: normal; }
+.st-page .st-actions { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 14px; margin-top: 8px; border-top: 1px solid var(--rule); }
+.st-page .errors { margin: 8px 0 0; padding-left: 18px; color: var(--bad); font-size: var(--t-small, 12px); }
+.st-page .errors:empty { display: none; }
+
+/* ---- run a check: a compact vertical form, then its result ---- */
+.st-page .st-check-card { align-self: start; display: grid; gap: 12px; }
+.st-page .st-check-card .gn-card-head { margin-bottom: 0; }
+.st-page .st-check-form { display: grid; gap: 10px; }
+.st-page .st-check-form .gn-btn { justify-self: start; }
+.st-page .st-help { margin: 0; line-height: 1.5; }
+.st-page .results { display: grid; gap: 10px; }
+.st-page .results:empty { display: none; }
+.st-page .running { color: var(--accent); }
+.st-page .st-bad { color: var(--bad); }
+.st-page .st-warn { color: var(--warn); }
+.st-page .st-run-summary { margin: 0; }
+.st-page .st-alert { border-top: 1px solid var(--rule); padding-top: 10px; display: grid; gap: 8px; min-width: 0; }
+.st-page .st-alert-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.st-page .st-alert-head strong { font-weight: 600; color: var(--text); }
+.st-page .st-alert h3 { margin: 0; }
+.st-page .drivers { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; }
+.st-page .drivers li { display: grid; grid-template-columns: 64px 40px minmax(40px, 1fr); gap: 4px 8px; align-items: center; font-size: var(--t-small, 12px); }
+.st-page .drivers .fam { color: var(--text); }
+.st-page .drivers .num { font-family: var(--mono); text-align: right; color: var(--text-2); }
+.st-page .drivers .why { grid-column: 1 / -1; color: var(--muted); font-size: var(--t-meta, 11px); overflow-wrap: anywhere; }
+.st-page .bar-track { height: 6px; background: var(--panel-2); border-radius: 3px; position: relative; overflow: hidden; }
+.st-page .bar-fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--muted); }
+.st-page .w0 { width: 0%; } .st-page .w1 { width: 5%; } .st-page .w2 { width: 10%; } .st-page .w3 { width: 15%; }
+.st-page .w4 { width: 20%; } .st-page .w5 { width: 25%; } .st-page .w6 { width: 30%; } .st-page .w7 { width: 35%; }
+.st-page .w8 { width: 40%; } .st-page .w9 { width: 45%; } .st-page .w10 { width: 50%; } .st-page .w11 { width: 55%; }
+.st-page .w12 { width: 60%; } .st-page .w13 { width: 65%; } .st-page .w14 { width: 70%; } .st-page .w15 { width: 75%; }
+.st-page .w16 { width: 80%; } .st-page .w17 { width: 85%; } .st-page .w18 { width: 90%; } .st-page .w19 { width: 95%; }
+.st-page .w20 { width: 100%; }
+.st-page .fields { margin: 0; display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 4px 10px; font-size: var(--t-small, 12px); }
+.st-page .fields dt { color: var(--muted); }
+.st-page .fields dd { margin: 0; color: var(--text-2); overflow-wrap: anywhere; }
+.st-page .to-check { margin: 0; padding-left: 16px; }
+
+/* ---- recent alerts: column widths, the linked row ---- */
+.st-page #history { min-width: 680px; }
+.st-page #history col.st-c-when { width: 150px; }
+.st-page #history col.st-c-region { width: 96px; }
+.st-page #history col.st-c-num { width: 128px; }
+.st-page #history col.st-c-sev { width: 96px; }
+.st-page #history col.st-c-src { width: 96px; }
+.st-page #history-card { scroll-margin-top: calc(var(--bar-h, 96px) + 16px); }
+.st-page #signin-card { scroll-margin-top: calc(var(--bar-h, 96px) + 16px); }
+.st-page #history tr.linked td { background: var(--sel, var(--accent-soft)); color: var(--text); }
+.st-page #history tr.linked td:first-child { box-shadow: inset 2px 0 0 var(--accent); }
+.st-page .st-history-note:empty { display: none; }
+.st-page .st-method { margin: 8px 0 0; padding-left: 18px; display: grid; gap: 4px; }
+
+/* a refused field */
+.st-page .invalid, .st-page input.invalid, .st-page select.invalid { border-color: var(--bad) !important; box-shadow: 0 0 0 1px var(--bad); }
+.st-page tr.invalid td { box-shadow: inset 2px 0 0 var(--bad); }
+
+@media (max-width: 760px) {
+  .account { margin-left: 0; width: 100%; justify-content: space-between; }
+  .st-page .st-banner { grid-template-columns: minmax(0, 1fr); }
+  .st-page .st-banner-badge { justify-self: start; }
+  .st-page .st-signin-form { grid-column: 1; }
+  .st-page .st-row { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .st-page .st-sub-action { margin-left: 0; }
+}

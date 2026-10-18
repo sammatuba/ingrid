@@ -1,0 +1,9 @@
+{
+ "label": "synthetic fixture: invented outages, invented demand and an invented response; a method demonstration, not a measurement",
+ "written_by": "tests/fixtures/price/event_study/out3/make_out3_synthetic.py",
+ "files": [
+  "demand_hourly-synthetic.csv",
+  "known_outages-synthetic.csv",
+  "response-synthetic.json"
+ ]
+}

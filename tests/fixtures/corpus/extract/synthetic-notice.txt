@@ -1,0 +1,11 @@
+SYNTHETIC DOCUMENT — written for the corpus extraction tests. It is fiction: the operator, the case number, the unit and every date below exist nowhere, it carries no legal authority, and no claim extracted from it describes the real market.
+
+The Example Market Operator announces that, pursuant to Example Case No. 2026-001 RC, the commercial dispatch and settlement of the Example Reserve Market is suspended from 2027-02-01 until further notice.
+
+During the suspension, reserve requirements continue to be sourced through existing Example Service Agreements and other designated arrangements.
+
+The Example Regulator targets a review of the Example Reserve Market design and pricing framework by 2027-06-30.
+
+The registered maximum available capacity of the fictional unit EXAMPLE-U2 is 83.7 MW, and the unit remains registered while the review is pending.
+
+The Example Market Operator will publish its reserve market reports under a new product family it calls the Example Reserve Product.

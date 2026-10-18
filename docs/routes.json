@@ -1,0 +1,207 @@
+{
+  "version": 1,
+  "bootstrap": [
+    "AGENTS.md",
+    "docs/status.md"
+  ],
+  "bootstrap_word_budget": 1400,
+  "plain_language": {
+    "note": "Simplified Technical English rules for the pages people read; scripts/repo.py check enforces them. The glossary defines the words and is exempt from the banned list.",
+    "pages": [
+      "README.md",
+      "CONTRIBUTING.md",
+      "docs/START-HERE.md",
+      "docs/status.md",
+      "docs/README.md",
+      "docs/glossary.md",
+      "docs/engineering/how-we-work.md",
+      "docs/explainer/*.md"
+    ],
+    "max_sentence_words": 25,
+    "max_step_words": 20,
+    "max_paragraph_sentences": 6,
+    "banned_exempt": [
+      "docs/glossary.md"
+    ],
+    "passive_allow": [],
+    "banned_words": {
+      "\\bpackets?\\b": "task record",
+      "\\bseats?\\b": "role",
+      "\\blanes?\\b": "work area",
+      "\\bgates?\\b": "owner approval",
+      "\\bbak(e|es|ed|ing)\\b": "data build",
+      "\\borchestrat(or|ors|e|es|ed|ion)\\b": "coordinator",
+      "\\bexecutors?\\b": "builder",
+      "\\bguardians?\\b": "strategy reviewer",
+      "\\bbundles?\\b": "question set",
+      "\\bprobes?\\b": "question set",
+      "\\bartifacts?\\b": "saved record",
+      "\\bprovenance\\b": "source trail",
+      "\\blineage\\b": "source trail",
+      "\\bdigests?\\b": "fingerprint",
+      "\\bmanifests?\\b": "file list",
+      "\\brails\\b": "rules",
+      "\\bdrill-?downs?\\b": "detail page",
+      "\\bleverag(e|es|ed|ing)\\b": "use",
+      "\\butili[sz](e|es|ed|ing)\\b": "use",
+      "\\bfacilitat(e|es|ed|ing)\\b": "help",
+      "\\bvia\\b": "through",
+      "\\bprior\\b": "earlier",
+      "\\bsubsequent(ly)?\\b": "later",
+      "\\bensur(e|es|ed|ing)\\b": "make sure",
+      "\\b(hence|thus|therefore|whilst|upon)\\b": "so, while, on",
+      "\\bcommenc(e|es|ed|ing)\\b": "start",
+      "\\bterminat(e|es|ed|ing)\\b": "stop",
+      "\\bidempotent\\b": "safe to repeat",
+      "\\bstale\\b": "out of date",
+      "\\bsandbox(es)?\\b": "own copy",
+      "\\bfrozen\\b": "fixed",
+      "\\bintents?\\b": "plan note",
+      "\\bin order to\\b": "to",
+      "\\bontolog(y|ies|ical)\\b": "shared vocabulary",
+      "\\bschematics?\\b": "diagram",
+      "\\bmethodolog(y|ies)\\b": "method",
+      "\\bfunctionalit(y|ies)\\b": "function",
+      "\\bdeliverables?\\b": "result",
+      "\\bdispositions?\\b": "decision",
+      "\\bperturbations?\\b": "rewording",
+      "\\binstances?\\b": "server",
+      "\\brevisions?\\b": "version",
+      "\\bLCP\\b": "time to the first screen",
+      "\\bp50\\b|\\bp95\\b": "typical time, slow time",
+      "\\bround[- ]trips?\\b": "request",
+      "\\brender(s|ed|ing)?\\b": "draw",
+      "\\bpayloads?\\b": "data",
+      "\\bendpoints?\\b": "address",
+      "\\bschemas?\\b": "data shape",
+      "\\bfixtures?\\b": "test data",
+      "\\bemulators?\\b": "local copy of the service",
+      "\\bhydrat(e|es|ed|ing)\\b": "fill",
+      "\\bparadigms?\\b": "way of working",
+      "\\brobust\\b": "strong",
+      "\\bseamless(ly)?\\b": "smooth",
+      "\\bnon-?trivial\\b": "hard",
+      "\\bmitigat(e|es|ed|ing)\\b": "reduce",
+      "\\bsynchroni[sz](e|es|ed|ing|ation)\\b": "match",
+      "\\bcanonical\\b": "single",
+      "\\bgranular(ity)?\\b": "detail",
+      "\\bholistic\\b": "whole"
+    }
+  },
+  "routes": {
+    "strategy": [
+      ".agents/skills/meos-strategy/SKILL.md",
+      "docs/work/strategy-refresh-2026-10-14/strategy.md",
+      "docs/product/working-paper-2026-10-11.md"
+    ],
+    "intent": [
+      ".agents/skills/meos-intent/SKILL.md",
+      "docs/architecture/README.md"
+    ],
+    "implement": [
+      ".agents/skills/meos-implement/SKILL.md",
+      "docs/architecture/README.md",
+      "docs/engineering/review-and-feedback.md"
+    ],
+    "review": [
+      ".agents/skills/meos-review/SKILL.md",
+      "docs/architecture/README.md",
+      "docs/engineering/review-and-feedback.md"
+    ],
+    "product": [
+      "docs/product/definitive-blueprint-2026-10-04.md"
+    ],
+    "architecture": [
+      "docs/architecture/README.md"
+    ],
+    "execution": [
+      "docs/work/milestones.md",
+      "docs/work/tasks.json"
+    ],
+    "modeling": [
+      "docs/work/bb1-modeling/review.md",
+      "docs/work/bb1-modeling/intake.md"
+    ],
+    "regulatory": [
+      "docs/work/bb2-regulatory/review.md",
+      "docs/work/r0-f0-export/intent.md"
+    ],
+    "case": [
+      "docs/cases/first-case.md"
+    ],
+    "research": [
+      "docs/research/README.md"
+    ],
+    "ideas": [
+      "docs/ideas/README.md"
+    ],
+    "decks": [
+      "archive/AGENTS.md",
+      "archive/campaign/pitches/AGENTS.md"
+    ],
+    "experiments": [
+      "experiments/AGENTS.md",
+      "experiments/README.md"
+    ],
+    "blueprint": [
+      "docs/product/definitive-blueprint-2026-10-04.md"
+    ],
+    "competition": [
+      "docs/competition/ai-builder-cup-2026/requirements.md",
+      "docs/competition/ai-builder-cup-2026/submission-checklist.md"
+    ],
+    "demo": [
+      "docs/work/grid-desk/intent.md",
+      "docs/work/strategy-refresh-2026-10-14/strategy.md",
+      "docs/competition/ai-builder-cup-2026/story-and-script.md"
+    ],
+    "map": [
+      "docs/repository-map.md"
+    ],
+    "milestones": [
+      "docs/work/milestones.md",
+      "docs/work/tasks.json"
+    ],
+    "inputs": [
+      "docs/work/input-register.md"
+    ],
+    "integration": [
+      "docs/work/branch-consolidation-2026-10-04/inventory.md",
+      "docs/work/branch-consolidation-2026-10-04/research-dispositions.md"
+    ],
+    "thesis": [
+      "docs/product/project-thesis.md",
+      "docs/product/working-paper-2026-10-11.md"
+    ],
+    "handoff": [
+      "docs/START-HERE.md",
+      "docs/engineering/seats.md"
+    ],
+    "progress": [
+      "docs/work/PROGRESS.md",
+      "docs/work/FEEDBACK.md",
+      "docs/work/milestones.md"
+    ],
+    "process": [
+      "docs/engineering/review-and-feedback.md",
+      "docs/engineering/lifecycle.md"
+    ],
+    "explain": [
+      "docs/START-HERE.md",
+      "docs/explainer/README.md",
+      "docs/glossary.md"
+    ],
+    "people": [
+      "docs/engineering/how-we-work.md",
+      "docs/glossary.md"
+    ],
+    "seats": [
+      "docs/engineering/seats.md",
+      "docs/engineering/review-and-feedback.md"
+    ]
+  },
+  "aliases": {
+    "audit": "review",
+    "start": "handoff"
+  }
+}

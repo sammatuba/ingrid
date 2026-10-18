@@ -1,0 +1,17 @@
+FICTIONAL SYNTHETIC EPSILON MANUAL
+Synthetic fixture issue 1.0
+Every word here is fictional.
+
+SECTION 1 PRICE CAP
+1.1 Price Cap rules
+The fictional operator reviews the price cap against the unit outage in clause 1.1. No real issuer, unit or market is described.
+
+1.2 Metering Point rules
+The fictional operator reviews the metering point against the must run unit in clause 1.2. No real issuer, unit or market is described.
+
+1.3 Settlement Amount rules
+The fictional operator reviews the settlement amount against the contingency reserve in clause 1.3. No real issuer, unit or market is described.
+
+1.4 Load Forecast rules
+The fictional operator reviews the load forecast against the reserve offer in clause 1.4. No real issuer, unit or market is described.
+

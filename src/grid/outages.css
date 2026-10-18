@@ -1,0 +1,23 @@
+/* ericka-desk E9, E10: the outage and derating tracker under the desk's map and the schedule lag
+   in the notices table (outages.js). PP-B5: one dense line per record inside the section's flush
+   card, with the shared badge (ui.css) for its kind. Colours are the shell's tokens. */
+.outages .gn-card { overflow: hidden; }
+.o-asof { margin: 0; padding: var(--s-2, 8px) var(--s-4, 16px); border-bottom: 1px solid var(--rule); }
+.o-asof:empty { display: none; }
+#outages-list { list-style: none; margin: 0; padding: 0; max-height: 360px; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.o-item {
+  display: grid; grid-template-columns: 104px minmax(0, 1fr) 32px 88px; gap: var(--s-2, 8px); align-items: center;
+  min-height: 32px; padding: 0 var(--s-4, 16px); border-bottom: 1px solid var(--rule); font-size: var(--t-small, 12px);
+}
+.o-item:last-child { border-bottom: 0; }
+.o-item:hover { background: var(--row-hover, var(--panel-2)); }
+.o-item .gn-badge { justify-self: start; }
+.o-unit { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text); }
+.o-unclear { color: var(--muted); }
+.o-grid { color: var(--muted); font-size: 11px; letter-spacing: .04em; }
+.o-when { color: var(--text-2); text-align: right; font-size: 11.5px; white-space: nowrap; }
+.o-more { padding: var(--s-2, 8px) var(--s-4, 16px); }
+.o-empty { list-style: none; }
+.o-empty .gn-empty { border: 0; }
+#feed .f-lag { font-size: 11.5px; color: var(--muted); }
+#feed .f-lag.gn-nodata { color: var(--faint); }

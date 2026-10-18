@@ -1,0 +1,6 @@
+{"type":"FeatureCollection","features":[
+{"type":"Feature","properties":{"kind":"country"},"geometry":{"type":"Polygon","coordinates":[[[116.0,4.5],[127.0,4.5],[127.0,21.0],[116.0,21.0],[116.0,4.5]]]}},
+{"type":"Feature","properties":{"kind":"province","name":"Cebu","region":"Central Visayas (Region VII)"},"geometry":{"type":"Polygon","coordinates":[[[123.5,10.0],[124.2,10.0],[124.2,10.8],[123.5,10.8],[123.5,10.0]]]}},
+{"type":"Feature","properties":{"kind":"province","name":"Iloilo","region":"Western Visayas (Region VI)"},"geometry":{"type":"Polygon","coordinates":[[[122.2,10.4],[122.9,10.4],[122.9,11.2],[122.2,11.2],[122.2,10.4]]]}},
+{"type":"Feature","properties":{"kind":"province","name":"Batangas","region":"CALABARZON (Region IV-A)"},"geometry":{"type":"Polygon","coordinates":[[[120.5,13.5],[121.2,13.5],[121.2,14.2],[120.5,14.2],[120.5,13.5]]]}}
+]}

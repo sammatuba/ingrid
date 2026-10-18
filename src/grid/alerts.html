@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- __NOWCAST_STAMP__ is the build stamp the server writes in: it names this build's assets,
+     so they can be cached for a year while this page revalidates. This page is served with the
+     sign-in content security policy (src/api SIGN_IN_POLICY): Google sign-in through Firebase
+     Auth needs Google's sign-in hosts, and no other page admits them. -->
+<meta charset="utf-8">
+<meta id="nowcast-build" name="nowcast-build" content="__NOWCAST_STAMP__">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>InGRID · Alerts</title>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0b1018" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f6fa" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/grid.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/alerts.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ask.css">
+<!-- Firebase JS SDK 10.12.2 (compat), vendored byte for byte from the npm package `firebase`
+     (Apache-2.0): the content security policy admits no script host but this one. -->
+<script src="/grid/__NOWCAST_STAMP__/firebase-app-compat.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/firebase-auth-compat.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/alerts.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/ask.js" defer></script>
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ui.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/shell.css">
+<script src="/grid/__NOWCAST_STAMP__/shell.js"></script>
+</head>
+<body class="alerts-page">
+<header class="bar">
+  <a class="brand" href="/" aria-label="InGRID home">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 15 8 6l4 6 2-3 3 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+    <span>InGRID</span>
+  </a>
+  <!-- The no-script fallback navigation; shell.js rebuilds it into the shared top bar. -->
+  <nav class="sites" aria-label="Sections">
+    <a href="/">Grid</a>
+    <a href="/data">Data</a>
+    <a href="/plants">Plants</a>
+    <a href="/explain">Explain</a>
+    <a href="/outlooks">Outlooks</a>
+    <a href="/paper">Paper</a>
+    <a href="/models">Models</a>
+    <a href="/work">Work</a>
+    <a href="/map">Map</a>
+    <a href="/alerts" aria-current="page">Alerts</a>
+    <a href="/book">Book</a>
+  </nav>
+  <div class="account" id="account">
+    <span class="who mono" id="who"></span>
+    <button type="button" class="gn-btn gn-btn--ghost gn-btn--sm" id="sign-out" hidden>Sign out</button>
+  </div>
+</header>
+
+<!-- ROUTES-1: the desk assistant's mount point. The command bar holds it in its sheet. -->
+<section id="ask" data-context="alerts" aria-label="Ask Ingrid"></section>
+
+<!-- ericka-desk, platform polish PP-B1: every alert up to the shared replay time. The head says
+     what the page is, the glance band says what needs attention now, one filter bar narrows the
+     list (its state is in the address), and the list is one dense table grouped by day or cause.
+     The email rules, a one-off check and the alerts already emailed live on /settings. -->
+<main class="gn-page al-page" id="inbox-card" aria-labelledby="inbox-title">
+  <header class="gn-page-head">
+    <div class="gn-page-title">
+      <h1 id="inbox-title">Alerts</h1>
+      <p class="gn-page-sub">Price spikes and collapses past the alert level, up to the replay time.</p>
+    </div>
+    <div class="gn-page-actions">
+      <a class="gn-btn" id="settings-link" href="/settings">Alert settings</a>
+    </div>
+    <div class="gn-page-meta">
+      <span class="gn-meta mono" id="inbox-asof"></span>
+      <span class="gn-meta" id="inbox-levels"></span>
+    </div>
+  </header>
+
+  <p class="notice" id="notice" role="status" aria-live="polite"></p>
+
+  <!-- The anchor: what is past the level at the replay time, by severity, and the worst of it. -->
+  <section class="gn-card al-glance" id="al-glance" aria-label="Alerts at a glance" aria-busy="true">
+    <div class="al-glance-now">
+      <span class="gn-label">In force now</span>
+      <span class="gn-value gn-value--lg" id="al-now-count">–</span>
+      <span class="al-glance-sev" id="al-now-sev"></span>
+    </div>
+    <div class="al-glance-counts gn-stats">
+      <div class="gn-stat"><span class="gn-label">Replay day</span><span class="gn-value" id="al-day-count">–</span><span class="gn-meta" id="al-day-label"></span></div>
+      <div class="gn-stat"><span class="gn-label">All days so far</span><span class="gn-value" id="al-all-count">–</span><span class="gn-meta" id="al-all-label"></span></div>
+    </div>
+    <div class="al-glance-worst" id="al-worst"></div>
+  </section>
+
+  <section class="gn-section al-list-section" aria-label="Alert list">
+    <div class="gn-filters" role="toolbar" aria-label="Filter alerts">
+      <div class="gn-seg" role="group" aria-label="Grid" data-filter="grid">
+        <button type="button" data-value="all" aria-pressed="true">All grids</button>
+        <button type="button" data-value="CLUZ" aria-pressed="false">Luzon</button>
+        <button type="button" data-value="CVIS" aria-pressed="false">Visayas</button>
+        <button type="button" data-value="CMIN" aria-pressed="false">Mindanao</button>
+      </div>
+      <div class="gn-seg" role="group" aria-label="Level" data-filter="level">
+        <button type="button" data-value="all" aria-pressed="true">All levels</button>
+        <button type="button" data-value="extreme" aria-pressed="false">Extreme</button>
+        <button type="button" data-value="high" aria-pressed="false">High</button>
+        <button type="button" data-value="medium" aria-pressed="false">Medium</button>
+        <button type="button" data-value="low" aria-pressed="false">Low</button>
+      </div>
+      <details class="gn-more-filters" id="al-more">
+        <summary>More filters</summary>
+        <div class="al-more-body">
+          <div class="al-more-row"><span class="gn-label" id="al-dir-l">Direction</span>
+            <div class="gn-seg" role="group" aria-labelledby="al-dir-l" data-filter="dir">
+              <button type="button" data-value="all" aria-pressed="true">Both</button>
+              <button type="button" data-value="spike" aria-pressed="false">Spikes</button>
+              <button type="button" data-value="collapse" aria-pressed="false">Collapses</button>
+            </div></div>
+          <div class="al-more-row"><span class="gn-label" id="al-cause-l">Cause</span>
+            <div class="gn-seg" role="group" aria-labelledby="al-cause-l" data-filter="cause">
+              <button type="button" data-value="all" aria-pressed="true">Any</button>
+              <button type="button" data-value="yes" aria-pressed="false">On record</button>
+              <button type="button" data-value="no" aria-pressed="false">None on record</button>
+            </div></div>
+          <div class="al-more-row"><span class="gn-label" id="al-days-l">Period</span>
+            <div class="gn-seg" role="group" aria-labelledby="al-days-l" data-filter="days">
+              <button type="button" data-value="all" aria-pressed="true">All days</button>
+              <button type="button" data-value="day" aria-pressed="false">Replay day</button>
+            </div></div>
+          <div class="al-more-row"><span class="gn-label" id="al-group-l">Group by</span>
+            <div class="gn-seg" role="group" aria-labelledby="al-group-l" data-view="group">
+              <button type="button" data-value="day" aria-pressed="true">Day</button>
+              <button type="button" data-value="cause" aria-pressed="false">Cause</button>
+              <button type="button" data-value="none" aria-pressed="false">None</button>
+            </div></div>
+          <div class="al-more-row"><span class="gn-label" id="al-sort-l">Order</span>
+            <div class="gn-seg" role="group" aria-labelledby="al-sort-l" data-view="sort">
+              <button type="button" data-value="newest" aria-pressed="true">Newest first</button>
+              <button type="button" data-value="worst" aria-pressed="false">Worst first</button>
+            </div></div>
+        </div>
+      </details>
+      <label class="gn-search"><span class="sr-only">Search alerts</span>
+        <input id="inbox-q" type="search" data-filter="q" placeholder="Search grid, cause, notice or date" autocomplete="off"></label>
+      <span class="gn-filters-count" id="inbox-note" role="status" aria-live="polite"></span>
+      <button type="button" class="gn-clear" id="inbox-clear" hidden>Clear</button>
+    </div>
+
+    <p class="gn-meta al-linked" id="inbox-linked" role="status" hidden></p>
+
+    <div class="gn-card gn-card--flush al-table-card" id="inbox-table-card">
+      <div class="gn-table-wrap">
+        <table class="gn-table al-table" id="inbox-table" data-sortable>
+          <caption class="sr-only">Alerts up to the replay time</caption>
+          <thead><tr>
+            <th scope="col" class="al-c-sev" data-sort="num">Level</th>
+            <th scope="col" class="al-c-title" data-sort="text">Alert</th>
+            <th scope="col" class="num al-c-num" data-sort="num" title="Peak price, or the lowest for a collapse">Price ₱/MWh</th>
+            <th scope="col" class="num al-c-x al-wide" data-sort="num">× usual</th>
+            <th scope="col" class="al-c-when" data-sort="time">Window</th>
+            <th scope="col" class="al-c-cause" data-sort="text">Cause</th>
+            <th scope="col" class="al-c-go al-wide"><span class="sr-only">Open</span></th>
+          </tr></thead>
+          <tbody id="inbox"></tbody>
+        </table>
+      </div>
+    </div>
+    <div id="inbox-empty" hidden></div>
+    <nav class="gn-pager" id="inbox-pager" aria-label="Alert pages" hidden></nav>
+  </section>
+
+  <footer class="gn-sources">
+    <details>
+      <summary>Sources and method</summary>
+      <ul class="al-method">
+        <li>Prices are the region's five-minute median from the WESM replay. Nothing after the replay time is shown.</li>
+        <li>Severity is a stated rule on the recorded price. Extreme is at the offer cap. High is twice the usual price, or longer than 30 minutes.</li>
+        <li>A collapse is high at the offer floor.</li>
+        <li>Usual is the same-hour median of the earlier replay days only. The first day has none.</li>
+        <li>A cause is shown only when a recorded event matches. Otherwise none is claimed.</li>
+        <li id="al-levels-src">Levels come from the saved alert rules, or the desk's defaults when none are saved.</li>
+        <li>Likely drivers are evidence, not proof. Nothing here is trading advice.</li>
+      </ul>
+    </details>
+  </footer>
+</main>
+</body>
+</html>

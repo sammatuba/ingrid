@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- __NOWCAST_STAMP__ is the build stamp the server writes in: it names this build's assets,
+     so they can be cached for a year while this page revalidates. -->
+<meta charset="utf-8">
+<meta id="nowcast-build" name="nowcast-build" content="__NOWCAST_STAMP__">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>Models · Evidence · InGRID</title>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0b1018" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f6fa" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/grid.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/models.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ask.css">
+<script src="/grid/__NOWCAST_STAMP__/models.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/ask.js" defer></script>
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ui.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/shell.css">
+<script src="/grid/__NOWCAST_STAMP__/shell.js"></script>
+</head>
+<body class="models-page">
+<header class="bar">
+  <a class="brand" href="/" aria-label="InGRID home">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 15 8 6l4 6 2-3 3 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+    <span>InGRID</span>
+  </a>
+  <!-- ATG-8: the site's own sections, the same block on every page; the page's own section is
+       the one marked current. -->
+  <nav class="sites" aria-label="Sections">
+    <a href="/">Grid</a>
+    <a href="/data">Data</a>
+    <a href="/plants">Plants</a>
+    <a href="/explain">Explain</a>
+    <a href="/outlooks">Outlooks</a>
+    <a href="/paper">Paper</a>
+    <a href="/models" aria-current="page">Models</a>
+    <a href="/work">Work</a>
+    <a href="/map">Map</a>
+    <a href="/alerts">Alerts</a>
+  </nav>
+</header>
+
+<main class="gn-page models">
+  <header class="gn-page-head md-head">
+    <div class="gn-page-title">
+      <h1>Models</h1>
+      <!-- MODELS-1: every sentence and figure below is copied from a committed record, and each
+           model names the record path as its as-of. models.js composes the one-line status
+           summary from the models' own status words; the models themselves are static.
+           Platform polish (PP-B4): a comparison table first, then each model's detail as a tab
+           with aligned key-value tables, so the four read side by side without scrolling. -->
+      <p class="gn-page-sub md-intro">Every model here shows the record that holds its number and its status.</p>
+    </div>
+    <div class="gn-page-meta"><p class="gn-meta asof" id="md-summary"></p></div>
+  </header>
+
+  <!-- ROUTES-1: the desk assistant's one mount point on this page. VIEW-1 renders into it; the
+       ask.js shell loaded above renders nothing until then. -->
+  <section id="ask" data-context="models" aria-label="Ask Ingrid"></section>
+
+  <section class="gn-section md-compare-sec" aria-labelledby="md-compare-title">
+    <header class="gn-section-head">
+      <h2 id="md-compare-title">The four models side by side</h2>
+      <span class="gn-section-meta">Status words from the strategy record</span>
+    </header>
+    <div class="gn-card gn-card--flush">
+      <div class="gn-table-wrap">
+        <table class="gn-table md-compare">
+          <colgroup><col class="md-c-model"><col class="md-c-what"><col class="md-c-status"><col class="md-c-figure"><col class="md-c-asof"></colgroup>
+          <thead>
+            <tr><th scope="col">Model</th><th scope="col" class="md-what">What it does</th><th scope="col">Status</th><th scope="col" class="num">Headline</th><th scope="col" class="num md-asof-h">As of</th></tr>
+          </thead>
+          <tbody>
+            <tr data-href="#tab=model:timesfm" data-model="timesfm">
+              <th scope="row"><a href="#tab=model:timesfm">TimesFM</a></th>
+              <td class="md-what">Forecasts the reserve-shortfall fraction, then scores a likely deficiency start.</td>
+              <td><span class="gn-badge gn-badge--info">Measured once</span></td>
+              <td class="num"><span class="md-hl" title="Visayas · Mindanao. The hour-of-day baseline reaches 0.85 to 0.89.">0.688 · 0.737</span><span class="md-hl-meta">Next-hour AUC, below baseline</span></td>
+              <td class="num md-asof-cell">3 Oct 2026</td>
+            </tr>
+            <tr data-href="#tab=model:tabfm" data-model="tabfm">
+              <th scope="row"><a href="#tab=model:tabfm">TabFM</a></th>
+              <td class="md-what">Predicts whether a deficiency starts within the next hour.</td>
+              <td><span class="gn-badge gn-badge--info">Measured once</span></td>
+              <td class="num"><span class="md-hl" title="Visayas · Mindanao. The record calls TabFM and the boosted model tied.">0.947 · 0.967</span><span class="md-hl-meta">AUC, tied with boosted</span></td>
+              <td class="num md-asof-cell">3 Oct 2026</td>
+            </tr>
+            <tr data-href="#tab=model:decision" data-model="decision">
+              <th scope="row"><a href="#tab=model:decision">Decision model</a></th>
+              <td class="md-what">Returns a typed option distribution for each compiled question.</td>
+              <td><span class="gn-badge">Built</span></td>
+              <td class="num"><span class="md-hl">Two runs</span><span class="md-hl-meta">Recorded Gemini runs</span></td>
+              <td class="num md-asof-cell">14 Oct 2026</td>
+            </tr>
+            <tr data-href="#tab=model:thinking" data-model="thinking">
+              <th scope="row"><a href="#tab=model:thinking">Thinking model</a></th>
+              <td class="md-what">Will extract claims from the rule documents.</td>
+              <td><span class="gn-badge">Decided</span></td>
+              <td class="num"><span class="md-hl md-hl--none">No run yet</span><span class="md-hl-meta">Waits on credits</span></td>
+              <td class="num md-asof-cell">16 Oct 2026</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="gn-section md-detail" aria-labelledby="md-detail-title">
+    <header class="gn-section-head">
+      <h2 id="md-detail-title">Each model in detail</h2>
+    </header>
+    <div class="gn-tabs" role="tablist" data-tabs="model" aria-label="Model">
+      <button type="button" role="tab" id="tab-timesfm" aria-controls="timesfm" aria-selected="true" data-tab="timesfm">TimesFM</button>
+      <button type="button" role="tab" id="tab-tabfm" aria-controls="tabfm" aria-selected="false" data-tab="tabfm" tabindex="-1">TabFM</button>
+      <button type="button" role="tab" id="tab-decision" aria-controls="decision" aria-selected="false" data-tab="decision" tabindex="-1">Decision model</button>
+      <button type="button" role="tab" id="tab-thinking" aria-controls="thinking" aria-selected="false" data-tab="thinking" tabindex="-1">Thinking model</button>
+    </div>
+
+    <div id="model-cards" class="md-cards">
+
+    <article class="md-card" id="timesfm" role="tabpanel" aria-labelledby="tab-timesfm" tabindex="0">
+      <header class="md-card-head">
+        <h2>TimesFM</h2>
+        <p class="md-status"><b class="md-status-word">Measured once</b> on reserve-shortfall onset, not on price.</p>
+      </header>
+      <div class="md-body">
+        <div class="md-prose">
+          <p class="md-line">It runs through the BigQuery function <span class="mono">AI.FORECAST</span>.</p>
+          <p class="md-line">The record asks it to forecast the reserve-shortfall fraction. It then scores a likely deficiency start from that forecast.</p>
+          <p class="md-line">The hour-of-day baseline reaches 0.85 to 0.89. TimesFM fell below it.</p>
+          <p class="md-line">The price target waits on the BigQuery decision.</p>
+        </div>
+        <div class="md-figs">
+          <table class="md-kv">
+            <caption class="gn-label">Setup</caption>
+            <tbody>
+              <tr><th scope="row"><span class="md-fig-label">Model version</span></th><td><b class="num" data-figure="timesfm-model-version" data-record="docs/work/data-foundation/timesfm-tabfm.md">2.5</b></td></tr>
+              <tr><th scope="row"><span class="md-fig-label">Context, five-minute intervals</span></th><td><b class="num" data-figure="timesfm-context" data-record="docs/work/data-foundation/timesfm-tabfm.md">2,048</b></td></tr>
+              <tr><th scope="row"><span class="md-fig-label">Horizon, steps</span></th><td><b class="num" data-figure="timesfm-horizon" data-record="docs/work/data-foundation/timesfm-tabfm.md">36</b></td></tr>
+              <tr><th scope="row"><span class="md-fig-label">Horizon, hours</span></th><td><b class="num" data-figure="timesfm-hours" data-record="docs/work/data-foundation/timesfm-tabfm.md">3</b></td></tr>
+              <tr><th scope="row"><span class="md-fig-label">Series per call</span></th><td><b class="num" data-figure="timesfm-series" data-record="docs/work/data-foundation/timesfm-tabfm.md">1,152</b></td></tr>
+            </tbody>
+          </table>
+          <table class="md-kv md-matrix">
+            <caption class="gn-label">AUC by region</caption>
+            <thead><tr><th scope="col"><span class="md-fig-label">Region</span></th><th scope="col" class="num">Next hour</th><th scope="col" class="num">3 hours</th></tr></thead>
+            <tbody>
+              <tr><th scope="row"><span class="md-fig-label">Visayas</span></th><td><b class="num" data-figure="timesfm-auc-1h-visayas" data-record="docs/work/data-foundation/timesfm-tabfm.md">0.688</b></td><td><b class="num" data-figure="timesfm-auc-3h-visayas" data-record="docs/work/data-foundation/timesfm-tabfm.md">0.743</b></td></tr>
+              <tr><th scope="row"><span class="md-fig-label">Mindanao</span></th><td><b class="num" data-figure="timesfm-auc-1h-mindanao" data-record="docs/work/data-foundation/timesfm-tabfm.md">0.737</b></td><td><b class="num" data-figure="timesfm-auc-3h-mindanao" data-record="docs/work/data-foundation/timesfm-tabfm.md">0.782</b></td></tr>
+            </tbody>
+            <tfoot>
+              <tr><th scope="row"><span class="md-fig-label">Hour-of-day baseline</span></th><td colspan="2"><b class="num" data-figure="timesfm-baseline-low" data-record="docs/work/data-foundation/timesfm-tabfm.md">0.85</b> to <b class="num" data-figure="timesfm-baseline-high" data-record="docs/work/data-foundation/timesfm-tabfm.md">0.89</b></td></tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+      <footer class="gn-sources md-sources"><p class="md-asof">As of <span class="mono">docs/work/data-foundation/timesfm-tabfm.md</span> (3 Oct 2026) and <span class="mono">docs/work/product-gap-2026-10-17/strategy.md</span>.</p></footer>
+    </article>
+
+    <article class="md-card" id="tabfm" role="tabpanel" aria-labelledby="tab-tabfm" tabindex="0" hidden>
+      <header class="md-card-head">
+        <h2>TabFM</h2>
+        <p class="md-status"><b class="md-status-word">Measured once</b> on onset.</p>
+      </header>
+      <div class="md-body">
+        <div class="md-prose">
+          <p class="md-line">It runs through the BigQuery function <span class="mono">AI.PREDICT</span>, in Preview.</p>
+          <p class="md-line">It predicts whether a deficiency starts within the next hour. It learns from example rows passed in the same query, with no training step.</p>
+          <p class="md-line">The boosted model trained on 36,827 rows per region.</p>
+          <p class="md-line">The record calls the two models statistically tied.</p>
+        </div>
+        <div class="md-figs">
+          <table class="md-kv">
+            <caption class="gn-label">Setup</caption>
+            <tbody>
+              <tr><th scope="row"><span class="md-fig-label">Example rows</span></th><td><b class="num" data-figure="tabfm-examples" data-record="docs/work/data-foundation/timesfm-tabfm.md">2,000</b></td></tr>
+              <tr><th scope="row"><span class="md-fig-label">Input features</span></th><td><b class="num" data-figure="tabfm-features" data-record="docs/work/data-foundation/timesfm-tabfm.md">17</b></td></tr>
+              <tr><th scope="row"><span class="md-fig-label">September test origins</span></th><td><b class="num" data-figure="tabfm-origins" data-record="docs/work/data-foundation/timesfm-tabfm.md">744</b></td></tr>
+              <tr><th scope="row"><span class="md-fig-label">Training rows</span></th><td><b class="num" data-figure="tabfm-training" data-record="docs/work/data-foundation/timesfm-tabfm.md">36,827</b></td></tr>
+            </tbody>
+          </table>
+          <table class="md-kv md-matrix">
+            <caption class="gn-label">AUC by region</caption>
+            <thead><tr><th scope="col"><span class="md-fig-label">Region</span></th><th scope="col" class="num">TabFM</th><th scope="col" class="num">Boosted model</th><th scope="col" class="num">TabFM minus boosted</th></tr></thead>
+            <tbody>
+              <tr><th scope="row"><span class="md-fig-label">Visayas</span></th><td><b class="num" data-figure="tabfm-auc-visayas" data-record="docs/work/data-foundation/timesfm-tabfm.md">0.947</b></td><td><b class="num" data-figure="tabfm-boosted-visayas" data-record="docs/work/data-foundation/timesfm-tabfm.md">0.943</b></td><td><b class="num" data-figure="tabfm-tie-visayas" data-record="docs/work/data-foundation/timesfm-tabfm.md">+0.004</b></td></tr>
+              <tr><th scope="row"><span class="md-fig-label">Mindanao</span></th><td><b class="num" data-figure="tabfm-auc-mindanao" data-record="docs/work/data-foundation/timesfm-tabfm.md">0.967</b></td><td><b class="num" data-figure="tabfm-boosted-mindanao" data-record="docs/work/data-foundation/timesfm-tabfm.md">0.961</b></td><td><b class="num" data-figure="tabfm-tie-mindanao" data-record="docs/work/data-foundation/timesfm-tabfm.md">+0.006</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <footer class="gn-sources md-sources"><p class="md-asof">As of <span class="mono">docs/work/data-foundation/timesfm-tabfm.md</span> (3 Oct 2026) and <span class="mono">docs/work/product-gap-2026-10-17/strategy.md</span>.</p></footer>
+    </article>
+
+    <article class="md-card" id="decision" role="tabpanel" aria-labelledby="tab-decision" tabindex="0" hidden>
+      <header class="md-card-head">
+        <h2>Decision model</h2>
+        <p class="md-status"><b class="md-status-word">Built</b>. No Clef call serves the desk.</p>
+      </header>
+      <div class="md-body">
+        <div class="md-prose">
+          <p class="md-line">The decision model returns a typed option distribution for each compiled question.</p>
+          <p class="md-line">A choice question carries a choice and probabilities over its options. A yes/no question carries one probability.</p>
+          <p class="md-line">The fixture backend carries its own label. It is a test stand-in, not a model run.</p>
+          <p class="md-line">Gemini answered the same question set on the real case at two cutoffs, in two recorded runs. They happened on 14 October 2026.</p>
+          <p class="md-line">The paper names <span class="mono">gemini-3.8-flash</span>, at thinking budget zero. Each compiled question ran in four presentation forms, and the answers held.</p>
+          <p class="md-line">The working paper names the class: TypeSafe's Jev, Cloudflare's Clef and OpenAI's Decisions API. Those models return typed option distributions over caller-defined choices.</p>
+        </div>
+        <div class="md-figs">
+          <table class="md-kv">
+            <caption class="gn-label">Recorded runs</caption>
+            <tbody>
+              <tr><th scope="row"><span class="md-fig-label">Compiled questions</span></th><td><b class="num" data-figure="decision-questions" data-record="docs/product/paper-accountable-ai-decisions-2026-10-17.md">eight</b></td></tr>
+              <tr><th scope="row"><span class="md-fig-label">Presentation forms</span></th><td><b class="num" data-figure="decision-forms" data-record="docs/product/paper-accountable-ai-decisions-2026-10-17.md">four</b></td></tr>
+              <tr><th scope="row"><span class="md-fig-label">Recorded runs</span></th><td><b class="num" data-figure="decision-runs" data-record="docs/product/paper-accountable-ai-decisions-2026-10-17.md">two</b></td></tr>
+              <tr><th scope="row"><span class="md-fig-label">Run date</span></th><td><b class="num" data-figure="decision-run-date" data-record="docs/product/paper-accountable-ai-decisions-2026-10-17.md">14 October 2026</b></td></tr>
+              <tr><th scope="row"><span class="md-fig-label">Model</span></th><td><b class="num" data-figure="decision-model" data-record="docs/product/paper-accountable-ai-decisions-2026-10-17.md">gemini-3.8-flash</b></td></tr>
+              <tr><th scope="row"><span class="md-fig-label">Thinking budget</span></th><td><b class="num" data-figure="decision-budget" data-record="docs/product/paper-accountable-ai-decisions-2026-10-17.md">zero</b></td></tr>
+            </tbody>
+          </table>
+          <details class="gn-disclosure md-records"><summary>Show the records</summary>
+          <table class="md-kv">
+            <tbody>
+              <tr><th scope="row"><span class="md-fig-label">Fixture execution mode</span></th><td><b class="num" data-figure="decision-fixture-mode" data-record="src/judgment/systemone.py">synthetic_fixture</b></td></tr>
+              <tr><th scope="row"><span class="md-fig-label">Fixture probabilities</span></th><td><b class="num" data-figure="decision-fixture-probabilities" data-record="src/judgment/systemone.py">fixture_supplied</b></td></tr>
+            </tbody>
+          </table>
+          </details>
+        </div>
+      </div>
+      <footer class="gn-sources md-sources"><p class="md-asof">As of <span class="mono">docs/product/paper-accountable-ai-decisions-2026-10-17.md</span>, <span class="mono">src/judgment/systemone.py</span>, <span class="mono">docs/product/working-paper-2026-10-11.md</span> and <span class="mono">docs/work/product-gap-2026-10-17/strategy.md</span>.</p></footer>
+    </article>
+
+    <article class="md-card" id="thinking" role="tabpanel" aria-labelledby="tab-thinking" tabindex="0" hidden>
+      <header class="md-card-head">
+        <h2>Thinking model</h2>
+        <p class="md-status"><b class="md-status-word">Decided</b>. No run exists yet. The live extraction waits on credits.</p>
+      </header>
+      <div class="md-body">
+        <div class="md-prose">
+          <p class="md-line">Gemini 3.8 Flash will extract claims from the 30 rule documents at the owner's thinking level.</p>
+          <p class="md-line">The owner keeps the level at medium or high. The request carries the level. The transport refuses that level today.</p>
+        </div>
+        <div class="md-figs">
+          <table class="md-kv">
+            <caption class="gn-label">The decision</caption>
+            <tbody>
+              <tr><th scope="row"><span class="md-fig-label">Rule documents</span></th><td><b class="num" data-figure="thinking-documents" data-record="docs/status.md">30</b></td></tr>
+              <tr><th scope="row"><span class="md-fig-label">Model</span></th><td><b class="num" data-figure="thinking-model" data-record="docs/work/corpus/extraction.md">Gemini 3.8 Flash</b></td></tr>
+              <tr><th scope="row"><span class="md-fig-label">Thinking level</span></th><td><b class="num" data-figure="thinking-level" data-record="docs/work/corpus/extraction.md">high</b></td></tr>
+              <tr><th scope="row"><span class="md-fig-label">Owner decision</span></th><td><b class="num" data-figure="thinking-owner-level" data-record="docs/work/corpus/intent.md">medium or high</b></td></tr>
+              <tr><th scope="row"><span class="md-fig-label">Decision date</span></th><td><b class="num" data-figure="thinking-decision-date" data-record="docs/work/corpus/extraction.md">16 Oct 2026</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <footer class="gn-sources md-sources"><p class="md-asof">As of <span class="mono">docs/status.md</span>, <span class="mono">docs/work/corpus/extraction.md</span>, <span class="mono">docs/work/corpus/intent.md</span> and <span class="mono">docs/work/product-gap-2026-10-17/strategy.md</span>.</p></footer>
+    </article>
+
+    </div>
+  </section>
+
+  <section class="gn-section md-close" aria-labelledby="md-close-title">
+    <header class="gn-section-head"><h2 id="md-close-title">Baselines and challengers</h2></header>
+    <div class="md-close-body">
+      <p class="md-line">Persistence, last week same interval and seasonal average by billing month are the three baselines.</p>
+      <p class="md-line">Ridge regression and histogram gradient-boosted trees are the two challengers.</p>
+      <p class="md-line">The paper counts 28 of 192 groups that claim skill. No month group passes the skill check. <a href="/outlooks">Open the price outlooks</a>.</p>
+    </div>
+    <footer class="gn-sources md-sources"><p class="md-asof">As of <span class="mono">docs/work/price-outlook/baselines.md</span> and <span class="mono">docs/product/paper-accountable-ai-decisions-2026-10-17.md</span>.</p></footer>
+  </section>
+
+  <footer class="gn-sources" id="caption"><details><summary>Sources and method</summary><p>Source: the committed records named under each model. Every figure shows its record path as its as-of. No model ran for this page. The fixture backend carries its own label, folded on its card.</p></details></footer>
+</main>
+</body>
+</html>

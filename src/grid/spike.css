@@ -1,0 +1,141 @@
+/* InGRID alert page (`/alert/<key>`). The frame, head, stats, cards, badges, buttons and
+   empty states are the shared components (ui.css, docs/work/platform-polish-2026-10-18/
+   design-system.md). This file holds only what is unique to this page: the charts, the minis'
+   matrix, the likely-drivers rows, the notice timeline and the side column's lines. Colours come
+   from shell.css tokens, so both themes work. No inline style: the page policy forbids it. */
+.sp-page [hidden] { display: none !important; }
+.sp-page .sp-body { display: flex; flex-direction: column; gap: var(--s-4, 16px); min-width: 0; }
+.sp-page .sp-main, .sp-page .sp-side { display: flex; flex-direction: column; gap: var(--s-4, 16px); min-width: 0; }
+.sp-page .gn-card-head .gn-meta { margin-right: auto; }
+
+/* the head's status and grid link */
+.sp-page .sp-live { color: var(--sev-alert); }
+.sp-page .sp-live::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; margin-right: 5px; display: inline-block; }
+.sp-page .sp-grid-link { font-size: var(--t-small, 12px); }
+
+/* the figures: the key stat a touch larger, unknowns on one line under them */
+.sp-page .sp-figures { display: grid; gap: 8px; padding: 4px 0 8px; border-bottom: 1px solid var(--rule); }
+.sp-page .sp-figures .gn-stat--key .gn-value--lg { font-size: 28px; line-height: 1.1; }
+
+/* charts */
+.sp-page .sp-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: var(--t-small, 12px); color: var(--text-2); }
+.sp-page .sp-key { display: inline-flex; align-items: center; gap: 6px; }
+.sp-page .sp-sw { display: inline-block; width: 16px; height: 0; border-top: 2px solid var(--accent); }
+.sp-page .sp-sw-level { border-top: 2px dashed var(--bad); }
+.sp-page .sp-sw-usual { border-top: 2px dashed var(--muted); }
+.sp-page .sp-sw-span { height: 10px; border: 0; border-radius: 2px; background: var(--bad-soft); }
+.sp-page .sp-graph-note { margin: 6px 0 0; }
+.sp-page .sp-graph-note:empty { display: none; }
+.sp-chart { display: block; width: 100%; overflow: visible; font-family: var(--sans); touch-action: pan-y; }
+.sp-grid line { stroke: var(--rule); stroke-width: 1; }
+.sp-axis { fill: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.sp-span { fill: var(--bad-soft); }
+.sp-line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.sp-line-price { stroke: var(--accent); }
+.sp-line-level { stroke: var(--bad); stroke-dasharray: 5 4; stroke-width: 1.5; }
+.sp-line-usual { stroke: var(--muted); stroke-dasharray: 3 3; stroke-width: 1.5; }
+.sp-line-short { stroke: var(--warn); }
+.sp-line-demand { stroke: var(--text-2); }
+.sp-peak { fill: var(--accent); stroke: var(--panel); stroke-width: 2; }
+.sp-hit { fill: transparent; pointer-events: all; cursor: crosshair; }
+.sp-hover line { stroke: var(--rule-strong); stroke-width: 1; }
+.sp-tip { fill: var(--panel); stroke: var(--rule-strong); }
+.sp-tip-t { fill: var(--text); font-size: 11.5px; font-weight: 650; }
+.sp-tip-v { fill: var(--text-2); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+.sp-page .sp-minis { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s-4, 16px); }
+.sp-page .sp-minis.sp-minis-one { grid-template-columns: minmax(0, 1fr); }
+.sp-page .sp-mini .gn-card-head { margin-bottom: 6px; }
+
+/* what stood out: name | text and bar | percentile */
+.sp-page .sp-ranked-line { margin: 0 0 6px; }
+.sp-page .sp-rk { display: flex; flex-direction: column; }
+.sp-page .sp-rk-row { display: grid; grid-template-columns: 160px minmax(0, 1fr) minmax(130px, max-content); gap: 12px; align-items: center; padding: 8px 0; border-top: 1px solid var(--rule); color: var(--text); }
+.sp-page .sp-rk-name { font-weight: 600; font-size: var(--t-body, 13px); }
+.sp-page .sp-rk-n { color: var(--muted); font-weight: 500; margin-right: 6px; }
+.sp-page .sp-rk-mid { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.sp-page .sp-rk-text { font-size: var(--t-body, 13px); color: var(--text-2); overflow-wrap: anywhere; }
+.sp-page .sp-nodata { color: var(--muted); }
+.sp-page .sp-rk-pill { justify-self: end; }
+.sp-rk-bar { -webkit-appearance: none; appearance: none; display: block; width: 100%; height: 6px; border: 0; border-radius: 3px; background: var(--panel-2); overflow: hidden; color: var(--faint); }
+.sp-rk-bar::-webkit-progress-bar { background: var(--panel-2); border-radius: 3px; }
+.sp-rk-bar::-webkit-progress-value { background: var(--faint); border-radius: 3px; }
+.sp-rk-bar::-moz-progress-bar { background: var(--faint); border-radius: 3px; }
+.sp-rk-bar.warn::-webkit-progress-value { background: var(--bad); }
+.sp-rk-bar.warn::-moz-progress-bar { background: var(--bad); }
+.sp-rk-bar.amber::-webkit-progress-value { background: var(--warn); }
+.sp-rk-bar.amber::-moz-progress-bar { background: var(--warn); }
+.sp-page .sp-ranked-ctx { margin: 8px 0 0; }
+.sp-page .sp-foot { margin: 10px 0 0; padding-top: 8px; border-top: 1px solid var(--rule); }
+
+/* AI explanation */
+.sp-page .sp-ai-para { margin: 0 0 8px; font-size: var(--t-lead, 14px); line-height: 1.55; color: var(--text); max-width: 80ch; }
+.sp-page .sp-ai-note { margin: 0 0 8px; }
+.sp-page .sp-kv { display: grid; grid-template-columns: minmax(8em, 11em) minmax(0, 1fr); gap: 4px 14px; margin: 8px 0 0; font-size: var(--t-small, 12px); }
+.sp-page .sp-kv dt { color: var(--muted); }
+.sp-page .sp-kv dd { margin: 0; color: var(--text-2); overflow-wrap: anywhere; }
+
+/* side: the cause, the notice timeline, the decision box */
+.sp-page .sp-side p { margin: 0; }
+.sp-page .sp-cause #sp-cause-body { display: grid; gap: 6px; }
+.sp-page .sp-cause-title { font-size: var(--t-lead, 14px); font-weight: 600; }
+.sp-page .sp-cause-none { font-size: var(--t-body, 13px); color: var(--text); }
+.sp-page .sp-cause-go { justify-self: start; margin-top: 4px; }
+.sp-page .sp-around-note { margin-bottom: 8px !important; }
+.sp-page .sp-steps { list-style: none; margin: 0; padding: 0; display: grid; }
+.sp-page .sp-step { padding: 7px 0; border-top: 1px solid var(--rule); min-width: 0; }
+.sp-page .sp-step:first-child { border-top: 0; padding-top: 0; }
+.sp-page .sp-step-head { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; font-size: var(--t-small, 12px); color: var(--muted); }
+.sp-page .sp-step-t { color: var(--text); }
+.sp-page .sp-step-id { font-size: var(--t-meta, 11px); }
+.sp-page .sp-step-text { margin-top: 3px; font-size: var(--t-small, 12px); line-height: 1.45; color: var(--text-2);
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; }
+.sp-page .sp-step-alert .sp-step-text { color: var(--muted); }
+.sp-page .sp-none { list-style: none; font-size: var(--t-small, 12px); color: var(--muted); padding: 6px 0; }
+.sp-page .sp-decide { display: grid; gap: 8px; scroll-margin-top: calc(var(--bar-h, 96px) + 16px); }
+.sp-page .sp-decide .gn-card-head { margin-bottom: 0; }
+.sp-page .sp-next, .sp-page .sp-cost { display: grid; gap: 2px; font-size: var(--t-body, 13px); color: var(--text); }
+.sp-page .sp-journal-box { padding-top: 8px; border-top: 1px solid var(--rule); }
+.sp-page .sp-more { font-size: var(--t-small, 12px); }
+.sp-page .sp-more a { color: var(--link); }
+.sp-page .sp-list { margin: 8px 0 0; padding-left: 18px; display: grid; gap: 4px; }
+
+/* One column (below the matrix's 1100px): the charts, then the cause, the notices and the
+   decision, then the longer driver cards, in reading order. */
+@media (max-width: 1099px) {
+  .sp-page .sp-grid { display: flex; flex-direction: column; gap: var(--s-4, 16px); }
+  .sp-page .sp-main, .sp-page .sp-side { display: contents; }
+  .sp-page .sp-chart-card { order: 1; }
+  .sp-page .sp-minis { order: 2; }
+  .sp-page .sp-cause { order: 3; }
+  .sp-page .sp-related { order: 4; }
+  .sp-page .sp-around { order: 4; }
+  .sp-page .sp-decide { order: 5; }
+  .sp-page .sp-ranked { order: 6; }
+  .sp-page .sp-ai { order: 7; }
+}
+@media (max-width: 760px) {
+  .sp-page .sp-minis { grid-template-columns: minmax(0, 1fr); }
+  .sp-page .sp-rk-row { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .sp-page .sp-rk-pill { justify-self: start; }
+  .sp-page .sp-kv { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* the full driver card (the ontology card, when one is saved for this alert): the view switch in the
+   card head (the shared segmented control), the view's note, each family's signals, and the facts
+   behind the disclosure */
+.sp-page .sp-ont-modes { margin-left: auto; }
+.sp-page .sp-ont-note { margin: 0 0 6px; }
+.sp-page .sp-rk-sig { margin: 2px 0 0; padding-left: 16px; font-size: var(--t-small, 12px); color: var(--muted); }
+.sp-page .sp-rk-sig li { margin: 2px 0; overflow-wrap: anywhere; }
+.sp-page .sp-ont-more-box { margin-top: 8px; }
+.sp-page .sp-ont-more { font-size: var(--t-body, 13px); color: var(--text-2); }
+.sp-page .sp-ont-more p { margin: 6px 0; }
+.sp-page .sp-ont-more b { color: var(--text); font-weight: 600; }
+.sp-page .sp-ont-more ul { margin: 4px 0; padding-left: 18px; }
+.sp-page .sp-onto-state { margin: 8px 0 0; }
+
+/* notices around this alert (not a confirmed cause): each says how sure its plant match is and why */
+.sp-page .sp-related-note { margin-bottom: 8px !important; }
+.sp-page .sp-rel-why { margin-top: 3px; font-size: var(--t-small, 12px); line-height: 1.45; color: var(--muted); overflow-wrap: anywhere; }
+.sp-page .sp-rel-links { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 4px; font-size: var(--t-small, 12px); }
+.sp-page .sp-related .sp-foot:empty { display: none; }

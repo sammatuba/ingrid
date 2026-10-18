@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- __NOWCAST_STAMP__ is the build stamp the server writes in: it names this build's assets
+     and the catalog data, so they can be cached for a year while this page revalidates. -->
+<meta charset="utf-8">
+<meta id="nowcast-build" name="nowcast-build" content="__NOWCAST_STAMP__">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Data catalog · Evidence · InGRID</title>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0b1018" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f6fa" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/catalog.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ask.css">
+<script src="/grid/__NOWCAST_STAMP__/catalog.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/ask.js" defer></script>
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ui.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/shell.css">
+<script src="/grid/__NOWCAST_STAMP__/shell.js"></script>
+</head>
+<body>
+<header class="bar">
+  <a class="brand" href="/" aria-label="InGRID home">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 15 8 6l4 6 2-3 3 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+    <span>InGRID</span>
+  </a>
+  <!-- ATG-8: the site's own sections, the same block on every page; the page's own section is
+       the one marked current. Each target is a route the application serves. ROUTES-1 adds
+       Models, Work and Map after Paper; the ask panel has no entry of its own. -->
+  <nav class="sites" aria-label="Sections">
+    <a href="/">Grid</a>
+    <a href="/data" aria-current="page">Data</a>
+    <a href="/plants">Plants</a>
+    <a href="/explain">Explain</a>
+    <a href="/outlooks">Outlooks</a>
+    <a href="/paper">Paper</a>
+    <a href="/models">Models</a>
+    <a href="/work">Work</a>
+    <a href="/map">Map</a>
+    <a href="/alerts">Alerts</a>
+    <a href="/book">Book</a>
+  </nav>
+</header>
+
+<!-- ROUTES-1: the desk assistant's mount point, after the title. VIEW-1 renders into it; the
+     ask.js shell loaded above renders nothing until then. -->
+<section id="ask" data-context="data" aria-label="Ask Ingrid"></section>
+
+<!-- Platform polish (PP-B4): the catalog in the shared frame. The page head carries the anchor
+     figures, the categories sit in a rail beside one dense table, and a dataset opens in a panel
+     beside the table, so the list never scrolls away. `/data#<id>` opens that dataset. -->
+<main class="gn-page cat-page">
+  <header class="gn-page-head">
+    <div class="gn-page-title">
+      <h1>Data catalog</h1>
+      <p class="gn-page-sub">Every dataset the desk reads, where it comes from and what reads it.</p>
+    </div>
+  </header>
+  <div class="gn-stats cat-stats" id="stats" aria-label="The catalog in figures"></div>
+
+  <div class="cat-layout" id="layout">
+    <nav class="cat-rail" aria-label="Categories">
+      <p class="gn-label cat-rail-title" id="tiles-title">Categories</p>
+      <div class="cat-rail-list" id="tiles" role="group" aria-labelledby="tiles-title"></div>
+    </nav>
+
+    <section class="cat-list" aria-label="Datasets">
+      <div class="gn-filters" role="toolbar" aria-label="Filter datasets">
+        <label class="gn-search"><span class="sr-only">Search datasets</span><input id="search" class="gn-input" type="search" placeholder="Search datasets" autocomplete="off"></label>
+        <span class="gn-filters-count" id="count" aria-live="polite"></span>
+        <button type="button" class="gn-clear" id="clear" hidden>Clear</button>
+      </div>
+      <p class="gn-meta cat-family-note" id="family-note" hidden></p>
+      <div class="gn-table-wrap">
+        <table class="gn-table cat-table" id="sets" data-sortable aria-describedby="count">
+          <colgroup><col class="cat-c-name"><col class="cat-c-pub"><col class="cat-c-cad"><col class="cat-c-cov"><col class="cat-c-rows"></colgroup>
+          <thead>
+            <tr>
+              <th scope="col" data-sort="text">Dataset</th>
+              <th scope="col" class="cat-pub" data-sort="text">Publisher</th>
+              <th scope="col" class="cat-cad" data-sort="text">Cadence</th>
+              <th scope="col" data-sort="time" id="axis">Coverage</th>
+              <th scope="col" class="num" data-sort="num">Rows</th>
+            </tr>
+          </thead>
+          <tbody id="list"><tr><td colspan="5"><p class="gn-loading">Loading the catalog</p></td></tr></tbody>
+        </table>
+      </div>
+      <div id="empty" hidden></div>
+    </section>
+
+    <aside class="cat-detail" id="detail" hidden aria-labelledby="detail-title">
+      <header class="cat-d-head">
+        <div class="cat-d-title">
+          <nav class="gn-crumbs" id="detail-crumbs" aria-label="Breadcrumb"></nav>
+          <h2 id="detail-title" tabindex="-1">Dataset</h2>
+          <p class="gn-meta" id="detail-publisher"></p>
+        </div>
+        <button type="button" class="gn-icon-btn" id="detail-close" aria-label="Close dataset" title="Close (Esc)"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      </header>
+      <div id="detail-body" class="cat-d-body"></div>
+    </aside>
+  </div>
+
+  <footer class="gn-sources">
+    <details>
+      <summary>Sources and method</summary>
+      <p id="caption">Source: WESM five-minute market data (company copy) and NGCP system-operator messages · perm:wesm-company-copy:2026-10-13 · replay window measured from the baked files, Manila civil time · Every count and digest is measured from the named baked file. Every other figure is stated by the record named beside it.</p>
+      <ul class="cat-licences" id="licences"></ul>
+    </details>
+  </footer>
+</main>
+</body>
+</html>

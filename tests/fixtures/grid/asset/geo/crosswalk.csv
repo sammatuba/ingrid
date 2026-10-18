@@ -1,0 +1,3 @@
+site_code,plant_name,operator,municipality,province,lat,lon,precision,source_url,retrieved_at,public_capacity_mw
+08PEDC,Sample Geothermal B,Cebu Sample Power Corp,Balamban,Cebu,10.4,123.8,plant,https://example.test/sample-geo-b,2026-10-14,300
+08PLACE,Sample Load Substation,Visayas Sample Grid,Balamban,Cebu,,,placeholder,https://example.test/sample-load,2026-10-14,0

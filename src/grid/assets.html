@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- __NOWCAST_STAMP__ is the build stamp the server writes in: it names this build's assets
+     and the profile data, so they can be cached for a year while this page revalidates. -->
+<meta charset="utf-8">
+<meta id="nowcast-build" name="nowcast-build" content="__NOWCAST_STAMP__">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>InGRID · Plants</title>
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0b1018" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f6fa" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/grid.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/asset.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ask.css">
+<script src="/grid/__NOWCAST_STAMP__/asset.js" defer></script>
+<script src="/grid/__NOWCAST_STAMP__/ask.js" defer></script>
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ui.css">
+<link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/shell.css">
+<script src="/grid/__NOWCAST_STAMP__/shell.js"></script>
+</head>
+<body class="assets-page">
+<header class="bar">
+  <a class="brand" href="/" aria-label="InGRID home">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 15 8 6l4 6 2-3 3 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+    <span>InGRID</span>
+  </a>
+  <!-- ATG-8: the site's own sections, the same block on every page; the page's own section is
+       the one marked current. Each target is a route the application serves. ROUTES-1 adds
+       Models, Work and Map after Paper; the ask panel has no entry of its own. -->
+  <nav class="sites" aria-label="Sections">
+    <a href="/">Grid</a>
+    <a href="/data">Data</a>
+    <a href="/plants" aria-current="page">Plants</a>
+    <a href="/explain">Explain</a>
+    <a href="/outlooks">Outlooks</a>
+    <a href="/paper">Paper</a>
+    <a href="/models">Models</a>
+    <a href="/work">Work</a>
+    <a href="/map">Map</a>
+    <a href="/alerts">Alerts</a>
+    <a href="/book">Book</a>
+  </nav>
+</header>
+
+<!-- ROUTES-1: the desk assistant's mount point. The command bar holds it in its sheet. -->
+<section id="ask" data-context="assets" aria-label="Ask Ingrid"></section>
+
+<main class="gn-page a-collection">
+  <header class="gn-page-head">
+    <div class="gn-page-title">
+      <h1>Plants</h1>
+      <p class="gn-page-sub">Every site in the replay, with its status at the replay clock.</p>
+    </div>
+    <div class="gn-page-meta"><span class="gn-meta" id="as-of"></span></div>
+  </header>
+
+  <!-- ericka-desk slice 6 (E29, E18): the status in force at the shared "as of" clock is the
+       page's anchor: the tripped, derated and back-online counts, each a filter, and the latest
+       status notices. Notices that fit more than one plant are Unclear, never linked or counted. -->
+  <section class="gn-card pl-anchor" id="status" aria-labelledby="status-title">
+    <div class="pl-anchor-figs">
+      <p class="gn-label" id="status-title">Status in force</p>
+      <div class="pl-anchor-sum" id="status-sum"></div>
+      <div id="unclear-list"></div>
+    </div>
+    <div class="pl-anchor-feed">
+      <p class="gn-label">Latest status notices</p>
+      <div id="status-list"></div>
+    </div>
+  </section>
+
+  <div class="gn-stats pl-counts" id="tiles" aria-label="Sites by kind and grid"></div>
+
+  <section class="gn-section pl-sites" aria-labelledby="sites-title">
+    <h2 class="sr-only" id="sites-title">Sites</h2>
+    <div class="gn-filters" role="toolbar" aria-label="Filter sites" id="filters">
+      <div class="gn-seg" role="group" aria-label="Grid" data-filter="grid">
+        <button type="button" data-value="all" aria-pressed="true">All grids</button><button type="button" data-value="CLUZ" aria-pressed="false">Luzon</button><button type="button" data-value="CVIS" aria-pressed="false">Visayas</button><button type="button" data-value="CMIN" aria-pressed="false">Mindanao</button>
+      </div>
+      <div class="gn-seg" role="group" aria-label="Status" data-filter="status">
+        <button type="button" data-value="all" aria-pressed="true">Any status</button><button type="button" data-value="trip" aria-pressed="false">Tripped</button><button type="button" data-value="derate" aria-pressed="false">Derated</button><button type="button" data-value="online" aria-pressed="false">Back online</button>
+      </div>
+      <details class="gn-more-filters">
+        <summary>More filters</summary>
+        <div class="pl-more-body">
+        <div class="gn-seg" role="group" aria-label="Kind" data-filter="kind">
+          <button type="button" data-value="all" aria-pressed="true">All kinds</button><button type="button" data-value="G" aria-pressed="false">Generator</button><button type="button" data-value="NL" aria-pressed="false">Load node</button><button type="button" data-value="PS" aria-pressed="false">Pumped storage</button>
+        </div>
+        <div class="gn-seg" role="group" aria-label="Position" data-filter="pos">
+          <button type="button" data-value="all" aria-pressed="true">Any position</button><button type="button" data-value="located" aria-pressed="false">Located</button><button type="button" data-value="approximate" aria-pressed="false">Approximate</button><button type="button" data-value="none" aria-pressed="false">Not known</button>
+        </div>
+        <div class="gn-seg" role="group" aria-label="Notices" data-filter="notice" data-multi id="only-notice">
+          <button type="button" data-value="1" aria-pressed="false">With a notice</button>
+        </div>
+        </div>
+      </details>
+      <label class="gn-search"><span class="sr-only">Search sites</span><input id="search" type="search" placeholder="Search code or name" autocomplete="off" data-filter="q"></label>
+      <span class="gn-filters-count" id="found" aria-live="polite"></span>
+      <button type="button" class="gn-clear" id="clear" hidden>Clear</button>
+    </div>
+    <div id="lists"></div>
+  </section>
+
+  <div class="gn-sources">
+    <details>
+      <summary>Sources and method</summary>
+      <p id="count"></p>
+      <p id="cap-src"></p>
+      <p id="match-rule"></p>
+      <footer class="caption" id="caption">Source: WESM five-minute market data and IEMOP registered capacity (company copy) · perm:wesm-company-copy:2026-10-13 · replay 21–29 September 2026, Manila time · positions from the site location file, approximate where placed near other sites of the area code, pending where placed at no position</footer>
+    </details>
+  </div>
+</main>
+</body>
+</html>

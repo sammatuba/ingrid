@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="currentColor" role="img" aria-label="InGRID">
+  <!-- InGRID mark, "the trace" (docs/brand/README.md): a reasoning path through a 3x3 node grid.
+       Evidence node at top left, decision node at bottom right, two corners left unvisited.
+       One colour, currentColor, so it themes wherever it is inlined. -->
+  <path d="M6 6H16V26H26" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="6" cy="6" r="3.5"/>
+  <circle cx="26" cy="26" r="4.75"/>
+  <circle cx="26" cy="6" r="2.5"/>
+  <circle cx="6" cy="26" r="2.5"/>
+</svg>

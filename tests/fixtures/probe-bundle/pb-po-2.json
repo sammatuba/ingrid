@@ -1,0 +1,366 @@
+{
+  "schema": "probe-bundle-fixture.v1",
+  "pair_id": "pb-po-2",
+  "edge_class": "planned_vs_confirmed_outage",
+  "fixture_label": "Fictional synthetic probe-bundle fixture; no real unit, operator, document or event",
+  "assumption_kind": "assumed_available_capacity",
+  "annotation_policy": {
+    "policy_id": "probe-bundle-annotation.v2",
+    "digest": "0c2f32eaa581a4db46cab14e7833ddc92dea5d11a2675634acfa41771fb5483c"
+  },
+  "bundle_version_at_freeze": "probe-bundle.v5",
+  "model_id": "fixture-systemone",
+  "tenant_id": "synthetic-tenant",
+  "case_id": "synthetic-case",
+  "actor_id": "synthetic-analyst",
+  "access_policy_refs": [
+    "synthetic-public"
+  ],
+  "records": [
+    {
+      "case_id": "synthetic-case",
+      "content_digest": "06393a4075501c2954a41e4823e7c9cdde9aedb68fc4326ed1486a2a249fae7c",
+      "payload": {
+        "entities": [
+          {
+            "entity_id": "fictional-unit-a",
+            "entity_type": "GeneratingUnit"
+          },
+          {
+            "entity_id": "fictional-unit-a2",
+            "entity_type": "GeneratingUnit"
+          }
+        ],
+        "permission_ref": null,
+        "permitted_actors": [
+          "synthetic-analyst",
+          "synthetic-other"
+        ],
+        "representations": [
+          {
+            "input_fields": {
+              "assumed_available_capacity": {
+                "quantity_kind": "assumed_available_capacity",
+                "unit": "MW"
+              },
+              "commercial_availability_from": {
+                "quantity_kind": "commercial_availability_from",
+                "unit": "MW"
+              }
+            },
+            "model_version": "synthetic-model.v1",
+            "representation_id": "fictional-model-unit-a",
+            "target_type": "GeneratingUnit"
+          }
+        ],
+        "synthetic": true
+      },
+      "record_id": "synthetic-case",
+      "record_kind": "Case",
+      "recorded_at": "2026-10-01T01:00:00Z",
+      "revision_id": "1",
+      "schema_version": "h0.v2",
+      "tenant_id": "synthetic-tenant",
+      "time_metadata": {
+        "/recorded_at": {
+          "offset": "+08:00",
+          "precision": "second",
+          "supplied": "2026-10-01T09:00:00+08:00"
+        }
+      }
+    },
+    {
+      "case_id": "synthetic-case",
+      "content_digest": "1e669afdf355e8e4c3f2ca8bbb22a04a5080efb0470ed4c9cc66b3529fb9e3e5",
+      "payload": {
+        "access_policy_ref": "synthetic-public",
+        "availability_basis": {
+          "basis_kind": "attested",
+          "basis_ref": "synthetic fixture author, task/CORE-8",
+          "note": "Fictional synthetic source; first availability asserted by the fixture"
+        },
+        "copied_from": null,
+        "known_at": "2026-10-01T01:00:00Z",
+        "lineage_id": "fictional-case-note",
+        "original_text": "Fictional synthetic case note: Fictional Unit A is a GeneratingUnit of the fictional plant and the reviewed mapping to fictional-model-unit-a is one-to-one for the declared period.",
+        "permission_ref": null,
+        "published_at": "2026-10-01",
+        "publisher": "Fictional case registry",
+        "source_byte_digest": "48ddf13af7554bb782465bd3951f148220c1e72e070a1f6e10f5f0d0c1f28731",
+        "source_id": "fictional-case-note",
+        "source_version": "1",
+        "synthetic": true,
+        "unknown_reason": null
+      },
+      "record_id": "fictional-case-note",
+      "record_kind": "SourceVersion",
+      "recorded_at": "2026-10-01T01:00:00Z",
+      "revision_id": "1",
+      "schema_version": "h0.v2",
+      "tenant_id": "synthetic-tenant",
+      "time_metadata": {
+        "/payload/known_at": {
+          "offset": "+08:00",
+          "precision": "second",
+          "supplied": "2026-10-01T09:00:00+08:00"
+        },
+        "/payload/published_at": {
+          "offset": null,
+          "precision": "date",
+          "supplied": "2026-10-01"
+        },
+        "/recorded_at": {
+          "offset": "+08:00",
+          "precision": "second",
+          "supplied": "2026-10-01T09:00:00+08:00"
+        }
+      }
+    },
+    {
+      "case_id": "synthetic-case",
+      "content_digest": "908ff8556e438f2a7b0fe15a87b90a3b43206bd72b0e167ff83b81d1ad7bc131",
+      "payload": {
+        "access_policy_ref": "synthetic-public",
+        "availability_basis": {
+          "basis_kind": "attested",
+          "basis_ref": "synthetic fixture author, task/CORE-8",
+          "note": "Fictional synthetic source; first availability asserted by the fixture"
+        },
+        "copied_from": null,
+        "known_at": "2026-10-05T16:30:00Z",
+        "lineage_id": "fictional-operator-bulletin",
+        "original_text": "Fictional synthetic operator bulletin. Fictional Unit A is out of service and remains unavailable at 00:00 on 2026-10-06.",
+        "permission_ref": null,
+        "published_at": "2026-10-06",
+        "publisher": "Fictional newsletter",
+        "source_byte_digest": "6582bfc5de3e3de254408651905b7f0ec5de0f905cc28e406bd6d13d968d2aea",
+        "source_id": "fictional-operator-bulletin",
+        "source_version": "1",
+        "synthetic": true,
+        "unknown_reason": null
+      },
+      "record_id": "fictional-operator-bulletin",
+      "record_kind": "SourceVersion",
+      "recorded_at": "2026-10-01T01:00:00Z",
+      "revision_id": "1",
+      "schema_version": "h0.v2",
+      "tenant_id": "synthetic-tenant",
+      "time_metadata": {
+        "/payload/known_at": {
+          "offset": "+08:00",
+          "precision": "second",
+          "supplied": "2026-10-06T00:30:00+08:00"
+        },
+        "/payload/published_at": {
+          "offset": null,
+          "precision": "date",
+          "supplied": "2026-10-06"
+        },
+        "/recorded_at": {
+          "offset": "+08:00",
+          "precision": "second",
+          "supplied": "2026-10-01T09:00:00+08:00"
+        }
+      }
+    },
+    {
+      "case_id": "synthetic-case",
+      "content_digest": "5e3aa0fa23194cae7b5c1660078ad82d371ac5f64d403ea188b76219bfcd1a31",
+      "payload": {
+        "end": 121,
+        "permission_ref": null,
+        "quote": "Fictional Unit A is out of service and remains unavailable at 00:00 on 2026-10-06.",
+        "quote_digest": "e469de9898f4de5200e5717f23b7572c075092319d4e42ed0b37f4d2f12bb875",
+        "source_byte_digest": "6582bfc5de3e3de254408651905b7f0ec5de0f905cc28e406bd6d13d968d2aea",
+        "source_id": "fictional-operator-bulletin",
+        "source_ref": {
+          "content_digest": "908ff8556e438f2a7b0fe15a87b90a3b43206bd72b0e167ff83b81d1ad7bc131",
+          "record_id": "fictional-operator-bulletin",
+          "record_kind": "SourceVersion",
+          "revision_id": "1"
+        },
+        "source_version": "1",
+        "start": 39,
+        "synthetic": true
+      },
+      "record_id": "passage:fictional-operator-bulletin",
+      "record_kind": "Passage",
+      "recorded_at": "2026-10-01T01:00:00Z",
+      "revision_id": "1",
+      "schema_version": "h0.v2",
+      "tenant_id": "synthetic-tenant",
+      "time_metadata": {
+        "/recorded_at": {
+          "offset": "+08:00",
+          "precision": "second",
+          "supplied": "2026-10-01T09:00:00+08:00"
+        }
+      }
+    },
+    {
+      "case_id": "synthetic-case",
+      "content_digest": "39898761fa11839b4bdf1a2d9e3d3e3ffb22208dbe42fcde953f760a8011d9eb",
+      "payload": {
+        "cardinality": "one_to_one",
+        "entities": [
+          {
+            "entity_id": "fictional-unit-a",
+            "entity_type": "GeneratingUnit"
+          }
+        ],
+        "input_field": "assumed_available_capacity",
+        "permission_ref": null,
+        "representation_id": "fictional-model-unit-a",
+        "reviewed_at": "2026-10-01T01:00:00Z",
+        "reviewer": "synthetic-analyst",
+        "source_refs": [
+          {
+            "content_digest": "1e669afdf355e8e4c3f2ca8bbb22a04a5080efb0470ed4c9cc66b3529fb9e3e5",
+            "record_id": "fictional-case-note",
+            "record_kind": "SourceVersion",
+            "revision_id": "1"
+          }
+        ],
+        "status": "reviewed",
+        "synthetic": true,
+        "valid_period": {
+          "end": "2026-10-07",
+          "start": "2026-10-06"
+        }
+      },
+      "record_id": "mapping-capacity",
+      "record_kind": "MappingRevision",
+      "recorded_at": "2026-10-01T01:00:00Z",
+      "revision_id": "1",
+      "schema_version": "h0.v2",
+      "tenant_id": "synthetic-tenant",
+      "time_metadata": {
+        "/payload/reviewed_at": {
+          "offset": "+08:00",
+          "precision": "second",
+          "supplied": "2026-10-01T09:00:00+08:00"
+        },
+        "/payload/valid_period/end": {
+          "offset": null,
+          "precision": "date",
+          "supplied": "2026-10-07"
+        },
+        "/payload/valid_period/start": {
+          "offset": null,
+          "precision": "date",
+          "supplied": "2026-10-06"
+        },
+        "/recorded_at": {
+          "offset": "+08:00",
+          "precision": "second",
+          "supplied": "2026-10-01T09:00:00+08:00"
+        }
+      }
+    }
+  ],
+  "assumption_seed": {
+    "record_id": "assumption-capacity",
+    "revision_id": "1",
+    "recorded_at": "2026-10-01T09:00:00+08:00",
+    "rationale": "Explicit fictional synthetic initial state for pb-po-2",
+    "payload": {
+      "case_id": "synthetic-case",
+      "entity": {
+        "entity_id": "fictional-unit-a",
+        "entity_type": "GeneratingUnit"
+      },
+      "proposition": "Fictional Unit A is assumed available at 120 MW for the declared day",
+      "value": {
+        "value": "120.00",
+        "quantity_kind": "assumed_available_capacity",
+        "unit": "MW"
+      },
+      "valid_period": {
+        "start": "2026-10-06",
+        "end": "2026-10-07"
+      },
+      "representation_id": "fictional-model-unit-a",
+      "input_field": "assumed_available_capacity",
+      "mapping_ref": {
+        "record_kind": "MappingRevision",
+        "record_id": "mapping-capacity",
+        "revision_id": "1",
+        "content_digest": "39898761fa11839b4bdf1a2d9e3d3e3ffb22208dbe42fcde953f760a8011d9eb"
+      }
+    }
+  },
+  "expected_assumption_ref": {
+    "record_kind": "AssumptionRevision",
+    "record_id": "assumption-capacity",
+    "revision_id": "1",
+    "content_digest": "536968025f97abe549e72ff9a7d7f3e5155c0375d935331a6d058541092a4768"
+  },
+  "cutoffs": {
+    "t0": "2026-10-06T09:00:00+08:00",
+    "t1": "2026-10-06T09:00:00+08:00"
+  },
+  "snapshot": {
+    "audit_cutoff": "2026-10-06T09:00:00+08:00",
+    "recorded_at": "2026-10-06T09:00:00+08:00",
+    "ref": {
+      "record_kind": "BeliefSnapshot",
+      "record_id": "snapshot:cdb17d6f7a0999bd18840d4c7c6b9739d507d49e5181a0de0c250ab8b90ae5dc",
+      "revision_id": "1",
+      "content_digest": "789f1ca6d3b32c9a15f4b8a7ec4f443fd84ea1a9a9006ceaa59ddb677d0f8c66"
+    }
+  },
+  "compiles": [
+    {
+      "at": "t1",
+      "information_cutoff": "2026-10-06T09:00:00+08:00",
+      "audit_cutoff": "2026-10-06T09:00:00+08:00",
+      "recorded_at": "2026-10-06T09:05:00+08:00",
+      "expected_snapshot_ref": {
+        "record_kind": "BeliefSnapshot",
+        "record_id": "snapshot:cdb17d6f7a0999bd18840d4c7c6b9739d507d49e5181a0de0c250ab8b90ae5dc",
+        "revision_id": "1",
+        "content_digest": "789f1ca6d3b32c9a15f4b8a7ec4f443fd84ea1a9a9006ceaa59ddb677d0f8c66"
+      },
+      "expected_status": "compiled",
+      "expected_block_reasons": [],
+      "expected_omissions": [],
+      "expected_context_passages": [
+        "passage:fictional-operator-bulletin"
+      ],
+      "expected_task_ref": {
+        "record_kind": "CompiledTask",
+        "record_id": "task:cb48a560b5e5b4d5ed19254bedf15c4f633d5503532929de1ce150be600bf9bd",
+        "revision_id": "20fffd34c0e7e8db8eb1567f770e3050bb592881c4825dca632f1536d8e921eb",
+        "content_digest": "8a4f862b21e39df34cc4e5e289bcbb14e63485c07aff2b0156e8ff62b602b37e"
+      },
+      "expected_task_digest": "cb48a560b5e5b4d5ed19254bedf15c4f633d5503532929de1ce150be600bf9bd",
+      "expected_render": {
+        "status": "rendered",
+        "bundle_version": "probe-bundle.v5",
+        "questions": 32,
+        "request_digest": "d8f64ed709a4c477ad5545e7b58eb8112a130e3ac37a0a4c9b83b5bd0e37ffdb"
+      },
+      "expected_atomic_answers": {
+        "q1": "fictional-unit-a",
+        "q2": "forced_outage",
+        "q3": "same",
+        "q4": "no",
+        "q5": "no",
+        "q6": "yes",
+        "q7": "yes",
+        "q8": "challenges"
+      },
+      "frozen_label": "challenges",
+      "rationale": "A confirmed observation that the unit is out of service at the start of the assumed day. The passage states no plan, schedule or clearance, so the event is a forced outage, not a planned one; the outage rule gives challenges with q4 = no, and PB-PO-1 is the same rule with a planned outage, so the pair separates plan from confirmation in the atomic answers while both labels agree.",
+      "expected_composition": {
+        "bundle_version": "probe-bundle.v5",
+        "fired_rule": "outage_or_later: Q2=forced_outage, Q3=same on an availability kind",
+        "label": "challenges",
+        "reason": null,
+        "unstable": false,
+        "unstable_questions": [],
+        "agrees_with_frozen_label": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="nowcast-build" id="nowcast-build" content="__NOWCAST_STAMP__">
+  <title>Components · InGRID</title>
+  <!-- The design system's reference page (tests and dev only, never shipped in GRID_FILES):
+       every ui.css component, in the markup the contract names, with synthetic content. -->
+  <link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/grid.css">
+  <link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/ui.css">
+  <link rel="stylesheet" href="/grid/__NOWCAST_STAMP__/shell.css">
+  <script src="/grid/__NOWCAST_STAMP__/shell.js"></script>
+  <script src="/ui-fixture/kitchen-sink.js" defer></script>
+</head>
+<body>
+<main class="gn-page" id="main">
+  <header class="gn-page-head">
+    <nav class="gn-crumbs" aria-label="Breadcrumb"><a href="/alerts">Alerts</a><span aria-current="page">Visayas price spike</span></nav>
+    <div class="gn-page-title">
+      <h1>Visayas price spike</h1>
+      <p class="gn-page-sub">The Visayas median hit the offer cap for 25 minutes after a geothermal unit tripped.</p>
+    </div>
+    <div class="gn-page-actions">
+      <a class="gn-btn" href="/settings">Alert settings</a>
+      <a class="gn-btn gn-btn--primary" href="/event/syn-bay-unit-2-trip">Open the event</a>
+    </div>
+    <div class="gn-page-meta">
+      <span class="gn-badge gn-badge--alert gn-sev">High</span>
+      <span class="gn-badge">Visayas</span>
+      <span class="gn-meta">Up to 21 Sep 13:40 · synthetic records</span>
+    </div>
+  </header>
+
+  <div class="gn-stats" id="ks-stats">
+    <div class="gn-stat gn-stat--key">
+      <span class="gn-label">Peak price</span>
+      <span class="gn-value gn-value--lg">31,513<span class="gn-unit">₱/MWh</span></span>
+      <span class="gn-meta">21 Sep 13:40</span>
+    </div>
+    <div class="gn-stat gn-stat--delta-up">
+      <span class="gn-label">Change</span>
+      <span class="gn-value gn-value--lg">+412<span class="gn-unit gn-unit--tight">%</span></span>
+      <span class="gn-delta">+25,320 vs 13:00</span>
+    </div>
+    <div class="gn-stat">
+      <span class="gn-label">At the cap</span>
+      <span class="gn-value gn-value--lg">25<span class="gn-unit">min</span></span>
+      <span class="gn-meta">13:15 to 13:40</span>
+    </div>
+    <div class="gn-stat">
+      <span class="gn-label">Reserve short</span>
+      <span class="gn-value gn-value--lg">118<span class="gn-unit">MW</span></span>
+      <span class="gn-meta">Peak 13:35</span>
+    </div>
+  </div>
+  <p class="gn-unknowns">Not on record: usual price for this hour, ranked drivers.</p>
+
+  <div class="gn-grid gn-grid--main-side">
+    <section class="gn-section" aria-labelledby="ks-notices-h">
+      <header class="gn-section-head">
+        <h2 id="ks-notices-h">Notices</h2>
+        <span class="gn-section-meta">21 Sep, newest first</span>
+        <div class="gn-section-actions"><button type="button" class="gn-btn gn-btn--sm">Export</button></div>
+      </header>
+      <div class="gn-filters" role="toolbar" aria-label="Filter notices" id="ks-filters">
+        <div class="gn-seg" role="group" aria-label="Grid" data-filter="grid">
+          <button type="button" aria-pressed="true" data-value="all">All</button><button type="button" aria-pressed="false" data-value="CLUZ">Luzon</button><button type="button" aria-pressed="false" data-value="CVIS">Visayas</button><button type="button" aria-pressed="false" data-value="CMIN">Mindanao</button>
+        </div>
+        <div class="gn-seg" role="group" aria-label="Kind" data-filter="kind">
+          <button type="button" aria-pressed="true" data-value="all">All</button><button type="button" aria-pressed="false" data-value="trip">Trip</button><button type="button" aria-pressed="false" data-value="derate">Derate</button>
+        </div>
+        <details class="gn-more-filters">
+          <summary>More filters</summary>
+          <div>
+            <span class="gn-label">Severity</span>
+            <div class="gn-seg" role="group" aria-label="Severity" data-filter="sev">
+              <button type="button" aria-pressed="true" data-value="all">All</button><button type="button" aria-pressed="false" data-value="alert">Alert</button><button type="button" aria-pressed="false" data-value="warning">Warning</button>
+            </div>
+          </div>
+        </details>
+        <label class="gn-search"><span class="sr-only">Search</span><input type="search" placeholder="Search notices" data-filter="q"></label>
+        <span class="gn-filters-count"></span>
+        <button type="button" class="gn-clear" hidden>Clear</button>
+      </div>
+      <div class="gn-table-wrap">
+        <table class="gn-table" data-sortable id="ks-table">
+          <colgroup><col class="w-time"><col class="w-code"><col><col class="w-num"><col class="w-badge"><col class="w-act"></colgroup>
+          <thead><tr>
+            <th scope="col" data-sort="time" aria-sort="descending">Time</th>
+            <th scope="col" data-sort="text">Plant</th>
+            <th scope="col" data-sort="text">Notice</th>
+            <th scope="col" class="num" data-sort="num">MW</th>
+            <th scope="col" data-sort="text">Kind</th>
+            <th scope="col"><span class="sr-only">Actions</span></th>
+          </tr></thead>
+          <tbody>
+            <tr data-href="/plant/08PEDC">
+              <td class="gn-num" data-value="2026-09-21T13:40">13:40</td>
+              <td><button type="button" class="gn-row-toggle" aria-expanded="false" aria-controls="ks-d1" aria-label="Show the notice text"></button><a href="/plant/08PEDC" data-entity="plant:08PEDC">08PEDC</a></td>
+              <td class="trunc" title="Unit 2 tripped at 13:38 on a loss of excitation. Restoration is not yet scheduled.">Unit 2 tripped at 13:38 on a loss of excitation. Restoration is not yet scheduled.</td>
+              <td class="num" data-value="317">317</td>
+              <td><span class="gn-badge gn-badge--alert gn-sev">Trip</span></td>
+              <td class="gn-row-actions"><button type="button" class="gn-icon-btn" aria-label="More options" data-menu><span class="gn-dots" aria-hidden="true"></span></button>
+                <div class="gn-menu" role="menu" hidden><a role="menuitem" href="/plant/08PEDC">Open plant</a><a role="menuitem" href="/event/syn-bay-unit-2-trip">Open the event</a><div class="gn-menu-sep" role="separator"></div><button type="button" role="menuitem">Copy notice text</button></div></td>
+            </tr>
+            <tr class="gn-row-detail" id="ks-d1" hidden><td colspan="6">Unit 2 tripped at 13:38 on a loss of excitation. Restoration is not yet scheduled. Source: synthetic operator notice SYN-0921-031.</td></tr>
+            <tr data-href="/plant/06CEBU" aria-selected="true">
+              <td class="gn-num" data-value="2026-09-21T13:15">13:15</td>
+              <td><a href="/plant/06CEBU" data-entity="plant:06CEBU">06CEBU</a></td>
+              <td class="trunc">Derated to 60 MW for a cooling water limit.</td>
+              <td class="num" data-value="60">60</td>
+              <td><span class="gn-badge gn-badge--warning gn-sev">Derate</span></td>
+              <td class="gn-row-actions"><button type="button" class="gn-icon-btn" aria-label="More options" data-menu><span class="gn-dots" aria-hidden="true"></span></button>
+                <div class="gn-menu" role="menu" hidden><a role="menuitem" href="/plant/06CEBU">Open plant</a><button type="button" role="menuitem">Copy notice text</button></div></td>
+            </tr>
+            <tr data-href="/plant/04BACMAN">
+              <td class="gn-num" data-value="2026-09-21T12:50">12:50</td>
+              <td><a href="/plant/04BACMAN" data-entity="plant:04BACMAN">04BACMAN</a></td>
+              <td class="trunc">Back online after the 11:05 trip.</td>
+              <td class="num" data-value="1,200">1,200</td>
+              <td><span class="gn-badge gn-badge--ok gn-sev">Back online</span></td>
+              <td class="gn-row-actions"><button type="button" class="gn-icon-btn" aria-label="More options" data-menu><span class="gn-dots" aria-hidden="true"></span></button>
+                <div class="gn-menu" role="menu" hidden><a role="menuitem" href="/plant/04BACMAN">Open plant</a></div></td>
+            </tr>
+            <tr data-href="#ks-tabs-h">
+              <td class="gn-num" data-value="2026-09-21T11:05">11:05</td>
+              <td><a href="/notices?at=2026-09-21T11:05#adv-syn-3" data-entity="notice:syn-3">Grid</a></td>
+              <td class="trunc">Yellow alert for the Visayas grid, 13:00 to 15:00.</td>
+              <td class="num"></td>
+              <td><span class="gn-badge gn-badge--warning gn-sev">Yellow alert</span></td>
+              <td class="gn-row-actions"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="gn-meta" id="ks-note">Synthetic notices for the reference page.</p>
+    </section>
+
+    <aside class="gn-section" aria-labelledby="ks-side-h">
+      <header class="gn-section-head"><h2 id="ks-side-h">At the clock</h2><span class="gn-section-meta">13:40</span></header>
+      <div class="gn-card">
+        <div class="gn-card-head"><h3>HVDC links</h3><span class="gn-section-meta">Flow</span></div>
+        <table class="gn-table gn-table--compact">
+          <thead><tr><th scope="col">Link</th><th scope="col" class="num">MW</th><th scope="col">State</th></tr></thead>
+          <tbody>
+            <tr><td><a href="/?link=VISLUZ1" data-entity="hvdc:VISLUZ1">Leyte–Luzon</a></td><td class="num">440</td><td><span class="gn-badge gn-badge--alert">Congested</span></td></tr>
+            <tr><td><a href="/?link=MINVIS1" data-entity="hvdc:MINVIS1">Mindanao–Visayas</a></td><td class="num">−120</td><td><span class="gn-badge gn-badge--ok">Clear</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="gn-card">
+        <div class="gn-card-head"><h3 class="gn-label" id="ks-label-h">Severity</h3></div>
+        <p class="gn-badges">
+          <span class="gn-badge gn-badge--alert gn-sev">Trip</span>
+          <span class="gn-badge gn-badge--alert gn-sev">Red alert</span>
+          <span class="gn-badge gn-badge--warning gn-sev">Derate</span>
+          <span class="gn-badge gn-badge--warning gn-sev">Load dropping</span>
+          <span class="gn-badge gn-badge--info gn-sev">Notice</span>
+          <span class="gn-badge gn-badge--ok gn-sev">Back online</span>
+          <span class="gn-badge">Neutral</span>
+          <span class="gn-badge gn-badge--outline">Outline</span>
+        </p>
+        <p class="gn-badges" id="ks-badges-js"></p>
+      </div>
+    </aside>
+  </div>
+
+  <section class="gn-section" aria-labelledby="ks-tabs-h">
+    <header class="gn-section-head"><h2 id="ks-tabs-h">Tabs and disclosure</h2></header>
+    <div class="gn-tabs" role="tablist" data-tabs="ks" aria-label="Views">
+      <button type="button" role="tab" id="ks-t1" aria-controls="ks-p1" aria-selected="true" data-tab="price">Price <span class="gn-num">288</span></button>
+      <button type="button" role="tab" id="ks-t2" aria-controls="ks-p2" aria-selected="false" data-tab="dispatch">Dispatch</button>
+      <button type="button" role="tab" id="ks-t3" aria-controls="ks-p3" aria-selected="false" data-tab="notices">Notices</button>
+    </div>
+    <div role="tabpanel" id="ks-p1" aria-labelledby="ks-t1"><p>The price panel. Arrow keys move between the tabs.</p></div>
+    <div role="tabpanel" id="ks-p2" aria-labelledby="ks-t2" hidden><p>The dispatch panel.</p></div>
+    <div role="tabpanel" id="ks-p3" aria-labelledby="ks-t3" hidden><p>The notices panel.</p></div>
+    <details class="gn-disclosure"><summary>How the usual price is set <span class="gn-meta">Method</span></summary><p class="gn-text-2">The median of the same hour on the earlier days of the replay.</p></details>
+  </section>
+
+  <div class="gn-grid gn-grid--2">
+    <div class="gn-empty" role="status">
+      <svg class="gn-empty-icon" viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="3" width="12" height="10" rx="1.5"/><path d="M2 9.5h3.5l1 1.5h3l1-1.5H14"/></svg>
+      <p class="gn-empty-title">No outlook issued in this build</p>
+      <p class="gn-empty-body">The archive holds issued outlooks. This build carries none, so there is nothing to compare yet.</p>
+      <div class="gn-empty-actions"><a class="gn-btn" href="/register">Open the register</a></div>
+    </div>
+    <div class="gn-empty" role="status">
+      <p class="gn-empty-title">Sign in to see your journal</p>
+      <p class="gn-empty-body">Journal entries are private to each person.</p>
+      <div class="gn-empty-actions"><button type="button" class="gn-btn gn-btn--primary">Sign in</button></div>
+    </div>
+    <div class="gn-empty" role="status">
+      <p class="gn-empty-title">No notice matches these filters</p>
+      <p class="gn-empty-body">Visayas and Trip match nothing up to 13:40.</p>
+      <div class="gn-empty-actions"><button type="button" class="gn-btn gn-btn--sm">Clear filters</button></div>
+    </div>
+    <div class="gn-empty" role="status">
+      <p class="gn-empty-title">Nothing yet at 06:00</p>
+      <p class="gn-empty-body">The first trip on this day is at 11:05. Move the clock with the As of control, or press ].</p>
+    </div>
+  </div>
+
+  <section class="gn-section" aria-labelledby="ks-states-h">
+    <header class="gn-section-head"><h2 id="ks-states-h">Loading, error and controls</h2></header>
+    <p class="gn-loading">Reading the notices for 21 Sep.</p>
+    <div aria-busy="true"><span class="gn-skel gn-skel--lg"></span><span class="gn-skel gn-skel--line"></span><span class="gn-skel"></span></div>
+    <p class="gn-error" role="alert">The notices did not load. <button type="button" class="gn-btn">Retry</button></p>
+    <div class="gn-filters">
+      <button type="button" class="gn-btn gn-btn--primary">Save entry</button>
+      <button type="button" class="gn-btn">Cancel</button>
+      <button type="button" class="gn-btn gn-btn--ghost">Skip</button>
+      <button type="button" class="gn-btn gn-btn--sm">Small</button>
+      <button type="button" class="gn-btn" disabled>Disabled</button>
+      <button type="button" class="gn-icon-btn gn-icon-btn--bordered" aria-label="More options"><span class="gn-dots" aria-hidden="true"></span></button>
+      <a class="gn-link" href="/data">Data catalog</a>
+      <a href="/event/syn-bay-unit-2-trip" data-entity="event:syn-bay-unit-2-trip">Bay unit 2 trip</a><button type="button" class="gn-entity-info" data-entity="event:syn-bay-unit-2-trip" aria-label="Preview Bay unit 2 trip"></button>
+    </div>
+    <div class="gn-grid gn-grid--3">
+      <label class="gn-field"><span>Plant code</span><input class="gn-input" placeholder="08PEDC"></label>
+      <label class="gn-field"><span>Grid</span><select class="gn-select"><option>Visayas</option><option>Luzon</option></select></label>
+      <label class="gn-field"><span>Note</span><textarea class="gn-textarea" rows="2" placeholder="What did you decide"></textarea></label>
+    </div>
+  </section>
+
+  <footer class="gn-sources"><details><summary>Sources and method</summary>
+    <p>Prices are the five-minute regional medians of the synthetic market bake. The usual price is the same-hour median of earlier days.</p>
+    <p>Notices are synthetic operator notices, matched to plants by code.</p>
+  </details></footer>
+</main>
+</body>
+</html>

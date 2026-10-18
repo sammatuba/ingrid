@@ -1,0 +1,403 @@
+/* InGRID map canvas (ATG-6, UX-3): the styles of the HTML src/grid/map.js builds inside
+   its host: the layer chips, the zoom column, the legend, the popover, the alert rings and the
+   text fallback. The canvas itself is painted by the module, so nothing here is load-bearing for
+   the drawing; the tokens are the shell's (shell.css), with a fallback beside each so this file is
+   also readable alone. Overlays follow the design brief: --panel at full opacity, a 1px rule, the
+   shell's shadow, 12px radius; controls 8px. UX-3 is authorised to edit this file; executor seats
+   do not edit src/grid/grid.css, and this file is the canvas's own.
+
+   The host carries no required class; everything below hangs off `.gmap`, which the module
+   builds itself. The host needs a height: the desk's map section gives it one. */
+
+.gmap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  background: var(--sea, #0c1219);
+  border-radius: var(--radius, 6px);
+  overflow: hidden;
+}
+
+/* the module's own chip row (the desk replaces it with its own pills, dashboard.css); it wraps
+   at every width, which is what keeps 390 usable where a page shows it */
+.gmap-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  align-items: center;
+  padding: 4px 6px;
+  background: var(--panel, #10151c);
+  border-bottom: 1px solid var(--rule, #1e2732);
+  z-index: 2;
+}
+.gmap-chip {
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-2, #b4bfcc);
+  padding: 3px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font: 400 11.5px var(--sans, Inter, ui-sans-serif, sans-serif);
+  white-space: nowrap;
+}
+.gmap-chip:hover { color: var(--text, #e6ebf1); border-color: var(--rule, #1e2732); }
+.gmap-chip[aria-pressed="true"] { background: var(--panel-2, #141b24); color: var(--text, #e6ebf1); border-color: var(--rule-strong, #2b3644); }
+.gmap-chip[aria-pressed="false"] { color: var(--muted, #7d8a99); }
+.gmap-scope { border-left: 1px solid var(--rule, #1e2732); }
+
+/* the stage: the canvas fills it, the controls and the legend float over it */
+.gmap-stage { position: relative; flex: 1; min-height: 0; min-width: 0; display: flex; }
+.gmap-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  touch-action: none;
+  cursor: grab;
+  outline: none;
+}
+.gmap-canvas:active { cursor: grabbing; }
+.gmap-canvas:focus-visible { outline: 2px solid var(--accent, #7cc4ff); outline-offset: -2px; }
+
+/* the zoom column: right edge, level with the desk's toolbar row */
+.gmap-zoom {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  background: var(--panel, #10151c);
+  border: 1px solid var(--rule, #1e2732);
+  border-radius: 8px;
+  box-shadow: var(--shadow, 0 6px 18px rgba(0, 0, 0, .3));
+  overflow: hidden;
+  z-index: 3;
+}
+.gmap-zoom .gmap-chip {
+  width: 34px; height: 32px; padding: 0; border: 0; border-radius: 0; text-align: center;
+  font: 500 15px var(--mono, monospace); color: var(--text, #e6ebf1); background: transparent;
+}
+.gmap-zoom .gmap-chip + .gmap-chip { border-top: 1px solid var(--rule, #1e2732); }
+.gmap-zoom .gmap-chip:last-child { font: 600 11px var(--sans, Inter, sans-serif); letter-spacing: .02em; }
+.gmap-zoom .gmap-chip:hover { background: var(--panel-2, #141b24); }
+.gmap-zoom .gmap-chip:focus-visible { outline: 2px solid var(--accent, #7cc4ff); outline-offset: -2px; }
+
+/* the legend: the domain at rest (the ramp, its five knots and what each knot is); the sentence
+   that explains the range, the mark key and the draw's counts open with the Key toggle */
+.gmap-legend {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  width: min(300px, calc(50% - 346px));
+  min-width: 236px;
+  box-sizing: border-box;
+  display: grid;
+  gap: 3px;
+  padding: 7px 10px 6px;
+  background: var(--panel, #10151c);
+  border: 1px solid var(--rule, #1e2732);
+  border-radius: 12px;
+  box-shadow: var(--shadow, 0 6px 18px rgba(0, 0, 0, .3));
+  font-size: 11px;
+  color: var(--muted, #7d8a99);
+  z-index: 3;
+}
+.gmap-legend-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.gmap-legend-title { color: var(--muted, #7d8a99); font-weight: 600; font-size: 11px; letter-spacing: .07em; text-transform: uppercase; }
+.gmap-key {
+  all: unset; box-sizing: border-box; cursor: pointer; font-size: 11px; color: var(--muted, #7d8a99);
+  padding: 0 8px; height: 24px; line-height: 22px; border: 1px solid var(--rule, #1e2732); border-radius: 8px;
+}
+.gmap-key:hover { color: var(--text, #e6ebf1); border-color: var(--rule-strong, #2b3644); }
+.gmap-key[aria-expanded="true"] { color: var(--text, #e6ebf1); border-color: var(--accent, #7cc4ff); }
+.gmap-key:focus-visible { outline: 2px solid var(--accent, #7cc4ff); outline-offset: 2px; }
+/* DESKFIX-1: with its key open the legend is some 410px tall and its head rises into the left
+   column, where the desk's state card (z-index 4) and detail drawer (z-index 5) stand; under them
+   the Key button could not be pressed again. The open legend stacks above both (the pinned
+   popover, 7, stays on top) and scrolls inside the stage on a short screen. */
+.gmap-legend.is-open { z-index: 6; max-height: calc(100% - 28px); overflow: auto; overscroll-behavior: contain; }
+.gmap-ramp { display: block; width: 100%; height: 6px; border-radius: 3px; margin-top: 1px; }
+.gmap-ticks, .gmap-quants { display: flex; justify-content: space-between; font-variant-numeric: tabular-nums; }
+.gmap-ticks { min-height: 14px; font: 400 10.5px/14px var(--mono, monospace); color: var(--text-2, #b4bfcc); }
+.gmap-quants { font-size: 9.5px; line-height: 1.2; color: var(--faint, #556170); }
+.gmap-ticks > span:first-child, .gmap-quants > span:first-child { text-align: left; }
+.gmap-ticks > span:last-child, .gmap-quants > span:last-child { text-align: right; }
+/* an unpriced draw keeps the rows' height (map.js), so the legend and the fit it feeds never jump */
+.gmap-ticks.is-empty, .gmap-quants.is-empty { visibility: hidden; }
+.gmap-range { color: var(--text-2, #b4bfcc); font-variant-numeric: tabular-nums; line-height: 1.45; }
+.gmap-kinds li.gmap-explain { display: block; padding-bottom: 5px; margin-bottom: 2px; border-bottom: 1px solid var(--rule, #1e2732); }
+.gmap-kinds { list-style: none; margin: 4px 0 0; padding: 6px 0 0; display: grid; gap: 3px; border-top: 1px solid var(--rule, #1e2732); }
+.gmap-kinds[hidden] { display: none; }
+.gmap-kinds li { display: flex; align-items: center; gap: 7px; color: var(--text-2, #b4bfcc); }
+.gmap-asof { color: var(--faint, #556170); font-variant-numeric: tabular-nums; font-size: 10px; line-height: 1.35; }
+.gmap-mark { display: inline-block; width: 9px; height: 9px; flex: 0 0 auto; border-radius: 50%; background: var(--rule-strong, #3a4552); }
+.gmap-mark.gen { background: var(--p1, #6fb0e8); }
+.gmap-mark.load { width: 5px; height: 5px; margin: 0 2px; background: var(--p2, #d9e2ea); }
+.gmap-mark.ps { background: var(--p0, #3b6fd9); }
+.gmap-mark.clu { width: 11px; height: 11px; background: var(--p3, #f2b134); box-shadow: 0 0 0 1px var(--text, #e6ebf1); }
+.gmap-mark.pend { border-radius: 1px; background: var(--faint, #556170); }
+/* an approximate position: the canvas's hollow ring with a dashed outline */
+.gmap-mark.approx { width: 10px; height: 10px; background: none; border: 1.5px dashed var(--p2, #d9e2ea); }
+.gmap-mark.cong { width: 12px; height: 3px; border-radius: 2px; background: var(--bad, #ff6b6b); }
+.gmap-mark.alert { width: 0; height: 0; border-radius: 0; background: none; border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 9px solid var(--bad, #ff6b6b); }
+.gmap-mark.warning { width: 7px; height: 7px; border-radius: 0; margin: 0 1px; background: none; border: 1.5px solid var(--warn, #f2b134); transform: rotate(45deg); }
+.gmap-mark.info { background: none; border: 1.5px solid var(--accent, #7cc4ff); }
+
+/* the popover: a compact list of the assets or notices at one place; a click pins a copy of it
+   (.gmap-pin), which takes focus, links each row and closes on Escape */
+.gmap-tip, .gmap-pin {
+  position: absolute;
+  pointer-events: none;
+  background: var(--panel, #0b1016);
+  border: 1px solid var(--rule-strong, #2b3644);
+  border-radius: 12px;
+  padding: 8px 10px 8px;
+  font-size: 12px;
+  color: var(--text-2, #b4bfcc);
+  width: max-content;
+  max-width: 340px;
+  z-index: 6;
+  box-shadow: var(--shadow, 0 6px 18px rgba(0, 0, 0, .4));
+  animation: gmap-pop .14s ease-out;
+}
+.gmap-pin { pointer-events: auto; z-index: 7; border-color: var(--accent, #7cc4ff); }
+.gmap-pin:focus { outline: none; }
+.gmap-pin:focus-visible { outline: none; box-shadow: var(--shadow, 0 6px 18px rgba(0, 0, 0, .4)), 0 0 0 1px var(--accent, #7cc4ff); }
+.gmap-tip[hidden], .gmap-pin[hidden] { display: none; }
+.gmap-tip b, .gmap-pin b { color: var(--text, #e6ebf1); font-weight: 500; }
+.gmap-tip .mono, .gmap-pin .mono { font-family: var(--mono, ui-monospace, monospace); font-variant-numeric: tabular-nums; }
+.gmap-tip p, .gmap-pin p { margin: 0; }
+.gt-head { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.gt-title { display: inline-flex; align-items: center; gap: 6px; min-width: 0; color: var(--muted, #7d8a99); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.gt-badge { flex: 0 0 auto; }
+
+.gt-time { margin-left: auto; color: var(--text-2, #b4bfcc); font-size: 11px; }
+.gt-close { all: unset; cursor: pointer; width: 22px; height: 22px; display: grid; place-items: center; border-radius: 6px; color: var(--muted, #7d8a99); font-size: 15px; line-height: 1; }
+.gt-close:hover { color: var(--text, #e6ebf1); background: var(--panel-2, #141b24); }
+.gt-close:focus-visible { outline: 2px solid var(--accent, #7cc4ff); outline-offset: 1px; }
+.gt-rows, .gt-notes { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.gt-row { display: grid; grid-template-columns: 14px minmax(0, 1fr) auto auto; gap: 8px; align-items: center; padding: 4px 0; border-top: 1px solid var(--rule, #1e2732); }
+.gt-row:first-child { border-top: 0; }
+.gt-k { display: grid; place-items: center; color: var(--text-2, #b4bfcc); }
+.gt-kind { width: 12px; height: 12px; }
+.gt-name { min-width: 0; max-width: 170px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text, #e6ebf1); text-decoration: none; }
+a.gt-name:hover { text-decoration: underline; }
+a.gt-name:focus-visible { outline: 2px solid var(--accent, #7cc4ff); outline-offset: 1px; border-radius: 4px; }
+.gt-name b { font-family: var(--mono, monospace); font-size: 11.5px; font-weight: 500; }
+.gt-sub { color: var(--muted, #7d8a99); font-size: 11.5px; }
+.gt-approx { height: 16px; padding: 0 5px; margin-left: 4px; font-size: 10.5px; font-weight: 500; }
+.gt-approx-note { color: var(--muted, #7d8a99); }
+.gt-cap { color: var(--muted, #7d8a99); font-size: 11px; text-align: right; }
+.gt-price { display: inline-flex; align-items: center; justify-content: flex-end; gap: 5px; min-width: 66px; color: var(--text, #e6ebf1); font-size: 12px; }
+.gt-dot { width: 8px; height: 8px; flex: 0 0 auto; }
+.gt-more, .gt-meta, .gt-foot { font-size: 11px; color: var(--muted, #7d8a99); padding-top: 3px; }
+.gt-meta.bad { color: var(--bad, #ff6b6b); }
+.gt-foot { color: var(--faint, #556170); border-top: 1px solid var(--rule, #1e2732); margin-top: 4px; padding-top: 4px; }
+.gt-note { display: grid; gap: 2px; padding: 6px 0; border-top: 1px solid var(--rule, #1e2732); max-width: 320px; }
+.gt-note:first-child { border-top: 0; }
+.gt-note-head { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.gt-note-head b { min-width: 0; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gt-when { margin-left: auto; padding-left: 6px; color: var(--muted, #7d8a99); font-size: 11px; }
+.gt-text { color: var(--text-2, #b4bfcc); font-size: 11.5px; line-height: 1.45; margin-top: 2px; white-space: normal; }
+.gt-go { display: inline-block; margin-top: 4px; font-size: 11.5px; color: var(--link, #a6d4ff); }
+.gt-unplaced { margin-top: 3px; color: var(--muted, #7d8a99); font-size: 11px; }
+@keyframes gmap-pop { from { opacity: 0; transform: translateY(2px); } to { opacity: 1; transform: none; } }
+
+/* the one slow ring, on an active alert's glyph only */
+.gmap-rings { position: absolute; inset: 0; pointer-events: none; z-index: 2; overflow: hidden; }
+.gmap-ring { position: absolute; width: 14px; height: 14px; margin: -8px 0 0 -8px; border-radius: 50%; border: 1.5px solid var(--bad, #ff6b6b); animation: gmap-ring 2.8s ease-out infinite; }
+@keyframes gmap-ring { 0% { transform: scale(.9); opacity: .9; } 80% { transform: scale(2.6); opacity: 0; } 100% { transform: scale(2.6); opacity: 0; } }
+
+/* the text fallback, when canvas is unavailable: the same readings as lines of text */
+.gmap-fallback { flex: 1; min-height: 0; overflow-y: auto; padding: 10px 12px; font-size: 12px; color: var(--text-2, #b4bfcc); }
+.gmap-fallback p { margin: 0 0 4px; }
+.gmap-line { font-family: var(--mono, ui-monospace, monospace); font-variant-numeric: tabular-nums; }
+
+/* 390: the chips wrap (flex-wrap above), the zoom column sits under the pills, the legend shrinks
+   to the ramp, its knots and a key toggle above the replay, and the canvas keeps the full width */
+@media (max-width: 760px) {
+  .gmap-chips { padding: 3px 4px; }
+  .gmap-chip { padding: 3px 6px; font-size: 11px; }
+  .gmap-zoom { top: 108px; right: 8px; }
+  .gmap-legend { left: 8px; bottom: 98px; width: min(250px, calc(100% - 64px)); min-width: 0; padding: 7px 9px 6px; }
+  .gmap-range, .gmap-asof, .gmap-quants { display: none; }
+  .gmap-tip, .gmap-pin { max-width: calc(100% - 24px); }
+  .gt-name { max-width: 120px; }
+  .gmap-kinds { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gmap-canvas { transition: none; }
+  .gmap-tip, .gmap-pin { animation: none; }
+  .gmap-ring { animation: none; opacity: .7; transform: scale(1.4); }
+}
+
+/* ===== MAP-1: the project map page (/map) ====================================================
+   The owner's consolidated map, carried into the site's own style: the same tokens, the same
+   hairline rules, the same faces. The content security policy admits no inline style, so every
+   rule the page needs lives here; the block is scoped to the page (`.map-page`) or to the
+   page's own `mp-` classes, so the grid page, which shares this stylesheet for ATG-6's canvas,
+   draws nothing differently. */
+.map-page .mp-main { flex: 1; min-width: 0; }
+.mp-shell { max-width: 1080px; margin: 0 auto; padding: 0 24px 24px; }
+.mp-mast {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 18px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+  color: var(--faint);
+  font-size: 11px;
+}
+.mp-mast .mp-mark { color: var(--text-2); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
+.mp-hero { padding: 40px 0 26px; border-bottom: 1px solid var(--rule); }
+.mp-hero h1 {
+  margin: 0 0 12px;
+  color: var(--text);
+  font-size: clamp(28px, 5vw, 46px);
+  font-weight: 600;
+  letter-spacing: -.02em;
+  line-height: 1.12;
+}
+.mp-lead { margin: 0 0 10px; color: var(--text); font-size: 16px; line-height: 1.55; max-width: 800px; }
+.mp-hero p { max-width: 800px; margin: 0 0 8px; color: var(--text-2); line-height: 1.6; }
+.mp-meta { display: flex; flex-wrap: wrap; gap: 4px 22px; margin-top: 14px; color: var(--faint); font-size: 11px; }
+.mp-meta b { color: var(--text-2); font-weight: 500; }
+.mp-meta .mono { color: var(--text-2); }
+.mp-contents { display: flex; flex-wrap: wrap; gap: 4px 16px; padding: 10px 0; border-bottom: 1px solid var(--rule); font-size: 11.5px; }
+.mp-contents a { color: var(--text-2); text-decoration: none; }
+.mp-contents a:hover { color: var(--text); }
+
+.mp-section { padding: 30px 0; border-bottom: 1px solid var(--rule); }
+.mp-secno { margin: 0 0 6px; color: var(--accent); font-size: 11px; letter-spacing: .1em; }
+.mp-section h2 {
+  margin: 0 0 10px;
+  color: var(--text);
+  font-size: clamp(20px, 3vw, 27px);
+  font-weight: 600;
+  letter-spacing: -.01em;
+  line-height: 1.2;
+}
+.mp-section h3 {
+  margin: 22px 0 6px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.mp-section p { max-width: 800px; margin: 0 0 10px; color: var(--text-2); line-height: 1.6; }
+.mp-summary { color: var(--text) !important; font-size: 14.5px; }
+
+.mp-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  margin: 20px 0 4px;
+}
+.mp-metric { padding: 14px 14px 12px; border-right: 1px solid var(--rule); min-width: 0; }
+.mp-metric:last-child { border-right: 0; }
+.mp-metric b { display: block; color: var(--accent); font: 500 26px/1.1 var(--mono); font-variant-numeric: tabular-nums; }
+.mp-metric > span { display: block; margin-top: 4px; color: var(--text-2); font-size: 12px; line-height: 1.45; }
+.mp-qualifier { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; line-height: 1.4; }
+.mp-record { display: block; margin-top: 6px; color: var(--faint); font-size: 10.5px; line-height: 1.45; overflow-wrap: anywhere; }
+.mp-record .mono { color: var(--muted); }
+
+.mp-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 26px; margin-top: 18px; }
+.mp-feature { border-top: 2px solid var(--accent); padding-top: 10px; min-width: 0; }
+.mp-feature small { color: var(--accent); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; }
+.mp-feature h3 { margin: 8px 0 6px; color: var(--text); font-size: 15px; font-weight: 600; letter-spacing: 0; text-transform: none; }
+.mp-feature p { font-size: 13px; }
+
+.mp-diagram {
+  margin: 18px 0;
+  padding: 14px;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+.mp-diagram svg { display: block; width: 100%; height: auto; max-height: 640px; }
+.mp-diagram text { font-family: var(--sans); fill: var(--text); }
+.mp-diagram .sub { fill: var(--muted); font-size: 13px; }
+.mp-diagram .title { font-size: 16px; font-weight: 600; }
+.mp-diagram .node { fill: var(--panel-2); stroke: var(--rule-strong); stroke-width: 1.5; }
+.mp-diagram .featured { fill: rgba(143, 211, 255, .07); stroke: var(--accent); stroke-width: 1.7; }
+.mp-diagram .edge { stroke: #8fa7a3; stroke-width: 2; fill: none; }
+.mp-diagram .future { stroke: var(--warn); stroke-dasharray: 6 5; }
+
+.mp-table-wrap {
+  margin: 14px 0;
+  overflow-x: auto;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+.mp-table { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 12px; }
+.mp-table th, .mp-table td { padding: 9px 11px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--rule); }
+.mp-table thead th {
+  background: var(--panel-2);
+  color: var(--muted);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.mp-table tbody th { color: var(--accent); font-family: var(--mono); font-weight: 500; white-space: nowrap; }
+.mp-table td { color: var(--text-2); }
+.mp-table tr:last-child td, .mp-table tr:last-child th { border-bottom: 0; }
+.mp-table .mp-record { margin-top: 5px; }
+.mp-contract { min-width: 1180px; }
+.mp-contract td { min-width: 172px; }
+.mp-contract .mp-finding { margin: 0 0 5px; max-width: none; color: var(--text-2); }
+.mp-contract .mp-cellmeta { display: block; margin: 2px 0 0; max-width: none; color: var(--faint); font-size: 10.5px; line-height: 1.5; }
+.mp-contract .mp-cellmeta .mono { color: var(--muted); overflow-wrap: anywhere; }
+.mp-contract .mp-status { color: var(--text); }
+.mp-contract a { color: var(--link); }
+
+.mp-callout {
+  margin: 16px 0;
+  padding: 8px 0 8px 16px;
+  border-left: 3px solid var(--accent);
+  color: var(--text) !important;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.mp-ordered { counter-reset: step; list-style: none; margin: 12px 0 0; padding: 0; }
+.mp-ordered li { counter-increment: step; position: relative; padding: 9px 0 12px 44px; border-bottom: 1px solid var(--rule); }
+.mp-ordered li::before {
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 11px;
+  color: var(--accent);
+  font: 500 11px var(--mono);
+}
+.mp-ordered strong { display: block; margin-bottom: 2px; color: var(--text); font-weight: 500; }
+.mp-ordered span { color: var(--text-2); font-size: 12.5px; line-height: 1.55; }
+
+.mp-sources { list-style: none; margin: 12px 0 0; padding: 0; font-size: 12px; }
+.mp-sources li { padding: 6px 0; border-bottom: 1px solid var(--rule); color: var(--text-2); line-height: 1.55; overflow-wrap: anywhere; }
+.mp-sources .mono { color: var(--text); }
+.mp-footer { margin-top: 16px; color: var(--faint); font-size: 11px; }
+
+@media (max-width: 760px) {
+  .mp-shell { padding: 0 12px 18px; }
+  .mp-hero { padding: 24px 0 18px; }
+  .mp-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mp-metric:nth-child(2) { border-right: 0; }
+  .mp-metric:nth-child(-n+2) { border-bottom: 1px solid var(--rule); }
+  .mp-grid2 { grid-template-columns: 1fr; }
+  /* The diagram scales to the column, and at a phone width its labels would fall under about
+     7 px. It keeps a readable minimum width and scrolls inside its own frame; the page itself
+     never scrolls sideways (measured at 390 and 1280). */
+  .mp-diagram { padding: 8px; overflow-x: auto; }
+  .mp-diagram svg { min-width: 560px; }
+}

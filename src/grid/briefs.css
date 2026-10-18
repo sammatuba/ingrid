@@ -1,0 +1,47 @@
+/* Briefings and findings panel (ATG-5). ATG-8 mounts it on the grid page; every token here is
+   the page's own (`src/grid/grid.css`), so the panel reads as part of the desk. */
+.briefs { display: flex; flex-direction: column; gap: var(--gap); min-width: 0; }
+.briefs .card { background: var(--panel); border: 1px solid var(--rule); border-radius: var(--radius); padding: 14px 16px; }
+.briefs h2 { margin: 0 0 8px; font-size: 13.5px; font-weight: 500; }
+.briefs .asof { margin: 8px 0 0; color: var(--faint); font-size: 11px; }
+
+.b-brief .b-text { margin: 0; color: var(--text-2); font-size: 13.5px; line-height: 1.6; }
+.b-brief .b-text b { color: var(--text); font-weight: 500; }
+.b-brief .b-text .num { font-size: 12.5px; color: var(--text); }
+.briefs .ent { color: var(--link); text-decoration: underline; text-decoration-color: rgba(198, 230, 255, .35); text-underline-offset: 3px; cursor: pointer; }
+.b-brief a.ent { text-decoration-color: rgba(198, 230, 255, .35); }
+
+.b-feed { display: flex; flex-direction: column; min-height: 0; }
+.b-chips { display: flex; gap: 4px; margin-bottom: 8px; flex-wrap: wrap; }
+.b-chips button { background: var(--panel-2); border: 1px solid var(--rule); border-radius: 4px; color: var(--text-2); font: inherit; font-size: 11.5px; padding: 3px 8px; cursor: pointer; }
+.b-chips button[aria-pressed="true"] { border-color: var(--rule-strong); color: var(--text); }
+.b-entries { list-style: none; margin: 0; padding: 0; overflow-y: auto; max-height: 420px; }
+.b-entry { padding: 8px 0; border-top: 1px solid var(--rule); }
+.b-entry:first-child { border-top: 0; }
+.b-head { display: flex; gap: 8px; align-items: baseline; font-size: 11px; color: var(--muted); }
+.b-kind { text-transform: uppercase; letter-spacing: .08em; font-weight: 500; }
+.b-kind.price { color: var(--p3); }
+.b-kind.link { color: var(--accent); }
+.b-kind.reserve { color: var(--warn); }
+.b-kind.event { color: var(--p4); }
+.b-kind.message { color: var(--text-2); }
+.b-market { color: var(--text-2); }
+.b-time { margin-left: auto; font-family: var(--mono); }
+.b-headline { margin-top: 3px; color: var(--text); font-size: 12.5px; }
+.b-why { margin-top: 2px; color: var(--text-2); font-size: 12px; line-height: 1.5; }
+.b-foot { display: flex; gap: 10px; align-items: baseline; margin-top: 4px; font-size: 11.5px; }
+.b-review { color: var(--link); text-decoration: none; }
+.b-review:hover { text-decoration: underline; }
+.b-count { margin-top: 6px; }
+/* FRONT-1: a run of near-identical rows is one expandable row naming its span and its count;
+   the members keep the entry styles above and are drawn behind the native `<details>`. */
+.b-group { border-top: 1px solid var(--rule); padding: 8px 0; }
+.b-group:first-child { border-top: 0; }
+.b-group summary { cursor: pointer; }
+.b-group summary .b-headline { display: block; }
+.b-group .b-open { display: inline-block; margin-top: 2px; color: var(--faint); font-size: 11px; }
+.b-group[open] .b-open { display: none; }
+.b-rows { list-style: none; margin: 4px 0 0; padding: 0 0 0 10px; border-left: 1px solid var(--rule); }
+@media (max-width: 700px) {
+  .b-entries { max-height: none; }
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "artifact_id": "pred-synthetic-timesfm-001",
+  "artifact_type": "prediction_artifact",
+  "revision_id": "rev-001",
+  "producer": {"name": "synthetic-fixture", "version": "0.1.0"},
+  "created_at": "2026-10-02T09:00:00+08:00",
+  "information_cutoff": "2026-10-02T06:00:00+08:00",
+  "access_policy_ref": "policy:internal-analyst",
+  "scope": {"kind": "task", "id": "price-forecast-synthetic"},
+  "source_refs": [
+    {
+      "source_id": "src-input-snapshot",
+      "source_version": "rev-input-001",
+      "content_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "locator": {"kind": "exact", "path": "snapshots/input-001.parquet"},
+      "availability": {"known_at": "2026-10-02T05:30:00+08:00", "basis": "pipeline-run"}
+    }
+  ],
+  "payload": {
+    "model_spec_ref": {
+      "artifact_id": "model-timesfm-synthetic",
+      "revision_id": "model-timesfm-rev-003",
+      "content_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    "forecast_origin": "2026-10-02T06:00:00+08:00",
+    "input_cutoff": "2026-10-02T05:30:00+08:00",
+    "entity": {"entity_type": "region", "entity_id": "LUZON", "region": "PH-LUZON"},
+    "valid_interval": {"start": "2026-10-02T06:00:00+08:00", "end": "2026-10-02T18:00:00+08:00"},
+    "horizon": {"value": 12, "unit": "hours"},
+    "units": "PHP/MWh",
+    "quantity_kind": "energy_price",
+    "outcome": {"kind": "point", "value": 4123.5},
+    "quantiles": [
+      {"level": 0.1, "value": 3800.0},
+      {"level": 0.9, "value": 4500.0}
+    ],
+    "input_snapshot_ref": {
+      "artifact_id": "ds-synthetic-wesm-2026-09",
+      "revision_id": "rev-input-001",
+      "content_digest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    },
+    "evaluation_report_ref": {
+      "artifact_id": "eval-synthetic-001",
+      "revision_id": "eval-rev-002",
+      "content_digest": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    },
+    "status": "evaluated"
+  },
+  "synthetic": true,
+  "content_digest": "e281a13cc4998d4f05a2291a59479d420e9fc7b99c6ec5292bfe6b64657a01cd"
+}

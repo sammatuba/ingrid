@@ -1,0 +1,120 @@
+{
+ "kind": "price-availability-response",
+ "version": "out-2.1",
+ "label": "synthetic fixture: invented outages, invented demand and an invented response; a method demonstration, not a measurement",
+ "basis": "final hourly regional settlement series; the real-time series was not read",
+ "normalization": "per_share_of_demand",
+ "units": "PHP/MWh per unit of rated MW lost over mean regional demand",
+ "denominator": "invented: the fixture states no measured denominator",
+ "mw_lost_basis": "invented rated MW of invented units",
+ "inputs": [
+  {
+   "role": "outages",
+   "path": "tests/fixtures/price/event_study/outages_forced-synthetic.csv",
+   "file": "outages_forced-synthetic.csv",
+   "rows": 25,
+   "sha256": "5f89a0e425fb8df4afc18cf59501b14132abdec2c04c9c87ed750e9ab057577a"
+  },
+  {
+   "role": "final_series",
+   "path": "tests/fixtures/price/event_study/lwap_final_hourly-synthetic.csv",
+   "file": "lwap_final_hourly-synthetic.csv",
+   "rows": 8640,
+   "sha256": "c6dcc38c11fd42336e0f640421723f9e095696a719e0f62fbc8c41ab11596707"
+  },
+  {
+   "role": "demand",
+   "path": "tests/fixtures/price/event_study/demand_hourly-synthetic.csv",
+   "file": "demand_hourly-synthetic.csv",
+   "rows": 6480,
+   "sha256": "d75aa1195923fcaca3031c3416fea9f21572b381e7d62561bd82cc5b2c0b1ecf"
+  }
+ ],
+ "parameters": {
+  "min_mw": 50.0,
+  "hours_after": 6,
+  "baseline_weeks": 4,
+  "min_events_per_cell": 10,
+  "size_edges": [
+   50.0,
+   150.0,
+   300.0
+  ]
+ },
+ "counts": {
+  "events_read": 44,
+  "events_used": 44,
+  "events_excluded": {}
+ },
+ "cells": [
+  {
+   "region": "CLUZ",
+   "size_class": "150 to 300 MW",
+   "mw_low": 150.0,
+   "mw_high": 300.0,
+   "count": 15,
+   "median": 20000.0,
+   "p10": -80000.0,
+   "p90": 120000.0,
+   "small_sample": false,
+   "min_events": 10,
+   "label": "measured",
+   "units": "PHP/MWh per unit of rated MW lost over mean regional demand",
+   "basis": "final hourly regional settlement series; the real-time series was not read",
+   "measured_hours": 6
+  },
+  {
+   "region": "CLUZ",
+   "size_class": "300+ MW",
+   "mw_low": 300.0,
+   "mw_high": null,
+   "count": 14,
+   "median": -8000.0,
+   "p10": -36000.0,
+   "p90": 54000.0,
+   "small_sample": false,
+   "min_events": 10,
+   "label": "measured",
+   "units": "PHP/MWh per unit of rated MW lost over mean regional demand",
+   "basis": "final hourly regional settlement series; the real-time series was not read",
+   "measured_hours": 6
+  },
+  {
+   "region": "CVIS",
+   "size_class": "150 to 300 MW",
+   "mw_low": 150.0,
+   "mw_high": 300.0,
+   "count": 11,
+   "median": 500.0,
+   "p10": -50000.0,
+   "p90": 15000.0,
+   "small_sample": false,
+   "min_events": 10,
+   "label": "measured",
+   "units": "PHP/MWh per unit of rated MW lost over mean regional demand",
+   "basis": "final hourly regional settlement series; the real-time series was not read",
+   "measured_hours": 6
+  },
+  {
+   "region": "CMIN",
+   "size_class": "50 to 150 MW",
+   "mw_low": 50.0,
+   "mw_high": 150.0,
+   "count": 4,
+   "median": 10000.0,
+   "p10": -8000.0,
+   "p90": 200000.0,
+   "small_sample": true,
+   "min_events": 10,
+   "label": "exploratory",
+   "units": "PHP/MWh per unit of rated MW lost over mean regional demand",
+   "basis": "final hourly regional settlement series; the real-time series was not read",
+   "measured_hours": 6
+  }
+ ],
+ "limits": {
+  "note": "invented cells; no limits measured"
+ },
+ "timing_check": "not run: invented cells",
+ "expectation": "A multi-hour outage against a billing-month mean moves the mean by a small delta. The materiality line, not the mechanism, decides whether it reaches the board."
+}

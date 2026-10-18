@@ -1,0 +1,57 @@
+/* Book page (`/book`). Platform polish, 2026-10-18.
+   The frame, stats, tabs, tables and disclosure are the shared components in ui.css
+   (docs/work/platform-polish-2026-10-18/design-system.md). This file holds only what is unique to
+   the book: the synthetic label line that stays in view, the section rhythm inside a tab, and the
+   exposure heat. The one use of colour is the heat shade, and it means one thing: more uncovered
+   MWh. No gradients, no glow. */
+
+/* The synthetic label line sticks under the shared bar, so every screen shows it. */
+.bk-top { position: sticky; top: var(--bar-h, var(--gn-bar-h, 0px)); z-index: 6; }
+.bk-top .bar { position: static; }
+.bk-flag {
+  margin: 0;
+  padding: 6px var(--gutter, 16px);
+  background: var(--panel-2);
+  border-bottom: 1px solid var(--rule-strong);
+  color: var(--text);
+  font-size: var(--t-small, 12px);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.bk-anchor { margin: 0; }
+.bk-panel { min-width: 0; }
+.bk-panel > .bk-section + .bk-section { margin-top: var(--s-6, 32px); }
+.bk-section h2 { margin: 0 0 var(--s-1, 4px); }
+.bk-text { margin: 2px 0 0; color: var(--text-2); font-size: var(--t-body, 13px); max-width: 82ch; }
+.bk-more { margin-top: var(--s-2, 8px); max-width: 82ch; }
+.bk-more .bk-text { font-size: var(--t-small, 12px); }
+.bk-cap { margin: var(--s-3, 12px) 0 var(--s-2, 8px); color: var(--muted); font-size: var(--t-small, 12px); overflow-wrap: anywhere; }
+.bk-syn { color: var(--text); font-weight: 600; }
+
+.bk-table td.wrap { font-size: var(--t-small, 12px); }
+.bk-table .bk-total td { color: var(--text); font-weight: 600; border-top: 1px solid var(--rule-strong); }
+
+/* The heat: five steps of one hue, from no uncovered MWh to the day's largest cell. Dense
+   cells, so the 24 hours fit the page at 1440 and scroll inside the table on a smaller screen. */
+.bk-table[data-table="heat"] th.num, .bk-table[data-table="heat"] td.bk-heat { padding-left: 4px; padding-right: 4px; }
+.bk-table[data-table="heat"] td.bk-heat { font-size: 10.5px; color: var(--text); }
+.gn-table tbody td.bk-shade-0 { color: var(--faint); }
+.gn-table tbody td.bk-shade-1 { background-color: rgba(214, 140, 60, .14); }
+.gn-table tbody td.bk-shade-2 { background-color: rgba(214, 140, 60, .30); }
+.gn-table tbody td.bk-shade-3 { background-color: rgba(214, 140, 60, .48); }
+.gn-table tbody td.bk-shade-4 { background-color: rgba(214, 140, 60, .68); }
+/* Column widths: the ids keep their width, the figures share the rest. */
+.bk-table[data-table="heat"] { --gn-table-min: 1240px; }
+.bk-table[data-table="heat"] col.bk-c-node { width: 104px; }
+.bk-table[data-table="heat"] col.bk-c-acct { width: 96px; }
+.bk-table[data-table="exposure"], .bk-table[data-table="nodes"] { max-width: 880px; }
+.bk-table[data-table="impact"] { --gn-table-min: 900px; }
+.bk-table[data-table="contracts"] { --gn-table-min: 1000px; }
+.bk-table col.bk-c-id { width: 128px; }
+.bk-table col.bk-c-region { width: 104px; }
+
+@media (max-width: 720px) {
+  .bk-flag { padding: 5px 16px; }
+  .bk-anchor .gn-value--lg { font-size: 18px; white-space: nowrap; }
+}

@@ -1,0 +1,41 @@
+{
+ "id": "syn-retrieval-fixture",
+ "title": "Fixture: a retrieval block (invented records)",
+ "fixture_note": "RAG-5 labelled fixture. Every passage, label, excerpt, digest, distance and count below is invented to exercise the event page's 'What the system read' card. It is the shape of the retrieval block in docs/work/retrieval-2026-10-18/intent.md (section Contracts), not a recorded run: no embedding, store or judgment ran to make it.",
+ "grid_name": "Visayas",
+ "event_at": "2026-09-21T13:34",
+ "retrieval": {
+  "question": "[fixture] Was the unit available to the market in the interval after the trip notice?",
+  "states": [
+   {"id": "hindsight", "label": "Everything now known", "cutoff": "2026-10-18T10:00:00+08:00",
+    "receipt_digest": "f1x7ure0000000000000000000000000000000000000000000000000000000a1",
+    "ranked": [
+     {"rank": 1, "issuer": "NGCP", "label": "[fixture] advisory 2026-09-21 13:20", "available_from": "2026-09-21T13:21:04+08:00",
+      "basis": "feed_logged_at", "distance": 0.1234564321, "excerpt": "[fixture] Unit SYN-2 tripped at 1318H; the grid operator is monitoring reserves.", "cited": true},
+     {"rank": 2, "issuer": "PEMC", "label": "[fixture] WESM Rules clause 9.9.1", "available_from": "2026-04-01",
+      "basis": "archive_snapshot", "distance": 0.2011, "excerpt": "[fixture] A unit that cannot deliver its scheduled quantity shall be reported to the market operator.", "cited": true},
+     {"rank": 3, "issuer": "IEMOP", "label": "[fixture] market report page 2026-10-15", "available_from": "2026-10-15T16:20:12Z",
+      "basis": "capture_logged_at", "distance": 0.2457, "excerpt": null, "cited": false},
+     {"rank": 4, "issuer": "PEMC", "label": "[fixture] WESM Rules section 9.9", "available_from": "2026-04-01",
+      "basis": "archive_snapshot", "distance": 0.30125, "excerpt": "[fixture] Section heading: reporting of unit availability.", "cited": false}
+    ],
+    "withheld": {"later_availability": 0, "availability_unknown": 3, "no_embedding": 0}},
+   {"id": "known-then", "label": "Known at the time", "cutoff": "2026-09-21T13:34:00+08:00",
+    "receipt_digest": "f1x7ure0000000000000000000000000000000000000000000000000000000b2",
+    "ranked": [
+     {"rank": 1, "issuer": "NGCP", "label": "[fixture] advisory 2026-09-21 13:20", "available_from": "2026-09-21T13:21:04+08:00",
+      "basis": "feed_logged_at", "distance": 0.1234564321, "excerpt": "[fixture] Unit SYN-2 tripped at 1318H; the grid operator is monitoring reserves.", "cited": true},
+     {"rank": 2, "issuer": "PEMC", "label": "[fixture] WESM Rules clause 9.9.1", "available_from": "2026-04-01",
+      "basis": "archive_snapshot", "distance": 0.2011, "excerpt": "[fixture] A unit that cannot deliver its scheduled quantity shall be reported to the market operator.", "cited": true},
+     {"rank": 3, "issuer": "PEMC", "label": "[fixture] WESM Rules section 9.9", "available_from": "2026-04-01",
+      "basis": "archive_snapshot", "distance": 0.30125, "excerpt": "[fixture] Section heading: reporting of unit availability.", "cited": false},
+     {"rank": 4, "issuer": "NGCP", "label": "[fixture] advisory 2026-09-20 22:05", "available_from": "2026-09-20T22:06:40+08:00",
+      "basis": "feed_logged_at", "distance": 0.4, "excerpt": null, "cited": true}
+    ],
+    "withheld": {"later_availability": 1, "availability_unknown": 3, "no_embedding": 0}}
+  ],
+  "receipt": {"embedding_model": "[fixture] hash-embedding", "dimension": 768, "backend": "memory",
+              "agreement": "[fixture] not compared", "bytes_billed": null, "run": "tests/fixtures/grid/event/retrieval/view.json"},
+  "judgment": {"used": true, "cited_ranks": [1, 2, 4], "receipt_digest": "f1x7ure0000000000000000000000000000000000000000000000000000000c3"}
+ }
+}
