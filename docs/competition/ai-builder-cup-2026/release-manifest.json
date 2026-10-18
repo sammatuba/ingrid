@@ -175,5 +175,5 @@
   "release_reviewer": "Pending review. The independent review record docs/work/reviews/REL-4.md names the reviewer and the reviewed commit; the value is copied here after that review. The first attempt on 2026-10-17 ended in a workspace credits outage and wrote no record (task record, Rework section)."
  },
  "deployed_url_alias": "https://grid-nowcast.web.app",
- "deployed_url_alias_note": "Second Firebase Hosting site in the same project, published by the owner on 2026-10-19; grid-nowcast.web.app serves the same build. Release 26 (stamp 2203404182507a81) published to grid-nowcast at ~01:35 Manila; the ingrid-desk publish follows from build/firebase-ingrid.json. The site id ingrid is reserved by another project."
+ "deployed_url_alias_note": "Second Firebase Hosting site in the same project, published by the owner on 2026-10-19; grid-nowcast.web.app serves the same build. Release 26 (stamp 2203404182507a81) published to grid-nowcast at ~01:35 Manila; the ingrid-desk site published by the owner at ~01:50 Manila with the same build (stamp 2203404182507a81 read back on /health and the first screen; paper, map, notices, event, alerts and explain answer 200). The site id ingrid is reserved by another project."
 }

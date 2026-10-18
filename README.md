@@ -23,7 +23,7 @@ Clone: `git clone https://github.com/sammatuba/ingrid`.
 ## Licence and attribution
 
 Proprietary: all rights reserved, published for the AI Builder Cup 2026 evaluation only (`LICENSE`).
-Sam Matuba wrote the paper. Sam Matuba and Ericka Formanes wrote the codebase. Jayden Cacayan gathered
+Sam Matuba wrote the paper. Sam Matuba and Ericka Formanes wrote the codebase (the private history holds her commits; each public commit names her as co-author). Jayden Cacayan gathered
 the feedback as the user representative (`ATTRIBUTION.md`).
 
 ## Start reading

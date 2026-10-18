@@ -1,7 +1,7 @@
 {
   "version": 1,
   "tool": "scripts/release/export.py",
-  "source_revision": "f1c0ca45ca95d7cca64ece87145311ef9c70de9e",
+  "source_revision": "85a69f58f724e8f76c5c97bea1a904b40a9b52e5",
   "source_date": "2026-10-19",
   "cutoff": "2026-09-07",
   "counts": {
@@ -51,7 +51,7 @@
         },
         "last": {
           "date": "2026-10-19",
-          "commit": "ed4e45a409f0"
+          "commit": "85a69f58f724"
         }
       }
     },
@@ -401,7 +401,7 @@
         },
         "last": {
           "date": "2026-10-19",
-          "commit": "f1c0ca45ca95"
+          "commit": "fa44d1c7e286"
         }
       }
     },
@@ -11162,7 +11162,7 @@
         },
         "last": {
           "date": "2026-10-19",
-          "commit": "14b040b41c36"
+          "commit": "75e92168a5d2"
         }
       }
     },
@@ -11216,6 +11216,6 @@
     "reviewed binary: src/grid/icon-192.png is not UTF-8 text, so the content rules cannot read it, and its 4446 bytes hash to a reviewed digest \u2014 Reviewed 2026-10-18 for the InGRID brand (platform-polish batch): a raster icon drawn by scripts/brand/build_icons.py from the SVG mark in src/grid (favicon.svg, ingrid-mark.svg), which the content rules do read. The PNG and ICO bytes are pinned by sha256; a redraw changes the digest and stops the export until the new bytes are reviewed. No data, text or credential is inside: the tile colours are the shell tokens and the mark is the 3x3 trace path.",
     "reviewed binary: src/grid/icon-512.png is not UTF-8 text, so the content rules cannot read it, and its 12477 bytes hash to a reviewed digest \u2014 Reviewed 2026-10-18 for the InGRID brand (platform-polish batch): a raster icon drawn by scripts/brand/build_icons.py from the SVG mark in src/grid (favicon.svg, ingrid-mark.svg), which the content rules do read. The PNG and ICO bytes are pinned by sha256; a redraw changes the digest and stops the export until the new bytes are reviewed. No data, text or credential is inside: the tile colours are the shell tokens and the mark is the 3x3 trace path.",
     "reviewed binary: src/grid/icon-maskable-512.png is not UTF-8 text, so the content rules cannot read it, and its 6989 bytes hash to a reviewed digest \u2014 Reviewed 2026-10-18 for the InGRID brand (platform-polish batch): a raster icon drawn by scripts/brand/build_icons.py from the SVG mark in src/grid (favicon.svg, ingrid-mark.svg), which the content rules do read. The PNG and ICO bytes are pinned by sha256; a redraw changes the digest and stops the export until the new bytes are reviewed. No data, text or credential is inside: the tile colours are the shell tokens and the mark is the 3x3 trace path.",
-    "worktree: 15 uncommitted path(s) under excluded rules cannot reach the export and did not block it"
+    "worktree: 16 uncommitted path(s) under excluded rules cannot reach the export and did not block it"
   ]
 }
