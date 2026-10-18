@@ -27,8 +27,8 @@ The [working paper](product/working-paper-2026-10-11.md) owns the method, the
 
 **Live**
 
-- `https://grid-nowcast.web.app` and `https://ingrid-desk.web.app` (Hosting to Cloud Run): release 25,
-  app server copy `grid-nowcast-00047-lnt`, one build on every page, 18 October 2025 to 14 October 2026.
+- `https://grid-nowcast.web.app` and `https://ingrid-desk.web.app` (Hosting to Cloud Run): release 26,
+  app server copy `grid-nowcast-00048-d4p`, one build on every page, 18 October 2025 to 14 October 2026.
   A sign-in screen comes first on every page.
 - Measured times: [baseline record](work/performance/baseline.md).
 - The real data ends 14 October 2026 under the signed
