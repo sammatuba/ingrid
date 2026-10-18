@@ -35,7 +35,7 @@ Some office networks block every `web.app` address. Then use
 You meet a sign-in screen first on every page. The submission form will name the judges'
 account. The site opens on the grid page and the event page. One top bar reaches the other pages:
 outlooks, register, models, plants, notices, alerts, book, journal, the explainer and the paper.
-The site serves one build, release 26. It covers 18 October 2025 to 14 October 2026.
+The site serves one build, release 27. It covers 18 October 2025 to 14 October 2026.
 
 The site changed on 18 October 2026 (GitHub PR #102, live since release 22). Release 23 added
 the InGRID name and one design system on every page. Release 25 fixed the map Key toggle and made

@@ -916,6 +916,7 @@
     brand.append(bolt(), make('h1', null, BRAND));
     brand.lastChild.id = 'gn-gate-title';
     const lede = make('p', 'gn-gate-lede', 'One sign-in for the whole app. Your alerts, portfolio and journal stay private to you.');
+    const judges = make('p', 'gn-gate-lede gn-gate-judges', 'Judges: the site is public, so the sign-in for the evaluation is on the last slide of the pitch deck, not here. This keeps the live model path from abuse.');
     const email = field('Email', 'email', 'email', 'gn-gate-email');
     const pw = field('Password', 'password', 'current-password', 'gn-gate-password');
     const status = make('p', 'gn-gate-status');
@@ -929,7 +930,7 @@
     const forgot = make('button', 'gn-gate-link', 'Forgot password?');
     forgot.type = 'button';
     // Google sign-in is not used by the desk: the card offers email and password only.
-    form.append(brand, lede, email.wrap, pw.wrap, status, submit, forgot);
+    form.append(brand, lede, judges, email.wrap, pw.wrap, status, submit, forgot);
     box.appendChild(form);
     const say = (text, bad) => { status.textContent = text; status.classList.toggle('gn-gate-bad', Boolean(bad)); };
     const busy = (on) => { [submit, google, forgot].forEach((b) => { b.disabled = on || !auth.handle; }); };

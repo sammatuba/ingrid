@@ -2,7 +2,7 @@
 
 *Accountable human–AI decision work, with a prototype for an electricity retailer in the Philippine wholesale electricity market*
 
-**Sam Matuba** (author). Prototype codebase: Sam Matuba and Ericka Formanes. Feedback gathering, as the user representative: Jayden Cacayan.
+**Sam Matuba** (author). Prototype codebase: Sam Matuba and Ericka Formanes. Feedback gathering and use-case refinement, as the user representative: Jayden Cacayan.
 
 Version of 19 October 2026 (InGRID release 25).
 

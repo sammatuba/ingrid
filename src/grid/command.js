@@ -358,7 +358,7 @@
   function applyVoice() {
     const narrow = Boolean(window.matchMedia && window.matchMedia('(max-width: 520px)').matches);
     let words = narrow ? 'Search or ask ' + AGENT : 'Search plants, events, data, or ask ' + AGENT;
-    if (state.gemini) words = narrow ? 'Search or ask ' + AGENT : 'Search, or ask ' + AGENT + ' about the grid';
+    if (state.gemini) words = narrow ? 'Search or ask ' + AGENT : 'Search, or ask ' + AGENT;
     input.setAttribute('placeholder', words);
     root.classList.toggle('gc-gemini', state.gemini === true);
   }
@@ -430,7 +430,10 @@
       + meta + '<span class="gc-opt-enter" aria-hidden="true">' + icon('arrow') + '</span></div>';
   }
 
-  function groupHtml(label, gid, items) {
+  function groupHtml(label, gid, items, bare) {
+    /* A bare group keeps its name for assistive technology only: no heading is drawn (the
+       cases, queue and threads row names itself, so a second "Ingrid" line above it was noise). */
+    if (bare) return '<div role="group" class="gc-grp gc-grp-bare" aria-label="' + esc(label) + '">' + items.join('') + '</div>';
     return '<div role="group" class="gc-grp" aria-labelledby="' + gid + '">'
       + '<div class="gc-grp-h" id="' + gid + '" role="presentation">' + esc(label) + '</div>'
       + items.join('') + '</div>';
@@ -462,7 +465,7 @@
     if (ui.listKind === 'prompts') {
       const items = prompts.items || [];
       if (items.length) {
-        groups.push(groupHtml((state.gemini ? 'Ask ' + AGENT + ' about the grid · ' : 'Suggested at ')
+        groups.push(groupHtml((state.gemini ? 'Ask ' + AGENT + ' · ' : 'Suggested at ')
           + (asOf().slice(11, 16) || 'the replay clock'),
           'gc-g-prompts', items.map((item) => {
             options.push({type: 'prompt', glyph: 'ask', id: item.id, text: item.text,
@@ -482,7 +485,7 @@
       if (findMount() && !WORKSPACE) {
         options.push({type: 'panel', glyph: 'history', titleHtml: 'Cases, queue and threads',
                       sub: signedIn() ? 'Your cases and what waits for your decision' : 'Sign in to ask live and keep cases'});
-        groups.push(groupHtml(AGENT_SHORT, 'gc-g-desk', [optionHtml(options[options.length - 1], options.length - 1)]));
+        groups.push(groupHtml(AGENT_SHORT, 'gc-g-desk', [optionHtml(options[options.length - 1], options.length - 1)], true));
       }
       if (prompts.pending && !items.length) note = 'Reading the suggestions for this page.';
       else if (prompts.failed && !items.length) {
