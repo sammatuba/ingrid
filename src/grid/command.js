@@ -88,6 +88,7 @@
   /* ---------- glyphs: 16px line icons, only where they carry meaning ---------- */
   const PATHS = {
     search: '<circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/>',
+    spark: '<path d="M7 1.75c.45 2.75 1.75 4.05 4.5 4.5-2.75.45-4.05 1.75-4.5 4.5-.45-2.75-1.75-4.05-4.5-4.5 2.75-.45 4.05-1.75 4.5-4.5z"/><path d="M12.25 10.25c.2 1.05.55 1.4 1.6 1.6-1.05.2-1.4.55-1.6 1.6-.2-1.05-.55-1.4-1.6-1.6 1.05-.2 1.4-.55 1.6-1.6z"/>',
     mic: '<rect x="6" y="1.75" width="4" height="8" rx="2"/><path d="M3.5 7.5a4.5 4.5 0 0 0 9 0M8 12v2.25"/>',
     send: '<path d="M8 13V3.5M4 7.5l4-4 4 4"/>',
     plant: '<path d="M9 1.5 3.5 9H8l-1 5.5L12.5 7H8z"/>',
@@ -299,7 +300,7 @@
     + '</div></section>'
     + '<div class="gc-list" id="gc-list" role="listbox" aria-label="Suggestions and search results" hidden></div>'
     + '<form class="gc-bar" role="search" aria-label="' + esc('Search or ask ' + AGENT) + '" autocomplete="off">'
-    + '<span class="gc-glyph" aria-hidden="true">' + icon('search') + '</span>'
+    + '<span class="gc-glyph" aria-hidden="true">' + icon('spark') + '</span>'
     + '<input id="gc-input" class="gc-input" type="text" role="combobox" aria-label="' + esc('Search or ask ' + AGENT) + '"'
     + ' aria-expanded="false" aria-controls="gc-list" aria-autocomplete="list" aria-haspopup="listbox"'
     + ' maxlength="500" enterkeyhint="send" spellcheck="false" autocomplete="off"'
@@ -310,7 +311,7 @@
     + ' data-tip="Voice input, coming soon">' + icon('mic') + '</button>'
     + '<button type="submit" class="gc-send" aria-label="' + esc('Ask ' + AGENT) + '" data-tip="Ask · Enter">' + icon('send') + '</button>'
     + '</form>'
-    + '<button type="button" class="gc-pill" data-act="expand" aria-label="' + esc('Search or ask ' + AGENT) + '">' + icon('search')
+    + '<button type="button" class="gc-pill" data-act="expand" aria-label="' + esc('Search or ask ' + AGENT) + '">' + icon('spark')
     + '<span>Ask</span><kbd class="gc-pill-k" aria-hidden="true">/</kbd></button>';
 
   const $ = (sel) => root.querySelector(sel);
@@ -325,6 +326,15 @@
   const panelBtn = root.querySelector('[data-act="panel"]');
 
   function attach() {
+    /* The sparkle twinkles once per page (command.css); the class goes when the animation ends,
+       so a bar shown again after the compact pill does not repeat it. */
+    const glyph = root.querySelector('.gc-glyph');
+    if (glyph) {
+      glyph.classList.add('gc-twinkle');
+      const done = () => glyph.classList.remove('gc-twinkle');
+      glyph.addEventListener('animationend', done, {once: true});
+      glyph.addEventListener('animationcancel', done, {once: true});
+    }
     if (WORKSPACE) {
       const host = document.getElementById('ask-main') || document.querySelector('main') || document.body;
       root.classList.add('gc-ws');
@@ -383,6 +393,7 @@
   const compact = {wanted: false};
   function sync() {
     root.classList.toggle('gc-compact', compact.wanted && !state.open && !state.focus && !ui.listKind);
+    if (root.classList.contains('gc-compact')) { const g = root.querySelector('.gc-twinkle'); if (g) g.classList.remove('gc-twinkle'); }
     root.setAttribute('data-open', isOpen() ? 'true' : 'false');
     root.classList.toggle('gc-focus', state.focus || Boolean(ui.listKind));
     root.classList.toggle('gc-listing', Boolean(ui.listKind));

@@ -86,6 +86,10 @@ const SHOT = arg('shot', '');
    alert-inbox request is listed in `inbox` with its query (`served` keeps the path alone). */
 const PLAY = Number(arg('play', '0'));
 const CROSS = arg('cross-days', '');
+/* --day-steps presses the replay's Next day and Previous day buttons and Shift+arrow keys (the
+   day mode only); `days` carries the clock, the day and each button's state after every press,
+   and the boxes of the replay's head and day-row controls so the caller can check they fit. */
+const DAY_STEPS = argv.lastIndexOf('--day-steps') >= 0;
 // DESKFIX-1: open one site's detail card and step to the other assets at its place.
 const SIBLINGS = arg('siblings', '');
 /* PERF-6: --probe asks the shell's own readers directly (`GNShell.inbox`, `GNShell.dayFile`) on
@@ -562,6 +566,7 @@ let siblings = null;
 let step = null;
 let play = null;
 let cross = null;
+let days = null;
 let probe = null;
 const text = (selector) => page.evaluate((sel) => { const n = document.querySelector(sel); return n ? n.textContent.replace(/\s+/g, ' ').trim() : null; }, selector);
 const count = (selector) => page.evaluate((sel) => document.querySelectorAll(sel).length, selector);
@@ -948,6 +953,40 @@ try {
     cross = {moves, nodeFiles: since.filter((name) => NODE_FILE.test(name)), dayFiles: since.filter(dayFile),
              nodeRequests: asked.filter((name) => NODE_FILE.test(name)), dayRequests: asked.filter(dayFile)};
   }
+  if (DAY_STEPS) {
+    const look = (label) => page.evaluate((label) => {
+      const box = (node) => { const b = node.getBoundingClientRect(); return {left: Math.round(b.left), right: Math.round(b.right), top: Math.round(b.top), bottom: Math.round(b.bottom), width: Math.round(b.width)}; };
+      const panel = document.getElementById('map-replay');
+      const btn = (n) => document.querySelector(`.rp-daystep[data-day="${n}"]`);
+      return {label, day: window.GridDesk.D.day, clock: document.getElementById('clock-time').textContent,
+              pick: document.getElementById('clock-day').value, hash: location.hash,
+              prev: {label: btn(-1).getAttribute('aria-label'), disabled: btn(-1).disabled},
+              next: {label: btn(1).getAttribute('aria-label'), disabled: btn(1).disabled},
+              panel: box(panel), viewport: window.innerWidth,
+              head: [...panel.querySelectorAll('.rp-head > *, .rp-when > *, .rp-days > *')].filter((n) => n.checkVisibility()).map((n) => ({name: n.id || n.className, ...box(n)}))};
+    }, label);
+    const settle = (d) => page.waitForFunction((d) => window.GridDesk && window.GridDesk.D.day === d, d, {timeout: 15000});
+    await page.evaluate(() => window.GridDesk.goto('2026-09-21T13:40'));
+    await settle('2026-09-21');
+    const seen = [await look('start')];
+    await page.click('.rp-daystep[data-day="1"]');
+    await settle('2026-09-22');
+    seen.push(await look('next'));
+    await page.evaluate(() => document.querySelector('.rp-daystep[data-day="1"]').click());
+    await page.waitForTimeout(500);
+    seen.push(await look('next at the end'));
+    await page.click('.rp-daystep[data-day="-1"]');
+    await settle('2026-09-21');
+    seen.push(await look('previous'));
+    await page.evaluate(() => document.activeElement && document.activeElement.blur());
+    await page.keyboard.press('Shift+ArrowRight');
+    await settle('2026-09-22');
+    seen.push(await look('shift right'));
+    await page.keyboard.press('Shift+ArrowLeft');
+    await settle('2026-09-21');
+    seen.push(await look('shift left'));
+    days = seen;
+  }
   if (PROBE) {
     await page.waitForTimeout(1500);  // the page's own first reads have settled
     const mark = INBOX.length, markRequested = REQUESTED.length;
@@ -969,7 +1008,7 @@ try {
     probe.inbox = INBOX.slice(mark);
     probe.dayRequests = REQUESTED.slice(markRequested).filter((name) => name.endsWith('/days/' + PROBE_DAY + '.json'));
   }
-  if (!INTERACT && !HOLD_NODE && !PLAY && !CROSS && !PROBE && !SIBLINGS) {
+  if (!INTERACT && !HOLD_NODE && !PLAY && !CROSS && !PROBE && !SIBLINGS && !DAY_STEPS) {
     const before = await text('#clock-time');
     await page.click('.clock [data-step="1"]');
     step = {before, after: await text('#clock-time')};
@@ -999,7 +1038,7 @@ const ok = thrown === null && pageErrors.length === 0 && consoleErrors.length ==
   && failedRequests.length === 0 && rendered !== null && rendered.overflow <= 0;
 report({ok, ran: true, width: WIDTH, hash: HASH, url: base + '/', stamp: STAMP || null, held: HOLD_NODE,
         thrown, consoleErrors, pageErrors, failedRequests, badResponses, stage1, rendered, served: SERVED, interactions, siblings, step,
-        inbox: INBOX, play, cross, probe, requested: REQUESTED,
+        inbox: INBOX, play, cross, days, probe, requested: REQUESTED,
         legacyCards: LEGACY, liveIds: EVENT ? WALKED_EVENT_IDS.filter((id) => LIVE_EVENT_IDS.has(id)) : null,
         health: SERVED.filter((name) => name === '/health').length,
         policy: Object.fromEntries(POLICY_PATHS.map((name) => [name, policyFor(name)]))}, ok ? 0 : 1);

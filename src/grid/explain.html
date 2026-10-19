@@ -689,7 +689,7 @@
 <p><strong>The event page is explorable too.</strong> Click a notice on the timeline and the judgment at that notice's cutoff opens: the readings before and after it, with their rules and receipts. Click the big value for where the <span class="term" tabindex="0" data-def="One fact that an outlook depends on. Example: &quot;PEDC Unit 2 can supply 83.7 MW on 21 September.&quot;">assumption</span> came from and when the desk accepted it. Click a judgment row for the question in plain words and the four answers. Click a saved decision for what its record carries. The limits line at the bottom expands to the full list.</p>
 <p><strong>Your copy is private.</strong> On your first action, the sign-in service gives you an identity, and the server makes your own copy of the case in one step. A decision you save changes only your copy. If your copy changed under you, the server refuses the save and tells you. That is the same rule that protects two analysts who work on one case.</p>
 <h2 id="ch10-what-the-site-does-not-do">What the site does not do</h2>
-<ul><li>It makes no live call to any AI model. The judgment is the recorded run.</li><li>It has no live data feed. The replay ends on 29 September 2026.</li><li>It computes no <span class="term" tabindex="0" data-def="The market price of power at one place and one time, in pesos per megawatt-hour.">price</span> or cost consequence of the <span class="term" tabindex="0" data-def="A sudden shutdown of a power plant unit.">trip</span>. The site says "not computed" where that applies.</li><li>It shows no feature that is not connected. No placeholder badges.</li></ul>
+<ul><li>The event page makes no live call to any AI model. Its judgment is the recorded run.</li><li>Since release 23, a signed-in visitor can ask Ingrid live in the command bar.</li><li>It has no live data feed. The replay ends on 14 October 2026.</li><li>It computes no <span class="term" tabindex="0" data-def="The market price of power at one place and one time, in pesos per megawatt-hour.">price</span> or cost consequence of the <span class="term" tabindex="0" data-def="A sudden shutdown of a power plant unit.">trip</span>. The site says "not computed" where that applies.</li><li>It shows no feature that is not connected. No placeholder badges.</li></ul>
 <h2 id="ch10-how-a-new-version-reaches-the-site">How a new version reaches the site</h2>
 <p>The owner runs one deploy script. It builds the container image, pushes it, deploys it to Cloud Run, and compares the <span class="term" tabindex="0" data-def="A short code computed from a file&#x27;s bytes. Two equal fingerprints mean two identical files.">fingerprint</span> of the deployed image with the fingerprint it built. It then publishes the grid files to Hosting. If anything goes wrong, the previous <span class="term" tabindex="0" data-def="One deployed build of the app server. Each has a code such as 00010-66b.">version</span> is one command away. Deploys are rare: one per batch of finished work. The <span class="ref">status page <code class="ref-path">docs/status.md</code></span> names the live version.</p>
 <div class="quiz" data-quiz="1">
@@ -702,7 +702,7 @@
 <p class="quiz-why" hidden>The deployed app has no model connected. The judgment is a recorded run, and the receipt on the page says so.</p>
 </div>
 <h2 id="ch10-sources-for-this-chapter">Sources for this chapter</h2>
-<ul><li>Times: the <span class="ref">performance baseline <code class="ref-path">docs/work/performance/baseline.md</code></span>, runs 3 to 9.</li><li>The pieces and the deploy script: the <span class="ref">hosting record <code class="ref-path">docs/work/hosting/implementation.md</code></span>.</li><li>No live model: the <span class="ref">status page <code class="ref-path">docs/status.md</code></span> and the <span class="ref">live run record <code class="ref-path">docs/work/grid-desk/live-run-2026-10-14.md</code></span>.</li></ul>
+<ul><li>Times: the <span class="ref">performance baseline <code class="ref-path">docs/work/performance/baseline.md</code></span>, runs 3 to 9.</li><li>The pieces and the deploy script: the <span class="ref">hosting record <code class="ref-path">docs/work/hosting/implementation.md</code></span>.</li><li>The recorded run and the live path: the <span class="ref">status page <code class="ref-path">docs/status.md</code></span> and the <span class="ref">live run record <code class="ref-path">docs/work/grid-desk/live-run-2026-10-14.md</code></span>.</li></ul>
 </section>
 <section class="chapter" id="ch-11" data-source="06-work.md">
 <p class="kicker">Chapter 11 of 27</p>
@@ -1841,7 +1841,7 @@
 <button type="button" class="fnode" data-id="H3">Document database: each visitor's private copy of a case and its decisions</button>
 </div></div>
 <div class="fgroup"><h4>Model service</h4><div class="nodes">
-<button type="button" class="fnode" data-id="M1">Recorded judgment runs with receipts. The site replays them, with no live call</button>
+<button type="button" class="fnode" data-id="M1">Question-set runs recorded with receipts, replayed on the event page. Live command-bar answers for signed-in visitors since release 23.</button>
 </div></div>
 </div>
 <div class="detail" data-detail>Select a box. This panel lists the arrows into it and out of it.</div>
@@ -1858,7 +1858,7 @@
 <li data-a="W3" data-b="D1">Driver card and likely-drivers ranking per interval → One data file per page, every figure from a table row, versioned by content.</li>
 <li data-a="A1" data-b="D1">Operator advisories and outage schedules → One data file per page, every figure from a table row, versioned by content. The arrow: advisories and schedules also feed the pages directly.</li>
 <li data-a="D2" data-b="H1">Files served under a version stamp → Static hosting.</li>
-<li data-a="M1" data-b="D1">Recorded judgment runs with receipts. The site replays them, with no live call → One data file per page, every figure from a table row, versioned by content.</li>
+<li data-a="M1" data-b="D1">Question-set runs recorded with receipts, replayed on the event page. Live command-bar answers for signed-in visitors since release 23. → One data file per page, every figure from a table row, versioned by content.</li>
 </ol></details>
 <p class="widget-note">The boxes and arrows come from the diagram text of the paper's Figure 2. A few words follow the plain-language list of these pages.</p>
 </div>

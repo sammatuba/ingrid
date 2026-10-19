@@ -141,7 +141,15 @@ body[data-replay="page"] .gn-replay { display: none !important; }
 .rp-when { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; justify-content: flex-end; }
 .map-replay #clock-time { order: 2; font: 500 15px/1 var(--mono); font-variant-numeric: tabular-nums; color: var(--text); white-space: nowrap; }
 .rp-date { order: 1; color: var(--muted); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.map-replay .gn-rp-day { order: 1; flex: 0 1 auto; min-width: 0; width: 112px; height: 24px; padding: 0 4px; font: 400 11px var(--mono); color: var(--text-2); background: transparent; border: 1px solid var(--rule); border-radius: 8px; }
+.map-replay .gn-rp-day { flex: 0 0 auto; width: 120px; height: 24px; padding: 0 4px; font: 400 11px var(--mono); color: var(--text-2); background: transparent; border: 1px solid var(--rule); border-radius: 8px; }
+.rp-date:empty { display: none; }
+/* the day row under the clock (day mode only): one day back, the date input, one day forward */
+.rp-days { display: flex; align-items: center; gap: 4px; min-width: 0; }
+.rp-daystep { all: unset; box-sizing: border-box; cursor: pointer; flex: 0 0 auto; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 8px; border: 1px solid var(--rule); color: var(--text-2); }
+.rp-daystep svg { width: 12px; height: 12px; }
+.rp-daystep:hover { color: var(--text); border-color: var(--rule-strong); background: var(--panel-2); }
+.rp-daystep:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.rp-daystep:disabled { cursor: default; opacity: .4; background: transparent; }
 .rp-speed { all: unset; box-sizing: border-box; cursor: pointer; flex: 0 0 auto; min-width: 30px; height: 24px; padding: 0 6px; text-align: center; border-radius: 8px; border: 1px solid var(--rule); color: var(--muted); font-size: 11px; line-height: 22px; }
 .rp-speed:hover { color: var(--text); border-color: var(--rule-strong); }
 .rp-row { display: flex; align-items: flex-start; gap: 4px; min-width: 0; }
@@ -234,7 +242,6 @@ body[data-replay="page"] .gn-replay { display: none !important; }
   .desk-map .map-pop { left: 8px !important; right: 8px; width: auto; max-width: none; }
   .desk-map .map-replay { left: 8px; right: 8px; bottom: 8px; width: auto; min-width: 0; padding: 8px 10px 6px; }
   .map-replay #clock-time { font-size: 15px; }
-  .map-replay .gn-rp-day { width: 108px; }
   /* on a phone the detail follows the map in the page, so the map stays whole to tap */
   .desk > .dash-side { position: static; width: auto; height: auto; padding: 12px 12px 0; }
   .desk > .dash-side > .detail { max-height: none; }

@@ -80,6 +80,23 @@
 [data-tip].gc-tool:last-child::after { left: auto; right: 0; transform: none; }
 [data-tip]:hover::after, [data-tip]:focus-visible::after { opacity: 1; }
 
+/* The bar is the one AI surface: a sparkle glyph, a hairline edge that runs from the accent to a
+   soft violet, a faint glow, and one twinkle of the sparkle after the page loads. Focus keeps
+   the plain accent edge and ring above. No looping motion; none at all with reduced motion. */
+.gc { --gc-violet: #b39dff; }
+:root[data-theme="light"] .gc { --gc-violet: #7c3aed; }
+.gc-bar, .gc.gc-compact > .gc-pill { border-color: transparent;
+  background: linear-gradient(var(--panel), var(--panel)) padding-box,
+    linear-gradient(105deg, color-mix(in srgb, var(--accent) 70%, var(--rule-strong)), color-mix(in srgb, var(--gc-violet) 60%, var(--rule-strong)) 45%, var(--rule-strong) 85%) border-box; }
+.gc-bar { box-shadow: var(--shadow), 0 0 24px -8px color-mix(in srgb, var(--gc-violet) 45%, transparent); }
+.gc-glyph, .gc-pill .gc-i { color: var(--accent); }
+.gc.gc-compact > .gc-pill:hover { border-color: var(--accent); }
+.gc-glyph .gc-i, .gc-pill .gc-i { fill: currentColor; fill-opacity: .18; }
+@media (prefers-reduced-motion: no-preference) {
+  .gc-glyph.gc-twinkle .gc-i { animation: gc-twinkle 1.1s ease-out .8s 1 both; transform-origin: 50% 50%; }
+}
+@keyframes gc-twinkle { 0%, 100% { transform: none; opacity: 1; } 35% { transform: scale(1.22) rotate(18deg); opacity: .65; } 70% { transform: scale(.94); opacity: 1; } }
+
 /* ---------- the list: suggestions and results ---------- */
 .gc-list { position: absolute; left: 0; right: 0; bottom: calc(100% + 8px); max-height: min(56vh, calc(100vh - var(--gn-bar-h, 56px) - var(--gc-low) - 80px));
   overflow-y: auto; overscroll-behavior: contain; padding: 6px; background: var(--panel); border: 1px solid var(--rule-strong);

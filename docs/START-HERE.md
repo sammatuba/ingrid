@@ -35,7 +35,7 @@ Some office networks block every `web.app` address. Then use
 You meet a sign-in screen first on every page. The submission form will name the judges'
 account. The site opens on the grid page and the event page. One top bar reaches the other pages:
 outlooks, register, models, plants, notices, alerts, book, journal, the explainer and the paper.
-The site serves one build, release 27. It covers 18 October 2025 to 14 October 2026.
+The site serves one build, release 28. It covers 18 October 2025 to 14 October 2026.
 
 The site changed on 18 October 2026 (GitHub PR #102, live since release 22). Release 23 added
 the InGRID name and one design system on every page. Release 25 fixed the map Key toggle and made
@@ -67,7 +67,7 @@ runs the app server for the other pages. Firestore stores your copy of the case 
 decisions.
 
 The AI judgment on the event page is a recorded run. On 14 October 2026, Gemini answered through
-Vertex AI at two cutoffs, and we saved the answers. The site makes no live call to any AI model.
+Vertex AI at two cutoffs, and we saved the answers. The event page makes no live call. Since release 23, a signed-in visitor can ask Ingrid live.
 
 The Google services, in one table. The state words: running, ran once, built (not run live), set
 up (no run record), designed.
@@ -121,7 +121,7 @@ date is the competition's, in the [requirements](competition/ai-builder-cup-2026
 
 ```sh
 git clone https://github.com/sammatuba/ingrid
-cd grid-nowcast
+cd ingrid
 /usr/bin/python3 -m unittest discover -s tests
 ```
 

@@ -32,7 +32,7 @@ people. The tests fail when they disagree.
 
 ```sh
 git clone https://github.com/sammatuba/ingrid
-cd grid-nowcast
+cd ingrid
 /usr/bin/python3 scripts/repo.py check                 # links, routes, word budgets, plain language
 /usr/bin/python3 scripts/plan.py check                 # task graph, states, review records
 /usr/bin/python3 -m unittest discover -s tests         # the offline tests

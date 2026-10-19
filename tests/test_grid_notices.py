@@ -286,7 +286,11 @@ class Browser(unittest.TestCase):
         self.assertIn("const desk = link(`/?at=${String(a.t).slice(0, 16)}#${a.grid ? 'g=' + encodeURIComponent(a.grid) + '&' : ''}"
                       "adv=${encodeURIComponent(a.id)}`,", NOTICES_JS)
         self.assertNotIn("'&grid=' + a.grid", NOTICES_JS)
-        self.assertIn("const adv = new URLSearchParams(location.hash.slice(1)).get('adv');", grid_js)
+        # The first render rewrites the hash (`#t=…&g=…`) before the explorable module starts, so
+        # the id is kept on the state at initialState and read back from there (headless run of
+        # 19 October: the hash alone lost it and the desk landed with nothing selected).
+        self.assertIn("state.openAdv = h.get('adv') || null;", grid_js)
+        self.assertIn("const adv = new URLSearchParams(location.hash.slice(1)).get('adv') || (G.state && G.state.openAdv) || null;", grid_js)
         self.assertIn("if (adv) selectMessage(adv);", grid_js)
 
     def test_a_phone_keeps_three_columns_and_opens_the_notice_under_its_row(self):

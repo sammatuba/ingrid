@@ -299,7 +299,7 @@ flowchart TB
         H1[Static hosting] --> H2[Application server] --> H3[Document database: each visitor's private copy of a case and its decisions]
     end
     subgraph MDL[Model service]
-        M1[Question-set runs recorded with receipts and replayed on the event page; live command-bar answers for signed-in visitors since release 23]
+        M1[Question-set runs recorded with receipts, replayed on the event page. Live command-bar answers for signed-in visitors since release 23.]
     end
     A1 --> W1
     A2 --> W1
@@ -432,7 +432,7 @@ outlooks, register, models, plants, notices, alerts, book, journal, the explaine
 page shows the recorded judgment of Section 3.6 and makes no live model call
 (docs/work/grid-desk/live-run-2026-10-14.md). A command bar on every page searches the site and
 takes questions; since release 23 it answers a signed-in visitor live on Vertex AI, labelled "live", and
-since release 25 it shows the steps as the model works; an anonymous visitor gets an answer composed from
+since release 25 it lists the steps the model took (as they run on the Cloud Run address; the Hosting addresses show them with the answer, because Hosting buffers the stream); an anonymous visitor gets an answer composed from
 the records (docs/work/PROGRESS.md, rows "Batch release 23" and "Batch release 25"). The alert record was
 run and recorded; no live alert has been sent. The rules corpus holds 30 documents with their clauses;
 no live extraction call has been made (docs/status.md). The data used is the company copy to 14 October

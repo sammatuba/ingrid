@@ -2,7 +2,7 @@
 
 Generated 2026-10-19 by `scripts/release/export.py` as part of REL-1 (public export audit). This copy ships inside the export as `PROVENANCE.md`.
 
-- Audited revision: `40fc1778b1b1a344db32b38782e7054ebf0d632c` (committed 2026-10-19), branch `integ/pp`
+- Audited revision: `146a502a6fdaee478c816e159cc19bc5b8224a1e` (committed 2026-10-19), branch `integ/pp`
 - Freshness cutoff: 2026-09-07 — the build-window start; first commits before it are excluded
 - Allowlist: `scripts/release/allowlist.json`, reviewed 2026-10-19
 - Decisions: 1684 tracked paths audited, 748 included, 936 excluded, 3 generated export files, 0 findings
@@ -206,7 +206,7 @@ reason; this table is the per-rule summary of the same run.
 | `Dockerfile` | 2026-10-12 `0a5c4851a367` | 2026-10-16 `0fccc3d2f4a2` |
 | `LICENSE` | 2026-10-19 `ed4e45a409f0` | 2026-10-19 `ed4e45a409f0` |
 | `docs/README.md` | 2026-10-03 `77f2895235c8` | 2026-10-15 `7f54bc8cc608` |
-| `docs/START-HERE.md` | 2026-10-14 `7b949424588a` | 2026-10-19 `0cc4d07bcc70` |
+| `docs/START-HERE.md` | 2026-10-14 `7b949424588a` | 2026-10-19 `2262f4899cad` |
 | `docs/architecture/README.md` | 2026-10-03 `77f2895235c8` | 2026-10-16 `dcc2ab2722e4` |
 | `docs/architecture/building-blocks.md` | 2026-10-03 `45c29311cc1a` | 2026-10-03 `45c29311cc1a` |
 | `docs/architecture/decision-system-v1.md` | 2026-10-04 `af242f8b0680` | 2026-10-11 `258a074a230b` |
@@ -227,14 +227,14 @@ reason; this table is the per-rule summary of the same run.
 | `docs/competition/ai-builder-cup-2026/future-of-work-case.md` | 2026-10-16 `5fbc22751998` | 2026-10-17 `83091d0055cd` |
 | `docs/competition/ai-builder-cup-2026/organizer-questions.md` | 2026-10-04 `af242f8b0680` | 2026-10-19 `ed4e45a409f0` |
 | `docs/competition/ai-builder-cup-2026/provenance-log.md` | 2026-10-11 `364a8ae39c1d` | 2026-10-12 `a873be062578` |
-| `docs/competition/ai-builder-cup-2026/release-manifest.json` | 2026-10-17 `ae78a52b87ae` | 2026-10-19 `d7743b5f075c` |
+| `docs/competition/ai-builder-cup-2026/release-manifest.json` | 2026-10-17 `ae78a52b87ae` | 2026-10-19 `dce95129b306` |
 | `docs/competition/ai-builder-cup-2026/release-manifest.template.json` | 2026-10-04 `af242f8b0680` | 2026-10-04 `f2ea4e85e4df` |
 | `docs/competition/ai-builder-cup-2026/requirements.md` | 2026-10-04 `af242f8b0680` | 2026-10-19 `ed4e45a409f0` |
 | `docs/competition/ai-builder-cup-2026/scorecard.md` | 2026-10-04 `af242f8b0680` | 2026-10-18 `933692b5cca4` |
 | `docs/competition/ai-builder-cup-2026/story-and-script.md` | 2026-10-04 `af242f8b0680` | 2026-10-19 `ed4e45a409f0` |
-| `docs/competition/ai-builder-cup-2026/submission-checklist.md` | 2026-10-04 `af242f8b0680` | 2026-10-19 `d7743b5f075c` |
+| `docs/competition/ai-builder-cup-2026/submission-checklist.md` | 2026-10-04 `af242f8b0680` | 2026-10-19 `cce286efbfb4` |
 | `docs/competition/ai-builder-cup-2026/video-shotlist.md` | 2026-10-15 `8527446e1a6f` | 2026-10-19 `ed4e45a409f0` |
-| `docs/engineering/how-we-work.md` | 2026-10-15 `45a2386aed04` | 2026-10-19 `ed4e45a409f0` |
+| `docs/engineering/how-we-work.md` | 2026-10-15 `45a2386aed04` | 2026-10-19 `2262f4899cad` |
 | `docs/engineering/lifecycle.md` | 2026-10-03 `77f2895235c8` | 2026-10-14 `7b949424588a` |
 | `docs/engineering/review-and-feedback.md` | 2026-10-11 `d8a00a90792e` | 2026-10-14 `7b949424588a` |
 | `docs/explainer/00-ideas-1-know.md` | 2026-10-17 `53ed5b432345` | 2026-10-17 `73211b8c82b6` |
@@ -246,7 +246,7 @@ reason; this table is the per-rule summary of the same run.
 | `docs/explainer/02-grid.md` | 2026-10-15 `9ba75dedf354` | 2026-10-18 `089de63e396a` |
 | `docs/explainer/03-evidence.md` | 2026-10-15 `9ba75dedf354` | 2026-10-15 `7f54bc8cc608` |
 | `docs/explainer/04-judgment.md` | 2026-10-15 `9ba75dedf354` | 2026-10-17 `73211b8c82b6` |
-| `docs/explainer/05-runs.md` | 2026-10-15 `9ba75dedf354` | 2026-10-18 `933692b5cca4` |
+| `docs/explainer/05-runs.md` | 2026-10-15 `9ba75dedf354` | 2026-10-19 `2262f4899cad` |
 | `docs/explainer/06-work.md` | 2026-10-15 `9ba75dedf354` | 2026-10-15 `7f54bc8cc608` |
 | `docs/explainer/07-paper-guide.md` | 2026-10-17 `73211b8c82b6` | 2026-10-19 `ed4e45a409f0` |
 | `docs/explainer/08-time-contract.md` | 2026-10-17 `73211b8c82b6` | 2026-10-17 `73211b8c82b6` |
@@ -265,7 +265,7 @@ reason; this table is the per-rule summary of the same run.
 | `docs/explainer/21-data-and-event-map.md` | 2026-10-17 `73211b8c82b6` | 2026-10-17 `73211b8c82b6` |
 | `docs/explainer/22-hosting-in-depth.md` | 2026-10-17 `73211b8c82b6` | 2026-10-18 `933692b5cca4` |
 | `docs/explainer/README.md` | 2026-10-15 `45a2386aed04` | 2026-10-19 `ed4e45a409f0` |
-| `docs/explainer/index.html` | 2026-10-15 `9ba75dedf354` | 2026-10-19 `ed4e45a409f0` |
+| `docs/explainer/index.html` | 2026-10-15 `9ba75dedf354` | 2026-10-19 `2262f4899cad` |
 | `docs/glossary.md` | 2026-10-15 `45a2386aed04` | 2026-10-17 `73211b8c82b6` |
 | `docs/product/capability-map.md` | 2026-10-17 `611746f52ebc` | 2026-10-18 `089de63e396a` |
 | `docs/product/definitive-blueprint-2026-10-04.md` | 2026-10-04 `af242f8b0680` | 2026-10-19 `ed4e45a409f0` |
@@ -273,14 +273,14 @@ reason; this table is the per-rule summary of the same run.
 | `docs/product/integration-contract.md` | 2026-10-17 `611746f52ebc` | 2026-10-18 `089de63e396a` |
 | `docs/product/interface-and-demo-v1.md` | 2026-10-04 `af242f8b0680` | 2026-10-14 `7b949424588a` |
 | `docs/product/market-factors-2026-10-17.md` | 2026-10-17 `2681d7d59a9b` | 2026-10-17 `538fef5bd6f1` |
-| `docs/product/paper-accountable-ai-decisions-2026-10-17.md` | 2026-10-17 `19de338e183b` | 2026-10-19 `40fc1778b1b1` |
+| `docs/product/paper-accountable-ai-decisions-2026-10-17.md` | 2026-10-17 `19de338e183b` | 2026-10-19 `2262f4899cad` |
 | `docs/product/problem-statement-2026-10-17.md` | 2026-10-17 `7cf1a9edf29c` | 2026-10-17 `87b8fd069ef6` |
 | `docs/product/project-thesis.md` | 2026-10-05 `2066d2d0a04f` | 2026-10-19 `ed4e45a409f0` |
 | `docs/product/strategy.md` | 2026-10-03 `77f2895235c8` | 2026-10-14 `7b949424588a` |
 | `docs/product/user-stories-2026-10-17.md` | 2026-10-17 `19de338e183b` | 2026-10-17 `87b8fd069ef6` |
 | `docs/product/working-paper-2026-10-11.md` | 2026-10-11 `258a074a230b` | 2026-10-19 `ed4e45a409f0` |
 | `docs/routes.json` | 2026-10-03 `77f2895235c8` | 2026-10-17 `f177805be561` |
-| `docs/status.md` | 2026-10-03 `77f2895235c8` | 2026-10-19 `0cc4d07bcc70` |
+| `docs/status.md` | 2026-10-03 `77f2895235c8` | 2026-10-19 `2262f4899cad` |
 | `docs/work/data-foundation/timesfm-tabfm.md` | 2026-10-03 `99208db9b7e7` | 2026-10-03 `b31463b94e22` |
 | `docs/work/docs-for-people/systems-inventory-2026-10-15.md` | 2026-10-15 `c6555020234e` | 2026-10-19 `ed4e45a409f0` |
 | `docs/work/grid-desk/event.md` | 2026-10-14 `4f29b1a9b4b2` | 2026-10-14 `8bb2d81a4a85` |
@@ -547,11 +547,11 @@ reason; this table is the per-rule summary of the same run.
 | `src/grid/catalog.css` | 2026-10-16 `2c7ea6e292e4` | 2026-10-18 `809840e3db5c` |
 | `src/grid/catalog.html` | 2026-10-16 `2c7ea6e292e4` | 2026-10-18 `809840e3db5c` |
 | `src/grid/catalog.js` | 2026-10-16 `2c7ea6e292e4` | 2026-10-18 `809840e3db5c` |
-| `src/grid/command.css` | 2026-10-18 `b097f60c2bcb` | 2026-10-18 `e022b7658324` |
-| `src/grid/command.js` | 2026-10-18 `b097f60c2bcb` | 2026-10-19 `5b7147db4fbb` |
+| `src/grid/command.css` | 2026-10-18 `b097f60c2bcb` | 2026-10-19 `169fb23b3a2f` |
+| `src/grid/command.js` | 2026-10-18 `b097f60c2bcb` | 2026-10-19 `146a502a6fda` |
 | `src/grid/dash-alerts.js` | 2026-10-18 `91707f3dfb6c` | 2026-10-18 `933692b5cca4` |
 | `src/grid/dash-map.js` | 2026-10-18 `a7fc74a5cc8b` | 2026-10-18 `47b9ec807438` |
-| `src/grid/dashboard.css` | 2026-10-18 `91707f3dfb6c` | 2026-10-18 `933692b5cca4` |
+| `src/grid/dashboard.css` | 2026-10-18 `91707f3dfb6c` | 2026-10-19 `d3784d9bc411` |
 | `src/grid/event-api.js` | 2026-10-14 `d812d416732d` | 2026-10-18 `933692b5cca4` |
 | `src/grid/event-desk.css` | 2026-10-18 `d8165059d831` | 2026-10-18 `11bf3bb12e88` |
 | `src/grid/event-desk.js` | 2026-10-18 `d8165059d831` | 2026-10-18 `061078f367fc` |
@@ -559,7 +559,7 @@ reason; this table is the per-rule summary of the same run.
 | `src/grid/event.html` | 2026-10-14 `d812d416732d` | 2026-10-18 `db5cb5cfc78f` |
 | `src/grid/event.js` | 2026-10-14 `d812d416732d` | 2026-10-18 `061078f367fc` |
 | `src/grid/explain.css` | 2026-10-15 `c3587c7d405b` | 2026-10-18 `809840e3db5c` |
-| `src/grid/explain.html` | 2026-10-15 `c3587c7d405b` | 2026-10-19 `ed4e45a409f0` |
+| `src/grid/explain.html` | 2026-10-15 `c3587c7d405b` | 2026-10-19 `2262f4899cad` |
 | `src/grid/explain.js` | 2026-10-15 `c3587c7d405b` | 2026-10-18 `11bf3bb12e88` |
 | `src/grid/favicon.ico` | 2026-10-18 `5ef60936b6f6` | 2026-10-18 `b22c44a717f8` |
 | `src/grid/favicon.svg` | 2026-10-18 `5ef60936b6f6` | 2026-10-18 `b22c44a717f8` |
@@ -578,7 +578,7 @@ reason; this table is the per-rule summary of the same run.
 | `src/grid/fonts/inter-latin-ext-500-normal.woff2` | 2026-10-14 `0d6b5fdcd395` | 2026-10-14 `0307e48fac96` |
 | `src/grid/fonts/inter-latin-ext-600-normal.woff2` | 2026-10-14 `0d6b5fdcd395` | 2026-10-14 `0307e48fac96` |
 | `src/grid/grid.css` | 2026-10-14 `0d6b5fdcd395` | 2026-10-19 `c140f7ecf15f` |
-| `src/grid/grid.js` | 2026-10-14 `0d6b5fdcd395` | 2026-10-19 `5dbfde79a9af` |
+| `src/grid/grid.js` | 2026-10-14 `0d6b5fdcd395` | 2026-10-19 `d3784d9bc411` |
 | `src/grid/icon-192.png` | 2026-10-18 `5ef60936b6f6` | 2026-10-18 `b22c44a717f8` |
 | `src/grid/icon-512.png` | 2026-10-18 `5ef60936b6f6` | 2026-10-18 `b22c44a717f8` |
 | `src/grid/icon-maskable-512.png` | 2026-10-18 `5ef60936b6f6` | 2026-10-18 `b22c44a717f8` |
@@ -606,7 +606,7 @@ reason; this table is the per-rule summary of the same run.
 | `src/grid/overview.css` | 2026-10-18 `2153ce0dc47b` | 2026-10-19 `c140f7ecf15f` |
 | `src/grid/overview.js` | 2026-10-18 `2153ce0dc47b` | 2026-10-19 `c140f7ecf15f` |
 | `src/grid/paper.css` | 2026-10-17 `6de9789caa8c` | 2026-10-18 `11bf3bb12e88` |
-| `src/grid/paper.html` | 2026-10-17 `6de9789caa8c` | 2026-10-19 `40fc1778b1b1` |
+| `src/grid/paper.html` | 2026-10-17 `6de9789caa8c` | 2026-10-19 `2262f4899cad` |
 | `src/grid/projectmap.css` | 2026-10-18 `c3786d7716c8` | 2026-10-18 `11bf3bb12e88` |
 | `src/grid/reading.js` | 2026-10-18 `c3786d7716c8` | 2026-10-18 `809840e3db5c` |
 | `src/grid/register.css` | 2026-10-17 `d99d3037b2ab` | 2026-10-18 `11bf3bb12e88` |
@@ -802,7 +802,7 @@ reason; this table is the per-rule summary of the same run.
 | `tests/fixtures/grid/outlook/register.json` | 2026-10-17 `c9b43216c00c` | 2026-10-17 `9715125f46d8` |
 | `tests/fixtures/grid/outlooks/browser.mjs` | 2026-10-17 `5c4353539151` | 2026-10-18 `b22c44a717f8` |
 | `tests/fixtures/grid/page/README.md` | 2026-10-14 `2abec1625fa7` | 2026-10-18 `b22c44a717f8` |
-| `tests/fixtures/grid/page/browser.mjs` | 2026-10-14 `2abec1625fa7` | 2026-10-19 `c140f7ecf15f` |
+| `tests/fixtures/grid/page/browser.mjs` | 2026-10-14 `2abec1625fa7` | 2026-10-19 `d3784d9bc411` |
 | `tests/fixtures/grid/page/build.py` | 2026-10-14 `2abec1625fa7` | 2026-10-17 `9715125f46d8` |
 | `tests/fixtures/grid/page/data/advisories.json` | 2026-10-14 `2abec1625fa7` | 2026-10-15 `c0da37badc90` |
 | `tests/fixtures/grid/page/data/briefs.json` | 2026-10-16 `eb2921ac6fd0` | 2026-10-16 `0fccc3d2f4a2` |
@@ -920,7 +920,7 @@ reason; this table is the per-rule summary of the same run.
 | `tests/test_grid_event_drivers.py` | 2026-10-17 `ee7f01eb40dc` | 2026-10-18 `7b84e0acd431` |
 | `tests/test_grid_flow.py` | 2026-10-18 `089de63e396a` | 2026-10-18 `11bf3bb12e88` |
 | `tests/test_grid_map.py` | 2026-10-16 `a26a3b6b9e81` | 2026-10-18 `47b9ec807438` |
-| `tests/test_grid_notices.py` | 2026-10-18 `64999cbe9f97` | 2026-10-19 `5dbfde79a9af` |
+| `tests/test_grid_notices.py` | 2026-10-18 `64999cbe9f97` | 2026-10-19 `2262f4899cad` |
 | `tests/test_grid_overview.py` | 2026-10-18 `2153ce0dc47b` | 2026-10-19 `c140f7ecf15f` |
 | `tests/test_grid_plants.py` | 2026-10-18 `47064695d308` | 2026-10-18 `11bf3bb12e88` |
 | `tests/test_grid_shell.py` | 2026-10-18 `ce97df8470e6` | 2026-10-19 `5dbfde79a9af` |
@@ -974,7 +974,7 @@ reason; this table is the per-rule summary of the same run.
 - reviewed binary: src/grid/icon-192.png is not UTF-8 text, so the content rules cannot read it, and its 4446 bytes hash to a reviewed digest — Reviewed 2026-10-18 for the InGRID brand (platform-polish batch): a raster icon drawn by scripts/brand/build_icons.py from the SVG mark in src/grid (favicon.svg, ingrid-mark.svg), which the content rules do read. The PNG and ICO bytes are pinned by sha256; a redraw changes the digest and stops the export until the new bytes are reviewed. No data, text or credential is inside: the tile colours are the shell tokens and the mark is the 3x3 trace path.
 - reviewed binary: src/grid/icon-512.png is not UTF-8 text, so the content rules cannot read it, and its 12477 bytes hash to a reviewed digest — Reviewed 2026-10-18 for the InGRID brand (platform-polish batch): a raster icon drawn by scripts/brand/build_icons.py from the SVG mark in src/grid (favicon.svg, ingrid-mark.svg), which the content rules do read. The PNG and ICO bytes are pinned by sha256; a redraw changes the digest and stops the export until the new bytes are reviewed. No data, text or credential is inside: the tile colours are the shell tokens and the mark is the 3x3 trace path.
 - reviewed binary: src/grid/icon-maskable-512.png is not UTF-8 text, so the content rules cannot read it, and its 6989 bytes hash to a reviewed digest — Reviewed 2026-10-18 for the InGRID brand (platform-polish batch): a raster icon drawn by scripts/brand/build_icons.py from the SVG mark in src/grid (favicon.svg, ingrid-mark.svg), which the content rules do read. The PNG and ICO bytes are pinned by sha256; a redraw changes the digest and stops the export until the new bytes are reviewed. No data, text or credential is inside: the tile colours are the shell tokens and the mark is the 3x3 trace path.
-- worktree: 21 uncommitted path(s) under excluded rules cannot reach the export and did not block it
+- worktree: 27 uncommitted path(s) under excluded rules cannot reach the export and did not block it
 
 ## Findings
 

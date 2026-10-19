@@ -43,8 +43,9 @@ that protects two analysts who work on one case.
 
 ## What the site does not do
 
-- It makes no live call to any AI model. The judgment is the recorded run.
-- It has no live data feed. The replay ends on 29 September 2026.
+- The event page makes no live call to any AI model. Its judgment is the recorded run.
+- Since release 23, a signed-in visitor can ask Ingrid live in the command bar.
+- It has no live data feed. The replay ends on 14 October 2026.
 - It computes no price or cost consequence of the trip. The site says "not computed" where that applies.
 - It shows no feature that is not connected. No placeholder badges.
 
@@ -68,4 +69,4 @@ Why: The deployed app has no model connected. The judgment is a recorded run, an
 
 - Times: the [performance baseline](../work/performance/baseline.md), runs 3 to 9.
 - The pieces and the deploy script: the [hosting record](../work/hosting/implementation.md).
-- No live model: the [status page](../status.md) and the [live run record](../work/grid-desk/live-run-2026-10-14.md).
+- The recorded run and the live path: the [status page](../status.md) and the [live run record](../work/grid-desk/live-run-2026-10-14.md).

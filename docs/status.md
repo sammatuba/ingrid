@@ -27,8 +27,8 @@ The [working paper](product/working-paper-2026-10-11.md) owns the method, the
 
 **Live**
 
-- `https://grid-nowcast.web.app` and `https://ingrid-desk.web.app` (Hosting to Cloud Run): release 27,
-  app server copy `grid-nowcast-00049-78l`, one build on every page, 18 October 2025 to 14 October 2026.
+- `https://grid-nowcast.web.app` and `https://ingrid-desk.web.app` (Hosting to Cloud Run): release 28,
+  app server copy `grid-nowcast-00050-4m4`, one build on every page, 18 October 2025 to 14 October 2026.
   A sign-in screen comes first on every page.
 - Measured times: [baseline record](work/performance/baseline.md).
 - The real data ends 14 October 2026 under the signed
@@ -39,11 +39,10 @@ The [working paper](product/working-paper-2026-10-11.md) owns the method, the
 
 **Pending**
 
-- DOC-1 to DOC-4: the people pages and the explainer, pending the owner's accept. HOST-3:
-  deferred by the owner. REL-5 export, REL-6 video and REL-7 submission (owner).
-- After the submission: POST-1 to POST-4 and the [price outlook work](work/thesis-challenge-2026-10-16/strategy.md).
+- Nothing before the submission. The owner submitted the entry on 19 October 2026 at about 02:10 Manila.
+- After it: PUB-2 (the cloud names), POST-1 to POST-4 and the [price outlook work](work/thesis-challenge-2026-10-16/strategy.md).
 
 **Cut.** CORE-5, EVAL-7, UI-3 to UI-6, NUM-2, NUM-3, CLEF-2, CLEF-3. Consequences stay not
 computed. We claim no analyst baseline and no forecast skill.
 
-**Next.** The export, then the submission.
+**Next.** Only if the owner reopens the work: PUB-2.

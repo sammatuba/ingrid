@@ -1,7 +1,7 @@
 {
   "version": 1,
   "tool": "scripts/release/export.py",
-  "source_revision": "40fc1778b1b1a344db32b38782e7054ebf0d632c",
+  "source_revision": "146a502a6fdaee478c816e159cc19bc5b8224a1e",
   "source_date": "2026-10-19",
   "cutoff": "2026-09-07",
   "counts": {
@@ -107,7 +107,7 @@
         },
         "last": {
           "date": "2026-10-19",
-          "commit": "0cc4d07bcc70"
+          "commit": "2262f4899cad"
         }
       }
     },
@@ -401,7 +401,7 @@
         },
         "last": {
           "date": "2026-10-19",
-          "commit": "d7743b5f075c"
+          "commit": "dce95129b306"
         }
       }
     },
@@ -471,7 +471,7 @@
         },
         "last": {
           "date": "2026-10-19",
-          "commit": "d7743b5f075c"
+          "commit": "cce286efbfb4"
         }
       }
     },
@@ -499,7 +499,7 @@
         },
         "last": {
           "date": "2026-10-19",
-          "commit": "ed4e45a409f0"
+          "commit": "2262f4899cad"
         }
       }
     },
@@ -666,8 +666,8 @@
           "commit": "9ba75dedf354"
         },
         "last": {
-          "date": "2026-10-18",
-          "commit": "933692b5cca4"
+          "date": "2026-10-19",
+          "commit": "2262f4899cad"
         }
       }
     },
@@ -933,7 +933,7 @@
         },
         "last": {
           "date": "2026-10-19",
-          "commit": "ed4e45a409f0"
+          "commit": "2262f4899cad"
         }
       }
     },
@@ -1045,7 +1045,7 @@
         },
         "last": {
           "date": "2026-10-19",
-          "commit": "40fc1778b1b1"
+          "commit": "2262f4899cad"
         }
       }
     },
@@ -1143,7 +1143,7 @@
         },
         "last": {
           "date": "2026-10-19",
-          "commit": "0cc4d07bcc70"
+          "commit": "2262f4899cad"
         }
       }
     },
@@ -4880,8 +4880,8 @@
           "commit": "b097f60c2bcb"
         },
         "last": {
-          "date": "2026-10-18",
-          "commit": "e022b7658324"
+          "date": "2026-10-19",
+          "commit": "169fb23b3a2f"
         }
       }
     },
@@ -4895,7 +4895,7 @@
         },
         "last": {
           "date": "2026-10-19",
-          "commit": "5b7147db4fbb"
+          "commit": "146a502a6fda"
         }
       }
     },
@@ -4936,8 +4936,8 @@
           "commit": "91707f3dfb6c"
         },
         "last": {
-          "date": "2026-10-18",
-          "commit": "933692b5cca4"
+          "date": "2026-10-19",
+          "commit": "d3784d9bc411"
         }
       }
     },
@@ -5049,7 +5049,7 @@
         },
         "last": {
           "date": "2026-10-19",
-          "commit": "ed4e45a409f0"
+          "commit": "2262f4899cad"
         }
       }
     },
@@ -5315,7 +5315,7 @@
         },
         "last": {
           "date": "2026-10-19",
-          "commit": "5dbfde79a9af"
+          "commit": "d3784d9bc411"
         }
       }
     },
@@ -5707,7 +5707,7 @@
         },
         "last": {
           "date": "2026-10-19",
-          "commit": "40fc1778b1b1"
+          "commit": "2262f4899cad"
         }
       }
     },
@@ -8451,7 +8451,7 @@
         },
         "last": {
           "date": "2026-10-19",
-          "commit": "c140f7ecf15f"
+          "commit": "d3784d9bc411"
         }
       }
     },
@@ -10103,7 +10103,7 @@
         },
         "last": {
           "date": "2026-10-19",
-          "commit": "5dbfde79a9af"
+          "commit": "2262f4899cad"
         }
       }
     },
@@ -11216,6 +11216,6 @@
     "reviewed binary: src/grid/icon-192.png is not UTF-8 text, so the content rules cannot read it, and its 4446 bytes hash to a reviewed digest \u2014 Reviewed 2026-10-18 for the InGRID brand (platform-polish batch): a raster icon drawn by scripts/brand/build_icons.py from the SVG mark in src/grid (favicon.svg, ingrid-mark.svg), which the content rules do read. The PNG and ICO bytes are pinned by sha256; a redraw changes the digest and stops the export until the new bytes are reviewed. No data, text or credential is inside: the tile colours are the shell tokens and the mark is the 3x3 trace path.",
     "reviewed binary: src/grid/icon-512.png is not UTF-8 text, so the content rules cannot read it, and its 12477 bytes hash to a reviewed digest \u2014 Reviewed 2026-10-18 for the InGRID brand (platform-polish batch): a raster icon drawn by scripts/brand/build_icons.py from the SVG mark in src/grid (favicon.svg, ingrid-mark.svg), which the content rules do read. The PNG and ICO bytes are pinned by sha256; a redraw changes the digest and stops the export until the new bytes are reviewed. No data, text or credential is inside: the tile colours are the shell tokens and the mark is the 3x3 trace path.",
     "reviewed binary: src/grid/icon-maskable-512.png is not UTF-8 text, so the content rules cannot read it, and its 6989 bytes hash to a reviewed digest \u2014 Reviewed 2026-10-18 for the InGRID brand (platform-polish batch): a raster icon drawn by scripts/brand/build_icons.py from the SVG mark in src/grid (favicon.svg, ingrid-mark.svg), which the content rules do read. The PNG and ICO bytes are pinned by sha256; a redraw changes the digest and stops the export until the new bytes are reviewed. No data, text or credential is inside: the tile colours are the shell tokens and the mark is the 3x3 trace path.",
-    "worktree: 21 uncommitted path(s) under excluded rules cannot reach the export and did not block it"
+    "worktree: 27 uncommitted path(s) under excluded rules cannot reach the export and did not block it"
   ]
 }

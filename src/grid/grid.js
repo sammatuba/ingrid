@@ -639,6 +639,9 @@
     if (pick) {
       pick.min = D.span.first.slice(0, 10); pick.max = D.span.last.slice(0, 10); pick.value = t.slice(0, 10);
       pick.title = D.missing ? 'No data for this day in the company copy' : 'Replay day';
+      for (const b of document.querySelectorAll('.rp-daystep')) {
+        b.disabled = b.dataset.day === '1' ? t.slice(0, 10) >= pick.max : t.slice(0, 10) <= pick.min;
+      }
     }
     $('scrub').value = state.i;
     history.replaceState(null, '', `#t=${hhmm(t)}&g=${state.grid}` + (REPLAY.index ? `&d=${t.slice(0, 10)}` : ''));
@@ -681,6 +684,12 @@
     }
     state.i = Math.max(0, Math.min(D.t.length - 1, i));
     render();
+  }
+  /* The day before or after the one shown, at the same time of day; nothing past the span. */
+  function stepDay(n) {
+    const d = SHELL.dayPlus(D.day, n);
+    if (d < D.span.first.slice(0, 10) || d > D.span.last.slice(0, 10)) return Promise.resolve();
+    return goto(d + 'T' + hhmm(D.t[state.i]));
   }
   const indexAt = (t) => { const key = String(t).slice(0, 16); const i = D.t.findIndex((x) => x >= key); return i < 0 ? D.t.length - 1 : i; };
   /* Any time in the span: the same day moves the clock; another day is read first, then drawn.
@@ -753,7 +762,8 @@
     $('play').addEventListener('click', () => play(!state.playing));
     if ($('play-speed')) $('play-speed').addEventListener('click', () => setSpeed(SPEEDS[(SPEEDS.indexOf(speed) + 1) % SPEEDS.length]));
     $('scrub').max = D.t.length - 1;
-    /* replay-year: a date input over the whole span beside the dashboard's own clock. */
+    /* replay-year: a date input over the whole span, with one day back and forward at the same
+       time of day either side of it, in its own row under the dashboard's own clock. */
     if (REPLAY.index && !$('clock-day') && $('clock-time')) {
       const pick = document.createElement('input');
       pick.type = 'date'; pick.id = 'clock-day'; pick.className = 'gn-rp-day mono'; pick.required = true;
@@ -762,13 +772,27 @@
         play(false);
         if (SHELL.validAt(pick.value + 'T00:00')) goto(pick.value + 'T' + hhmm(D.t[state.i]));
       });
-      $('clock-time').parentElement.insertBefore(pick, $('clock-time'));
+      const row = document.createElement('div');
+      row.className = 'rp-days';
+      for (const [n, label, glyph] of [[-1, 'Previous day', 'M10 3 5 8l5 5'], [0], [1, 'Next day', 'm6 3 5 5-5 5']]) {
+        if (!n) { row.appendChild(pick); continue; }
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'rp-daystep'; b.dataset.day = String(n);
+        b.setAttribute('aria-label', label); b.title = label;
+        b.innerHTML = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="${glyph}" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>`;
+        b.addEventListener('click', () => { play(false); stepDay(n); });
+        row.appendChild(b);
+      }
+      const head = document.querySelector('#map-replay .rp-head');
+      if (head) head.parentElement.insertBefore(row, head.nextSibling);
+      else $('clock-time').parentElement.insertBefore(row, $('clock-time'));
     }
     $('scrub').addEventListener('input', (e) => { play(false); setTime(Number(e.target.value)); });
     for (const b of document.querySelectorAll('.filters button')) b.addEventListener('click', () => setFeedFilter(b.dataset.filter));
     document.addEventListener('keydown', (e) => {
       if (e.target.tagName === 'INPUT') return;
-      if (e.key === 'ArrowRight') setTime(state.i + 1);
+      if (e.shiftKey && REPLAY.index && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) { play(false); stepDay(e.key === 'ArrowRight' ? 1 : -1); }
+      else if (e.key === 'ArrowRight') setTime(state.i + 1);
       else if (e.key === 'ArrowLeft') setTime(state.i - 1);
       else if (e.key === ' ') { e.preventDefault(); play(!state.playing); }
     });
@@ -782,6 +806,9 @@
     const h = new URLSearchParams(location.hash.slice(1));
     const g = h.get('g');
     if (g && GRIDS[g]) state.grid = g;
+    /* A notice named in the hash (`adv=<id>`, the notices page's "Open on the desk") is kept
+       here, because the first render rewrites the hash before the explorable module starts. */
+    state.openAdv = h.get('adv') || null;
     const want = REPLAY.index ? (h.get('t') || SHELL.asOf().slice(11, 16)) : (h.get('t') || START);
     const i = D.t.findIndex((t) => hhmm(t) === want);
     state.i = i >= 0 ? i : 0;
@@ -1212,7 +1239,7 @@
     /* A notice named in the hash (`#adv=<id>`, the notices page's "Open on the desk") opens on
        the desk as a click on its feed row would: the grid, the clock and the detail panel. */
     try {
-      const adv = new URLSearchParams(location.hash.slice(1)).get('adv');
+      const adv = new URLSearchParams(location.hash.slice(1)).get('adv') || (G.state && G.state.openAdv) || null;
       if (adv) selectMessage(adv);
     } catch (err) { /* no hash, or a DOM shim without location */ }
   };
