@@ -332,6 +332,14 @@ class ThePageSources(unittest.TestCase):
         for source in (SHELL_JS, COMMAND_JS):
             self.assertNotIn("AGENT + '\\'s", source)
 
+    def test_every_page_carries_the_market_data_disclaimer(self):
+        self.assertIn('addDisclaimer();', SHELL_JS)
+        self.assertIn("make('footer', 'gn-disclaimer', DISCLAIMER)", SHELL_JS)
+        self.assertIn('Market data: Wholesale Electricity Spot Market (WESM) data published by IEMOP, shown as a '
+                      'fixed historical snapshot for demonstration only. InGRID is not affiliated with or endorsed '
+                      'by IEMOP or NGCP. IEMOP does not guarantee that the data is accurate or complete.', SHELL_JS)
+        self.assertIn('.gn-disclaimer {', SHELL_CSS)
+
     def test_the_bars_own_sentences_follow_the_copy_rules(self):
         code = re.sub(r'/\*.*?\*/', '', COMMAND_JS, flags=re.S)
         code = re.sub(r'(?m)^\s*//[^\n]*', '', code)

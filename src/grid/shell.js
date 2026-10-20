@@ -1856,12 +1856,22 @@
       .then(() => loadScript('command.js')).catch(() => { /* the page reads without the bar */ });
   }
 
+  /* The market data disclaimer, at the foot of every page. */
+  const DISCLAIMER = 'Market data: Wholesale Electricity Spot Market (WESM) data published by IEMOP, shown as a fixed historical snapshot for demonstration only. InGRID is not affiliated with or endorsed by IEMOP or NGCP. IEMOP does not guarantee that the data is accurate or complete.';
+  function addDisclaimer() {
+    if (document.querySelector('.gn-disclaimer')) return;
+    const note = make('footer', 'gn-disclaimer', DISCLAIMER);
+    note.setAttribute('role', 'contentinfo');
+    document.body.appendChild(note);
+  }
+
   askConfig();
   function start() {
     adoptPage();
     buildStrip();
     startAuth();
     ensureDock();
+    addDisclaimer();
   }
   /* The bar goes in as soon as the parser opens the body: a mutation observer's callback runs
      before the browser paints, so no page shows its old bar first. */

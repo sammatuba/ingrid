@@ -18,6 +18,10 @@ a reviewed allowlist. `EXPORT-AUDIT.json` lists every exported path and names th
 (`source_revision`, `source_date`); `PROVENANCE.md` records the first and last commit of each path.
 Nothing is edited here. The work records (plans, progress, task packets) and the private market data (the
 company's WESM copy) stay in the private repository and never enter Git.
+
+**Market data.** Wholesale Electricity Spot Market (WESM) data published by IEMOP, shown as a fixed
+historical snapshot for demonstration only. InGRID is not affiliated with or endorsed by IEMOP or NGCP.
+IEMOP does not guarantee that the data is accurate or complete.
 Clone: `git clone https://github.com/sammatuba/ingrid`.
 
 ## Licence and attribution

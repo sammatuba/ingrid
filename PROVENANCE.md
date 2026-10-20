@@ -1,8 +1,8 @@
 # Public export provenance log
 
-Generated 2026-10-19 by `scripts/release/export.py` as part of REL-1 (public export audit). This copy ships inside the export as `PROVENANCE.md`.
+Generated 2026-10-21 by `scripts/release/export.py` as part of REL-1 (public export audit). This copy ships inside the export as `PROVENANCE.md`.
 
-- Audited revision: `146a502a6fdaee478c816e159cc19bc5b8224a1e` (committed 2026-10-19), branch `integ/pp`
+- Audited revision: `e3adb8d1443fda2c97015c11e56e0a523cd6f38a` (committed 2026-10-21), branch `export/r31`
 - Freshness cutoff: 2026-09-07 — the build-window start; first commits before it are excluded
 - Allowlist: `scripts/release/allowlist.json`, reviewed 2026-10-19
 - Decisions: 1684 tracked paths audited, 748 included, 936 excluded, 3 generated export files, 0 findings
@@ -547,11 +547,11 @@ reason; this table is the per-rule summary of the same run.
 | `src/grid/catalog.css` | 2026-10-16 `2c7ea6e292e4` | 2026-10-18 `809840e3db5c` |
 | `src/grid/catalog.html` | 2026-10-16 `2c7ea6e292e4` | 2026-10-18 `809840e3db5c` |
 | `src/grid/catalog.js` | 2026-10-16 `2c7ea6e292e4` | 2026-10-18 `809840e3db5c` |
-| `src/grid/command.css` | 2026-10-18 `b097f60c2bcb` | 2026-10-19 `169fb23b3a2f` |
-| `src/grid/command.js` | 2026-10-18 `b097f60c2bcb` | 2026-10-19 `146a502a6fda` |
+| `src/grid/command.css` | 2026-10-18 `b097f60c2bcb` | 2026-10-19 `6de1faf4a143` |
+| `src/grid/command.js` | 2026-10-18 `b097f60c2bcb` | 2026-10-19 `63545ee9f54f` |
 | `src/grid/dash-alerts.js` | 2026-10-18 `91707f3dfb6c` | 2026-10-18 `933692b5cca4` |
 | `src/grid/dash-map.js` | 2026-10-18 `a7fc74a5cc8b` | 2026-10-18 `47b9ec807438` |
-| `src/grid/dashboard.css` | 2026-10-18 `91707f3dfb6c` | 2026-10-19 `d3784d9bc411` |
+| `src/grid/dashboard.css` | 2026-10-18 `91707f3dfb6c` | 2026-10-19 `cbd234a44dd7` |
 | `src/grid/event-api.js` | 2026-10-14 `d812d416732d` | 2026-10-18 `933692b5cca4` |
 | `src/grid/event-desk.css` | 2026-10-18 `d8165059d831` | 2026-10-18 `11bf3bb12e88` |
 | `src/grid/event-desk.js` | 2026-10-18 `d8165059d831` | 2026-10-18 `061078f367fc` |
@@ -578,7 +578,7 @@ reason; this table is the per-rule summary of the same run.
 | `src/grid/fonts/inter-latin-ext-500-normal.woff2` | 2026-10-14 `0d6b5fdcd395` | 2026-10-14 `0307e48fac96` |
 | `src/grid/fonts/inter-latin-ext-600-normal.woff2` | 2026-10-14 `0d6b5fdcd395` | 2026-10-14 `0307e48fac96` |
 | `src/grid/grid.css` | 2026-10-14 `0d6b5fdcd395` | 2026-10-19 `c140f7ecf15f` |
-| `src/grid/grid.js` | 2026-10-14 `0d6b5fdcd395` | 2026-10-19 `d3784d9bc411` |
+| `src/grid/grid.js` | 2026-10-14 `0d6b5fdcd395` | 2026-10-19 `cbd234a44dd7` |
 | `src/grid/icon-192.png` | 2026-10-18 `5ef60936b6f6` | 2026-10-18 `b22c44a717f8` |
 | `src/grid/icon-512.png` | 2026-10-18 `5ef60936b6f6` | 2026-10-18 `b22c44a717f8` |
 | `src/grid/icon-maskable-512.png` | 2026-10-18 `5ef60936b6f6` | 2026-10-18 `b22c44a717f8` |
@@ -614,8 +614,8 @@ reason; this table is the per-rule summary of the same run.
 | `src/grid/register.js` | 2026-10-17 `d99d3037b2ab` | 2026-10-18 `11bf3bb12e88` |
 | `src/grid/settings.css` | 2026-10-18 `7b84e0acd431` | 2026-10-18 `809840e3db5c` |
 | `src/grid/settings.html` | 2026-10-18 `7b84e0acd431` | 2026-10-18 `809840e3db5c` |
-| `src/grid/shell.css` | 2026-10-18 `b6cbc0210a0c` | 2026-10-19 `4eb8a492a197` |
-| `src/grid/shell.js` | 2026-10-18 `b6cbc0210a0c` | 2026-10-19 `4eb8a492a197` |
+| `src/grid/shell.css` | 2026-10-18 `b6cbc0210a0c` | 2026-10-21 `e3adb8d1443f` |
+| `src/grid/shell.js` | 2026-10-18 `b6cbc0210a0c` | 2026-10-21 `e3adb8d1443f` |
 | `src/grid/site.webmanifest` | 2026-10-18 `5ef60936b6f6` | 2026-10-18 `b22c44a717f8` |
 | `src/grid/spike.css` | 2026-10-18 `7b84e0acd431` | 2026-10-18 `809840e3db5c` |
 | `src/grid/spike.html` | 2026-10-18 `7b84e0acd431` | 2026-10-18 `809840e3db5c` |
@@ -802,7 +802,7 @@ reason; this table is the per-rule summary of the same run.
 | `tests/fixtures/grid/outlook/register.json` | 2026-10-17 `c9b43216c00c` | 2026-10-17 `9715125f46d8` |
 | `tests/fixtures/grid/outlooks/browser.mjs` | 2026-10-17 `5c4353539151` | 2026-10-18 `b22c44a717f8` |
 | `tests/fixtures/grid/page/README.md` | 2026-10-14 `2abec1625fa7` | 2026-10-18 `b22c44a717f8` |
-| `tests/fixtures/grid/page/browser.mjs` | 2026-10-14 `2abec1625fa7` | 2026-10-19 `d3784d9bc411` |
+| `tests/fixtures/grid/page/browser.mjs` | 2026-10-14 `2abec1625fa7` | 2026-10-19 `cbd234a44dd7` |
 | `tests/fixtures/grid/page/build.py` | 2026-10-14 `2abec1625fa7` | 2026-10-17 `9715125f46d8` |
 | `tests/fixtures/grid/page/data/advisories.json` | 2026-10-14 `2abec1625fa7` | 2026-10-15 `c0da37badc90` |
 | `tests/fixtures/grid/page/data/briefs.json` | 2026-10-16 `eb2921ac6fd0` | 2026-10-16 `0fccc3d2f4a2` |
@@ -923,7 +923,7 @@ reason; this table is the per-rule summary of the same run.
 | `tests/test_grid_notices.py` | 2026-10-18 `64999cbe9f97` | 2026-10-19 `2262f4899cad` |
 | `tests/test_grid_overview.py` | 2026-10-18 `2153ce0dc47b` | 2026-10-19 `c140f7ecf15f` |
 | `tests/test_grid_plants.py` | 2026-10-18 `47064695d308` | 2026-10-18 `11bf3bb12e88` |
-| `tests/test_grid_shell.py` | 2026-10-18 `ce97df8470e6` | 2026-10-19 `5dbfde79a9af` |
+| `tests/test_grid_shell.py` | 2026-10-18 `ce97df8470e6` | 2026-10-21 `e3adb8d1443f` |
 | `tests/test_hosted_config.py` | 2026-10-12 `0a5c4851a367` | 2026-10-18 `809840e3db5c` |
 | `tests/test_judgment.py` | 2026-10-06 `f3c796287090` | 2026-10-06 `f3c796287090` |
 | `tests/test_modeling_baselines.py` | 2026-10-04 `2009748672a0` | 2026-10-04 `f2ea4e85e4df` |
@@ -953,7 +953,7 @@ reason; this table is the per-rule summary of the same run.
 
 | File | Content source | First commit | Last commit |
 |---|---|---|---|
-| `README.md` | `scripts/release/clean-install.md` at the audited revision | 2026-10-11 `7bc88a976071` | 2026-10-19 `40fc1778b1b1` |
+| `README.md` | `scripts/release/clean-install.md` at the audited revision | 2026-10-11 `7bc88a976071` | 2026-10-21 `e3adb8d1443f` |
 | `PROVENANCE.md` | written by this tool from the audit of the audited revision | — `—` | — `—` |
 | `EXPORT-AUDIT.json` | machine-readable record of this audit, written by this tool | — `—` | — `—` |
 
@@ -974,7 +974,6 @@ reason; this table is the per-rule summary of the same run.
 - reviewed binary: src/grid/icon-192.png is not UTF-8 text, so the content rules cannot read it, and its 4446 bytes hash to a reviewed digest — Reviewed 2026-10-18 for the InGRID brand (platform-polish batch): a raster icon drawn by scripts/brand/build_icons.py from the SVG mark in src/grid (favicon.svg, ingrid-mark.svg), which the content rules do read. The PNG and ICO bytes are pinned by sha256; a redraw changes the digest and stops the export until the new bytes are reviewed. No data, text or credential is inside: the tile colours are the shell tokens and the mark is the 3x3 trace path.
 - reviewed binary: src/grid/icon-512.png is not UTF-8 text, so the content rules cannot read it, and its 12477 bytes hash to a reviewed digest — Reviewed 2026-10-18 for the InGRID brand (platform-polish batch): a raster icon drawn by scripts/brand/build_icons.py from the SVG mark in src/grid (favicon.svg, ingrid-mark.svg), which the content rules do read. The PNG and ICO bytes are pinned by sha256; a redraw changes the digest and stops the export until the new bytes are reviewed. No data, text or credential is inside: the tile colours are the shell tokens and the mark is the 3x3 trace path.
 - reviewed binary: src/grid/icon-maskable-512.png is not UTF-8 text, so the content rules cannot read it, and its 6989 bytes hash to a reviewed digest — Reviewed 2026-10-18 for the InGRID brand (platform-polish batch): a raster icon drawn by scripts/brand/build_icons.py from the SVG mark in src/grid (favicon.svg, ingrid-mark.svg), which the content rules do read. The PNG and ICO bytes are pinned by sha256; a redraw changes the digest and stops the export until the new bytes are reviewed. No data, text or credential is inside: the tile colours are the shell tokens and the mark is the 3x3 trace path.
-- worktree: 27 uncommitted path(s) under excluded rules cannot reach the export and did not block it
 
 ## Findings
 
